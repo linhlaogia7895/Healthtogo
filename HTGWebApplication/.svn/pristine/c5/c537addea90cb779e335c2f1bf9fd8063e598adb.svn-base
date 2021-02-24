@@ -1,0 +1,27 @@
+<!--Body button links-->
+<div class="w3-row container-fluid w3-container" style="max-width: 1090px; height: 500px; width: auto;">
+    <h1>Account & Website Management</h1>
+    <div class="btn-grp w3-row w3-center">
+	<a href="ManageNutritionLibraryServlet?page=manage-nutrition-library&tableSelector=calorie" class="page-buttons button btn btn-success">Manage Calorie Table</a>
+	<a href="ManageNutritionLibraryServlet?page=manage-nutrition-library&tableSelector=tips" class="page-buttons button btn btn-success">Manage Tips Table</a>
+	<a href="ManageNutritionLibraryServlet?page=manage-nutrition-library&tableSelector=faq-table" class="page-buttons button btn btn-success">Manage FAQ Table</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="ManageAdvertsServlet?page=manage-adverts&tableSelector=news" class="page-buttons button btn btn-success">Manage News</a>
+	<a href="ManageAdvertsServlet?page=manage-adverts&tableSelector=promos" class="page-buttons button btn btn-success">Manage Promotions</a>
+	<a href="ManageAdvertsServlet?page=manage-adverts&tableSelector=career" class="page-buttons button btn btn-success">Manage Careers</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="ManageAdvertsServlet?page=manage-adverts&tableSelector=intern" class="page-buttons button btn btn-success">Manage Internship</a>
+	<a href="ManageAdvertsServlet?page=manage-adverts&tableSelector=volunteer" class="page-buttons button btn btn-success">Manage Volunteers</a>
+	<a href="ManageAdvertsServlet?page=manage-adverts&tableSelector=news" class="page-buttons button btn btn-success">Manage Subscriptions</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="#" class="page-buttons button btn btn-success">Reset Login</a>
+	<a href="#" class="page-buttons button btn btn-success">Manage Library</a>
+	<a href="#" class="page-buttons button btn btn-success">Manage Library</a>
+    </div>
+</div>

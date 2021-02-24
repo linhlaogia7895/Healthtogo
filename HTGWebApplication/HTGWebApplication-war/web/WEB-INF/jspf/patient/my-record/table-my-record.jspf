@@ -1,0 +1,23 @@
+<!--My record-->
+<h1>My Record:</h1>
+<a href="RedirectServlet?url=89dZp9iqx2BpKJIE3vRe50qqRuCfyB7nYYm4Oix7bao=" class="btn btn-success btn-lg" role="button" >Add New Record</a><br><br>
+<table>
+    <tr>
+	<th>Date Record</th>
+	<th>Current Weight</th>
+	<th>Goal Weight</th>
+	<th>Start Weight</th>
+	<th>Lowest Weight</th>
+	<th>Halfway Weight</th>
+        <th>Weight Lost</th>
+	<th>Calories Level</th>
+	<th>Chest Measure</th>
+	<th>Waist Measure</th>
+	<th>Abdomen Measure</th>
+	<th>Hip Measure</th>
+    </tr>
+
+    ${table}
+    
+</table>
+    <br><br>

@@ -1,0 +1,101 @@
+<!--news section - style using W#.CSS - has angular component -->
+<div id="news-table" class="table-bodies news-section-body container w3-container container-fluid" ng-controller="newsSectionController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Nutrition News</h1>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search news" ng-model="searchNews">
+		</div>
+	    </div>
+
+
+	    <!--Add News edit button-->
+	    <div class="w3-col m4 w3-right-align w3-container" style="padding: 7px;">
+		<button name="addData" class="btn btn-success" value="Add Data" ng-click="showNewsBlank=!showNewsBlank">
+		    <span style="font-size: 20px;">
+			{{addBtnTxtshowNewsBlankToggle}}
+		    </span>
+		</button>
+	    </div>
+	</div>
+    </form>
+
+
+    <!--Add News blank form-->
+    <div ng-show="showNewsBlank">
+	<form action="NewsTableServlet" method="post" name="newsBlankForm">
+	    <div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+		<div class="panel-heading">News Detials</div>
+		<div class="panel-body">
+
+		    <!--tips title-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-title"></span>
+			</span>
+			<input name="newsTitle" class="form-control" placeholder="Enter Title" ng-model="newsTitle">
+		    </div>
+
+		    <!--enter date-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-calendar"></span>
+			</span>
+			<input type="date" ng-model="newsDate" class="datepicker2 form-control" name="newsDate" placeholder="Enter Date published" style="max-width: 220px;">
+		    </div>
+
+		    <!--enter link-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-link"></span>
+			</span>
+			<input ng-model="newsSource" class="form-control" name="newsSource" placeholder="Enter link/source">
+		    </div>
+
+		    <!--enter link label-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-tag"></span>
+			</span>
+			<input ng-model="newsLinkLabel" class="form-control" name="newsLinkLabel" placeholder="Enter Source label">
+		    </div>
+
+		    <!--Tips article-->
+		    <div style="padding: 10px 0;">
+			<label><span class="icon-pencil"></span>Article:</label>
+			<textarea ng-model="newsArticle" class="form-control" name="newsArticle" rows="30" placeholder="Enter your content here"></textarea>
+		    </div>
+
+		    <!--tips form buttons-->
+		    <input type="submit" name="newsFormSubmit" value="Submit Form" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+		    <input type="reset" name="newsFormReset" value="Reset Form" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">
+
+		</div>
+	    </div>
+
+	</form>
+    </div>
+
+    <!--populates page with angular content for tips-->
+    <div ng-repeat="n in news | orderBy:'-date':true | filter:searchNews" class="w3-accordion w3-light-grey">
+	<button id="news-btn" ng-click="manageNewsAccordion(n.id)" class="w3-btn-block w3-left-align adverts-btn">
+	    <span class="adverts-btn-text">{{n.title}} 
+		<span ng-model="dates" class="pull-right">Date: {{n.date}}</span>
+	    </span>
+	</button>
+	<div id='{{n.id}}' class="w3-accordion-content w3-container">
+	    <h3 style="text-align: center;">{{n.title}}</h3>
+	    <h5>Source: <a href="{{n.href}}" target='_blank'>{{n.hrefText}}</a></h5>
+	    <div class="adverts-content" ng-bind-html='n.content'></div> <!-- ng-bind-html requires the ng-sanitize CDN -->
+	</div>
+    </div>
+    <br>
+</div>

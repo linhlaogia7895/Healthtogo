@@ -1,0 +1,15 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Document   : appointment-patient-stylesheet.css
+    Version    : April 3, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: css for patient appointment booking JSP
+*/
+
+/*----------------------------Font type for time slot--------------------------------------*/ 
+/*table*/
+.table-title { text-align: center; text-shadow: 10px 10px 5px #888888; }

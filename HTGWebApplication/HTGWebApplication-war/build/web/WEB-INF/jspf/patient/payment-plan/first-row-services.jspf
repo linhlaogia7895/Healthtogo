@@ -1,0 +1,166 @@
+<!--first row of services-->
+<div id="set1">
+    <div class="row">
+	<div class="col-md-4">
+	    <div class="thumbnail hovereffect2">
+		<div id="pack1GIF">
+		    <img src="_res/main/images/meal1.gif" alt="Package 1: Meal Planning" style="width:100%">
+		</div>
+		<div class="caption" align="center">
+		    <p><a id="pack1Label" class="package" style="cursor:pointer">Package 1: Meal Planning</a></p>
+		    <p class="hides extraInfos1"></p>
+		</div>
+		<div id="pack1Form" class="hides" align="center">
+		    <form>
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+				<h4 >
+				    <a data-toggle="collapse" href="#collapse1" class="panel-title">Click For More Info</a>
+				</h4>
+
+				<div id="collapse1" class="panel-collapse collapse">
+				    <ul class="list-group">
+					<li class="list-group-item"><p class="package">Package 1: Meal Planning $25</p><p>A complete meal plan for a week, including breakfast, lunch and dinner. If you are struggling to plan your meals and find the perfect balance, this is the perfect package to get you started.</p>
+					</li>
+				    </ul>
+				    <div class="panel-footer"></div>
+				</div>
+
+
+
+			    </div></div>
+<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7---?
+">
+</form>
+			<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="C6CAW8WZQ38QQ">
+<table><tr><td><select name="os0">
+  <option value="Package 1">Package 1 $25.00 CAD</option>
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="CAD">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+		    </form>
+		</div>
+	    </div>
+	</div>
+
+	<!--Package 2: Sport Nutrition-->
+	<div class="col-md-4">
+	    <div class="thumbnail hovereffect2">
+		<div id="pack2GIF">
+		    <img src="_res/main/images/sport.gif" alt="Package 2: Sport Nutrition" style="width:100%">
+		</div>
+		<div class="caption" align="center">
+		    <p><a id="pack2Label" class="package" style="cursor:pointer">Package 2: Sport Nutrition</a></p>
+		    <p class="hides extraInfos2"></p>
+		</div>
+		<div id="pack2Form" class="hides" align="center">
+		    <form>
+
+
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+				<h4 >
+				    <a data-toggle="collapse" href="#collapse2" class="panel-title">Click For More Info</a>
+				</h4>
+
+				<div id="collapse2" class="panel-collapse collapse">
+				    <ul class="list-group">
+
+					<li class="list-group-item"><p class="package">Package 2: Sport Nutrition $25</p>
+					    <p>A complete meal plan for a week, including breakfast, lunch and dinner. This special package is a new addition to help any fitness or sport enthusiast.</p>
+					</li>
+				    </ul>
+				    <div class="panel-footer"></div>
+				</div>
+
+
+
+			    </div></div>
+                        <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIG3QYJKoZIhvcNAQcEoIIGzjCCBsoCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYBjFT45PxN7EnwKIUmD+6xpAEQI09kmO65JCeLG9aL1MkQy9ucm+y/wZlWWExNgUcfia0mxKSjA/dBToV48cKFbAMRjXQumCAMFeQ2xH2dKFW1V+ybwm8CrJirCsi2UiPNmHPf3Dpkbnd9pMetoIlq6DJsEklXNyBvkK1/QofCCaTELMAkGBSsOAwIaBQAwWwYJKoZIhvcNAQcBMBQGCCqGSIb3DQMHBAj2gotpJnGfYYA4UfazAHTxhUUkfg7PDTjEDCdrrNZl6Gbo/lQJjJgs3XsI3pvkkqIGB6idT2iSZNmNFYg2m5qSU2CgggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNzAzMjkxNzI3MDlaMCMGCSqGSIb3DQEJBDEWBBRRyY62RNy6Kk9AK7CwTp5dnJ6bczANBgkqhkiG9w0BAQEFAASBgB21xgFxsQY6krHPFmiNk6d1DjFDSGCtJM4+zVxE1OJoncyT9/lkUWHV/Oy37uHLELyu3RIFDEWuC/IWr51MYGjXFRA+T1VnyzgkjaevCj/fvyVL7trXwga+f91qBV1hgnfI+lUrMmYG749j6WPtHfNSJdWL2CDigno5lVV7Vvg7-----END PKCS7---?
+">
+</form>
+			<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="C6CAW8WZQ38QQ">
+<table>
+<tr><td><select name="os0">
+  
+  <option value="Package 2">Package 2 $25.00 CAD</option>
+  
+</select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="CAD">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+		    </form>
+		</div>
+	    </div>
+	</div>
+
+	<!--Package 3: Eating Disorder-->
+	<div class="col-md-4">
+	    <div class="thumbnail hovereffect2">
+		<div id="pack3GIF">
+		    <img src="_res/main/images/eating.gif" alt="Package 3: Eating Disorder" style="width:100%">
+		</div>
+		<div class="caption" align="center">
+		    <p><a id="pack3Label" class="package" style="cursor:pointer">Package 3: Eating Disorder</a></p>
+		    <p class="hides extraInfos3"></p>
+		</div>
+		<div id="pack3Form" class="hides" align="center">
+		    <form>
+
+
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+				<h4 >
+				    <a data-toggle="collapse" href="#collapse3" class="panel-title">Click For More Info</a>
+				</h4>
+
+				<div id="collapse3" class="panel-collapse collapse">
+				    <ul class="list-group">
+
+					<li class="list-group-item"><p class="package">Package 3: Eating Disorder $25</p>
+					    <p>A complete meal plan for a week, including breakfast, lunch and dinner. Eating disorder has become more and more common, with our specialists help, we have created the perfect meal plan and diet for our clients needs.</p>
+					</li>
+
+				    </ul>
+				    <div class="panel-footer"></div>
+				</div>
+
+
+
+			    </div></div>
+                        <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7---?
+">
+</form>
+			<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="C6CAW8WZQ38QQ">
+<table>
+<tr><td><select name="os0">
+ <option value="Package 3">Package 3 $25.00 CAD</option>
+  </select> </td></tr>
+</table>
+<input type="hidden" name="currency_code" value="CAD">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+		    </form>
+		</div>
+	    </div>
+	</div>
+    </div>
+</div>

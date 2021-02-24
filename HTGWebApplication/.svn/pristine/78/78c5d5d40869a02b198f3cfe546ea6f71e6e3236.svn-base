@@ -1,0 +1,316 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package beans.main;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+import javax.ejb.Singleton;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+/**
+ * Document   : NutritionLibraryBean.java
+ * Version    : March 9, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Bean for all adverts
+ */
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
+@Singleton
+public class AdvertsBean implements AdvertsBeanLocal {
+    /**
+     * Method to create an instance of the connection to the MYSQL DBase
+     * @return Connection the connection to the DBAse
+     */
+    @Lock(LockType.READ)
+    private Connection getConnection(){
+	Connection conn=null;
+	
+	try {
+	    Class.forName("com.mysql.jdbc.Driver");
+	    InitialContext ic=new InitialContext();
+	    DataSource ds=(DataSource)ic.lookup("jdbc/htgConnectionPool");
+	    conn=ds.getConnection();
+	} catch (ClassNotFoundException | NamingException | SQLException ex) {
+	    Logger.getLogger(NutritionLibraryBean.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return conn;
+    }
+
+    /**
+     * Method to get all news
+     * @return ArrayList the news list
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getAllNews() {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get news by Id
+     * @param newsId the news Id to search for
+     * @return ArrayList the news record found
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getNewsById(int newsId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to return all promos
+     * @return ArrayList the list of promos
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getAllPromos() {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get a promo by Id
+     * @param promoId the promo Id to search
+     * @return ArrayList the promo found
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getPromoById(int promoId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get all careers
+     * @return ArrayList the careers list
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getAllCareers() {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
+     * Method to get a career by Id
+     * @param careerId the career to search for
+     * @return ArrayList the career found
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getCareerById(int careerId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get all interns
+     * @return ArrayList the interns list
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getAllInterns() {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get intern by Id
+     * @param internId the intern Id to search for
+     * @return ArrayList the intern found
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getInternById(int internId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get all volunteers
+     * @return ArrayList the volunteers list
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getAllVolunteers() {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get a volunteer by Id
+     * @param volunteerId the volunteer Id to search for
+     * @return ArrayList the volunteer record found
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getVolunteerById(int volunteerId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get all applications
+     * @return ArrayList the applications list
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getAllApplications() {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to get an application by Id
+     * @param applicationId the application Id to search for
+     * @return ArrayList the application record found
+     */
+    @Lock(LockType.READ)
+    @Override
+    public ArrayList getApplicationById(int applicationId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to add news
+     * @param username the username of the logged in user adding the news
+     * @param newsTitle the news Title
+     * @param newsHref the news link
+     * @param hrefLabel the link label
+     * @param newsContent the news content
+     * @return true if the news is added
+     */
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean addNews(String username, String newsTitle, String newsHref, String hrefLabel, String newsContent) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to add promo
+     * @param username the username of the logged in user adding the promo
+     * @param closingDate the closing date of the promo
+     * @param promoContent the promo content
+     * @return true if the promo is added
+     */
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean addPromo(String username, int closingDate, String promoContent) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method to add a career
+     * @param username the username of the logged in user adding the promo
+     * @param title the position title for the career
+     * @param category the position category for the career
+     * @param employmentType the employment type for the career
+     * @param closingDate the closing date of the advert for hiring
+     * @param positionRequirements the requirements for the position
+     * @return true if the carerr is added
+     */
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean addCareer(String username, String title, String category, String employmentType, Date closingDate, String positionRequirements) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * Method
+     * @param username
+     * @param title
+     * @param category
+     * @param employmentType
+     * @param closingDate
+     * @param positionRequirements
+     * @return 
+     */
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean addIntern(String username, String title, String category, String employmentType, Date closingDate, String positionRequirements) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean addVolunteer(String username, String title, String category, String employmentType, Date closingDate, String positionRequirements) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean editNews(String userName, int newsId, String newsTitle, Date datePosted, String href, String hrefLabel, String content) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean editPromo(String username, int promoId, Date datePosted, Date closingDate, String content) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)    
+    @Override
+    public boolean editCareer(String username, int careerId, String title, String positionCategory, String employmentType, Date datePosted, Date closingDate, String positionRequirements) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean editIntern(String username, int internId, String title, String positionCategory, String employmentType, Date datePosted, Date closingDate, String positionRequirements) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean editVolunteer(String username, int internId, String title, String positionCategory, String employmentType, Date datePosted, Date closingDate, String positionRequirements) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean editApplication(String username, int applicationId, int careerId, int internId, int volunteerId, String theName, String theEmail, String contactNumber, String coverLetter, String resumePath) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean removeNews(String username, int newsId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean removePromo(String username, int promoId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean removeCareer(String username, int careerId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean removeIntern(String username, int internId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean removeVolunteer(String username, int volunteerId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean removeApplication(String username, int applicationId) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+}

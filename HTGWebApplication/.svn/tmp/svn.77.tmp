@@ -1,0 +1,82 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package domains.users;
+
+import java.sql.Date;
+
+/**
+ *
+ * @author 696645
+ */
+public final class Journal {
+    private int journalNumber;
+    private int patientId;
+    private int recordNumber;
+    private Date dateRecord;
+    private Date dateCompleted;
+    private int dietPlanNumber;
+    private String motivation;
+    private boolean activityCompleted;
+    private double startWeight;
+    private double endWeight;
+
+    public Journal() {
+    }
+
+    public Journal(int journalNumber, int patientId, int recordNumber, Date dateRecord, Date dateCompleted, int dietPlanNumber, String motivation, boolean activityCompleted, double startWeight, double endWeight) {
+        this.journalNumber = journalNumber;
+        this.patientId = patientId;
+        this.recordNumber = recordNumber;
+        this.dateRecord = dateRecord;
+        this.dateCompleted = dateCompleted;
+        this.dietPlanNumber = dietPlanNumber;
+        this.motivation = motivation;
+        this.activityCompleted = activityCompleted;
+        this.startWeight = startWeight;
+        this.endWeight = endWeight;
+    }
+
+    public int getJournalNumber() {
+        return journalNumber;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public int getRecordNumber() {
+        return recordNumber;
+    }
+
+    public Date getDateRecord() {
+        return dateRecord;
+    }
+    
+    public Date getDateCompleted() {
+        return dateRecord;
+    }
+
+    public int getDietPlanNumber() {
+        return dietPlanNumber;
+    }
+
+    public String getMotivation() {
+        return motivation;
+    }
+
+    public boolean isActivityCompleted() {
+        return activityCompleted;
+    }
+
+    public double getStartWeight() {
+        return startWeight;
+    }
+
+    public double getEndWeight() {
+        return endWeight;
+    }
+    
+}

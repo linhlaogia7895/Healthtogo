@@ -1,0 +1,44 @@
+<!--form for changing security question-->
+<form class="form-horizontal" action="PatientInfo" method="POST">
+    <table class="table table-hover">
+	<thead>
+	    <tr><th><label class="control-label col-sm-2" for="txt">Change Your Security Question</label></th></tr>
+	</thead>
+	<tbody>
+	    <tr><td>
+		    <div class="input-group">
+			<span class="input-group-addon">Question 1: &nbsp;</span>
+			<select class="form-control" name="questionOne" id="questionone">
+			    <option value="1">What is your mother's middle name?</option>
+				<option value="2">What city did you grow up in?</option>
+				<option value="3">What is your favorite book?</option>
+				<option value="4">what is your first car?</option>
+			</select>
+		    </div>
+		    <div class="input-group">
+			<span class="input-group-addon">Answer 1: &nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<input id="anwserone" type="text" class="form-control" name="anwserOne" required>
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <div class="input-group">
+			<span class="input-group-addon">Question 2: &nbsp;</span>
+			<select class="form-control" name="questionTwo" id="questiontwo">
+			    <option value="5">What is your father's first name?</option>
+				<option value="6">What is your favorite vacation destination?</option>
+				<option value="7">What was your favorite sport in high school?</option>
+				<option value="8">What school did you attend for sixth grade?</option>
+			</select>
+		    </div>
+		    <div class="input-group">
+			<span class="input-group-addon">Anwser 2: &nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<input id="anwsertwo" type="text" class="form-control" name="anwserTwo" required>
+		    </div>
+	    </td></tr>
+	</tbody>
+    </table>
+    <br/>
+    <div class="control-label col-sm-1"><a id="white" href="PatientInformation" class="btn btn-success" role="button">Cancel</a> </div>
+    <div class="control-label col-sm-3"><input class="btn btn-success" type="submit" name="changeAnwser" value="Submit"> </div>
+    <br/><br/>
+</form> 

@@ -1,0 +1,21 @@
+<%
+    String message = request.getParameter("message");
+    if(message != null)
+    {
+        StringBuffer html=new StringBuffer();
+        html.append("<div class='modal fade' id='modal-messages-popup' role='dialog'>")
+                .append("<div class='modal-dialog modal-sm'>")
+                    .append("<div class='modal-content'>")
+                        .append("<div class='modal-header'>")
+                            .append("<button type='button' class='close' data-dismiss='modal'>&times;</button>")
+                            .append("<h4 class='modal-title'><span class='icon-envelope'></span> Message</h4>")
+                        .append("</div>")
+                        .append("<div class='modal-body'>")
+                            .append("<h5><span id='message-text'>" + message + "</span></h5>")
+                        .append("</div>")
+                    .append("</div>")
+                .append("</div>")
+            .append("</div>");
+        out.print(html);
+    }
+%>

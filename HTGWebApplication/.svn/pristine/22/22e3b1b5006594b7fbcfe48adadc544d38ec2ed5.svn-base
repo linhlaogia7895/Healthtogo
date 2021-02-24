@@ -1,0 +1,112 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package common;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringEscapeUtils;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+/**
+ * Document   : CreateSecurityHelper.java
+ * Version    : Feb 15, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for installing security
+ */
+public final class CreateSecurityHelper{
+
+byte[] salt = new byte[16];
+    private static final String ALGO = "AES";
+    private static final byte[] keyValue = 
+    new byte[] { 'H', 'T', 'G', 'N', 'u', 't', 'r',
+		'i', 't', 'i', 'o','n', 'C', 'a', 'r', 'e' }; //16 bytes
+    
+    private static CreateSecurityHelper obj=null;
+    public static CreateSecurityHelper getInstance(){
+	if(obj==null){
+	    obj=new CreateSecurityHelper();
+	    return obj;
+	}else{
+	    return obj;
+	}
+    }
+    
+    /**
+     * Method to encrypt data
+     * @param Data the data to encrypt
+     * @return String the encrypted form
+     * @throws Exception When any error is produced
+     */
+    public static String encrypt(String Data) {
+	try {
+	    Key key = generateKey();
+	    Cipher c = Cipher.getInstance(ALGO);
+	    c.init(Cipher.ENCRYPT_MODE, key);
+	    byte[] encVal = c.doFinal(Data.getBytes());
+	    String encryptedValue = new BASE64Encoder().encode(encVal);
+	    return encryptedValue;
+	    
+	} catch (NoSuchAlgorithmException ex) {
+	    Logger.getLogger(CreateSecurityHelper.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException ex) {
+	    Logger.getLogger(CreateSecurityHelper.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (Exception ex) {
+	    Logger.getLogger(CreateSecurityHelper.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return null;
+    }
+
+    /**
+     * Method to decrypt data
+     * @param encryptedData the encrypted data to decrypt
+     * @return String the decrypted data
+     */
+    public static String decrypt(String encryptedData) {
+	try {
+	    Key key = generateKey();
+	    Cipher c = Cipher.getInstance(ALGO);
+	    c.init(Cipher.DECRYPT_MODE, key);
+	    byte[] decordedValue = new BASE64Decoder().decodeBuffer(encryptedData);
+	    byte[] decValue = c.doFinal(decordedValue);
+	    String decryptedValue = new String(decValue);
+	    return decryptedValue;
+	    
+	} catch (NoSuchAlgorithmException ex) {
+	    Logger.getLogger(CreateSecurityHelper.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (NoSuchPaddingException | InvalidKeyException | IOException | IllegalBlockSizeException | BadPaddingException ex) {
+	    Logger.getLogger(CreateSecurityHelper.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (Exception ex) {
+	    Logger.getLogger(CreateSecurityHelper.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return null;
+    }
+    
+    /**
+     * Method to generate the key for the encryptor/decryptor
+     * @return Key the generated key
+     */
+    private static Key generateKey() throws Exception {
+        Key key = new SecretKeySpec(keyValue, ALGO);
+        return key;
+    }
+}

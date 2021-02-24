@@ -1,0 +1,28 @@
+<!--faq table - style using W#.CSS - has angular component -->
+<div id="faq-table" class="table-bodies faq-table-body container w3-container container-fluid" ng-controller="faqTableController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Frequently Asked Questions</h1>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="form-group">
+	    <div class="input-group input-group-lg">
+		<span class="input-group-addon">
+		    <span class="icon-search"></span>
+		</span>
+		<input type="search" name="search" class="form-control" placeholder="Search tips" ng-model="searchFaq">
+	    </div>
+	</div>
+    </form>
+
+    <!--populates page with angular content for tips-->
+    <div ng-repeat="y in faqs | filter:searchFaq" class="w3-accordion w3-light-grey">
+	<button id="faq-btn" ng-click="manageFaqAccordion(y.id)" class="w3-btn-block w3-left-align"><span id="faq-btn-text">{{y.title}}</span></button>
+	<div id='{{y.id}}' class="w3-accordion-content w3-container">
+	    <div id="faq-content" ng-bind-html='y.content'></div> <!-- ng-bind-html requires the ng-sanitize CDN -->
+	</div>
+    </div>
+    <br>
+
+</div>

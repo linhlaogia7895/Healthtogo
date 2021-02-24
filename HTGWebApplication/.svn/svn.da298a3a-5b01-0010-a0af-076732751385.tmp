@@ -1,0 +1,73 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+(function(){
+    var app=angular.module('journalApp',['ngSanitize']);
+
+    app.factory('DietId', function(){
+    var id =
+        {
+            dietPlanId: "0"
+        };
+    
+    return {
+        getDietPlanId: function () {
+            return id.dietPlanId;
+        },
+        setDietPlanId: function (dietId) {
+            id.dietPlanId = dietId;
+        }
+    };
+});
+    app.controller('journalController', function ($scope,$http, DietId){
+        //$scope.patientId = '';
+	$http({
+		method : "POST",
+		url : "JournalJSON"
+	    }).then(function mySucces(response) {
+		$scope.journal = response.data;
+		}, function myError(response) {
+		    $scope.journal = response.statusText;
+		});
+        $scope.details=function(x){
+            $("#plan-detail-popup").modal();
+            x.activityCompleted == "Not Complete" ? $("#activityProgress").show() : $("#activityProgress").hide();
+            $http({
+		method : "POST",
+		url : "DietPlanJSON",
+                data : { dietPlanId : x.dietPlanNumber }
+	    }).then(function mySucces(response) {
+		$scope.diet = response.data;
+		}, function myError(response) {
+		    $scope.diet = response.statusText;
+            });
+            $http({
+		method : "POST",
+		url : "RecordJSON",
+                data : { recordId : x.recordNumber }
+	    }).then(function mySucces(response) {
+		$scope.record = response.data;
+		}, function myError(response) {
+		    $scope.record = response.statusText;
+            });
+	};
+    });
+//    app.controller('dietPlan', function ($scope, $http, DietId){
+//        var newvalue;
+//        
+//            newvalue = DietId.getDietPlanId();
+//        
+//        
+//        $http({
+//		method : "POST",
+//		url : "DietPlanJSON",
+//                data : { dietPlanId : newvalue }
+//	    }).then(function mySucces(response) {
+//		$scope.diet = response.data;
+//		}, function myError(response) {
+//		    $scope.diet = response.statusText;
+//        });
+//    });
+}());

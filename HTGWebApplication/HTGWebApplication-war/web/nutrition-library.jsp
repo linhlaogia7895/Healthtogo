@@ -1,0 +1,108 @@
+<%-- 
+    Document   : nutrition-library.jsp
+    Version    : Jan 5, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: nutrition library for main or home page
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@include file="WEB-INF/jspf/main/nutrition-library/client-side/header-scriptlet-nlibrary-client.jspf" %>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTG Nutrition Library</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!--CDNs-->
+	<c:import url="WEB-INF/jspf/main/nutrition-library/client-side/cdn-nlibrary-client.jspf"></c:import>
+	<!--end of CDN definitions-->
+
+    </head>
+    
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <div class="page" ng-app="mainApp">
+            
+            <!--logo-header-->
+            <c:import url="WEB-INF/jspf/common/logo-header-common.jspf"></c:import>
+	    <!--end of logo header definitions-->
+            
+	    
+	    <!--Navigation bar-->
+	    <%@include file="WEB-INF/jspf/common/nav-common.jspf" %>
+	    <!--end of navigation bar definitions-->
+            
+            
+            <!--ENTER YOUR HTML HERE-->
+            <div class="main-body container-fluid">
+                
+                <!--side navbar - style from W3.CSS -->
+                <c:import url="WEB-INF/jspf/main/nutrition-library/client-side/nav-side-nlibrary-client.jspf"></c:import>
+		<!--end of side navbar definitions-->
+		
+                
+                <!--margin left makes sure there's space for side navbar-->
+                <div style="margin-left:70px">
+                    
+		    
+		<!--calorie table - style using W#.CSS - has angular component -->
+		<c:import url="WEB-INF/jspf/main/nutrition-library/client-side/calorie-section-nlibrary-client.jspf"></c:import>
+		<!--end of calorie table definitions-->
+		
+		
+		<!--tips table - style using W#.CSS - has angular component -->
+		<c:import url="WEB-INF/jspf/main/nutrition-library/client-side/tips-table-nlibrary-client.jspf"></c:import>
+		<!--end of tips table definitions-->
+
+		
+		<!--faq table - style using W#.CSS - has angular component -->
+		<c:import url="WEB-INF/jspf/main/nutrition-library/client-side/faq-table-nlibrary-client.jspf"></c:import>
+		<!--end of faq table definitions-->
+                    
+                </div>
+            </div>
+            
+            <!--footer definition-->
+	    <c:import url="WEB-INF/jspf/common/footer-common.jspf"></c:import>
+            <!--end of footer definition-->
+            
+            
+            <!-- +++++++++++++++++++++++++++popups+++++++++++++++++++++++++++ -->
+            
+            <!--login modal popup-->
+	    <c:import url="WEB-INF/jspf/common/login-popup-common.jspf"></c:import>
+	    <!--end of login modal popup-->
+	    
+            
+            <!--contact modal popup-->
+	    <c:import url="WEB-INF/jspf/common/contact-popup-common.jspf"></c:import>
+	    <!--end of contact modal popup-->
+	    
+	    
+            <!--modal sign up popup-->
+	    <c:import url="WEB-INF/jspf/common/sign-up-popup-common.jspf"></c:import>
+	    <!--end of sign up modal popup-->
+            
+	    
+            <!--modal popup for require login-->
+	    <c:import url="WEB-INF/jspf/common/require-login-popup-common.jspf"></c:import>
+	    <!--end of require login modal popup-->
+            
+	    
+            <!--forgot password-->
+            <c:import url="WEB-INF/jspf/common/forgot-password-popup-common.jspf"></c:import>
+	    <!--end of require login modal popup-->
+            
+            
+            <!--Messages coming from Servlet-->
+	    <%@include file="WEB-INF/jspf/common/servlet-messages.jspf" %>
+	    <!--end messages from servlet definitions-->
+        </div>
+    </body>
+</html>
+
+
+
+

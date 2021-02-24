@@ -1,0 +1,194 @@
+
+<!--Navigation bar-->
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="150">
+    <div class="container-fluid" id="nav_local">
+
+	<!--Navigation bar for small screens-->
+	<div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>          
+	    </button>
+	    <a class="navbar-brand" href="#"></a>
+	</div>
+
+	<!--Regular navigation bar-->
+	<div class="collapse navbar-collapse" id="myNavbar">
+	    <ul class="nav navbar-nav">
+
+		<!--IMPORTANT: MUST CHANGE ALL PATHS HERE WHEN FILE IS MOVED-->
+		<li class="#"><a href="MainPageServlet?page=index#main-page"><span class="icon-home" style="font-size: 1.2em;"></span>&nbsp;Home</a></li>
+		<li class="#"><a href="MainPageServlet?page=index#services-page">Services</a></li>
+		<li class="#"><a href="MainPageServlet?page=index#about-page">About Us</a></li>
+		<li class="#"><a style="cursor:pointer" id="contact-popup">Contact</a></li>
+		<li class="#"><a href="NutritionLibrary">Nutrition Library</a></li>
+<!--                            <li class="${nutritionistStatus}"><a href="MainPageServlet?page=nutritionist">Nutritionist</a></li>
+		<li class="${adminStatus}"><a href="MainPageServlet?page=admin">Admin</a></li>
+		<li class="${staffStatus}"><a href="MainPageServlet?page=staff">Staff</a></li>-->
+
+
+		<!--No one logged in-->
+		<li class="${noneLoggedIn} dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+			Account
+
+			<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+
+			<!--check MainPageServlet.java and HtmlPageHelper.java for the contents of classRequireLogin-->
+			<li><a style="cursor:pointer" ${classRequireLogin}>Reset Login</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Create / Update account</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Payment plan</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Pay for service</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Send message to nutritionist</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Patient journal</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Search FAQ, tips and nutrition library</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Subscribe to advert(s)</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Manage invoice</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>Book appointment</a></li>
+		    </ul>
+		</li>
+
+
+		<!--patient-->
+		<li class='${patientStatus} dropdown'>
+			<a class='dropdown-toggle' data-toggle='dropdown' href='#'>Account<span class='caret'></span></a>
+			<ul class='dropdown-menu'>
+			    <li><a href='PageNotReady'>Reset Login</a></li>
+			    <li><a href='PatientInformation'>Edit Account Infomation</a></li>
+				<li><a href='paymentPlan.jsp'>Payment plan</a></li>
+				<li><a href='RedirectServlet?url=uCEnu7FrA9+Rm2vqCKEkOMBSm1HXKmi5RvX6O5jrd5Q='>Manage Invoice</a></li>
+                                <li><a href='Record'>My Record</a></li>
+                                <li><a href='RedirectServlet?url=icBa3l73XB44QmLOpbIbJw=='>My Journal</a></li>
+				<li><a href='PageNotReady'>Send message to nutritionist</a></li>
+				<li><a href='PageNotReady'>Patient journal</a></li>
+				<li><a href='PageNotReady'>Search FAQ, tips and nutrition library</a></li>
+				<li><a href='PageNotReady'>Subscribe to advert(s)</a></li>
+				<li><a href="BookAppointmentServletByPatient?url=xrYn9w8h6Cc5SIaQg8b9AQ==">Book appointment</a></li>
+			</ul>
+		</li>
+
+		<!--nutritionist-->
+		<li class="${nutritionistStatus} dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+			    Nutritionist
+
+			<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+			<li><a href="PageNotReady">Manage staff</a></li>
+			<li><a href="PageNotReady">Reset login</a></li>
+			<li><a href="PageNotReady">Manage patient account</a></li>
+			<li><a href="PageNotReady">Answer messages from patient</a></li>
+			<li><a href="RedirectServlet?url=OKF85Yjky0be53sV2v+G0MFv/cqr9baPHh8vhQTJXJ8=">Manage Patient journal</a></li>
+			<li><a href="PageNotReady">Monitor patient progress</a></li>
+			<li><a href="PageNotReady">Manage patients' journals</a></li>
+			<li><a href="PageNotReady">Generate patient progress report</a></li>
+			<li><a href="PageNotReady">Generate business report</a></li>
+			<li><a href="PageNotReady">Manage FAQ, tips and nutrition library</a></li>
+			<li><a href="PageNotReady">Search FAQ, tips and nutrition library</a></li>
+			<li><a href="PageNotReady">Manage appointments</a></li>
+		    </ul>
+		</li>
+
+		<!--administrator-->
+		<li class="${adminStatus} dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+			    Administrator
+
+			<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+			<li><a href="PageNotReady">Manage staff</a></li>
+			<li><a href="PageNotReady">Modify security</a></li>
+			<li><a href="PageNotReady">Reset login</a></li>
+			<li><a href="PageNotReady">Manage patient account</a></li>
+			<li><a href="PageNotReady">Manage patients' journals</a></li>
+			<li><a href="PageNotReady">Generate patient progress report</a></li>
+			<li><a href="PageNotReady">Search FAQ, tips and nutrition library</a></li>
+			<li><a href="PageNotReady">Manage activity logs</a></li>
+			<li><a href="PageNotReady">Manage logins</a></li>
+		    </ul>
+		</li>
+
+		<!--staff-->
+		<li class="${staffStatus} dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+			    Staff
+
+			<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+			<li><a href="PageNotReady">Reset Login</a></li>
+			<li><a style='cursor:pointer' class='sign-up'>Create patient account</a></li>
+			<li><a href="PageNotReady">Manage patient account</a></li>
+			<li><a href="invoice.jsp">Manage invoice and payments</a></li>
+			<li><a href="PageNotReady">Pay for service</a></li>
+			<li><a href="PageNotReady">Manage patients' journals</a></li>
+			<li><a href="PageNotReady">Generate patient progress report</a></li>
+			<li><a href="PageNotReady">Generate business report</a></li>
+			<li><a href="ManageNutritionLibraryServlet?page=WGTgXbhM6gIkkquIePUbTWSs2YVKp1o34U+09pXTOjc=&tableSelector=viLodokcSMmV5BdcHIw4bg==">Manage Calorie Table</a></li>
+			<li><a href="ManageNutritionLibraryServlet?page=WGTgXbhM6gIkkquIePUbTWSs2YVKp1o34U+09pXTOjc=&tableSelector=CLVBi6kfXTOX1+Gb0qtNEQ==">Manage Tips Table</a></li>
+			<li><a href="ManageNutritionLibraryServlet?page=WGTgXbhM6gIkkquIePUbTWSs2YVKp1o34U+09pXTOjc=&tableSelector=snNZCTIHanGJMAMxZNCPiw==">Manage FAQ Table</a></li>
+			<li><a href="ManageAdvertsServlet?page=jNhMYKBfsWKgACdxnwlU9Q==&tableSelector=dI6d/mDV5ahfNFDsnG1rDQ==">Manage News</a></li>
+			<li><a href="ManageAdvertsServlet?page=jNhMYKBfsWKgACdxnwlU9Q==&tableSelector=qP2WhaE2OBUNBDtRZvG2yg==">Manage Promotions</a></li>
+			<li><a href="ManageAdvertsServlet?page=jNhMYKBfsWKgACdxnwlU9Q==&tableSelector=kDSZTh2iO3Vr8amp5e90QQ==">Manage Careers</a></li>
+			<li><a href="ManageAdvertsServlet?page=jNhMYKBfsWKgACdxnwlU9Q==&tableSelector=fCsjPF2OXVYkqAmWHFdOpA==">Manage Internship</a></li>
+			<li><a href="ManageAdvertsServlet?page=jNhMYKBfsWKgACdxnwlU9Q==&tableSelector=nwwfJ3Gse0zR8jzNMVrHqA==">Manage Volunteers</a></li>
+			<li><a href="ManageAdvertsServlet?page=jNhMYKBfsWKgACdxnwlU9Q==&tableSelector=subscriptions">Manage Subscriptions</a></li>
+			<li><a href="NutritionLibrary">Search FAQ, tips and nutrition library</a></li>
+			<li><a href="PageNotReady">Manage appointments</a></li>
+			<li><a href="PageNotReady">Manage email notifications</a></li>
+		    </ul>   
+		</li>
+	    </ul>
+
+	    <!--Sign up, login, logout, LoggedIn icons using glyph icons of bootstrap 3-->
+	    <ul class="nav navbar-nav navbar-right">
+		<li class="${logoutIconStatus}">
+		    <a href='UsersServlet?logout=true'> &nbsp; <span class='icon-log-out'></span> Logout</a>
+		</li>
+
+		<!--logged in link for nutritionist-->
+		<li class="${nutritionistStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=nutritionist"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Nutritionist </i></span>
+			</a>
+		</li> 
+
+		<!--logged in link for admin-->
+		<li class="${adminStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=admin"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Admin </i></span>
+			</a>
+		</li> 
+
+		<!--logged in link for staff-->
+		<li class="${staffStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=staff"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Staff </i></span>
+			</a>
+		</li>  
+
+		<!--logged in link for patient-->
+		<li class="${patientStatus}" style="display: inline-block;">
+		    <a><span class='icon-user logged-in user-attrib'> logged in: <i> Patient </i></span></a>
+		</li>
+
+		<li class="${signUpIconStatus}">
+		    <a style='cursor:pointer' class='sign-up'><span class='icon-user'></span> Sign Up</a>
+		</li>
+		<li class="${logInIconStatus}">
+		    <a style='cursor:pointer' id='my-login'><span class='icon-log-in'></span> Login</a>
+		</li>
+	    </ul>
+
+	</div>
+    </div>
+</nav>

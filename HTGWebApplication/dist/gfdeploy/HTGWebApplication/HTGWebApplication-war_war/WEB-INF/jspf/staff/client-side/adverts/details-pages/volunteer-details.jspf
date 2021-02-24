@@ -1,0 +1,175 @@
+<!--volunteer details page-->
+<div id="volunteer-table">
+    <h1 style="text-shadow:10px 10px 5px #888888; font-stretch: expanded;" class="w3 w3-center jumbotron"><strong><i>Volunteer</i></strong></h1>
+    <div ng-show="allvolunteerDetails" class="w3-container container" style="max-width: 100%;">
+	<div class="panel panel-primary" style="padding: 10px;">
+	    <div class="panel-heading">
+		<h3>Position Details</h3>
+	    </div>
+	    <div class="panel-body" style="background-color: #e6f2ff;">
+
+		<form action="AdvertsVolunteerClientSideServlet" method="post">
+		    <table class="career-table-properties table table-striped">
+
+			<!--position id-->
+			<tr>
+			    <td><p>Position ID: </p></td>
+			    <td>
+				<!--<div>{{detail_volunteerID}}</div>-->
+				<div>${volunteerID}</div>
+				<!--<input type="hidden" name="detail_volunteerID" value="{{detail_volunteerID}}">-->
+				<input type="hidden" name="detail_volunteerID" value="${volunteerID}">
+			    </td>
+			</tr>
+
+			<!--title-->
+			<tr>
+			    <td><p>Title: </p></td>
+			    <td>
+				<!--<div>{{detail_volunteerTitle}}</div>-->
+				<div>${volunteerTitle}</div>
+				<input type="hidden" name="detail_volunteerTitle" value="${volunteerTitle}">
+			    </td>
+			</tr>
+
+			<!--category-->
+			<tr>
+			    <td><p>Category: </p></td>
+			    <td>
+				<!--<div>{{detail_volunteerCategory}}</div>-->
+				<div>${volunteerCategory}</div>
+				<!--<input type="hidden" name="detail_volunteerCategory" value="{{detail_volunteerCategory}}">-->
+				<input type="hidden" name="detail_volunteerCategory" value="${volunteerCategory}">
+			    </td>
+			</tr>
+
+			<!--volunteer type-->
+			<tr>
+			    <td><p>Career Type: </p></td>
+			    <td>
+				<!--<div>{{detail_volunteerType}}</div>-->
+				<div>${volunteerEmploymentType}</div>
+				<!--<input type="hidden" name="detail_volunteerType" value="{{detail_volunteerType}}">-->
+				<input type="hidden" name="detail_volunteerType" value="${volunteerEmploymentType}">
+			    </td>
+			</tr>
+
+			<!--posting date-->
+			<tr>
+			    <td><p>Posting Date: </p></td>
+			    <td>
+				<!--<div>{{detail_volunteerDatePosted}}</div>-->
+				<div>${volunteerDatePosted}</div>
+				<!--<input type="hidden" name="detail_volunteerDatePosted" value="{{detail_volunteerDatePosted}}">-->
+				<input type="hidden" name="detail_volunteerDatePosted" value="${volunteerDatePosted}">
+			    </td>
+			</tr>
+
+			<!--closing date-->
+			<tr>
+			    <td><p>Closing Date: </p></td>
+			    <td>
+				<!--<div>{{detail_volunteerDateClosed}}</div>-->
+				<div>${volunteerDateClosed}</div>
+				<!--<input type="hidden" name="detail_volunteerDateClosed" value="{{detail_volunteerDateClosed}}">-->
+				<input type="hidden" name="detail_volunteerDateClosed" value="${volunteerDateClosed}">
+			    </td>
+			</tr>
+		    </table>
+
+		    <!--requirements-->
+		    <div>
+			<h5 class="" style="font-size: 1.2em;"><span class="icon-pencil"></span> Requirements:</h5>
+			<div  style="border: 2px solid gray; border-radius: 5px;">
+			    <div style="padding: 7px; background-color: white;">
+				<!--<p class="detailValue">{{detail_volunteerRequirements}}</p>-->
+				<p class="detailValue">${volunteerRequirements}</p>
+			    </div>
+			</div>
+			<!--<input type="hidden" name="detail_volunteerRequirements" value="{{detail_volunteerRequirements}}">-->
+			<input type="hidden" name="detail_volunteerRequirements" value="${volunteerRequirements}">
+		    </div>
+
+		    <hr>
+		    <h2 class="w3-center" style="text-shadow: 10px 10px 5px #888888; font-style: italic">Application Form</h2>
+
+		    <!--Enter first name-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="detail_volunteerFName" type="text" 
+				   class="form-control" name="detail_volunteerFName" 
+				   placeholder="Enter fist name">
+			</div>
+
+			 <!--enter last name-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="detail_volunteerLName" type="text" 
+				   class="form-control" name="detail_volunteerLName" 
+				   placeholder="Enter last name">
+			</div>
+
+			 <!--enter email-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-envelope"></span>
+			    </span>
+			    <input type="email" class="form-control" 
+				   name="detail_volunteerEmail" placeholder="Enter email" 
+				   ng-model="email" 
+				   data-toggle="popover"
+				   data-trigger="focus"
+				   data-placement="left"
+				   title="Example"
+				   data-content="someone@example.com">
+			</div>
+
+			 <!--enter home phone-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-phone-alt"></span>
+			    </span>
+			    <input ng-model="detail_volunteerContactNum" 
+				   type="tel" 
+				   class="form-control container-fluid" 
+				   name="detail_volunteerContactNum" 
+				   placeholder="Contact number" 
+				   pattern="\d{10}" 
+				   data-toggle="popover" 
+				   data-trigger="focus" 
+				   data-placement="left" 
+				   title="Format" 
+				   data-content="10 digits, No dashes or spaces: 7778889999">
+			</div>
+			 <br>
+
+			<!--volunteer cover letter-->
+			<div style="padding: 10px 0;">
+			    <label><span class="icon-pencil"></span> Cover letter:</label>
+			    <textarea ng-model="detail_volunteerCoverLetter" class="form-control" name="detail_volunteerCoverLetter" rows="15" placeholder="Type your cover letter here.."></textarea>
+			</div>
+
+			 <br>
+			 <!--upload resume-->
+			    <div style="padding: 10px 0;">
+				<label><span class="icon-file"></span> Upload Resume:</label>
+				<p><span style="font-size: large; font-weight: bolder; color: red;"><strong>Important:</strong></span> Only text, PDF and document files are accepted. Moreover, you have to press <em><strong>UPLOAD</strong></em> before clicking submit. Otherwise, your resume will not get submitted.</p>
+				<input type="file" name="volunteerFileUpload" class="fileUpload" data-upload-url="VolunteerFileUploadServlet">
+			    </div>
+			 <br>
+
+			<!--volunteer form buttons-->
+			<input type="submit" name="detail_volunteerApplyFormSubmit" ng-model="detail_volunteerApplyFormSubmit" value="Submit Application" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+			<a href="ManageAdvertsServlet?page=adverts-all&tableSelector=volunteer" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder; text-decoration: none; color: white; padding: 0.9px 8px; border-width: 2px; border-style: outset; "><strong>Cancel Submit</strong></a>
+			<!--<input type="button" name="#" ng-click="cancelSubmit()" value="Cancel Submit" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">-->
+			<br>
+
+		</form>
+	    </div>
+	</div>
+    </div>
+</div>

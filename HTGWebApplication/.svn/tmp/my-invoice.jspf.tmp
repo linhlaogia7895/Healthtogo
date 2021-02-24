@@ -1,0 +1,29 @@
+<h1>My Invoices</h1>
+<div class="container" ng-controller="invoiceController">
+    <div ng-repeat="x in invoice">
+        <div class="col-md-6" >
+            <div class="thumbnail hovereffect2">
+                <div align="center">
+                    <p>Invoice Number: {{x.invoiceNumber}}</p>
+                    <p>Date Record: {{x.dateInvoice}}</p>
+                    <p>Sub Total: {{x.subTotal}}</p>
+                    <p>Tax Rate: {{x.taxRate}}</p>
+                    <p>Tax Amount: {{x.taxAmount}}</p>
+                    <p><b>Total: {{x.total}}</b></p>
+                    <p>Bill Address: {{x.billAddress}}</p>
+                    <p>Description: {{x.description}}</p>
+                    <p>Due Date: {{x.dueDate}}</p>
+                    <p>Status: {{x.status}}</p>
+                    <div id="checkInvoice">
+<<<<<<< .mine
+                        <button id="invoice-detail" class="btn btn-warning" ng-model="checkPay" value="{{x.status}}">Pay Now</button>
+=======
+                    <button id="invoice-detail" class="btn btn-warning" ng-hide="x.status=!incomplete">Pay Now</button>
+>>>>>>> .r240
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>    

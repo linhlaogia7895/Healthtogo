@@ -1,0 +1,9 @@
+beans.admin
+beans.main
+beans.nutritionist
+beans.patient
+beans.staff
+beans.users
+domains.main
+domains.patient
+domains.users

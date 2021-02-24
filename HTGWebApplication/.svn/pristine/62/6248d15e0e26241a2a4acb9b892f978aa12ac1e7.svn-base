@@ -1,0 +1,63 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Document   : appointment-manage-controller.js
+ * Version    : April 5, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Angular js for appointment-manage-by-staff.jsp
+ */
+
+(function(){
+    var app=angular.module("mainApp",[]);
+    
+    app.controller("managePatientAppointmentsController",function ($scope,$http) {
+	$scope.sortOrder = "";
+	$scope.searchAppointments = "";
+	$scope.sortReverse = null;
+	$scope.sortType="";
+		
+	$http({
+	    method: "POST",
+	    url: "AppointmentJSON"
+	}).then(function mySuccess(response){
+	    $scope.careers=response.data;
+	},function myError(response){
+	    $scope.careers=response.statusText;
+	});
+	
+	/*makes sure that each time, editTips is reset before it takes in another value*/	
+	$scope.editAppointmentData={};
+	
+	/*Sets the sort order value for sortOrder*/
+	$scope.$watch('sortReverse',function (){
+	    $scope.sortOrder = $scope.sortReverse?"Descending":
+	    $scope.sortReverse===null?"":"Ascending";
+	});
+	
+	/*changes the text for Add news button*/
+	$scope.$watch('showBlankAppointment',function (){
+	    $scope.addBtnTxt_AddAppointment_or_CloseForm=$scope.showNewsBlank ? "Close Form":"Add Appointment";
+	});
+	
+	/*initially hides the add promos blank input fields until they're called*/
+	$scope.showBlankAppointment=false;
+	
+	$scope.getDetail = function(data){
+	    $scope.APPOINTMENT_ID=data.APPOINTMENT_ID;
+	    $scope.PATIENT_ID=data.PATIENT_ID;
+	    $scope.NUTRITION_ID=data.NUTRITION_ID;
+	    $scope.APPOINTMENT_DATE=data.APPOINTMENT_DATE;
+	    $scope.START_TIME=data.START_TIME;
+	    $scope.END_TIME=data.END_TIME;
+	    $scope.APPOINTMENT_TYPE=data.APPOINTMENT_TYPE;
+	    $scope.PURPOSE=data.PURPOSE;
+
+	    $('#modal-appointment-details-popup').modal();
+	};
+    });
+});
+

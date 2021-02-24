@@ -1,0 +1,57 @@
+<h1>My Invoices</h1>
+<div class="container" ng-controller="invoiceController">
+    <div ng-repeat="x in invoice">
+        <div class="col-md-6 col-lg-12" >
+            <div class="thumbnail col-lg-6">
+                <div>
+                    <table>
+                        <tr id="invoiceTitle"><td>Invoice Number:</td><td>{{x.invoiceNumber}}</td></tr>
+                        <tr><td>Date Record:</td><td> {{x.dateInvoice}}</td></tr>
+                    <tr><td>Sub Total:</td><td> \${{x.subTotal}}</td></tr>
+                    <tr><td>Tax Rate:</td><td>  {{x.taxRate}}%</td></tr>
+                    <tr><td>Tax Amount:</td><td>  \${{x.taxAmount}}</td></tr>
+                    <tr id="invoiceBold"><td>Total:</td><td>  \${{x.total}}</td></tr>
+                    <tr><td>Bill Address:</td><td>  {{x.billAddress}}</td></tr>
+                    <tr><td>Description:</td><td>  {{x.description}}</td></tr>
+                    <tr><td>Due Date:</td><td>  {{x.dueDate}}</td></tr>
+                    <tr id="invoiceBold"><td>Status:</td><td>  {{x.status}}</td></tr>
+                    </table>
+                    <div ng-show="x.status == 'Not Pay'">
+                        <form action="Checkout" method="POST">
+                            <input type="hidden" name="invoiceId" value="{{x.invoiceNumber}}">
+                            <input type="hidden" name="PAYMENTREQUEST_0_AMT" value="2">
+                            <input type="hidden" name="currencyCodeType" value="USD">
+                            <input type="hidden" name="paymentType" value="Sale">
+                            <!--Pass additional input parameters based on your shopping cart. For complete list of all the parameters click here -->
+                            <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Checkout with PayPal"></input>
+                      </form>
+                    </div>
+                    <div ng-show="x.status == 'Paid'">
+                        <form action="generatePdf" method="POST" target="_blank">
+                            <input type="hidden" name="patientId" value="{{x.patientId}}">
+                            <input type="hidden" name="invoiceId" value="{{x.invoiceNumber}}">
+                            <input type="hidden" name="subTotal" value="{{x.subTotal}}">
+                            <input type="hidden" name="total" value="{{x.total}}">
+                            <input type="hidden" name="address" value="{{x.billAddress}}">
+                            <input type="hidden" name="description" value="{{x.description}}">
+                            <input type="hidden" name="dateInvoice" value="{{x.dateInvoice}}">
+                            <input type="submit" name="geneInvoice" value="Generate Invoice PDF File">
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
+<script type="text/javascript">
+window.paypalCheckoutReady = function () {
+	paypal.checkout.setup('<%= new paypal.PayPal().getGvAPIUserName() %>', {
+	container: 'myContainer',
+	environment: '<%= new paypal.PayPal().getEnvironment() %>'
+	});
+};
+</script>
+<script src="//www.paypalobjects.com/api/checkout.js" async></script>   

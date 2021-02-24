@@ -1,0 +1,8 @@
+<form>
+    <div class="form-group">
+	<label for="comment">Entry:</label>
+	<textarea class="form-control" rows="5" id="comment"></textarea>
+    </div>
+    <input  class="btn btn-primary btn-lg active" type="submit" name="saveJournalEntry" value="Save">
+    <input class="btn btn-primary btn-lg active" type="reset" Value="Cancel">
+</form>

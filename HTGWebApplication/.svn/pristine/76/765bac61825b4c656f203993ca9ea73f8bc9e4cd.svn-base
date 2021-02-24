@@ -1,0 +1,119 @@
+<!--calorie table - style using W#.CSS - has angular component -->
+<div id="calorie-table" class="table-bodies calorie-table-body container w3-container" ng-controller="calorieTableController">
+
+    <!--title-->
+    <h1 class="table-title">Food Calorie Table</h1>
+
+    <!--alert section at top of table-->
+    <div class="alert alert-info">
+	<p>Sort Column: {{sortType}}</p>
+	<p>Sort Order: {{sortOrder}}</p>
+	<p>Sort Query: {{sortQuery}}</p>
+    </div>
+
+
+    <!--search box - styles in css file-->
+    <form>
+	<div class="form-group">
+	    <div class="input-group input-group-lg">
+		<span class="input-group-addon">
+		    <span class="searchIcon icon-search"></span>
+		</span>
+		<input type="search" name="search" class="searchFood form-control" placeholder="Search calorie" ng-model="searchFood">
+
+
+	    </div>
+	</div>
+    </form>
+
+
+    <!--the table-->
+    <table class="table table-bordered table-stripped">
+
+	<!--table header-->
+	<thead>
+	    <tr>
+
+		<!--Food name column header-->
+		<td>
+		    <a href="#" ng-click="sortType = 'foodName'; sortReverse=!sortReverse">
+			Food (100g)
+			<span ng-show="sortType === 'foodName' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'foodName' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<!--Recommended calories column header-->
+		<td>
+		    <a href="#" ng-click="sortType = 'recommendedCalories'; sortReverse=!sortReverse">
+			Recommended
+			<span ng-show="sortType === 'recommendedCalories' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'recommendedCalories' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<!--Calories column header-->
+		<td>
+		    <a href="#" ng-click="sortType = 'calories'; sortReverse=!sortReverse">
+			Calories
+			<span ng-show="sortType === 'calories' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'calories' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<!--Protein column header-->
+		<td>
+		    <a href="#" ng-click="sortType = 'protein'; sortReverse=!sortReverse">
+			Protein
+			<span ng-show="sortType === 'protein' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'protein' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<!--Fat column header-->
+		<td>
+		    <a href="#" ng-click="sortType = 'fat'; sortReverse=!sortReverse">
+			Fat
+			<span ng-show="sortType === 'fat' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'fat' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<!--Carbs column header-->
+		<td>
+		    <a href="#" ng-click="sortType = 'carbs'; sortReverse = !sortReverse">
+			Carbs
+			<span ng-show="sortType === 'carbs' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'carbs' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<!--Fiber column header-->
+		<td>
+		    <a href="#" ng-click="sortType = 'fiber'; sortReverse = !sortReverse">
+			Fiber
+			<span ng-show="sortType === 'fiber' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'fiber' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+	    </tr>
+	</thead>
+
+
+	<!--table body - content in angularjs file-->
+	<tbody>
+	    <tr ng-repeat="x in foods | orderBy:sortType:sortReverse | filter:searchFood">
+		<td>{{x.FOOD_NAME}}</td>
+		<td>{{x.RECOMMENDED_CALORIES}}g</td>
+		<td>{{x.CALORIES}}g</td>
+		<td>{{x.PROTEIN}}g</td>
+		<td>{{x.FAT}}g</td>
+		<td>{{x.CARBS}}g</td>
+		<td>{{x.FIBER}}g</td>
+	    </tr>
+	</tbody>
+
+    </table>
+
+</div>

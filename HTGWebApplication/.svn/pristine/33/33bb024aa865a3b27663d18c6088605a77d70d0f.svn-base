@@ -1,0 +1,139 @@
+<!--Career section-->
+<div id="career-table" class="table-bodies news-section-body container w3-container container-fluid" ng-controller="careerSectionController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Careers</h1>
+
+    <div ng-hide="allCareerTable">
+	<!--alert section at top of table-->
+	<div class="alert alert-info">
+	    <p>Sort Column: {{sortType}}</p>
+	    <p>Sort Order: {{sortOrder}}</p>
+	    <p>Sort Query: {{searchCareer}}</p>
+	</div>
+
+	<!--search box - style in css file-->
+	<form>
+	    <div class="w3-row">
+		<div class="form-group w3-col m8 w3-left-align">
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-search"></span>
+			</span>
+			<input type="search" name="search" class="form-control" placeholder="Search careers" ng-model="searchCareer">
+		    </div>
+		</div>
+	    </div>
+	</form>
+
+	<form action="DetailsCarrierServlet_CareerInternVolunteer" method="post">
+	    <!--the table-->
+	    <table class="table table-bordered table-stripped">
+
+		<!--table header-->
+		<thead>
+		    <tr>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'positionID'; sortReverse=!sortReverse">
+				Position ID
+				<span ng-show="sortType === 'positionID' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'positionID' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'title'; sortReverse=!sortReverse">
+				Title
+				<span ng-show="sortType === 'title' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'title' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'category'; sortReverse=!sortReverse">
+				Category
+				<span ng-show="sortType === 'category' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'category' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'employmentType'; sortReverse=!sortReverse">
+				Employment Type
+				<span ng-show="sortType === 'employmentType' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'employmentType' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'datePosted'; sortReverse=!sortReverse">
+				Date Posted
+				<span ng-show="sortType === 'datePosted' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'datePosted' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'dateClosed'; sortReverse=!sortReverse">
+				Closing Date
+				<span ng-show="sortType === 'dateClosed' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'dateClosed' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			</td>
+
+		    </tr>
+		</thead>
+
+
+		<!--table body - content in angularjs file-->
+		<tbody>
+		    <tr ng-repeat="c in careers | orderBy:sortType:sortReverse | filter:searchCareer">
+			<td>
+			    <!--Here: position id is displayed-->
+			    <div>{{c.CAREER_ID}}</div>
+			    <input type="hidden" name="CAREER_ID" value="{{c.CAREER_ID}}">
+			</td>
+
+			<td>
+			    <!--Here: position title is displayed-->
+			    <div ng-model="editCareerData[c.POSITION_TITLE]">{{c.POSITION_TITLE}}</div>
+			</td>
+
+			<td>
+			    <!--Here: position category is displayed-->
+			    <div ng-model="editCareerData[c.CAREER_ID]">{{c.POSITION_CATEGORY}}</div>
+			</td>
+
+			<td>
+			    <!--Here: position employment type is displayed-->
+			    <div ng-model="editCareerData[c.CAREER_ID]">{{c.EMPLOYMENT_TYPE}}</div>
+			</td>
+
+			<td>
+			    <!--Here: date posted is displayed-->
+			    <div ng-model="editCareerData[c.CAREER_ID]">{{c.DATE_POSTED}}</div>
+			</td>
+
+			<td>
+			    <!--Here: date posted is displayed-->
+			    <div ng-model="editCareerData[c.CAREER_ID]">{{c.DATE_CLOSED}}</div>
+			</td>
+
+			<td>
+			    <!--Here: button to display detail is displayed-->
+			    <input type="submit" name="careerGetDetailsSubmit" value="Show Detail" class="btn btn-warning">
+			    
+			</td>
+		    </tr>
+		</tbody>
+
+	    </table>
+	</form>
+	
+    </div>
+    
+</div>

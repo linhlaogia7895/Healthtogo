@@ -1,0 +1,35 @@
+<!--News section-->
+<div id="news-table" class="table-bodies news-section-body container w3-container container-fluid" ng-controller="newsSectionController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Nutrition News</h1>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search news" ng-model="searchNews">
+		</div>
+	    </div>
+	</div>
+    </form>
+
+    <!--populates page with angular content for tips-->
+    <div ng-repeat="n in news | orderBy:'-date':true | filter:searchNews" class="w3-accordion w3-light-grey">
+	<button id="news-btn" ng-click="manageNewsAccordion(n.id)" class="w3-btn-block w3-left-align adverts-btn">
+	    <span class="adverts-btn-text">{{n.title}} 
+		<span ng-model="dates" class="pull-right">Date: {{n.date}}</span>
+	    </span>
+	</button>
+	<div id='{{n.id}}' class="w3-accordion-content w3-container">
+	    <h3 style="text-align: center;">{{n.title}}</h3>
+	    <h5>Source: <a href="{{n.href}}" target='_blank'>{{n.hrefText}}</a></h5>
+	    <div class="adverts-content" ng-bind-html='n.content'></div> <!-- ng-bind-html requires the ng-sanitize CDN -->
+	</div>
+    </div>
+    <br>
+</div>

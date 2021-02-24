@@ -1,0 +1,115 @@
+<!--cancel appointment modal popup-->
+<div class="modal fade" id="modal-cancel-appointment-popup" role="dialog">
+    <div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	    <div class="modal-header">
+
+		<!--close button-->
+		<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+		<button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+		<!--contact header-->
+		<h4><span class="icon-calendar"></span> Cancel Appointment</h4>
+	    </div>
+	    <!--form USING ANGULAR JS--> 
+	    <form action="BookAppointmentServletByPatient" method="post" name="contactForm">
+
+		<!--modal body-->
+		<div class="modal-body">
+		    <div class="form-group">
+			   
+			    <!--enter ID-->
+			    <div class="input-group input-group-lg">
+				<h5>To cancel this booking, please enter your registered username.</h5>
+			    </div>
+			    <hr>
+			    
+			    <!--enter ID-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-user"></span>
+				</span>
+				<input ng-model="USERNAME" 
+				       type="text" 
+				       class="form-control" 
+				       name="USERNAME" 
+				       placeholder="Enter your username" 
+				       autofocus required>
+			    </div>
+
+			    <!--BOOKING DATE-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-time"></span>&nbsp; Booking Date:
+				</span>
+				<input type="text" 
+					 class="form-control" 
+					 name="BOOKING_DATE" 
+					 value="{{BOOKING_DATE}}" 
+					 readonly>
+			    </div>
+			    
+			    <!--start time-->
+			    <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-time"></span>&nbsp; Start Time:
+			       </span>
+			       <input type="text" 
+				      class="form-control" 
+				      name="START_TIME" 
+				      value="{{START_TIME}}" 
+				      readonly>
+			    </div>
+			   
+			    <!--end time-->
+			    <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-time"> </span>&nbsp; End Time:
+			       </span>
+			       <input type="text" 
+				      class="form-control" 
+				      name="END_TIME" 
+				      value="{{END_TIME}}" 
+				      readonly>
+			    </div>
+			    
+			    <!--Appointment ID-->
+			    <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-time"></span>&nbsp; Appointment ID:
+			       </span>
+			       <input type="text" 
+				      class="form-control" 
+				      name="APPOINTMENT_ID" 
+				      value="{{APPOINTMENT_ID}}" 
+				      readonly>
+			    </div>
+			    <br>
+			   
+			    <!--hidden inputs-->
+			    <input type="hidden" name="url" value="xrYn9w8h6Cc5SIaQg8b9AQ==">
+			    <input type="hidden" name="KEY" value="Z5EiUyEwb2XBxxNzunuJGQ==">
+			   
+			    <!--submit button-->
+			    <input ng-disabled="contactForm.$invalid" 
+				   id="contact-btn" 
+				   class="btn btn-danger pull-left" 
+				   type="submit" 
+				   name="submitCancel" 
+				   value="Submit Request">
+		       </div>
+	       </div>
+
+	       <!--footer-->
+	       <div class="modal-footer">
+		   <p>
+		       <i class="fa fa-spinner w3-spin" style="font-size:64px">Ohh.. </i>
+		   </p>
+	       </div>
+	   </form>
+
+       </div>
+    </div>
+</div>

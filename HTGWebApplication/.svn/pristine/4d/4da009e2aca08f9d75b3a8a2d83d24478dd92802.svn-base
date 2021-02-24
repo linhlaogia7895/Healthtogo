@@ -1,0 +1,210 @@
+package beans.nutritionist;
+
+import beans.admin.AdminBean;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Stateless;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import beans.users.UsersBean;
+import domains.main.PatientDomain;
+import domains.users.Journal;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+import javax.ejb.Singleton;
+
+/**
+ * Document   : NutritionistBean.java
+ * Version    : Jan 20, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: EJB for nutritionist connections
+ */
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
+@Singleton
+public class NutritionistBean implements NutritionistBeanLocal {
+
+    /**
+     * Private method to manage connections to jdbc
+     * @return Connection the jdbc connection
+     */
+    @Lock(LockType.READ)
+    private Connection getConnection() {
+        Connection conn=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            InitialContext ic=new InitialContext();
+            DataSource ds=(DataSource)ic.lookup("jdbc/htgConnectionPool");
+            conn=ds.getConnection();
+        } catch (ClassNotFoundException | NamingException | SQLException ex) {
+            Logger.getLogger(UsersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
+    }
+    
+
+    /**
+     * Method to edit account by nutritionist
+     * @param activityUser the activity user
+     * @param newUsername the staff username
+     * @param newFirstName the staff first name
+     * @param newLastName the staff last name
+     * @param newEmail the staff email
+     * @param newAddress the staff physical address
+     * @param newHomePhone the staff home phone
+     * @param newCellPhone the staff cell phone
+     * @param dateOfBirth the staff date of birth
+     * @param newSalary the staff salary
+     * @param newGender the staff gender
+     * @param jobStatus the staff job status
+     * @param accountStatus the staff account status
+     * @return true when the staff account has been edited
+     */
+    @Lock(LockType.WRITE)
+    @Override
+    public boolean editStaffAccountByAdminOrNutritionist(
+            String activityUser, 
+            String newUsername, 
+            String newFirstName, 
+            String newLastName, 
+            String newEmail, 
+            String newAddress, 
+            int newHomePhone, 
+            int newCellPhone, 
+            Date dateOfBirth, 
+            double newSalary, 
+            char newGender, 
+            String jobStatus, 
+            String accountStatus) 
+    {
+	PreparedStatement ps = null;
+	Connection conn = null;
+	
+        boolean accountEdited=false;
+        
+        try {
+            
+	    conn = getConnection();
+	    String sql="{call editStaffAccountByAdminOrNutritionist(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+	    ps = conn.prepareStatement(sql);
+	    ps.setString(1, activityUser);
+	    ps.setString(2, newUsername);
+	    ps.setString(3, newFirstName);
+	    ps.setString(4, newLastName);
+	    ps.setString(5, newEmail);
+	    ps.setString(6, newAddress);
+	    ps.setInt(7, newHomePhone);
+	    ps.setInt(8, newCellPhone);
+	    ps.setDate(9, dateOfBirth);
+	    ps.setDouble(10, newSalary);
+	    ps.setString(11, String.valueOf(newGender)); // Hi Linh. Pls check this. there's no ps.setChar() to set the value to SQL (newGender CHAR)
+	    ps.setString(12, jobStatus);
+	    ps.setString(13, accountStatus);
+	    int result=ps.executeUpdate();
+	    accountEdited=result>0;
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminBean.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+	    try {
+		/*closing inside finally prevents an accidental Dos when the app encounters an exception and fails
+		to close the connection handle*/
+		conn.close();
+		ps.close();
+	    } catch (SQLException ex) {
+		Logger.getLogger(NutritionistBean.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+                
+        return accountEdited;
+    }
+    /**
+     * Method to get the calories table
+     * @return ArrayList<FoodCalories> the calories table constituted
+     */
+    @Lock(LockType.READ)
+    public final ArrayList getPatientTable() {
+	ArrayList<PatientDomain> patientList=new ArrayList<>();
+	
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	Connection conn = null;
+	try {
+		conn = getConnection(); 
+		String sql="{call getPatientList()}";
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
+		while(rs.next()){
+		    PatientDomain fc=PatientDomain.getInstance(rs.getInt(1),
+			    rs.getString(2),
+			    rs.getString(3),
+			    rs.getDate(8),
+			    rs.getString(4),
+			    rs.getString(6),
+			    rs.getString(7),
+			    rs.getString(5));
+		    patientList.add(fc);
+		    fc.flush();
+	    }
+	} catch (SQLException ex) {
+	    Logger.getLogger(NutritionistBean.class.getName()).log(Level.SEVERE, null, ex);
+	}finally{
+	    try {
+		/*closing inside finally prevents an accidental Dos when the app encounters an exception and fails
+		to close the connection handle*/
+		conn.close();
+		ps.close();
+		rs.close();
+	    } catch (SQLException ex) {
+		Logger.getLogger(NutritionistBean.class.getName()).log(Level.SEVERE, null, ex);
+	    }
+	}
+	return patientList;
+    }
+    @Lock(LockType.WRITE)
+    public final ArrayList<Journal> getPatientJournal(int id) {
+	ArrayList<Journal> fc=new ArrayList<>();
+	
+	try {
+	    PreparedStatement ps;
+	    ResultSet rs;
+	    try (Connection conn = getConnection()) {
+		String sql="{call getJournalById(?)}";
+		ps = conn.prepareStatement(sql);
+                ps.setInt(1, id);
+		rs = ps.executeQuery();
+                while(rs.next())
+                {
+                    
+                }
+		while(rs.previous()){
+		    fc.add(Journal.getInstance(rs.getInt(1),
+			    rs.getInt(2),
+			    rs.getInt(3),
+			    rs.getDate(4),
+                            rs.getDate(8),
+			    rs.getInt(5),
+			    rs.getString(6),
+			    rs.getString(7),
+			    rs.getDouble(9),
+                            rs.getDouble(10)));
+                    
+		}
+		conn.close();
+	    }
+	    ps.close();
+	    rs.close();
+	} catch (SQLException ex) {
+	    Logger.getLogger(NutritionistBean.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return fc;
+    }   
+}

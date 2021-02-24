@@ -1,0 +1,48 @@
+package beans.staff;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
+import javax.ejb.Local;
+
+/**
+ * Document   : StaffersBeanLocal.java
+ * Version    : Jan 20, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: interface for StaffersBean.java
+ */
+@Local
+public interface StaffersBeanLocal {
+    boolean createStaffACcount(
+            String activityUser,
+            String newUsername,
+            String newPassword,
+            String newUserType,
+            boolean newLocked,
+            String newFirstName,
+            String newLastName,
+            String newEmail,
+            String newAddress,
+            int newHomePhone,
+            int newCellPhone,
+            Date dateOfBirth,
+            double newSalary,
+            char newGender,
+            String jobStatus,
+            String accountStatus
+        );
+    
+    boolean editStaffAccountByStaff(
+            String activityUser,
+            String newUsername,
+            String newFirstName,
+            String newLastName,
+            String newEmail,
+            String newAddress,
+            int newHomePhone,
+            int newCellPhone,
+            Date dateOfBirth,
+            char newGender
+    );
+    
+}

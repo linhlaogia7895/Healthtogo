@@ -1,0 +1,79 @@
+<!--Form for reset staff password-->
+<form class="form-horizontal" action="AdminPageServlet" method="POST" name="registrationForm">
+    <table class="table table-hover">
+	<tbody>
+	    <tr>
+		<td>
+		    <!--password-->
+		    <label for="pwd">Password:</label>
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-user"></span>
+			</span>
+			<input ng-model="password" 
+			    check-password="password"
+			    type="password" 
+			    class="form-control" 
+			    name="password" 
+			    placeholder="Enter password" 
+			    data-toggle="popover" 
+			    data-trigger="focus" 
+			    data-placement="right" 
+			    title="Requirement" 
+			    data-content="A min of 8 characters, at least one uppercase, at least one lowercase, at least 2 numbers, and at least one special character" 
+			    required>
+			<input type="hidden" name="UserType" value="${session.getAttribute("userName")}">
+			<input type="hidden" name="theStaffID"  value="${request.getParameter("staffID")}">
+		    </div>
+		    <span ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid" style="color: red;">
+			<div ng-messages="registrationForm.password.$error" ng-messages-include="_js/_common/angular/messages.html"></div>
+		    </span>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <!--confirm password-->
+		    <label for="pwd">Confirm Password:</label>
+
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-user"></span>
+			</span>
+			<input ng-model="confirmPassword"
+			    compare-to="password" 
+			    type="password" 
+			    class="form-control" 
+			    name="confirmPassword" 
+			    placeholder="Confirm password" 
+			    data-toggle="popover" 
+			    data-trigger="focus" 
+			    data-placement="right" 
+			    title="Requirement" 
+			    data-content="Must match the password" 
+			    required>
+		    </div>
+		    <span ng-show="registrationForm.confirmPassword.$dirty && registrationForm.confirmPassword.$invalid" style="color: red;">
+			<span ng-messages="registrationForm.confirmPassword.$error" ng-messages-include="_js/_common/angular/messages.html"></span>
+		    </span>
+		</td>
+	    </tr>
+
+	    <tr>
+		<td>
+		    <div class="form-group"> 
+			<div class="col-sm-offset-2 col-sm-10">
+			    <button type="submit" name="submitResetCancel" value="true" class="w3-btn w3-gray" style="width:150px;"><b>Cancel</b></button>
+			</div>
+		    </div>
+	       </td>
+	       <td>
+		    <div class="form-group"> 
+			<div class="col-sm-offset-2 col-sm-10">
+			    <button type="submit" name="submitResetStaff" value="true" class="w3-btn w3-green" style="width:150px;"><b>Reset Staff</b></button>
+			</div>
+		    </div>
+		</td>
+	    </tr>
+	</tbody>
+    </table>
+</form> 

@@ -1,0 +1,49 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package beans.admin;
+
+import java.sql.Date;
+import javax.ejb.Local;
+
+/**
+ * Document   : AdminBeanLocal.java
+ * Version    : Jan 20, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: interface for AdminBean.java
+ */
+@Local
+public interface AdminBeanLocal {
+    boolean editStaffAccountByAdminOrNutritionist(
+            String activityUser,
+            String newUsername,
+            String newFirstName,
+            String newLastName,
+            String newEmail,
+            String newAddress,
+            String newHomePhone,
+            String newCellPhone,
+            Date dateOfBirth,
+            double newSalary,
+            String newGender,
+            String jobStatus,
+            String accountStatus
+    );
+    String findStaffToUpdateByAdmin(String firstName,String lastName, String phoneNumber);
+    String findStaffToResetByAdmin(String firstName, String lastName, String phoneNumber);
+    String findStaffoDeactivateByAdmin(String firstName, String lastName, String phoneNumber);
+    String findStaffToReactviateByAdmin(String firstName,String lastName, String phoneNumber);
+    String findStaffToDeleteByAdmin(String firstName, String lastName, String phoneNumber);
+    String findStaffToLockByAdmin(String firstName, String lastName, String phoneNumber);
+    String findStaffToUnlockByAdmin(String firstName, String lastName, String phoneNumber);
+    void resetPasswordByUserAndAdmin(String activityUser, int staffID, String resetPassword);
+    void deleteStaffAccountByID(String activityUser, int staffID);
+    void deactivateStaffByAdmin(String activityUser, int staffID);
+    void reactivateStaffByAdmin(String activityUser, int staffID);
+    void lockStaffByAdmin(String activityUser, int staffID);
+    void unlockStaffByAdmin(String activityUser, int staffID);
+    
+}
+

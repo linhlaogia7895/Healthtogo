@@ -1,0 +1,109 @@
+
+package domains.users;
+
+/**
+ * Document   : Account.java
+ * Version    : Jan 21, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: domain class for jdbc Account table
+ */
+public class Account {
+    private int account_id;
+    private String username;
+    private String password;
+    private String user_type;
+    private int lock_status;
+
+    /**
+     * no-arg constructor
+     */
+    public Account() {
+    }
+
+    /**
+     * main constructor
+     * @param account_id the account id
+     * @param username the account username
+     * @param password the account password
+     * @param user_type the account user type
+     * @param lock_status the account lock status
+     */
+    public Account(int account_id, String username, String password, String user_type, int lock_status) {
+        this.account_id = account_id;
+        this.username = username;
+        this.password = password;
+        this.user_type = user_type;
+        this.lock_status = lock_status;
+    }
+
+    /**
+    * @return the account_id
+    */
+    public final int getAccount_id() {
+            return account_id;
+    }
+
+    /**
+     * @param account_id the account_id to set
+     */
+    public final void setAccount_id(int account_id) {
+            this.account_id = account_id;
+    }
+
+    /**
+     * @return the username
+     */
+    public final String getUsername() {
+            return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public final void setUsername(String username) {
+            this.username = username;
+    }
+
+    /**
+     * @return the password
+     */
+    public final String getPassword() {
+            return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public final void setPassword(String password) {
+            this.password = password;
+    }
+
+    /**
+     * @return the user_type
+     */
+    public final String getUser_type() {
+            return user_type;
+    }
+
+    /**
+     * @param user_type the user_type to set
+     */
+    public final void setUser_type(String user_type) {
+            this.user_type = user_type;
+    }
+
+    /**
+     * @return the lock_status
+     */
+    public final int getLock_status() {
+            return lock_status;
+    }
+
+    /**
+     * @param lock_status the lock_status to set
+     */
+    public final void setLock_status(int lock_status) {
+            this.lock_status = lock_status;
+    }
+
+}

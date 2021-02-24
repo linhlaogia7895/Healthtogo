@@ -1,0 +1,155 @@
+<!--form for creating new account by staff-->
+<form class="form-horizontal" action="ManagePatientByStaffServlet" method="POST" name="registrationForm">             
+<table class="table table-hover">
+  <thead>
+ <tr><th><label class="control-label col-sm-2" for="txt">Personal details</label></th></tr>
+	       </thead>
+	       <tbody>
+		   <tr><td>
+		    <label for="fname">First Name:</label>
+		     <div class="input-group">
+		     <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+		      <input id="firstName" type="text" class="form-control" name="firstName" placeholder="Enter First Name" required>
+		      <input id="firstName" type="hidden" class="form-control" name="username" value="${username}">
+		       </div>
+		   </td></tr>
+		   <tr><td>
+			   <label for="lname">Last Name: </label>
+			   <div class="input-group">
+			       <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+			       <input id="lastName" type="text" class="form-control" name="lastName" placeholder="Enter Last Name" required>
+			   </div>
+		   </td></tr>
+		   <tr><td>
+			   <label for="birth">Date of Birth:</label>
+			   <div class="input-group">
+			       <span class="input-group-addon"><span class="glyphicon glyphicon-gift"></span></span>
+			       <input type="text" id="datepicker" class="form-control" name="dateOfBirth" placeholder="Enter date of birth">
+			   </div>
+		   </td></tr>
+		   <tr><td>
+			   <label for="add">Address:</label>
+			   <div class="input-group">
+			       <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+			       <input id="address" type="text" class="form-control" name="address" placeholder="Enter Address">
+			   </div>
+		   </td></tr>
+		   <tr><td>
+			   <label for="phone">Home Phone:</label>
+			   <div class="input-group">
+			       <span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt"></span></span>
+			       <input id="homephone" type="number" class="form-control" name="homePhone" placeholder="Enter home phone">
+			   </div>
+		   </td></tr>
+		   <tr><td>
+			   <label for="phone">Cell Phone:</label>
+			   <div class="input-group">
+			       <span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+			       <input id="cellphone" type="number" class="form-control" name="cellPhone" placeholder="Enter cell phone">
+			   </div>
+		   </td></tr>
+		   <tr><td>
+			   <label for="email">Email:</label> 
+			   <div class="input-group">
+			       <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+			       <input type="email" class="form-control" 
+					      name="email" placeholder="Enter email" 
+					      ng-model="email" 
+					      data-toggle="popover"
+					      data-trigger="focus"
+					      data-placement="left"
+					      title="Example"
+					      data-content="someone@example.com"
+					      required>
+				   </div>
+				   <span ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid" style="color: red;">
+				       <span ng-messages="registrationForm.email.$error" ng-messages-include="_js/_common/angular/messages.html"></span>
+				   </span>
+		   </td></tr>
+		   <tr><td>
+			   <label for="contract">Contract Period:</label>
+			   <div class="input-group">
+			       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			       <select id="contract" class="form-control" name="contract">
+				   <option value="1 year">1 year</option>
+				   <option value="2 years">2 years</option>
+				   <option value="3 years">3 years</option>
+				   <option value="5 years">5 years</option>
+			       </select>
+			   </div>
+		   </td></tr>
+		   <tr><td>
+			   <label for="gender">Gender:</label> 
+			   <div class="input-group">
+
+			       <input type="radio" name="gender" value="M" checked> Male &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+			       <input type="radio" name="gender" value="F"> Female
+
+			   </div>
+		   </td></tr>
+		    <tr><td>
+			   <label for="lock">Lock Status:</label> 
+			   <div class="input-group">
+
+			       <input type="radio" name="lockStatus" value="true" checked> Locked &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+			       <input type="radio" name="lockStatus" value="false"> Unlocked
+
+			   </div>
+		   </td></tr>
+		    <tr><td>
+		    <label for="acct">Account Status:</label>
+		   <div class="input-group">
+		    <input type="radio" name="accountStatus" value="active" checked> Active &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+		    <input type="radio" name="accountStatus" value="inactive"> Inactive 
+		    </div>
+		    </td></tr>
+	       </tbody>
+	   </table>
+	   <br/>
+	   <table class="table table-hover">
+	       <thead>
+		   <tr><th><label class="control-label col-sm-2" for="txt">Security Question</label></th></tr>
+	       </thead>
+	       <tbody>
+		   <tr><td>
+			   <div class="input-group">
+			       <span class="input-group-addon">Question 1: &nbsp;</span>
+			       <select class="form-control" name="questionOne" id="questionone">
+				   <option value="1">question 1</option>
+				   <option value="2">question 2</option>
+				   <option value="3">question 3</option>
+				   <option value="4">question 4</option>
+			       </select>
+			   </div>
+			   <div class="input-group">
+			       <span class="input-group-addon">Answer 1: &nbsp;&nbsp;&nbsp;&nbsp;</span>
+			       <input id="anwserone" type="text" class="form-control" name="anwserOne" required>
+			   </div>
+		   </td></tr>
+		   <tr><td>
+			   <div class="input-group">
+			       <span class="input-group-addon">Question 2: &nbsp;</span>
+			       <select class="form-control" name="questionTwo" id="questiontwo">
+				   <option value="5">question 5</option>
+				   <option value="6">question 6</option>
+				   <option value="7">question 7</option>
+				   <option value="8">question 8</option>
+			       </select>
+			   </div>
+			   <div class="input-group">
+			       <span class="input-group-addon">Anwser 2: &nbsp;&nbsp;&nbsp;&nbsp;</span>
+			       <input id="anwsertwo" type="text" class="form-control" name="anwserTwo" required>
+			   </div>
+		   </td></tr>
+	       </tbody>
+	   </table>
+	   <table class="table table-hover">
+	    <tbody>
+	   <tr><td>
+		    <div class="control-label col-sm-1"><a href="admin.jsp" class="w3-btn w3-gray" style="width:150px;" role="button">Cancel</a> </div>
+		   </td><td>
+		     <div class="control-label col-sm-3"><input class="w3-btn w3-green" style="width:150px;" type="submit" name="submitCreatePatient" value="Create"> </div>   
+		   </td></tr>
+	    </tbody>
+	  </table> 
+       </form> 

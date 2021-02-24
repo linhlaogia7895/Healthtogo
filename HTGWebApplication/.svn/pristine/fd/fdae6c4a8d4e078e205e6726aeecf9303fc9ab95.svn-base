@@ -1,0 +1,106 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package domains.users;
+
+import java.sql.Date;
+
+/**
+ * Document   : Journal.java
+ * Version    : Jan 21, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: entity class using Singleton for Journal
+ */
+public final class Invoice {
+
+    private  int invoiceNumber;
+    private  int patientId;
+    private  Date dateInvoice;
+    private  double subTotal;
+    private  double taxRate;
+    private  double taxAmount;
+    private  double total;
+    private  String billAddress;
+    private  String description;
+    private  Date dueDate;
+    private  String status;
+
+    private Invoice(int invoiceNumber, int patientId, Date dateInvoice, double subTotal, double taxRate, double taxAmount, double total, String billAddress, String description, Date dueDate, String status) {
+        this.invoiceNumber = invoiceNumber;
+        this.patientId = patientId;
+        this.dateInvoice = dateInvoice;
+        this.subTotal = subTotal;
+        this.taxRate = taxRate;
+        this.taxAmount = taxAmount;
+        this.total = total;
+        this.billAddress = billAddress;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.status = status;
+    }
+
+    
+    private static Invoice obj=null;
+    public static synchronized Invoice getInstance(int invoiceNumber, int patientId, Date dateInvoice, double subTotal, double taxRate, double taxAmount, double total, String billAddress, String description, Date dueDate, String status) {
+        obj=new Invoice(invoiceNumber,
+                        patientId,
+                        dateInvoice, 
+                        subTotal, 
+                        taxRate, 
+                        taxAmount, 
+                        total, 
+                        billAddress, 
+                        description, 
+                        dueDate, 
+                        status);
+        return obj;
+    }
+
+    public int getInvoiceNumber() {
+        return invoiceNumber;
+    }
+    
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public Date getDateInvoice() {
+        return dateInvoice;
+    }
+
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    public double getTaxRate() {
+        return taxRate;
+    }
+
+    public double getTaxAmount() {
+        return taxAmount;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public String getBillAddress() {
+        return billAddress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }   
+}
+    
+        

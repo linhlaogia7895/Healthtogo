@@ -1,0 +1,52 @@
+<!--Quick links on right side of main page--> 
+<div class="w3-col l2 s12">
+    <div class="side-boxes">
+	<h3 id="side-box-header" style="text-align: center;">
+	    <span>Quick Links</span>
+	</h3>
+	<div></div>
+
+	<div id="quick-links-body">
+	    <div class="quick-links thumbnail">
+		<ul class="">
+		    <li class="#"><p><a href="ManageAdvertsServlet?page=CsDijCrlhLaexkqfun366A==&tableSelector=dI6d/mDV5ahfNFDsnG1rDQ==">Nutrition News</a></p></li>
+		    <li class="#"><p><a href="ManageAdvertsServlet?page=CsDijCrlhLaexkqfun366A==&tableSelector=qP2WhaE2OBUNBDtRZvG2yg==">Promotions</a></p></li>
+		</ul>
+		<hr>
+		<ul class="">
+		    <li><p><a href="ManageAdvertsServlet?page=CsDijCrlhLaexkqfun366A==&tableSelector=kDSZTh2iO3Vr8amp5e90QQ==">Careers</a></p></li>
+		    <li><p><a href="ManageAdvertsServlet?page=CsDijCrlhLaexkqfun366A==&tableSelector=fCsjPF2OXVYkqAmWHFdOpA==">Internship</a></p></li>
+		    <li><p><a href="ManageAdvertsServlet?page=CsDijCrlhLaexkqfun366A==&tableSelector=nwwfJ3Gse0zR8jzNMVrHqA==">Volunteer</a></p></li>
+		</ul>
+		<hr>
+		<ul>
+		    <li><p><a href="#" style="line-height: 27px;">Subscribe to<br>Newsletter</a></p></li>
+		</ul>
+		<hr>
+		<ul>
+		    <li><p><a href="NutritionLibrary?specialPath=iUdJaE184wpG3sOzaEPsfsWdGNo7uAo5wuJLkBw7kYc=&tableSelector=qMbnpvyO3nFOC6q4LF9DIA==">FAQ</a></p></li>
+		    <li><p><a href="NutritionLibrary?specialPath=iUdJaE184wpG3sOzaEPsfsWdGNo7uAo5wuJLkBw7kYc=&tableSelector=hnyxjySbkW1zDWJngdDWTA==">Nutrition tips</a></p></li>
+		    <li><p><a href="NutritionLibrary?specialPath=iUdJaE184wpG3sOzaEPsfsWdGNo7uAo5wuJLkBw7kYc=&tableSelector=viLodokcSMmV5BdcHIw4bg==">Calorie table</a></p></li>
+		</ul>
+		<hr>
+		<ul>
+		    <li class="#"><p><a style="cursor:pointer" id="sec-contact-popup">Contact Us</a></p></li>
+		</ul>
+	    </div>
+
+	    <!--google maps office locator-->
+	    <div class="quick-links thumbnail">
+		<h3 style="font-style: italic;">
+		    Office locator:
+		</h3>
+		<div id="map"></div><br>
+		<p style="font-size: 0.8em;">Click 
+		    <a style="color: red;" href="https://www.google.ca/maps/dir//140+Castlebrook+Rise+NE,+AB+T3J+1P1,+CANADA/@51.1050826,-113.9695245,16z/data=!3m1!4b1" target="_blank">
+			<span class="icon-map-marker">
+			HERE
+			</span>
+		    </a> for a whole page view</p>
+	    </div>
+	</div>
+    </div>
+</div>

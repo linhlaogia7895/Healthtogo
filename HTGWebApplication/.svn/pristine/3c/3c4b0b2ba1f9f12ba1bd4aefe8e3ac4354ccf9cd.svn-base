@@ -1,0 +1,125 @@
+<!--second row of services-->
+<div id="set2">
+    <div class="row">
+
+	<!--Package 4: Celiac Meal Planning-->
+	<div class="col-md-4">
+	    <div class="thumbnail hovereffect2">
+		<div id="pack4GIF">
+		    <img src="_res/main/images/celiac.gif" alt="Package 4: Celiac Meal Planning" style="width:100%">
+		</div>
+		<div class="caption" align="center">
+		    <p><a id="pack4Label" class="package" style="cursor:pointer">Package 4: Celiac Meal Planning</a></p>
+		    <p class="hides extraInfos4"></p>
+		</div>
+		<div id="pack4Form" class="hides" align="center">
+		    <form>
+
+
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+				<h4 >
+				    <a data-toggle="collapse" href="#collapse4" class="panel-title">Click For More Info</a>
+				</h4>
+
+				<div id="collapse4" class="panel-collapse collapse">
+				    <ul class="list-group">
+
+					<li class="list-group-item"><p class="package">Package 4: Celiac Meal Planning $25</p>
+					    <p>A complete meal plan for a week, including breakfast, lunch and dinner. Our team is committed to accommodate everyone, our celiac/gluten free meal plans have been specially crafted for those that believe their food options are slim</p>
+					</li>
+
+				    </ul>
+				    <div class="panel-footer"></div>
+				</div>
+
+
+
+			    </div></div>
+			<input class="btn btn-warning serv_btn" type="submit" name="submitPackage4" value="Add To Cart">
+		    </form>
+		</div>
+	    </div>
+	</div>
+
+	<!--Package 5: Weight loss meal planning-->
+	<div class="col-md-4">
+	    <div class="thumbnail hovereffect2">
+		<div id="pack5GIF">
+		    <img src="_res/main/images/losing.gif" alt="Package 5: Weight loss meal planning" style="width:100%">
+		</div>
+		<div class="caption" align="center">
+		    <p><a id="pack5Label" class="package" style="cursor:pointer">Package 5: Losing weight</a></p>
+		    <p class="hides extraInfos5"></p>
+		</div>
+		<div id="pack5Form" class="hides" align="center">
+		    <form>
+
+
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+				<h4 >
+				    <a data-toggle="collapse" href="#collapse5" class="panel-title">Click For More Info</a>
+				</h4>
+
+				<div id="collapse5" class="panel-collapse collapse">
+				    <ul class="list-group">
+
+					<li class="list-group-item"><p class="package">Package 5: Weight Loss Meal Planning $25</p>
+					    <p>A complete meal plan for a week, including breakfast, lunch and dinner. One of our most popular package. This package is the perfect for anyone that 
+						loves food and wants to lose weight while eating. Don't give up on food you love, our specialist will work around the food items you love to create the best meal plan for you.</p>
+					</li>
+
+				    </ul>
+				    <div class="panel-footer"></div>
+				</div>
+
+
+
+			    </div></div>
+			<input class="btn btn-warning serv_btn" type="submit" name="submitPackage5" value="Add To Cart">
+		    </form>
+		</div>
+	    </div>
+	</div>
+
+	<!--Package 6: Weight gain meal planning-->
+	<div class="col-md-4">
+	    <div class="thumbnail hovereffect2">
+		<div id="pack6GIF">
+		    <img src="_res/main/images/gain.gif" alt="Package 6: Weight gain meal planning" style="width:100%">
+		</div>
+		<div class="caption" align="center">
+		    <p><a id="pack6Label" class="package" style="cursor:pointer">Package 6: Gaining weight</a></p>
+		    <p class="hides extraInfos6"></p>
+		</div>
+		<div id="pack6Form" class="hides" align="center">
+		    <form>
+
+
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+				<h4 >
+				    <a data-toggle="collapse" href="#collapse6" class="panel-title">Click For More Info</a>
+				</h4>
+
+				<div id="collapse6" class="panel-collapse collapse">
+				    <ul class="list-group">
+
+					<li class="list-group-item"><p class="package">Package 6: Weight Gain Meal Planning $25</p>
+					    <p>A complete meal plan for a week, including breakfast, lunch and dinner. This is the perfect package for anyone looking to gain healthy weight. With weekly meetings and meal proportion planning</p>
+					</li>
+				    </ul>
+				    <div class="panel-footer"></div>
+				</div>
+
+
+
+			    </div></div>
+			<input class="btn btn-warning serv_btn" type="submit" name="submitPackage6" value="Add To Cart">
+		    </form>
+		</div>
+	    </div>
+	</div>
+    </div>
+</div>

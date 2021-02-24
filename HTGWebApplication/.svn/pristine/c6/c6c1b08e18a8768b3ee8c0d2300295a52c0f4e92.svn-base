@@ -1,0 +1,68 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package domains.users;
+
+/**
+ *
+ * @author 696645
+ */
+public final class DietPlanDetail {
+    private int detailNumber;
+    private int dietPlanNumber;
+    private String day;
+    private String breakfast;
+    private String lunch;
+    private String dinner;
+    private String morningSnack;
+    private String afternoonSnack;
+
+    public DietPlanDetail() {
+    }
+
+    public DietPlanDetail(int detailNumber, int dietPlanNumber, String day, String breakfast, String lunch, String dinner, String morningSnack, String afternoonSnack) {
+        this.detailNumber = detailNumber;
+        this.dietPlanNumber = dietPlanNumber;
+        this.day = day;
+        this.breakfast = breakfast;
+        this.lunch = lunch;
+        this.dinner = dinner;
+        this.morningSnack = morningSnack;
+        this.afternoonSnack = afternoonSnack;
+    }
+
+    public int getDetailNumber() {
+        return detailNumber;
+    }
+
+    public int getDietPlanNumber() {
+        return dietPlanNumber;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getBreakfast() {
+        return breakfast;
+    }
+
+    public String getLunch() {
+        return lunch;
+    }
+
+    public String getDinner() {
+        return dinner;
+    }
+
+    public String getMorningSnack() {
+        return morningSnack;
+    }
+
+    public String getAfternoonSnack() {
+        return afternoonSnack;
+    }
+    
+}

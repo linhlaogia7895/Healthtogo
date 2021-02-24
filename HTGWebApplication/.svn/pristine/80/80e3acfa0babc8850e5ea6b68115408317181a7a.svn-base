@@ -1,0 +1,106 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/*
+    Document   : appointment-patient-controller.js
+    Version    : April 3, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: angularJS for patient appointment booking JSP
+*/
+
+(function(){
+    var app=angular.module("mainApp",[]);
+    
+    app.controller("appointment-controller",function ($scope) {
+	$scope.btnTime0809=function () {
+	    $scope.START_TIME="08:00 AM";
+	    $scope.END_TIME="09:00 AM";
+	};
+	
+	$scope.btnTime1011=function () {
+	    $scope.START_TIME="10:00 AM";
+	    $scope.END_TIME="11:00 AM";
+	};
+	
+	$scope.btnTime1314=function () {
+	    $scope.START_TIME="01:00 PM";
+	    $scope.END_TIME="02:00 PM";
+	};
+	
+	$scope.btnTime1516=function () {
+	    $scope.START_TIME="03:00 PM";
+	    $scope.END_TIME="04:00 PM";
+	};
+	
+	$scope.btnTime1716=function () {
+	    $scope.START_TIME="05:00 PM";
+	    $scope.END_TIME="06:00 PM";
+	};
+	
+	$scope.btnTime1920=function () {
+	    $scope.START_TIME="07:00 PM";
+	    $scope.END_TIME="08:00 PM";
+	};
+	
+	$scope.$watch("EXTENSION",function () {$scope.adjustEndTime();});
+	
+	var ext=$scope.EXTENSION; 
+	if(ext==="30 minutes"){
+	    $scope.adjustEndTime=function () {
+	    $scope.END_TIME==="08:00 PM" ? 
+	    $scope.END_TIME="08:30 PM":
+
+	    $scope.END_TIME==="06:00 PM" ?
+	    $scope.END_TIME="06:30 PM":
+
+	    $scope.END_TIME==="04:00 PM" ?
+	    $scope.END_TIME="04:30 PM":
+
+	    $scope.END_TIME==="01:00 PM" ?
+	    $scope.END_TIME="01:30 PM":
+
+	    $scope.END_TIME==="11:00 AM" ?
+	    $scope.END_TIME="11:30 AM":
+
+	    $scope.END_TIME="09:30 AM";
+	    };
+	}else if(ext==="1 hour"){
+	    $scope.END_TIME==="08:00 PM" ? 
+	    $scope.END_TIME="08:59 PM":
+
+	    $scope.END_TIME==="06:00 PM" ?
+	    $scope.END_TIME="06:59 PM":
+
+	    $scope.END_TIME==="04:00 PM" ?
+	    $scope.END_TIME="04:59 PM":
+
+	    $scope.END_TIME==="01:00 PM" ?
+	    $scope.END_TIME="01:59 PM":
+
+	    $scope.END_TIME==="11:00 AM" ?
+	    $scope.END_TIME="11:59 AM":
+
+	    $scope.END_TIME="09:59 AM";
+	}else{
+	    $scope.END_TIME==="08:00 PM" ? 
+	    $scope.END_TIME="08:00 PM":
+
+	    $scope.END_TIME==="06:00 PM" ?
+	    $scope.END_TIME="06:00 PM":
+
+	    $scope.END_TIME==="04:00 PM" ?
+	    $scope.END_TIME="04:00 PM":
+
+	    $scope.END_TIME==="01:00 PM" ?
+	    $scope.END_TIME="01:00 PM":
+
+	    $scope.END_TIME==="11:00 AM" ?
+	    $scope.END_TIME="11:00 AM":
+
+	    $scope.END_TIME="09:00 AM";
+	}
+    });
+}());

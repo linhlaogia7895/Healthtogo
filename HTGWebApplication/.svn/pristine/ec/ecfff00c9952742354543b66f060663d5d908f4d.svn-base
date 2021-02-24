@@ -1,0 +1,21 @@
+<!--search box - style in css file-->
+<form>
+    <div class="w3-row">
+	<div class="form-group pull-left">
+	    <input ng-model="DATE_TO_SEARCH" 
+		   type="text" 
+		   id="datepicker" 
+		   class="form-control container-fluid w3-container w3-third m1" 
+		   name="DATE_TO_SEARCH" 
+		   placeholder="Enter Date" 
+		   style="width: 200px; border-bottom-right-radius: 0; border-top-right-radius: 0;">
+	</div>
+	<div class="form-group">
+	    <input type="submit" name="SEARCH_SELECTED_DATE" class="btn btn-success w3-container w3-col m2" value="Search Date" style="height: 35px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+	    <!--<button class="btn btn-success w3-container w3-col m2" style="height: 35px; border-bottom-left-radius: 0; border-top-left-radius: 0;">Check Date</button>-->
+	</div>
+	<div class="form-group">
+	    <input type="submit" name="SEARCH_TODAY_DATE" class="btn btn-success w3-container pull-right" style="font-size: 1.2em; height: 60px; border-bottom-left-radius: 0; border-top-left-radius: 0; border-radius: 10px;" value="Check Today: 02/31/2017${DATE_TODAY}">
+	</div>
+    </div>
+</form>

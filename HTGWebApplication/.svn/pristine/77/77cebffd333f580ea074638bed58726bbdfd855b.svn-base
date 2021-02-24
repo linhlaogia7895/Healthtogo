@@ -1,0 +1,25 @@
+<footer class="navbar navbar-inverse container-fluid">
+    <div align='center'>
+	<p>Copyright &copy; Health To Go, Inc. 
+	    <strong>|</strong> 
+	       Tel: 403.998.9902 
+	    <strong>|</strong> 
+	    <a target="_blank" href="https://www.google.ca/maps/dir//140+Castlebrook+Rise+NE,+AB+T3J+1P1,+CANADA/@51.1050826,-113.9695245,16z/data=!3m1!4b1" style="text-decoration: none; color: black; ">
+		   <span class="icon-map-marker office-address"
+			 data-toggle="tooltip"
+			 data-placement="top"
+			 title="Click me!"
+			 data-content="Direction to get to office">
+		   </span>
+	       </a> 
+	   <strong>|</strong> 
+	       <a href="mailto:amina.ashraf@yahoo.com">
+		   amina.ashraf@yahoo.com
+	       </a> 
+	   <strong>|</strong> 
+	       <a href="designer.jsp">
+		   Designed by: M.R.M.T.R.
+	       </a>
+	</p>
+   </div>
+</footer> 

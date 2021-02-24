@@ -1,0 +1,176 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package beans.staff;
+
+
+import beans.users.UsersBean;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Stateless;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+/**
+ *
+ * @author 690727
+ */
+@Stateless
+public class ManagePatientByStaffBean implements ManagePatientByStaffBeanLocal 
+{
+
+    @Override
+    public boolean editPatientAccountByStaff(
+            String activityUser, 
+            int patientId, 
+            String newFirstName, 
+            String newLastName, 
+            String newEmail, 
+            String newAddress, 
+            String newHomePhone, 
+            String newCellPhone, 
+            Date newDateOfBirth, 
+            String newGender, 
+            String newContractPeriod) 
+    {
+         boolean patientAccountEdited = false;
+        
+         try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call editPatientAccountByOther(?,?,?,?,?,?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setInt(2, patientId);
+                ps.setString(3,newFirstName);
+                ps.setString(4, newLastName);
+                ps.setString(5, newEmail);
+                ps.setString(6, newAddress);
+                ps.setString(7, newHomePhone);
+                ps.setString(8, newCellPhone);
+                ps.setDate(9, newDateOfBirth);
+                ps.setString(10, newGender);
+                ps.setString(11, newContractPeriod);
+                ps.executeQuery();
+                patientAccountEdited = true;
+                
+                conn.close();
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManagePatientByStaffBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return patientAccountEdited;
+    }
+
+    @Override
+    public boolean deactivatePatientAccountByStaff(String activityUser, int patientId) {
+        
+        boolean accountDeactivated = false;
+        
+         try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call deactivatePatientAccountById(?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setInt(2, patientId);
+                ps.executeQuery();
+                accountDeactivated = true;
+                
+                conn.close();
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManagePatientByStaffBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return accountDeactivated;
+    }
+
+    @Override
+    public boolean deletePatientAccountByStaff(String activityUser, int patientId) {
+        
+         boolean accountDeleted = false;
+        
+         try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call deleteAccountById(?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setInt(2, patientId);
+                ps.executeQuery();
+                accountDeleted = true;
+                
+                conn.close();
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManagePatientByStaffBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return accountDeleted;
+    }
+
+    @Override
+    public boolean reactivatePatientAccountByStaff(String activityUser, int patientId) {
+        
+         boolean accountReactivated = false;
+        
+         try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call reactivatePatientAccountById(?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setInt(2, patientId);
+                ps.executeQuery();
+                accountReactivated = true;
+                
+                conn.close();
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ManagePatientByStaffBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return accountReactivated;
+    }
+
+    // Add business logic below. (Right-click in editor and choose
+    // "Insert Code > Add Business Method")
+    
+    
+     private Connection getConnection() {
+        Connection conn=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            InitialContext ic=new InitialContext();
+            DataSource ds=(DataSource)ic.lookup("jdbc/htgConnectionPool");
+            conn=ds.getConnection();
+        } catch (ClassNotFoundException | NamingException | SQLException ex) {
+            Logger.getLogger(UsersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
+    }
+}

@@ -1,0 +1,572 @@
+package beans.patient;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Stateless;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import beans.users.UsersBean;
+import domains.users.DietPlanDetail;
+import domains.users.Journal;
+import domains.users.Record;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+import javax.ejb.Singleton;
+
+/**
+ * Document   : PatientBean.java
+ * Version    : Jan 20, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: EJB for patient connections
+ */
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
+@Singleton
+public class PatientBean{
+
+    /**
+     * Private method to manage connections to jdbc
+     * @return Connection the jdbc connection
+     */
+    @Lock(LockType.READ)
+    private Connection getConnection() {
+        Connection conn=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            InitialContext ic=new InitialContext();
+            DataSource ds=(DataSource)ic.lookup("jdbc/htgConnectionPool");
+            conn=ds.getConnection();
+        } catch (ClassNotFoundException | NamingException | SQLException ex) {
+            Logger.getLogger(UsersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
+    }
+
+    /**
+     * Method to create patient account by patient
+     * @param newUsername the patient username
+     * @param usertype the patient username
+     * @param newFirstName the patient first name
+     * @param newLastName the patient last name
+     * @param newEmail the patient email address
+     * @param newAddress the patient physical address
+     * @param newHomePhone the patient home phone
+     * @param newCellPhone the patient cell phone
+     * @param dateOfBirth the patient date of birth
+     * @param newGender the patient gender
+     * @param contractPeriod the contract period
+     * @return true when the account has been created
+     */
+    @Lock(LockType.WRITE)
+    public final boolean createPatientAccountByPatient(String newUsername, String usertype, String newFirstName, String newLastName, String newEmail, 
+            String newAddress, String newHomePhone, String newCellPhone, Date dateOfBirth, String newGender, String contractPeriod) 
+    {
+         boolean created=false;
+         
+         
+        try {
+           
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call createPatientAccountByPatient(?,?,?,?,?,?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, newUsername);
+                ps.setString(2, usertype);
+                ps.setString(3, newFirstName);
+                ps.setString(4, newLastName);
+                ps.setString(5, newEmail);
+                ps.setString(6, newAddress);
+                ps.setString(7, newHomePhone);
+                ps.setString(8, newCellPhone);
+                ps.setDate(9, dateOfBirth); 
+                ps.setString(10, newGender);
+                ps.setString(11, contractPeriod);
+                ps.executeQuery();
+                created=true;
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return created;
+    }
+
+    
+    /**
+     * Method to add a security question to patient account
+     * @param activityUser the activity user
+     * @param theUsername the patient username
+     * @param questionNumberOne the first question
+     * @param anwserNumberOne the first answer
+     * @param questionNumberTwo the second question
+     * @param anwserNumberTwo the second answer
+     * @return true when security questions added
+     */
+    @Lock(LockType.WRITE)
+    public final boolean addSecurityQuestion(
+            String activityUser, 
+            String theUsername, 
+            String questionNumberOne, 
+            String anwserNumberOne, 
+            String questionNumberTwo, 
+            String anwserNumberTwo) 
+    {
+        boolean questionAdded=false;
+        
+        try {
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call addSecurityQuestion(?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, theUsername);
+                ps.setInt(3, Integer.parseInt(questionNumberOne));
+                ps.setString(4, anwserNumberOne);
+                ps.setInt(5, Integer.parseInt(questionNumberTwo));
+                ps.setString(6, anwserNumberTwo);
+                ps.executeQuery();
+                questionAdded = true;
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return questionAdded;
+    }
+
+    
+    /**
+     * Method to edit patient account
+     * @param activityUser the activity user
+     * @param newUsername the patient username
+     * @param newFirstName the patient first name
+     * @param newLastName the patient last name
+     * @param newEmail the patient email address
+     * @param newAddress the patient physical address
+     * @param newHomePhone the patient home phone
+     * @param newCellPhone the patient cell phone
+     * @param dateOfBirth the patient date of birth
+     * @param newGender the patient gender
+     * @param contractPeriod the contract period
+     * @return true when account has been edited
+     */
+    @Lock(LockType.WRITE)
+    public final boolean editPatientAccount(
+            String activityUser, 
+            String newUsername, 
+            String newFirstName, 
+            String newLastName, 
+            String newEmail, 
+            String newAddress, 
+            String newHomePhone, 
+            String newCellPhone, 
+            Date dateOfBirth, 
+            String newGender, 
+            String contractPeriod) 
+    {
+        boolean accountEdited=false;
+        
+        try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call editPatientAccount(?,?,?,?,?,?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, newUsername);
+                ps.setString(3, newFirstName);
+                ps.setString(4, newLastName);
+                ps.setString(5, newEmail);
+                ps.setString(6, newAddress);
+                ps.setString(7, newHomePhone);
+                ps.setString(8, newCellPhone);
+                ps.setDate(9, dateOfBirth); 
+                ps.setString(10, String.valueOf(newGender)); // Hi Linh. Pls check this. there's no ps.setChar() to set the value to SQL (newGender CHAR)
+                ps.setString(11, contractPeriod);
+                ps.executeQuery();
+                accountEdited = true;
+                
+                conn.close();
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return accountEdited;
+    }
+
+    
+    /**
+     * Method to edit a security question to patient account
+     * @param activityUser the activity user
+     * @param theUsername the patient username
+     * @param questionNumberOne the first question
+     * @param anwserNumberOne the first answer
+     * @param questionNumberTwo the second question
+     * @param anwserNumberTwo the second answer
+     * @return true when security questions edited
+     */
+    @Lock(LockType.WRITE)
+    public final boolean editSecurityQuestion(
+            String activityUser, 
+            String theUsername, 
+            String questionNumberOne, 
+            String anwserNumberOne, 
+            String questionNumberTwo, 
+            String anwserNumberTwo) 
+    {
+        boolean questionAdded=false;
+        
+        try {
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call editSecurityQuestion(?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, theUsername);
+                ps.setInt(3, Integer.parseInt(questionNumberOne));
+                ps.setString(4, anwserNumberOne);
+                ps.setInt(5, Integer.parseInt(questionNumberTwo));
+                ps.setString(6, anwserNumberTwo);
+                ps.execute();
+                questionAdded = true;
+                
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return questionAdded;
+    }
+    /**
+     * Method to get patient record
+     * @param username the patient username
+     * @return String the patient record
+     */
+    @Lock(LockType.WRITE)
+    public final String getPatientRecord(String username)
+    {
+        String list="";
+        try {
+            PreparedStatement ps;
+            ResultSet rs;
+            try (Connection conn = getConnection()) {
+                String sql="{call getPatientRecord(?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, username);
+                rs = ps.executeQuery();
+                while(rs.next())
+                {
+                    
+                }
+                while(rs.previous())
+                {
+                    list += "<tr><td>" + rs.getDate(3)+"</td>";
+                    list += "<td>" + rs.getDouble(4) +"</td>";
+                    list += "<td>" + rs.getDouble(5) +"</td>";
+                    list += "<td>" + rs.getDouble(6) +"</td>";
+                    list += "<td>" + rs.getDouble(7) +"</td>";
+                    list += "<td>" + rs.getDouble(8) +"</td>";
+                    list += "<td>" + rs.getDouble(9) +"</td>";
+                    list += "<td>" + rs.getDouble(10) +"</td>";
+                    list += "<td>" + rs.getDouble(11) +"</td>";
+                    list += "<td>" + rs.getDouble(12) +"</td>";
+                    list += "<td>" + rs.getDouble(13) +"</td>";
+                    list += "<td>" + rs.getDouble(14) +"</td></tr>";
+                }
+                
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    /**
+     * Method to add new record
+     * @param activityUser the registered user name
+     * @param username the registered user name
+     * @param current the current weight
+     * @param goal the goal weight
+     * @param start the start weight
+     * @param lowest the lowest weight
+     * @param halfway the halfway goal
+     * @param lost the lost weight
+     * @param calories the calories
+     * @param chest the chest measurement
+     * @param waist the waist line
+     * @param abdomen the abdomen measurement
+     * @param hip the hip measurement
+     * @return true if the record is added
+     */
+    @Lock(LockType.WRITE)
+    public final boolean addNewRecord(String activityUser, String username,String current,String goal,String start,String lowest,String halfway,String lost,String calories,String chest,String waist,String abdomen,String hip)
+    {
+        boolean newRecord=false;
+        
+        try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call addNewRecord(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, username);
+                ps.setDouble(3, Double.parseDouble(current));
+                ps.setDouble(4, Double.parseDouble(goal));
+                ps.setDouble(5, Double.parseDouble(start));
+                ps.setDouble(6, Double.parseDouble(lowest));
+                ps.setDouble(7, Double.parseDouble(halfway));
+                ps.setDouble(8, Double.parseDouble(lost));
+                ps.setDouble(9, Double.parseDouble(calories)); 
+                ps.setDouble(10, Double.parseDouble(chest)); 
+                ps.setDouble(11, Double.parseDouble(waist));
+                ps.setDouble(12, Double.parseDouble(abdomen));
+                ps.setDouble(13, Double.parseDouble(hip));
+                ps.executeQuery();
+                newRecord = true;
+                
+                conn.close();
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return newRecord;
+    }
+    /**
+     * Method to get the diet plan table
+     * @param dietPlanId the diet plan ID
+     * @return ArrayList the list of diet plan detail
+     */
+    @Lock(LockType.WRITE)
+    public final ArrayList<DietPlanDetail> getDietPlanTable(String dietPlanId)
+    {
+        ArrayList<DietPlanDetail> pd = new ArrayList<>();
+        try {
+	    PreparedStatement ps;
+	    ResultSet rs;
+	    try (Connection conn = getConnection()) {
+		String sql="{call getDietPlanDetail(?)}";
+		ps = conn.prepareStatement(sql);
+                ps.setInt(1, Integer.parseInt(dietPlanId));
+		rs = ps.executeQuery();
+		while(rs.next()){
+		    pd.add(DietPlanDetail.getInstance(rs.getInt(1),
+			    rs.getInt(2),
+			    rs.getString(3),
+			    rs.getString(4),
+			    rs.getString(5),
+			    rs.getString(6),
+                            rs.getString(7),
+			    rs.getString(8)));
+                }
+		conn.close();
+	    }
+	    ps.close();
+	    rs.close();
+	} catch (SQLException ex) {
+	    Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+	}
+        return pd;
+    }
+    /**
+     * Method to get the journal table
+     * @param username the registered user name
+     * @return ArrayList the list of the journal table 
+     */
+    @Lock(LockType.WRITE)
+    public final ArrayList<Journal> getJournalTable(String username) {
+	ArrayList<Journal> fc=new ArrayList<>();
+	
+	try {
+	    PreparedStatement ps;
+	    ResultSet rs;
+	    try (Connection conn = getConnection()) {
+		String sql="{call getJournal(?)}";
+		ps = conn.prepareStatement(sql);
+                ps.setString(1, username);
+		rs = ps.executeQuery();
+                while(rs.next())
+                {
+                    
+                }
+		while(rs.previous()){
+		    fc.add(Journal.getInstance(rs.getInt(1),
+			    rs.getInt(2),
+			    rs.getInt(3),
+			    rs.getDate(4),
+                            rs.getDate(8),
+			    rs.getInt(5),
+			    rs.getString(6),
+			    rs.getString(7),
+			    rs.getDouble(9),
+                            rs.getDouble(10)));
+		}
+		conn.close();
+	    }
+	    ps.close();
+	    rs.close();
+	} catch (SQLException ex) {
+	    Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return fc;
+    }    
+
+     @Lock(LockType.WRITE)
+    public boolean createPatientInvoice(String invoiceName, String invoiceDate, String invoiceAmount) throws SQLException {
+    
+        boolean newInvoice=false;
+        
+        try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call addNewInvoice(?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                 ps.setString(1, invoiceName);
+                 ps.setString(2, invoiceDate);
+                 ps.setString(3, invoiceAmount);
+                 ps.executeQuery();
+                 newInvoice=true;
+                 
+                  conn.close();
+            }
+            
+              ps.close();
+                
+            }
+         catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return newInvoice;
+        
+    }
+<<<<<<< .mine
+    
+    @Lock(LockType.WRITE)
+    public final ArrayList<Record> getRecordTable(String recordId) {
+	ArrayList<Record> fc=new ArrayList<>();
+	
+	try {
+	    PreparedStatement ps;
+	    ResultSet rs;
+	    try (Connection conn = getConnection()) {
+		String sql="{call getRecord(?)}";
+		ps = conn.prepareStatement(sql);
+                ps.setInt(1, Integer.parseInt(recordId));
+		rs = ps.executeQuery();
+		while(rs.next()){
+		    fc.add(new Record(rs.getInt(1),
+			    rs.getInt(2),
+			    rs.getDate(3),
+			    rs.getDouble(4),
+                            rs.getDouble(5),
+			    rs.getDouble(6),
+			    rs.getDouble(7),
+			    rs.getDouble(8),
+			    rs.getDouble(9),
+                            rs.getDouble(10),
+                            rs.getDouble(11),
+                            rs.getDouble(12),
+                            rs.getDouble(13),
+                            rs.getDouble(14)));
+		}
+		conn.close();
+	    }
+	    ps.close();
+	    rs.close();
+	} catch (SQLException ex) {
+	    Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	return fc;
+    }
+    @Lock(LockType.WRITE)
+    public boolean addNewJournal(String activityUser, String username, String purpose, String current,String goal,String start,String lowest,String halfway,String lost,String calories,String chest,String waist,String abdomen,String hip)
+    {
+        boolean newRecord=false;
+        
+        try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call addNewJournalByPatient(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, username);
+                ps.setString(3, purpose);
+                ps.setDouble(4, Double.parseDouble(current));
+                ps.setDouble(5, Double.parseDouble(goal));
+                ps.setDouble(6, Double.parseDouble(start));
+                ps.setDouble(7, Double.parseDouble(lowest));
+                ps.setDouble(8, Double.parseDouble(halfway));
+                ps.setDouble(9, Double.parseDouble(lost));
+                ps.setDouble(10, Double.parseDouble(calories)); 
+                ps.setDouble(11, Double.parseDouble(chest)); 
+                ps.setDouble(12, Double.parseDouble(waist));
+                ps.setDouble(13, Double.parseDouble(abdomen));
+                ps.setDouble(14, Double.parseDouble(hip));
+                ps.executeQuery();
+                newRecord = true;
+                
+                conn.close();
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return newRecord;
+    }
+    @Lock(LockType.WRITE)
+    public final boolean checkComplete(
+            String activityUser, 
+            String theUsername, 
+            String data
+            ) 
+    {
+        boolean complete=false;
+        
+        try {
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call chechJournalComplete(?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, theUsername);
+                ps.setInt(3, Integer.parseInt(data));
+                ps.execute();
+                complete = true;
+                
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return complete;
+    }
+}
+=======
+} 
+>>>>>>> .r219

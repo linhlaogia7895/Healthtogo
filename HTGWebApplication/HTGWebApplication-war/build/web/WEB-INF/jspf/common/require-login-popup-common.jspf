@@ -1,0 +1,24 @@
+<!--modal popup for require login-->
+<div class="modal fade" id="modal-require-login-popup" role="dialog">
+     <div class="modal-dialog modal-sm">
+
+	 <!-- Modal content-->
+	<div class="modal-content">
+	    <div class="modal-header">
+
+		<!--close top button-->
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+		<!--popup header-->
+		<h4 class="modal-title"><span class="icon-warning"></span> Error!</h4>
+	    </div>
+
+	    <!--modal body-->
+	    <div class="modal-body">
+
+		<!--message-->
+		<h5>Sorry. You are required to login to be able to use this feature...</h5>
+	    </div>
+	</div>
+     </div>
+ </div>

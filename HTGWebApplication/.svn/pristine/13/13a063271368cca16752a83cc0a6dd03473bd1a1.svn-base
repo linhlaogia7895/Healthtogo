@@ -1,0 +1,392 @@
+
+/*
+    Document   : common.css
+    Version    : Jan 1, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: All the JSP common css
+*/
+
+
+/********************* Base text for all html pages using common ****************************/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Aladin|Fredericka+the+Great|Great+Vibes|Kaushan+Script|Nixie+One|Oleo+Script|Playball|Shrikhand|Tangerine');
+
+body { font-family: 'Open Sans', sans-serif; font-size: 16px; font-weight: 300; color: #555; margin: 0; padding: 0; 
+}
+
+.page { max-width: 1200px; margin: 0 auto; position:relative; padding: 20px; display: block; }
+/*.page { max-width: 900px; margin: 0 auto; position:relative; padding: 20px; display: block; }*/
+
+
+
+/********************* all texts ****************************/
+h1 {margin: 0 0 1em 0; font-size: 2.8em; font-weight: 700;}
+h2 {margin: 0 0 .5em 0; font-size: 1.6em; font-weight: 700; line-height: 1.1em;}
+h3 {margin: 0 0 .5em 0; font-size: 1.3em; font-weight: 700; }
+h4 {margin: 0 0 1.5em 0; font-size: 1em; font-weight: 700; }
+
+p { margin: 0 0 1em 0; }
+
+a { color: #007eff; }
+a:visited { color: #65b1ff; }
+
+
+/* Note: This style is necessary for nav bar to stick to the top on scroll */
+.affix {
+    top: 0;
+    width: 100%;
+    max-width: 1160px;
+    z-index: 200;
+}
+.affix + .container-fluid {
+    padding-top: 70px;
+}
+
+
+
+/********************* Header ****************************/
+header { position: relative; max-height: 205px; max-width: 1160px; } 
+header#logo { position: absolute; display: block; max-width: 200px; left: 50px; }
+/*continuous slideshow image effect for logo*/
+.slideshow { position: relative; width: 240px; height: 240px; padding: 10px; }
+.slideshow > div { position: absolute;  left: 10px; }
+
+
+
+/********************* NavBar ****************************/
+.navbar { box-shadow: 10px 10px 5px #888888; }
+.dropdown-menu ul:hover li { display: compact; }
+/*remove effects from logged-in user text on navbar*/
+.logged-in { text-decoration: none; color: white; text-transform: capitalize;}
+.logged-in:hover { text-decoration: none; color: white; }
+
+
+
+/********************* Footer ****************************/
+/*footer p { color: white; height: auto; width: 0 auto; font-size: 1.3em; margin-top: 15px; }*/
+footer p {position: relative; color: white; height: auto; width: 0 auto; font-size: 1em; margin-top: 15px; }
+footer a:hover { font-size: 1.2em; color: gold; }
+footer a span { color: orange; font-size: 1.2em; }
+footer a span:hover { color: orangered; font-size: 0.8em; }
+
+
+
+/********************* MODAL POPUPS: login, sign up and contact ****************************/
+.modal-header { padding:35px 50px; }
+.modal-header, h4{ 
+    color:white !important; text-align: center; font-size: 30px;
+    background: rgba(252,234,187,1);
+    background: -moz-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(252,234,187,1)), color-stop(50%, rgba(252,205,77,1)), color-stop(51%, rgba(248,181,0,1)), color-stop(100%, rgba(251,223,147,1)));
+    background: -webkit-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    background: -o-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    background: -ms-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    background: linear-gradient(to right, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93', GradientType=1 );
+  }
+.close { color:black; text-align: center; font-size: 30px; }
+.modal-body { padding:40px 50px; }
+.modal-footer { 
+    background: rgba(252,234,187,1);
+    background: -moz-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(252,234,187,1)), color-stop(50%, rgba(252,205,77,1)), color-stop(51%, rgba(248,181,0,1)), color-stop(100%, rgba(251,223,147,1)));
+    background: -webkit-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    background: -o-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    background: -ms-linear-gradient(left, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    background: linear-gradient(to right, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93', GradientType=1 );
+  }
+/*BROWSER COMPABILITIES for FORM elements inside the POPUPS*/
+.form-control:hover { background-color: gray; color: white; }
+.form-control:hover::-webkit-input-placeholder { color: white; }
+/* Firefox < 19 */
+.form-control:hover:-moz-placeholder { color: white; }
+/* Firefox > 19 */
+.form-control:hover::-moz-placeholder { color: white; }
+/* Internet Explorer 10 */
+.form-control:hover:-ms-input-placeholder { color: white; }
+.form-item { border-top-left-radius: 0; border-bottom-left-radius: 0; text-align: left; display: inline; }
+.form-item:hover { background-color: lightgrey; color: white; }
+.input-group { padding: 5px 0; margin: 0; }
+
+
+/********************* REUSABLES: Glyph icons: http://glyphicons.bootstrapcheatsheets.com/ ****************************/
+span.icon-home:before { font-family: 'Glyphicons Halflings'; content:"\e021"; align-content: space-between; font-size: .9em; }
+span.icon-user:before { font-family: 'Glyphicons Halflings'; content:"\e008"; align-content: space-around; font-size: .9em; }
+span.icon-envelope:before { font-family: 'Glyphicons Halflings'; content:"\2709"; align-content: flex-start; font-size: .9em; }
+span.icon-lock:before { font-family: 'Glyphicons Halflings'; content:"\e033"; align-content: space-around; font-size: .9em; }
+span.icon-log-in:before { font-family: 'Glyphicons Halflings'; content:"\e161"; font-size: .9em; }
+span.icon-pencil:before { font-family: 'Glyphicons Halflings'; content:"\270f"; align-content: space-between; font-size: .9em; }
+span.icon-plus:before { font-family: 'Glyphicons Halflings'; content:"\e081"; align-content: space-between; font-size: .9em; }
+span.icon-remove:before { font-family: 'Glyphicons Halflings'; content:"\e014"; align-content: space-between; font-size: .9em; }
+span.icon-question:before { font-family: 'Glyphicons Halflings'; content:"\e085"; align-content: space-between; font-size: .9em; }
+span.icon-phone-alt:before { font-family: 'Glyphicons Halflings'; content:"\e183"; align-content: space-between; font-size: .9em; }
+span.icon-ear-phone:before { font-family: 'Glyphicons Halflings'; content:"\e182"; align-content: space-between; font-size: .9em; }
+span.icon-gift:before { font-family: 'Glyphicons Halflings'; content:"\e102"; align-content: space-between; font-size: .9em; }
+span.icon-log-out:before { font-family: 'Glyphicons Halflings'; content:"\e163"; align-content: space-between; font-size: .9em; }
+span.icon-warning:before { font-family: 'Glyphicons Halflings'; content:"\e107"; align-content: space-between; font-size: .9em; }
+span.icon-search:before { font-family: 'Glyphicons Halflings'; content:"\e003"; align-content: space-between; font-size: .9em; }
+span.icon-sort:before { font-family: 'Glyphicons Halflings'; content:"\e150"; align-content: space-between; font-size: .9em; }
+span.icon-edit:before { font-family: 'Glyphicons Halflings'; content:"\270f"; align-content: space-between; font-size: .9em; }
+span.icon-title:before { font-family: 'Glyphicons Halflings'; content:"\e188"; align-content: space-between; font-size: .9em; }
+span.icon-link:before { font-family: 'Glyphicons Halflings'; content:"\e144"; align-content: space-between; font-size: .9em; }
+span.icon-align-right:before { font-family: 'Glyphicons Halflings'; content:"\e052"; align-content: space-between; font-size: .9em; }
+span.icon-tag:before { font-family: 'Glyphicons Halflings'; content:"\e041"; align-content: space-between; font-size: .9em; }
+span.icon-calendar:before { font-family: 'Glyphicons Halflings'; content:"\e109"; align-content: space-between; font-size: .9em; }
+span.icon-add:before { font-family: 'Glyphicons Halflings'; content:"\e065"; align-content: space-between; font-size: .9em; }
+span.icon-map-marker:before { font-family: 'Glyphicons Halflings'; content:"\e062"; align-content: space-between; font-size: .9em; }
+span.icon-filter:before { font-family: 'Glyphicons Halflings'; content:"\e138"; align-content: space-between; font-size: .9em; }
+span.icon-time:before { font-family: 'Glyphicons Halflings'; content:"\e023"; align-content: space-between; font-size: .9em; }
+span.icon-list:before { font-family: 'Glyphicons Halflings'; content:"\e012"; align-content: space-between; font-size: .9em; }
+span.icon-saved:before { font-family: 'Glyphicons Halflings'; content:"\e168"; align-content: space-between; font-size: .9em; }
+span.icon-sort-by-order:before { font-family: 'Glyphicons Halflings'; content:"\e153"; align-content: space-between; font-size: .9em; }
+span.icon-file:before { font-family: 'Glyphicons Halflings'; content:"\e022"; align-content: space-between; font-size: .9em; }
+span.icon-credit-card:before { font-family: 'Glyphicons Halflings'; content:"\e177"; align-content: space-between; font-size: .9em; }
+span.icon-usd:before { font-family: 'Glyphicons Halflings'; content:"\e148"; align-content: space-between; font-size: .9em; }
+
+
+
+
+/********************* CALENDAR: date picker (used in date of birth in sign-up) ****************************/
+#datepicker .ui-datepicker
+{
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 10px;
+   z-index: 1003 !important;
+   display: none;
+}
+
+
+
+/********************* REUSABLE: hover effects ****************************/
+.hovereffect:hover { display: block;  
+        -webkit-transform: scale(0.9); -ms-transform: scale(0.9); transform: scale(0.9); -webkit-transition: all 0.35s; transition: all 0.35s; 
+        filter: brightness(0.7); -webkit-filter: brightness(0.7); opacity:0.5; border-radius:30px; 
+
+background: #BA8B02; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #BA8B02 , #181818); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #BA8B02 , #181818); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                        
+}
+.hovereffect { -webkit-transform: scale(1); -ms-transform: scale(1); transform: scale(1); -webkit-transition: all 0.35s; transition: all 0.35s; }
+.hovereffect2:hover { display: block;  
+        -webkit-transform: scale(0.9); -ms-transform: scale(0.9); transform: scale(0.9); -webkit-transition: all 0.35s; transition: all 0.35s; 
+        filter: brightness(0.7); -webkit-filter: brightness(0.7); opacity:0.5; border-radius:30px; 
+        background-color:black;
+
+}
+.hovereffect2 { -webkit-transform: scale(1); -ms-transform: scale(1); transform: scale(1); -webkit-transition: all 0.35s; transition: all 0.35s; }
+
+
+/********************* business address link effects (bottom of CONTACTS popup) ****************************/
+#address-link { text-align: center; }
+#address-link a { text-decoration: none; color: green; }
+#address-link a:hover { font-size: 1.3em; }
+
+
+/********************* Angular JS effects ****************************/
+/*input.ng-invalid { background-color: black; color: white; font-weight: bold; }*/
+/*input.ng-invalid { background-color: lightcyan; color: white; font-weight: bold; }
+input.ng-valid { background-color: white; color: #555; }*/
+.ng-invalid { border-color: red; outline-color: red; }
+.ng-valid { border-color: green; outline-color: green; }
+.messages { font-size: smaller; padding-top: 5px; padding-bottom: 10px; color: red; }
+
+
+/********************* assigned to team member ****************************/
+.assigned { color:red; font-weight: bold; font-style: italic; }
+
+
+/********************* prevents IE from displaying the clear button in input boxes ****************************/
+
+input[type=text]::-ms-clear { display: none; }
+input[type=search]::-ms-clear { display: none; }
+input[type=email]::-ms-clear { display: none; }
+input[type=password]::-ms-clear { display: none; }
+input[type=date]::-ms-clear { display: none; }
+input[type=tel]::-ms-clear { display: none; }
+
+/********************* for the Logged in:USER on navbar ****************************/
+span[class='icon-user logged-in user-attrib'] { text-decoration: none; cursor: default; }
+span[id="userSpan"] i { color: white; }
+span[id="userSpan"]:hover i { color:red; }
+/*
+    Document   : patient.css
+    Version    : Jan 1, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: Stylesheet for patient page
+*/
+     
+h4
+{
+    font-family: 'Kaushan Script', cursive;
+ 
+}
+
+.consultation,.membership,.package
+{
+  font-family: 'Aladin', cursive;
+    font-size: 130%;
+
+  text-decoration: underline black;
+     
+}
+
+.emailbox
+{
+     border-style: groove;
+     
+}
+
+.emailboxcenter
+{
+     border-style: groove;
+     width: 50%;
+     border-color: goldenrod;
+     border-width: thick;
+     border-radius: 2%;
+}
+
+.packagebox
+{
+    
+    
+}
+
+table.border
+{
+    border: 3px solid black;
+    alignment-adjust: central;
+}
+
+
+body{margin-top:20px;
+background:#eee;
+}
+
+
+.inbox .inbox-menu ul {
+    margin-top: 30px;
+    padding: 0;
+    list-style: none
+}
+
+.inbox .inbox-menu ul li {
+    height: 30px;
+    padding: 5px 15px;
+    position: relative
+}
+
+.inbox .inbox-menu ul li:hover,
+.inbox .inbox-menu ul li.active {
+    background: #e4e5e6
+}
+
+.inbox .inbox-menu ul li.title {
+    margin: 20px 0 -5px 0;
+    text-transform: uppercase;
+    font-size: 10px;
+    color: #d1d4d7
+}
+
+.inbox .inbox-menu ul li.title:hover {
+    background: 0 0
+}
+
+.inbox .inbox-menu ul li a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: #3d3f42
+}
+
+.inbox .inbox-menu ul li a i {
+    margin-right: 10px
+}
+
+.inbox .inbox-menu ul li a .label {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    display: block;
+    min-width: 14px;
+    height: 14px;
+    padding: 2px
+}
+
+.inbox ul.messages-list {
+    list-style: none;
+    margin: 15px -15px 0 -15px;
+    padding: 15px 15px 0 15px;
+    border-top: 1px solid #d1d4d7
+}
+
+.inbox ul.messages-list li {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding: 10px
+}
+
+.inbox ul.messages-list li a {
+    color: #3d3f42
+}
+
+.inbox ul.messages-list li a:hover {
+    text-decoration: none
+}
+
+.inbox ul.messages-list li.unread .header,
+.inbox ul.messages-list li.unread .title {
+    font-weight: 700
+}
+
+.inbox ul.messages-list li:hover {
+    background: #e4e5e6;
+    border: 1px solid #d1d4d7;
+    padding: 9px
+}
+
+.inbox ul.messages-list li:hover .action {
+    color: #d1d4d7
+}
+
+.inbox ul.messages-list li .header {
+    margin: 0 0 5px 0
+}
+
+.inbox ul.messages-list li .header .from {
+    width: 49.9%;
+    white-space: nowrap;
+    overflow: hidden!important;
+    text-overflow: ellipsis
+}
+
+.inbox ul.messages-list li .header .date {
+    width: 50%;
+    text-align: right;
+    float: right
+}
+
+.inbox ul.messages-list li .title {
+    margin: 0 0 5px 0;
+    white-space: nowrap;
+    overflow: hidden!important;
+    text-overflow: ellipsis
+}
+
+.inbox ul.messages-list li .description {
+    font-size: 12px;
+    padding-left: 29px
+}
+#invoiceTitle {
+    color: red;
+    font-size: 200%;
+    font-weight: bold;
+}
+#invoiceBold{
+    font-weight: bold;
+}

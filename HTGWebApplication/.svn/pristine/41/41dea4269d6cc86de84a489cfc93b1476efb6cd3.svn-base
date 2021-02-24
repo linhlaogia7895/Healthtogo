@@ -1,0 +1,135 @@
+package common;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
+
+/**
+ * Document   : HtmlPageHelper.java
+ * Version    : Jan 3, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Java class for rendering elements of html pages
+ */
+public final class HtmlPageHelper {
+
+    /**
+     * no-arg constructor
+     */
+//    public HtmlPageHelper() {
+//    }
+    
+    private static HtmlPageHelper obj = null;
+    public static synchronized HtmlPageHelper getInstance(){
+	if(obj==null){
+	    obj=new HtmlPageHelper();
+	    return obj;
+	}else{
+	    return obj;
+	}
+    }
+    
+    
+    /**
+     * Method to compose a servlet message for sending to the front end:JSP. This creates
+     * a modal popup on the front end
+     * @param message The message to compose
+     * @return String the composed message
+     */
+    public final StringBuffer sendMessage(String message){
+        StringBuffer html=new StringBuffer();
+	
+        html.append("<div class='modal fade' id='modal-messages-popup' role='dialog'>")
+		.append("<div class='modal-dialog modal-sm'>")
+		.append("<div class='modal-content'>")
+		.append("<div class='modal-header'>")
+		.append("<button type='button' class='close' data-dismiss='modal'>&times;</button>")
+		.append("<h4 class='modal-title'><span class='icon-envelope'></span> Message</h4>")
+		.append("</div>")
+		.append("<div class='modal-body'>")
+                        .append("<h5><span id='message-text'>")
+			    .append(message)
+			.append("</span></h5>")
+                        .append("</div>")
+                    .append("</div>")
+                .append("</div>")
+            .append("</div>");
+	
+        return html;
+    }
+    
+    
+    public final void setNavBarElements(String userType, HttpServletRequest request){
+        
+        
+        /*sets which user navbar menu should appear. This has corresponding javascript function*/
+        switch(userType){
+            
+            /*admin menu to appear and the rest to disappear*/
+            case "admin":
+
+                request.getSession().setAttribute("noneLoggedIn", "not-showing");
+                request.getSession().setAttribute("patientStatus", "not-showing");
+                request.getSession().setAttribute("nutritionistStatus", "not-showing");
+                request.getSession().setAttribute("adminStatus", "showing");
+                request.getSession().setAttribute("staffStatus", "not-showing");
+                break;
+
+            /*nutritionist menu to appear and the rest to disappear*/
+            case "nutritionist":
+                request.getSession().setAttribute("noneLoggedIn", "not-showing");
+                request.getSession().setAttribute("patientStatus", "not-showing");
+                request.getSession().setAttribute("nutritionistStatus", "showing");
+                request.getSession().setAttribute("adminStatus", "not-showing");
+                request.getSession().setAttribute("staffStatus", "not-showing");
+                break;
+
+            /*staff menu to appear and the rest to disappear*/
+            case "staff":
+
+                request.getSession().setAttribute("noneLoggedIn", "not-showing");
+                request.getSession().setAttribute("patientStatus", "not-showing");
+                request.getSession().setAttribute("nutritionistStatus", "not-showing");
+                request.getSession().setAttribute("adminStatus", "not-showing");
+                request.getSession().setAttribute("staffStatus", "showing");
+                break;
+
+            /*patient menu to appear and the rest to disappear*/
+            case "patient":
+
+                request.getSession().setAttribute("noneLoggedIn", "not-showing");
+                request.getSession().setAttribute("patientStatus", "showing");
+                request.getSession().setAttribute("nutritionistStatus", "not-showing");
+                request.getSession().setAttribute("adminStatus", "not-showing");
+                request.getSession().setAttribute("staffStatus", "not-showing");
+                break;
+
+            /*no-user menu to appear and the rest to disappear*/
+            default:
+
+                request.getSession().setAttribute("noneLoggedIn", "showing");
+                request.getSession().setAttribute("patientStatus", "not-showing");
+                request.getSession().setAttribute("nutritionistStatus", "not-showing");
+                request.getSession().setAttribute("adminStatus", "not-showing");
+                request.getSession().setAttribute("staffStatus", "not-showing");
+            }
+            
+            
+        /*determines which of login, logout, logged-in and sign-up should appear on navbar*/
+        if(userType.length()>0){
+
+             /*sets which navbar glyphicons are showing or not*/
+            request.getSession().setAttribute("logoutIconStatus", "showing");
+            request.getSession().setAttribute("loggedInIconStatus", "showing");
+            request.getSession().setAttribute("signUpIconStatus", "not-showing");
+            request.getSession().setAttribute("logInIconStatus", "not-showing");
+        }else{
+
+             /*sets which navbar glyphicons are showing or not*/
+            request.getSession().setAttribute("logoutIconStatus", "not-showing");
+            request.getSession().setAttribute("loggedInIconStatus", "not-showing");
+            request.getSession().setAttribute("signUpIconStatus", "showing");
+            request.getSession().setAttribute("logInIconStatus", "showing");
+        }
+    } 
+}
+

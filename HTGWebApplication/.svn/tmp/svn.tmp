@@ -1,0 +1,746 @@
+/*
+SQLyog Trial v12.3.3 (64 bit)
+MySQL - 5.7.9-log : Database - capstone
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`capstone` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `capstone`;
+
+/*Table structure for table `account` */
+
+DROP TABLE IF EXISTS `account`;
+
+CREATE TABLE `account` (
+  `account_id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `user_type` varchar(20) DEFAULT NULL,
+  `lock_status` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`account_id`),
+  UNIQUE KEY `ACCOUNT_username_uk` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `account` */
+
+insert  into `account`(`username`,`password`,`user_type`,`lock_status`) values ('admin','password','admin',0);
+insert  into `account`(`username`,`password`,`user_type`,`lock_status`) values ('patient','password','patient',0);
+insert  into `account`(`username`,`password`,`user_type`,`lock_status`) values ('nutritionist','password','nutritionist',0);
+insert  into `account`(`username`,`password`,`user_type`,`lock_status`) values ('staff','password','staff',0);
+
+/*Table structure for table `activity_log` */
+
+DROP TABLE IF EXISTS `activity_log`;
+
+CREATE TABLE `activity_log` (
+  `record_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) DEFAULT NULL,
+  `activity_type` varchar(30) DEFAULT NULL,
+  `note` varchar(100) DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`record_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `activity_log` */
+
+/*Table structure for table `advert` */
+
+DROP TABLE IF EXISTS `advert`;
+
+CREATE TABLE `advert` (
+  `advert_id` int(10) NOT NULL AUTO_INCREMENT,
+  `offer` varchar(100) DEFAULT NULL,
+  `start_offer` datetime DEFAULT NULL,
+  `end_offer` datetime DEFAULT NULL,
+  `details` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`advert_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `advert` */
+
+/*Table structure for table `appointment` */
+
+DROP TABLE IF EXISTS `appointment`;
+
+CREATE TABLE `appointment` (
+  `appointment_id` int(10) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(10) NOT NULL,
+  `nutrition_id` int(10) NOT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `purpose` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`appointment_id`),
+  KEY `APPOINTMENT_nutrition_id_fk` (`nutrition_id`),
+  KEY `APPOINTMENT_patient_id_fk` (`patient_id`),
+  CONSTRAINT `APPOINTMENT_nutrition_id_fk` FOREIGN KEY (`nutrition_id`) REFERENCES `staff` (`staff_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `APPOINTMENT_patient_id_fk` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `appointment` */
+
+/*Table structure for table `bidder` */
+
+DROP TABLE IF EXISTS `bidder`;
+
+CREATE TABLE `bidder` (
+  `bidder_number` int(10) NOT NULL AUTO_INCREMENT,
+  `advert_id` int(10) DEFAULT NULL,
+  `firstname` varchar(30) DEFAULT NULL,
+  `lastname` varchar(30) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `qualification` varchar(20) DEFAULT NULL,
+  `if_approve` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`bidder_number`),
+  KEY `BIDDER_advert_id_fk` (`advert_id`),
+  CONSTRAINT `BIDDER_advert_id_fk` FOREIGN KEY (`advert_id`) REFERENCES `advert` (`advert_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `bidder` */
+
+/*Table structure for table `credit_card` */
+
+DROP TABLE IF EXISTS `credit_card`;
+
+CREATE TABLE `credit_card` (
+  `id` int(10) DEFAULT NULL,
+  `card_number` int(16) NOT NULL,
+  `card_type` varchar(10) DEFAULT NULL,
+  `name_on_card` varchar(50) DEFAULT NULL,
+  `expired_date` date DEFAULT NULL,
+  `cvv` int(5) DEFAULT NULL,
+  PRIMARY KEY (`card_number`),
+  KEY `CREDIT_CARD_id_fk` (`id`),
+  CONSTRAINT `CREDIT_CARD_id_fk` FOREIGN KEY (`id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `credit_card` */
+
+/*Table structure for table `diet_plan` */
+
+DROP TABLE IF EXISTS `diet_plan`;
+
+CREATE TABLE `diet_plan` (
+  `diet_plan_number` int(10) NOT NULL AUTO_INCREMENT,
+  `date_create` datetime DEFAULT NULL,
+  `purpose` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`diet_plan_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `diet_plan` */
+
+/*Table structure for table `diet_plan_detail` */
+
+DROP TABLE IF EXISTS `diet_plan_detail`;
+
+CREATE TABLE `diet_plan_detail` (
+  `plan_detail_number` int(10) NOT NULL AUTO_INCREMENT,
+  `diet_plan_number` int(10) DEFAULT NULL,
+  `day` varchar(10) DEFAULT NULL,
+  `breakfast` varchar(255) DEFAULT NULL,
+  `lunch` varchar(255) DEFAULT NULL,
+  `dinner` varchar(255) DEFAULT NULL,
+  `morning_snack` varchar(255) DEFAULT NULL,
+  `afternoon_snack` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`plan_detail_number`),
+  KEY `DIET_PLAN_DETAIL_number_fk` (`diet_plan_number`),
+  CONSTRAINT `DIET_PLAN_DETAIL_number_fk` FOREIGN KEY (`diet_plan_number`) REFERENCES `diet_plan` (`diet_plan_number`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `diet_plan_detail` */
+
+/*Table structure for table `faq` */
+
+DROP TABLE IF EXISTS `faq`;
+
+CREATE TABLE `faq` (
+  `faq_number` int(10) NOT NULL AUTO_INCREMENT,
+  `question` varchar(50) DEFAULT NULL,
+  `anwser` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`faq_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `faq` */
+
+/*Table structure for table `invoice` */
+
+DROP TABLE IF EXISTS `invoice`;
+
+CREATE TABLE `invoice` (
+  `invoice_number` int(10) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(10) DEFAULT NULL,
+  `date_invoice` datetime DEFAULT NULL,
+  `sub_total` int(10) DEFAULT NULL,
+  `tax_rate` decimal(10,2) DEFAULT NULL,
+  `taxable_amount` decimal(10,2) DEFAULT NULL,
+  `total` decimal(10,2) DEFAULT NULL,
+  `bill_address` varchar(50) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `due_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`invoice_number`),
+  KEY `INVOICE_patient_id_fk` (`patient_id`),
+  CONSTRAINT `INVOICE_patient_id_fk` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `invoice` */
+
+/*Table structure for table `message` */
+
+DROP TABLE IF EXISTS `message`;
+
+CREATE TABLE `message` (
+  `message_id` int(10) NOT NULL AUTO_INCREMENT,
+  `sender_id` int(10) DEFAULT NULL,
+  `recipient_id` int(10) DEFAULT NULL,
+  `from_email` varchar(50) DEFAULT NULL,
+  `to_email` varchar(50) DEFAULT NULL,
+  `subject` varchar(50) DEFAULT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL,
+  `achieved` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`message_id`),
+  KEY `MESSAGE_sender_id_fk` (`sender_id`),
+  KEY `MESSAGE_recipient_id` (`recipient_id`),
+  CONSTRAINT `MESSAGE_recipient_id` FOREIGN KEY (`recipient_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `MESSAGE_sender_id_fk` FOREIGN KEY (`sender_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `message` */
+
+/*Table structure for table `nutrition_library` */
+
+DROP TABLE IF EXISTS `nutrition_library`;
+
+CREATE TABLE `nutrition_library` (
+  `food_id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `calories_recommend` decimal(5,2) DEFAULT NULL,
+  `calories_in_gram` decimal(5,2) DEFAULT NULL,
+  `protein_in_gram` decimal(5,2) DEFAULT NULL,
+  `fat_in_gram` decimal(5,2) DEFAULT NULL,
+  `carbs_in_gram` decimal(5,2) DEFAULT NULL,
+  `fiber_in_gram` decimal(5,2) DEFAULT NULL,
+  PRIMARY KEY (`food_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `nutrition_library` */
+
+/*Table structure for table `patient` */
+
+DROP TABLE IF EXISTS `patient`;
+
+CREATE TABLE `patient` (
+  `patient_id` int(10) NOT NULL,
+  `firstname` varchar(30) NOT NULL,
+  `lastname` varchar(30) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `home_phone` varchar(11) DEFAULT NULL,
+  `cell_phone` varchar(11) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `gender` char(1) DEFAULT NULL,
+  `contract_period` varchar(30) DEFAULT NULL,
+  `user_type` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`patient_id`),
+  UNIQUE KEY `PATIENT_email_uk` (`email`),
+  KEY `PATIENT_patient_id_fk` (`patient_id`),
+  CONSTRAINT `PATIENT_patient_id_fk` FOREIGN KEY (`patient_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `patient` */
+
+/*Table structure for table `patient_journal` */
+
+DROP TABLE IF EXISTS `patient_journal`;
+
+CREATE TABLE `patient_journal` (
+  `journal_number` int(10) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(10) DEFAULT NULL,
+  `record_number` int(10) DEFAULT NULL,
+  `date_record` datetime DEFAULT NULL,
+  `diet_plan_number` int(10) DEFAULT NULL,
+  `motivation` varchar(100) DEFAULT NULL,
+  `activity_completed` tinyint(1) DEFAULT '0',
+  `start_weight` decimal(3,2) DEFAULT NULL,
+  `end_weight` decimal(3,2) DEFAULT NULL,
+  PRIMARY KEY (`journal_number`),
+  KEY `JOURNAL_patient_id_fk` (`patient_id`),
+  KEY `JOURNAL_record_number_fk` (`record_number`),
+  KEY `JOURNAL_diet_plan_number_fk` (`diet_plan_number`),
+  CONSTRAINT `JOURNAL_diet_plan_number_fk` FOREIGN KEY (`diet_plan_number`) REFERENCES `diet_plan` (`diet_plan_number`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `JOURNAL_patient_id_fk` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `JOURNAL_record_number_fk` FOREIGN KEY (`record_number`) REFERENCES `patient_record` (`record_number`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `patient_journal` */
+
+/*Table structure for table `patient_record` */
+
+DROP TABLE IF EXISTS `patient_record`;
+
+CREATE TABLE `patient_record` (
+  `record_number` int(10) NOT NULL,
+  `patient_id` int(10) DEFAULT NULL,
+  `date_of_measurement` datetime DEFAULT NULL,
+  `patient_current_weight` decimal(3,2) DEFAULT NULL,
+  `patient_goal_weight` decimal(3,2) DEFAULT NULL,
+  `patient_start_weight` decimal(3,2) DEFAULT NULL,
+  `patient_lowest_weight` decimal(3,2) DEFAULT NULL,
+  `patient_half_way_weight` decimal(3,2) DEFAULT NULL,
+  `patient_weight_lost` decimal(3,2) DEFAULT NULL,
+  `patient_calories_level` decimal(10,0) DEFAULT NULL,
+  `patient_chest_measure` decimal(3,2) DEFAULT NULL,
+  `patient_waist_measure` decimal(3,2) DEFAULT NULL,
+  `patient_abdomen_measure` decimal(3,2) DEFAULT NULL,
+  `patient_hip_measure` decimal(3,2) DEFAULT NULL,
+  PRIMARY KEY (`record_number`),
+  KEY `PATIENT_RECORD_patient_id_fk` (`patient_id`),
+  CONSTRAINT `PATIENT_RECORD_patient_id_fk` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `patient_record` */
+
+/*Table structure for table `payment` */
+
+DROP TABLE IF EXISTS `payment`;
+
+CREATE TABLE `payment` (
+  `transaction_number` int(10) NOT NULL AUTO_INCREMENT,
+  `invoice_number` int(10) DEFAULT NULL,
+  `patient_id` int(10) DEFAULT NULL,
+  `type_of_payment` varchar(20) DEFAULT NULL,
+  `payment_amount` decimal(10,2) DEFAULT NULL,
+  `payment_due_date` datetime DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`transaction_number`),
+  KEY `PAYMENT_invoice_number_fk` (`invoice_number`),
+  KEY `PAYMENT_patient_id_fk` (`patient_id`),
+  CONSTRAINT `PAYMENT_invoice_number_fk` FOREIGN KEY (`invoice_number`) REFERENCES `invoice` (`invoice_number`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `PAYMENT_patient_id_fk` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `payment` */
+
+/*Table structure for table `question_list` */
+
+DROP TABLE IF EXISTS `question_list`;
+
+CREATE TABLE `question_list` (
+  `question_id` int(2) NOT NULL,
+  `anwser` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`question_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `question_list` */
+
+insert  into `question_list`(`question_id`,`anwser`) values (1,'anwser 1');
+insert  into `question_list`(`question_id`,`anwser`) values (2,'anwser 2');
+insert  into `question_list`(`question_id`,`anwser`) values (3,'anwser 3');
+insert  into `question_list`(`question_id`,`anwser`) values (4,'anwser 4');
+insert  into `question_list`(`question_id`,`anwser`) values (5,'anwser 5');
+insert  into `question_list`(`question_id`,`anwser`) values (6,'anwser 6');
+insert  into `question_list`(`question_id`,`anwser`) values (7,'anwser 7');
+insert  into `question_list`(`question_id`,`anwser`) values (8,'anwser 8');
+
+/*Table structure for table `security_question` */
+
+DROP TABLE IF EXISTS `security_question`;
+
+CREATE TABLE `security_question` (
+  `account_id` int(10) DEFAULT NULL,
+  `question_number` int(10) NOT NULL AUTO_INCREMENT,
+  `question_id` int(2) DEFAULT NULL,
+  `anwser` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`question_number`),
+  KEY `SECURITY_account_id_fk` (`account_id`),
+  KEY `SECURITY_question_id_fk` (`question_id`),
+  CONSTRAINT `SECURITY_account_id_fk` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `SECURITY_question_id_fk` FOREIGN KEY (`question_id`) REFERENCES `question_list` (`question_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `security_question` */
+
+/*Table structure for table `staff` */
+
+DROP TABLE IF EXISTS `staff`;
+
+CREATE TABLE `staff` (
+  `staff_id` int(10) NOT NULL,
+  `firstname` varchar(30) NOT NULL,
+  `lastname` varchar(30) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `home_phone` varchar(11) DEFAULT NULL,
+  `cell_phone` varchar(11) DEFAULT NULL,
+  `date_of_birth` date NOT NULL,
+  `date_of_hire` date NOT NULL,
+  `salary` double(10,2) DEFAULT NULL,
+  `gender` char(1) DEFAULT NULL,
+  `job_status` varchar(50) DEFAULT NULL,
+  `user_type` varchar(20) DEFAULT NULL,
+  `account_status` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`staff_id`),
+  UNIQUE KEY `STAFF_email_uk` (`email`),
+  KEY `STAFF_staff_id_fk` (`staff_id`),
+  CONSTRAINT `STAFF_staff_id_fk` FOREIGN KEY (`staff_id`) REFERENCES `account` (`account_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `staff` */
+
+/*Table structure for table `tip` */
+
+DROP TABLE IF EXISTS `tip`;
+
+CREATE TABLE `tip` (
+  `tip_number` int(10) NOT NULL AUTO_INCREMENT,
+  `date` datetime DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`tip_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `tip` */
+
+/* Function structure for function `getUserId` */
+
+/*!50003 DROP FUNCTION IF EXISTS  `getUserId` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` FUNCTION `getUserId`(theUsername VARCHAR(50)) RETURNS INT(10)
+BEGIN
+	DECLARE id INT(10);
+	SELECT account_id INTO id FROM account WHERE username=theUsername;
+	return id;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `userValidate` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `userValidate` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `userValidate`(theUsername VARCHAR(50), thePassword VARCHAR(50))
+BEGIN
+	SELECT COUNT(*) FROM account WHERE username=theUsername AND PASSWORD=thePassword;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `userGetType` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `userGetType` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `userGetType`(theUsername VARCHAR(50))
+BEGIN
+
+	SELECT user_type FROM account WHERE username=theUsername;
+
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `userForgetPassword` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `userForgetPassword` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `userForgetPassword`(theUsername varchar(50))
+BEGIN
+	select count(*) from account where username=theUsername;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `resetPasswordByUserAndAdmin` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `resetPasswordByUserAndAdmin` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `resetPasswordByUserAndAdmin`(activityUser varchar(50), resetUsername varchar(50), resetPassword varchar(50))
+BEGIN
+	DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	update account set password=resetPassword where username=resetUsername;
+	insert into activity_log set user_id=userId, activity_type='reset password', note=CONCAT('reset password for ',resetUsername), date_time=SYSDATE;
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `userExists` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `userExists` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `userExists`(theUsername varchar(50))
+BEGIN
+	select count(*) from account where username=theUsername;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `userGetLockedStatus` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `userGetLockedStatus` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `userGetLockedStatus`(theUsername varchar(50))
+BEGIN
+	select lock_status from account where username=theUsername;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `userAdd` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `userAdd` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `userAdd`(activityUser varchar(50), newUsername varchar(50), newPassword varchar(50), newType varchar(20), newLocked boolean)
+BEGIN
+	DECLARE userId int(10);
+	insert into account set username=newUsername, password=newPassword, user_type=newType, lock_status=newLocked;
+	SET userId = getUserId(activityUser);
+	insert into activity_log set user_id=userId, activity_type='User Add', note=CONCAT('add user ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `createStaffAccount` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `createStaffAccount` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `createStaffAccount`(activityUser varchar(50), newUsername varchar(50), newPassword varchar(50), newUserType varchar(20), newLocked boolean, newFirstName varchar(30), newLastName varchar(30), newEmail varchar(50), newAddress varchar(50), newHomePhone varchar(11), newCellPhone varchar(11), dateOfBirth date, newSalary double, newGender char, jobStatus varchar(50), accountStatus varchar(20))
+BEGIN
+	DECLARE staffId INT;
+	DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	insert into account set username=newUsername, password=newPassword, user_type=newUserType, lock_status=newLocked;
+	select account_id into staffId from account where username=newUsername;
+	insert into staff set staff_id=staffId, firstname=newFirstName, lastname=newLastName, email=newEmail, address=newAddress, home_phone=newHomePhone, cell_phone=newCellPhone, date_of_birth=dateOfBirth, date_of_hire=sysdate, salary=newSalary, gender=newGender, job_status=jobStatus, user_type=newUserType, account_status=accountStatus;
+	insert into activity_log set user_id=userId, activity_type='Create Account', note=CONCAT('Create Staff Account: ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `editStaffAccountByAdminOrNutritionist` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `editStaffAccountByAdminOrNutritionist` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `editStaffAccountByAdminOrNutritionist`(activityUser varchar(50), newUsername varchar(50), newFirstName varchar(30), newLastName varchar(30), newEmail varchar(50), newAddress varchar(50), newHomePhone varchar(11), newCellPhone varchar(11), dateOfBirth date, newSalary double, newGender char, jobStatus varchar(50), accountStatus varchar(20))
+BEGIN
+	DECLARE staffId INT;
+	DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	select account_id into staffId from account where username = newUsername;
+	update staff set firstname=newFirstName, lastname=newLastName, email=newEmail, address=newAddress, home_phone=newHomePhone, cell_phone=newCellPhone, date_of_birth=dateOfBirth, salary=newSalary, gender=newGender, job_status=jobStatus, user_type=newUserType, account_status=accountStatus
+	where staff_id=staffId;
+	insert into activity_log set user_id=userId, activity_type='Edit Account', note=CONCAT('Edit Staff Account: ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `editStaffAccountByStaff` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `editStaffAccountByStaff` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `editStaffAccountByStaff`(activityUser varchar(50), newUsername varchar(50), newFirstName varchar(30), newLastName varchar(30), newEmail varchar(50), newAddress varchar(50), newHomePhone varchar(11), newCellPhone varchar(11), dateOfBirth date, newGender char)
+BEGIN
+DECLARE staffId INT;
+DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	select account_id into staffId from account where username = newUsername;
+	update staff set firstname=newFirstName, lastname=newLastName, email=newEmail, address=newAddress, home_phone=newHomePhone, cell_phone=newCellPhone, date_of_birth=dateOfBirth, gender=newGender
+	where staff_id=staffId;
+	insert into activity_log set user_id=userId, activity_type='Edit Account', note=CONCAT('Edit Staff Account: ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `deactivateAccount` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `deactivateAccount` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `deactivateAccount`(activityUser varchar(50), accountUsername varchar(50))
+BEGIN
+	DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	update account set lock_status=1 where username=accountUsername;
+	insert into activity_log set user_id=userId, activity_type='Deactivate Account', note=CONCAT('Deactivate Account: ',accountUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `accountSetUserType` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `accountSetUserType` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `accountSetUserType`(activityUser varchar(50), accountUsername varchar(50), accountUserType varchar(20))
+BEGIN
+DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	update account set user_type=accountUserType where username=accountUsername;
+	insert into activity_log set user_id=userId, activity_type='Edit Account', note=CONCAT('Edit user type for account: ',accountUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `reactivateAccount` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `reactivateAccount` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `reactivateAccount`(activityUser varchar(50), accountUsername varchar(50))
+BEGIN
+DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	update account set lock_status=0 where username=accountUsername;
+	insert into activity_log set user_id=userId, activity_type='Reactivate Account', note=CONCAT('Reactivate Account: ',accountUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `createPatientAccountByPatient` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `createPatientAccountByPatient` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `createPatientAccountByPatient`(newUsername varchar(50), newUserType varchar(20), newFirstName varchar(30), newLastName varchar(30), newEmail varchar(50), newAddress varchar(50), newHomePhone varchar(11), newCellPhone varchar(11), dateOfBirth date, newGender char(1), contractPeriod varchar(30))
+BEGIN
+	DECLARE userId int(10);
+	SET userId = getUserId(newUsername);
+	insert into patient set patient_id=userId, firstname=newFirstName, lastname=newLastName, email=newEmail, address=newAddress, home_phone=newHomePhone, cell_phone=newCellPhone, date_of_birth=dateOfBirth, gender=newGender, contract_period=contractPeriod, user_type=newUserType;
+	insert into activity_log set user_id=userId, activity_type='Edit Patient Info', note=CONCAT('Edit Patient Info: ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `createPatientAccountByOthers` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `createPatientAccountByOthers` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `createPatientAccountByOthers`(activityUser varchar(50), newUsername varchar(50), newPassword varchar(50), newUserType varchar(20), newLocked boolean, newFirstName varchar(30), newLastName varchar(30), newEmail varchar(50), newAddress varchar(50), newHomePhone varchar(11), newCellPhone varchar(11), dateOfBirth date, newGender char(1), contractPeriod varchar(30))
+BEGIN
+	DECLARE patientId INT;
+	DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	insert into account set username=newUsername, password=newPassword, user_type=newUserType, lock_status=newLocked;
+	select account_id into patientId from account where username=newUsername;
+	insert into patient set patient_id=patientId, firstname=newFirstName, lastname=newLastName, email=newEmail, address=newAddress, home_phone=newHomePhone, cell_phone=newCellPhone, date_of_birth=dateOfBirth, gender=newGender, contract_period=contractPeriod, user_type=newUserType;
+	insert into activity_log set user_id=userId, activity_type='Create Account', note=CONCAT('Create Patient Account: ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `editPatientAccount` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `editPatientAccount` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `editPatientAccount`(activityUser varchar(50), newUsername varchar(50), newFirstName varchar(30), newLastName varchar(30), newEmail varchar(50), newAddress varchar(50), newHomePhone varchar(11), newCellPhone varchar(11), dateOfBirth date, newGender char, contractPeriod varchar(30))
+BEGIN
+DECLARE patientId INT;
+DECLARE userId int(10);
+	SET userId = getUserId(activityUser);
+	select account_id into patientId from account where username = newUsername;
+	update patient set firstname=newFirstName, lastname=newLastName, email=newEmail, address=newAddress, home_phone=newHomePhone, cell_phone=newCellPhone, date_of_birth=dateOfBirth, gender=newGender, contract_period=contractPeriod
+	where patient_id=patientId;
+	insert into activity_log set user_id=userId, activity_type='Edit Account', note=CONCAT('Edit Patient Account: ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `addSecurityQuestion` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `addSecurityQuestion` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `addSecurityQuestion`(activityUser varchar(50), theUsername varchar(50), questionNumberOne varchar (50), anwserNumberOne varchar(50), questionNumberTwo varchar (50), anwserNumberTwo varchar(50))
+BEGIN
+DECLARE userId INT(10);
+DECLARE activityUserId INT(10);
+	SET userId = getUserId(theUsername);
+	SET activityUserId = getUserId(activityUser);
+	insert into security_question set account_id=userId, question=questionNumberOne, anwser=anwserNumberOne;
+	insert into security_question set account_id=userId, question=questionNumberTwo, anwser=anwserNumberTwo;
+	insert into activity_log set user_id=activityUserId, activity_type='Add Security Question', note=CONCAT('Add Security Question For Account: ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `getSecurityQuestion` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `getSecurityQuestion` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `getSecurityQuestion`(theUsername varchar(50))
+BEGIN
+	DECLARE userId INT(10);
+	SET userId = getUserId(theUsername);
+	select question, anwser from security_question where account_id=userId;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `editSecurityQuestion` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `editSecurityQuestion` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`localhost` PROCEDURE `editSecurityQuestion`(activityUser varchar(50), theUsername varchar(50), questionNumberOne varchar (50), anwserNumberOne varchar(50), questionNumberTwo varchar (50), anwserNumberTwo varchar(50))
+BEGIN
+DECLARE userId INT(10);
+DECLARE activityUserId INT(10);
+	SET userId = getUserId(theUsername);
+	SET activityUserId = getUserId(activityUser);
+	delete from security_question where account_id=userId;
+	insert into security_question set account_id=userId, question=questionNumberOne, anwser=anwserNumberOne;
+	insert into security_question set account_id=userId, question=questionNumberTwo, anwser=anwserNumberTwo;
+	insert into activity_log set user_id=activityUserId, activity_type='Edit Security Question', note=CONCAT('Edit Security Question For Account: ',newUsername), date_time=SYSDATE();
+	commit;
+    END */$$
+DELIMITER ;
+
+/* Procedure structure for procedure `getEmailByUser` */
+/* Procedure structure for procedure `getUserByEmail` */
+/* Procedure structure for procedure `getUsernameByFirstname` */
+/* Procedure structure for procedure `getUsernameByLastname` */
+/* Procedure structure for procedure `getUsernameByPhone` */
+/* Procedure structure for procedure `getUsernameByFirstnameAndLastname` */
+/* Procedure structure for procedure `getUsernameByFirstnameAndPhone` */
+/* Procedure structure for procedure `getUsernameByLastnameAndPhone` */
+/* Procedure structure for procedure `getUsernameByFirstnameLastnameAndPhone` */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

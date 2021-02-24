@@ -1,0 +1,289 @@
+<!--intern section - style using W#.CSS - has angular component -->
+<div id="intern-table" class="table-bodies news-section-body container w3-container container-fluid" ng-controller="internSectionController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Internships</h1>
+
+    <!--alert section at top of table-->
+    <div class="alert alert-info">
+	<p>Sort Column: {{sortType}}</p>
+	<p>Sort Order: {{sortOrder}}</p>
+	<p>Sort Query: {{searchInternships}}</p>
+    </div>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search interns" ng-model="searchInternships">
+		</div>
+	    </div>
+
+	    <!--Add Intern edit button-->
+	    <div class="w3-col m4 w3-right-align w3-container" style="padding: 7px;">
+		<button name="addData" class="btn btn-success" value="Add Data" ng-click="showInternBlank=!showInternBlank">
+		    <span style="font-size: 20px;">
+			{{addBtnTxtshowInternBlankToggle}}
+		    </span>
+		</button>
+	    </div>
+	</div>
+    </form>
+
+    <!--Add Intern blank form-->
+    <div ng-show="showInternBlank">
+	<form action="AdvertsInternStaffSideServlet" method="post" name="internBlankForm">
+	    <div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+		<div class="panel-heading">Internship Details</div>
+		<div class="panel-body">
+
+		    <!--intern title-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-title"></span>
+			</span>
+			<input name="POSITION_TITLE" class="form-control" placeholder="Enter Title" ng-model="internTitle">
+		    </div>
+
+		    <!--intern category-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-filter"></span>
+			</span>
+			<input name="POSITION_CATEGORY" class="form-control" placeholder="Enter Category" ng-model="internCategory">
+		    </div>
+
+		    <!--intern category-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-time"></span>
+			</span>
+			<input name="EMPLOYMENT_TYPE" class="form-control" placeholder="Enter Intern type" ng-model="internType">
+		    </div>
+
+		    <!--enter date posted-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-calendar"></span>
+			</span>
+			<input type="date" ng-model="internDatePosted" class="datepicker2 form-control" name="DATE_POSTED" placeholder="Enter posting date" style="max-width: 220px;">
+		    </div>
+
+		    <!--enter date posted-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-calendar"></span>
+			</span>
+			<input type="date" ng-model="internDateClosed" class="datepicker2 form-control" name="DATE_CLOSED" placeholder="Enter closing date" style="max-width: 220px;">
+		    </div>
+
+		    <!--intern article-->
+		    <div style="padding: 10px 0;">
+			<label><span class="icon-pencil"></span>Position Details:</label>
+			<textarea ng-model="internArticle" class="form-control" name="REQUIREMENTS" rows="30" placeholder="Enter your content here"></textarea>
+		    </div>
+
+		    <!--Intern form buttons-->
+		    <input type="submit" name="newInternFormSubmit" value="Submit Form" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+		    <input type="reset" name="internFormReset" value="Reset Form" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">
+
+		</div>
+	    </div>
+	</form>
+    </div>
+
+    <!--the table-->
+    <table class="table table-bordered table-stripped">
+
+	<!--table header-->
+	<thead>
+	    <tr>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'positionID'; sortReverse=!sortReverse">
+			Position ID
+			<span ng-show="sortType === 'positionID' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'positionID' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'title'; sortReverse=!sortReverse">
+			Title
+			<span ng-show="sortType === 'title' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'title' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'category'; sortReverse=!sortReverse">
+			Category
+			<span ng-show="sortType === 'category' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'category' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'employmentType'; sortReverse=!sortReverse">
+			Employment Type
+			<span ng-show="sortType === 'employmentType' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'employmentType' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'datePosted'; sortReverse=!sortReverse">
+			Date Posted
+			<span ng-show="sortType === 'datePosted' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'datePosted' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'dateClosed'; sortReverse=!sortReverse">
+			Closing Date
+			<span ng-show="sortType === 'dateClosed' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'dateClosed' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		</td>
+
+	    </tr>
+	</thead>
+
+
+	<!--NG-Repeat loops through table in printing all rows-->
+	<tbody>
+	    <tr ng-repeat="i in interns | orderBy:sortType:sortReverse | filter:searchInternships">
+		<td>
+		    <!--Here: position id is displayed-->
+		    <div>{{i.INTERN_ID}}</div>
+		</td>
+
+		<td>
+		    <!--Here: position title is displayed-->
+		    <div ng-model="editInternData[i.INTERN_ID]">{{i.POSITION_TITLE}}</div>
+		<td>
+		    <!--Here: position category is displayed-->
+		    <div ng-model="editInternData[i.INTERN_ID]">{{i.POSITION_CATEGORY}}</div>
+		</td>
+
+		<td>
+		    <!--Here: position employment type is displayed-->
+		    <div ng-model="editInternData[i.INTERN_ID]">{{i.EMPLOYMENT_TYPE}}</div>
+		</td>
+
+		<td>
+		    <!--Here: date posted is displayed-->
+		    <div ng-model="editInternData[i.INTERN_ID]">{{i.DATE_POSTED}}</div>
+		</td>
+
+		<td>
+		    <!--Here: date posted is displayed-->
+		    <div ng-model="editInternData[i.INTERN_ID]">{{i.DATE_CLOSED}}</div>
+		</td>
+
+		<td>
+		    <!--Here: button to display detail is displayed-->
+		    <button class="btn btn-warning" name="displayDetail" value="Show Detail" ng-click="getDetail(i)">
+			Modify
+		    </button>
+		    <a href="AdvertsInternStaffSideServlet?delete=true&id={{i.INTERN_ID}}" class="btn btn-danger">Delete</a>
+		</td>
+	    </tr>
+	</tbody>
+
+    </table>
+
+
+    <!--intern details popup for editing intern-->
+    <div class="modal fade" id="modal-intern-details-popup" role="dialog">
+	<div class="modal-dialog">
+
+	    <!-- Modal content-->
+	   <div class="modal-content">
+	       <div class="modal-header">
+
+		   <!--close button-->
+		   <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+		   <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+		   <!--contact header-->
+		   <h4><span class="icon-list"></span> Intern Details</h4>
+	       </div>
+
+	       <!--form USING ANGULAR JS--> 
+	       <form action="AdvertsInternStaffSideServlet" method="post" name="contactForm">
+
+		   <!--modal body-->
+		   <div class="modal-body">
+
+			<!--intern ID-->
+			<input type="hidden" name="INTERN_ID" value="{{detail_internID}}">	
+
+			<!--intern title-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-title"></span>
+			    </span>
+			    <input name="POSITION_TITLE" class="form-control" placeholder="Enter Title" ng-model="detail_internTitle">
+			</div>
+
+			<!--intern category-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-filter"></span>
+			    </span>
+			    <input name="POSITION_CATEGORY" class="form-control" placeholder="Enter Category" ng-model="detail_internCategory">
+			</div>
+
+			<!--intern category-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-time"></span>
+			    </span>
+			    <input name="EMPLOYMENT_TYPE" class="form-control" placeholder="Enter Intern type" ng-model="detail_internType">
+			</div>
+
+			<!--enter date posted-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-calendar"></span>
+			    </span>
+			    <input type="date" ng-model="detail_internDatePosted" class="datepicker2 form-control" name="DATE_POSTED" placeholder="Enter posting date" style="max-width: 220px; z-index: 2003;">
+			</div>
+
+			<!--enter date posted-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-calendar"></span>
+			    </span>
+			    <input type="date" ng-model="detail_internDateClosed" class="datepicker2 form-control" name="DATE_CLOSED" placeholder="Enter closing date" style="max-width: 220px; z-index: 2003;">
+			</div>
+
+			<!--intern article-->
+			<div style="padding: 10px 0;">
+			    <label><span class="icon-pencil"></span>Position Details:</label>
+			    <textarea ng-model="detail_internArticle" class="form-control" name="REQUIREMENTS" rows="30" placeholder="Enter your content here"></textarea>
+			</div>
+
+			<!--intern form buttons-->
+			<input type="submit" name="internEditFormSubmit" value="Submit Form" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+			<br>
+		   </div>
+
+		   <!--footer-->
+		   <div class="modal-footer">
+		   </div>
+	       </form>
+	   </div>
+	</div>
+    </div>
+
+</div>

@@ -1,0 +1,192 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package main;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+/**
+ * Document   : AdvertsCareerClientSideServlet.java
+ * Version    : March 1, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for receiving inputs for career interface
+ */
+public class AdvertsCareerClientSideServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	
+	
+	String detail_careerApplyFormSubmit=request.getParameter("detail_careerApplyFormSubmit");
+	if(detail_careerApplyFormSubmit!=null){
+	    String careerFileUpload=request.getParameter("careerFileUpload");
+	    String careerCoverLetter=request.getParameter("careerCoverLetter");
+	    String careerContactNum=request.getParameter("careerContactNum");
+	    String careerEmail=request.getParameter("careerEmail");
+	    String careerFName=request.getParameter("careerFName");
+	    String careerLName=request.getParameter("careerLName");
+	    String careerTitle=request.getParameter("careerTitle");
+	    String careerCategory=request.getParameter("careerCategory");
+	    String careerType=request.getParameter("careerType");
+	    String careerDescription=request.getParameter("careerDescription");
+	    
+	    
+	    System.out.println("careerCoverLetter: "+careerCoverLetter);
+	    System.out.println("careerContactNum: "+careerContactNum);
+	    System.out.println("careerEmail: "+careerEmail);
+	    System.out.println("careerFName: "+careerFName);
+	    System.out.println("careerLName: "+careerLName);
+	    System.out.println("careerTitle: "+careerTitle);
+	    System.out.println("careerCategory: "+careerCategory);
+	    System.out.println("careerType: "+careerType);
+	    System.out.println("careerDescription: "+careerDescription);
+	    System.out.println("careerFileUpload: "+careerFileUpload);
+	    
+//	    writeFile(request);
+	    
+//	    boolean hasFile=careerFileUpload!=null && !careerFileUpload.isEmpty();
+//	    if(hasFile){
+//		
+//	    }
+	}
+	
+	request.setAttribute("tableSelector", "career");
+	getServletContext().getRequestDispatcher("/adverts-all.jsp").forward(request, response);
+//	response.sendRedirect("adverts-all.jsp#career-table");
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+	return "Short description";
+    }// </editor-fold>
+
+    /**
+     * Utility method to get file name from HTTP header content-disposition
+     */
+    private String getFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        System.out.println("content-disposition header= "+contentDisp);
+        String[] tokens = contentDisp.split(";");
+        for (String token : tokens) {
+            if (token.trim().startsWith("filename")) {
+                
+                String tken=token.substring(token.indexOf("=") + 2, token.length()-1);
+                return tken;
+            }
+        }
+        return "";
+    }
+    
+    private void writeFile(HttpServletRequest request){
+	try {
+	    /*constructs path of the directory to save uploaded file*/
+	    String uploadFilePath = "c:\\HTGWebApplications\\uploads\\career\\";
+	    String dir1="HTGWebApplications";
+	    String dir2="uploads";
+	    String dir3="career";
+	    
+	    String root=File.listRoots()[0].getAbsolutePath();
+	    
+	    /*creates the save directory if it does not exists*/
+	    File fileSaveDir1 = new File(root + dir1);
+	    if (!fileSaveDir1.exists()) {
+		fileSaveDir1.mkdirs();
+	    }
+	    
+	    File fileSaveDir2 = new File(root +File.pathSeparator+ dir1+ File.pathSeparator + dir2);
+	    if (!fileSaveDir2.exists()) {
+		fileSaveDir2.mkdirs();
+	    }
+	    
+	    File fileSaveDir3 = new File(root +File.pathSeparator+ dir1+ File.pathSeparator + dir2+ File.pathSeparator + dir3);
+	    if (!fileSaveDir3.exists()) {
+		fileSaveDir3.mkdirs();
+	    }
+	    
+	    String savePath=root +File.pathSeparator+ dir1+ File.pathSeparator + dir2+ File.pathSeparator + dir3;
+	    
+	    int ctr=0;
+	    
+	    /*Get all the parts from request and write it to the file on server*/
+	    for (Part part : request.getParts()) {
+		
+		System.out.println("counter: "+ctr++);
+		
+		String fileName = getFileName(part);
+//		fileName=fileName.substring(fileName.lastIndexOf("\\"));
+		System.out.println("filename path: "+fileName);
+		
+		/*The save path will be handled by the Multipart-config*/
+		/*part.write(uploadFilePath + File.separator + fileName);*/
+		
+		if(fileName.toLowerCase().contains(".txt") || fileName.toLowerCase().contains(".doc") || fileName.toLowerCase().contains(".pdf")){
+		    System.out.println("True ------------------------");
+		    part.write(File.separator + fileName);
+		}else{
+		    System.out.println("false ------------------------");
+		}
+	    
+//		part.write(File.separator + fName);
+
+	    }
+	} catch (IOException ex) {
+	    Logger.getLogger(AdvertsCareerClientSideServlet.class.getName()).log(Level.SEVERE, null, ex);
+	} catch (ServletException ex) {
+	    Logger.getLogger(AdvertsCareerClientSideServlet.class.getName()).log(Level.SEVERE, null, ex);
+	}
+    }
+}

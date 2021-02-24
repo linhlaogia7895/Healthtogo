@@ -1,0 +1,28 @@
+/* AUTOMATICALLY GENERATED ON Mon Feb 13 11:21:54 MST 2017*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.WebResourcePermission "/";
+  permission javax.security.jacc.WebUserDataPermission "/";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "AdminPageServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "PatientInformation", "**";
+  permission javax.security.jacc.WebRoleRefPermission "MainPageServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "SecurityServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "TipsTableServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "UsersServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "default", "**";
+  permission javax.security.jacc.WebRoleRefPermission "TipsJSON", "**";
+  permission javax.security.jacc.WebRoleRefPermission "AdminPageHelper", "**";
+  permission javax.security.jacc.WebRoleRefPermission "CalorieTableServlet", "**";
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
+  permission javax.security.jacc.WebRoleRefPermission "FaqJSON", "**";
+  permission javax.security.jacc.WebRoleRefPermission "NutritionLibrary", "**";
+  permission javax.security.jacc.WebRoleRefPermission "PatientInfo", "**";
+  permission javax.security.jacc.WebRoleRefPermission "CalorieJSON", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ManageStaffServlet", "**";
+};
+

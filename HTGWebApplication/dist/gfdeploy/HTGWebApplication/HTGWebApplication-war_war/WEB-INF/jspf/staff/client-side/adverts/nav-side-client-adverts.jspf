@@ -1,0 +1,8 @@
+<!--side navbar - style from W3.CSS -->
+<nav class="w3-sidenav w3-black">
+    <a class="w3-padding-16" href="#"><i class="news-section-icon fa fa-newspaper-o"></i></a> 
+    <a class="w3-padding-16" href="#"><i><img class="promos-section-icon" src="_res/main/images/adds-icon.png" alt="Adverts icon"></i></a> 
+    <a class="w3-padding-16" href="#"><i class="careers-section-icon fa fa-briefcase"></i></a> 
+    <a class="w3-padding-16" href="#"><i><img class="interns-section-icon" src="_res/main/images/intern2-icon.png" alt="Interns icon"></i></a> 
+    <a class="w3-padding-16" href="#"><i><img class="volunteers-section-icon" src="_res/main/images/volunteer-icon.png" alt="Volunteers icon"></i></a> 
+</nav>

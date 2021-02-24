@@ -1,0 +1,147 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package main;
+
+import common.HtmlPageHelper;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+/**
+ * Document   : AdvertsCareerClientSideServlet.java
+ * Version    : March 1, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for receiving inputs for career interface
+ */
+public class AdvertsCareerClientSideServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	
+	String message="";
+	String detail_careerApplyFormSubmit=request.getParameter("detail_careerApplyFormSubmit");
+	if(detail_careerApplyFormSubmit!=null){
+	    HttpSession session=request.getSession(true);
+	    
+	    
+	    String detail_careerID=request.getParameter("detail_careerID");
+	    String detail_careerTitle=request.getParameter("detail_careerTitle");
+	    String detail_careerCategory=request.getParameter("detail_careerCategory");
+	    String detail_careerType=request.getParameter("detail_careerType");
+	    String detail_careerPostingDate=request.getParameter("detail_careerPostingDate");
+	    String detail_careerClosingDate=request.getParameter("detail_careerClosingDate");
+	    String detail_careerRequirements=request.getParameter("detail_careerRequirements");
+	    
+	    String detail_careerFName=request.getParameter("detail_careerFName");
+	    String detail_careerLName=request.getParameter("detail_careerLName");
+	    String detail_careerEmail=request.getParameter("detail_careerEmail");
+	    String detail_careerContactNum=request.getParameter("detail_careerContactNum");
+	    
+	    String detail_careerCoverLetter=request.getParameter("detail_careerCoverLetter");
+	    
+	    String root=File.listRoots()[0].getAbsolutePath(); /*determines the root drive letter, ex. C:*/
+	    String uploadFilePath = "HTGWebApplications/uploads/career/";
+	    String fileName=(String)session.getAttribute("uploadedFile");
+	    
+	    File f=new File(root+uploadFilePath+fileName);
+	    boolean fileExists=f.exists();
+	    if(fileExists) System.out.println("File exists in the path: "+f.getAbsolutePath());
+	    
+	    boolean dataComplete=detail_careerID!=null && !detail_careerID.isEmpty()
+				&& detail_careerTitle!=null && !detail_careerTitle.isEmpty()
+				&& detail_careerCategory!=null && !detail_careerCategory.isEmpty()
+				&& detail_careerType!=null && !detail_careerType.isEmpty()
+				&& detail_careerPostingDate!=null && !detail_careerPostingDate.isEmpty()
+				&& detail_careerClosingDate!=null && !detail_careerClosingDate.isEmpty()
+				&& detail_careerRequirements!=null && !detail_careerRequirements.isEmpty()
+				&& detail_careerFName!=null && !detail_careerFName.isEmpty()
+				&& detail_careerLName!=null && !detail_careerLName.isEmpty()
+				&& detail_careerEmail!=null && !detail_careerEmail.isEmpty()
+				&& detail_careerContactNum!=null && !detail_careerContactNum.isEmpty()
+				&& detail_careerCoverLetter!=null && !detail_careerCoverLetter.isEmpty()
+				&& fileExists;
+	    
+	    /*for testing*/
+	    System.out.println("detail_careerID: "+detail_careerID);
+	    System.out.println("careerTitle: "+detail_careerTitle);
+	    System.out.println("careerCategory: "+detail_careerCategory);
+	    System.out.println("careerType: "+detail_careerType);
+	    System.out.println("detail_careerPostingDate: "+detail_careerPostingDate);
+	    System.out.println("detail_careerClosingDate: "+detail_careerClosingDate);
+	    System.out.println("detail_careerRequirements: "+detail_careerRequirements);
+	    System.out.println();
+	    System.out.println("detail_careerFName: "+detail_careerFName);
+	    System.out.println("detail_careerLName: "+detail_careerLName);
+	    System.out.println("detail_careerEmail: "+detail_careerEmail);
+	    System.out.println("detail_careerContactNum: "+detail_careerContactNum);
+	    System.out.println("detail_careerCoverLetter: "+detail_careerCoverLetter);
+	    
+	    if(dataComplete)	message = "Application submitted";
+	    else		message = "Application incomplete. All data will be discarded. You will have to start over again.";
+	}
+	
+	request.setAttribute("message", HtmlPageHelper.getInstance().sendMessage(message));
+	request.setAttribute("tableSelector", "career");
+	getServletContext().getRequestDispatcher("/adverts-all.jsp").forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+	return "Short description";
+    }// </editor-fold>
+
+}

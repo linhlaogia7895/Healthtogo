@@ -1,0 +1,173 @@
+package admin;
+
+import beans.admin.AdminBean;
+import beans.staff.StaffersBean;
+import beans.users.UsersBean;
+import common.HtmlPageHelper;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import users.UsersServlet;
+
+/**
+ * Document   : AdminPageServlet.js
+ * Version    : Jan 14, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for admin page
+ */
+public class AdminPageServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        HtmlPageHelper hph=new HtmlPageHelper();
+        AdminBean adminbean = new AdminBean();
+         
+        String url="/admin.jsp";
+        
+        String submitCancel = request.getParameter("submitCancel");
+        String submitCreateStaff = request.getParameter("submitCreateStaff");
+        String submitResetCancel = request.getParameter("submitResetCancel");
+        String submitResetStaff = request.getParameter("submitResetStaff");
+       
+        if(submitCancel !=null)
+        {   
+            request.setAttribute("message", hph.sendMessage("Account creation canceled!"));
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(submitCreateStaff !=null)
+        {
+           String userName = (String) request.getSession().getAttribute("userName");
+           String username = request.getParameter("username");
+           String password = request.getParameter("password");
+          // String question1 = request.getParameter("question1");
+         //  String answer1 = request.getParameter("securityAnswer1");
+         //  String question2 = request.getParameter("securityAnswer2");
+           String firstName = request.getParameter("firstName");
+           String lastName = request.getParameter("lastName");
+           String dateOfBirth = request.getParameter("dateOfBirth");
+          // String sinNumber = request.getParameter("sinNumber");
+           String address = request.getParameter("address");
+           String homePhone = request.getParameter("homePhone");
+           String cellPhone = request.getParameter("cellPhone");
+           String email = request.getParameter("email");
+           String gender = request.getParameter("gender");
+          // String positionName = request.getParameter("position");
+           String dateOfHire = request.getParameter("dateOfHire");
+           String salary = request.getParameter("salary");
+           String jobStatus = request.getParameter("jobStatus");
+           String accountStatus = request.getParameter("accountStatus");
+           String lockStatus = request.getParameter("lockStatus");
+           SimpleDateFormat sdformat = new SimpleDateFormat("MM/DD/YYYY");
+            boolean lockedStatus;
+            StaffersBean  newStaff = new StaffersBean();
+            UsersBean ub=new UsersBean();
+            try
+            {
+                Date mydate = sdformat.parse(dateOfBirth);
+                java.sql.Date sqlBirthDate = new java.sql.Date(mydate.getTime());
+                Date hireDate = sdformat.parse(dateOfHire);
+                java.sql.Date sqlDateOfHire = new java.sql.Date(hireDate.getTime());
+                if(ub.userExists(username))
+                {
+                 request.setAttribute("message", hph.sendMessage("Username already exits"));
+                 getServletContext().getRequestDispatcher(url).forward(request, response); 
+                }
+                else
+                {   
+                    lockedStatus = Boolean.parseBoolean(lockStatus);
+                    double staffSalary = Double.parseDouble(salary);
+                    if(newStaff.createStaffACcount(userName, username, password, "staff",lockedStatus, firstName, lastName, email,address, homePhone, cellPhone, sqlBirthDate, sqlDateOfHire, staffSalary, gender, jobStatus, accountStatus))
+                    {
+                        request.setAttribute("message", hph.sendMessage("New staff account created"));
+                        getServletContext().getRequestDispatcher(url).forward(request, response); 
+                    }
+                    else
+                    {
+                        request.setAttribute("message", hph.sendMessage("Unable to create new staff account"));
+                        getServletContext().getRequestDispatcher(url).forward(request, response);
+                    }
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.getLogger(AdminPageServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
+        }
+        if(submitResetCancel != null)
+        {
+             request.setAttribute("message", hph.sendMessage("Reset Staff canceled!"));
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(submitResetStaff != null)
+        {
+            String username = request.getParameter("userName");
+            //String theStaffID = request.getParameter("theStaffID");
+            String newPassword = request.getParameter("password");
+           
+            adminbean.resetPasswordByUserAndAdmin(username, Integer.parseInt(request.getParameter("getId")), newPassword );
+            request.setAttribute("message", hph.sendMessage("Staff password has been reset!"));
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

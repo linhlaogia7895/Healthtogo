@@ -1,0 +1,35 @@
+<!--Body button links-->
+<div class="w3-row container-fluid w3-container" style="max-width: 1090px; height: 500px; width: auto;">
+    <h1>Account & Website Management</h1>
+    <div class="btn-grp w3-row w3-center">
+	<a href="createNewStaffAccount.jsp"  class="page-buttons button btn btn-success">Create Staff Account</a>
+	<a href="#" id="updateStaff" class="page-buttons button btn btn-success">Update Staff Account</a>
+	<a href="#" id="deactivateStaff" class="page-buttons button btn btn-success">Deactivate Staff Account</a>
+	<a href="#" id="reactivateStaff" class="page-buttons button btn btn-success">Reactivate Staff Account</a>
+	<a href="#" id="lockStaff" class="page-buttons button btn btn-success">Lock Staff Account</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="#" id="unlockStaff" class="page-buttons button btn btn-success">Unlock Staff Account</a>
+	<a href="#" id="deleteStaff" class="page-buttons button btn btn-success">Delete Staff Account</a>
+	<a href="#" id="resetPassword" class="page-buttons button btn btn-success">Reset Password</a>
+	<a href="#" class="page-buttons button btn btn-success">Modify System Security</a>
+	<a href="#" class="page-buttons button btn btn-success">Modify Account Security</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="#" class="page-buttons button btn btn-success">Edit Log</a>
+	<a href="#" class="page-buttons button btn btn-success">Import Log</a>
+	<a href="#" class="page-buttons button btn btn-success">Export Log</a>
+	<a href="#" class="page-buttons button btn btn-success">Print Log</a>
+	<a href="#" class="page-buttons button btn btn-success">Delete Log</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="checkPatientExist.jsp" class="page-buttons button btn btn-success">Create Patient Account</a>
+	<a href="#" id="updatePatientAccount" class="page-buttons button btn btn-success">Update Patient Account</a>
+	<a href="#" id="deactivatePatientAccount" class="page-buttons button btn btn-success">Deactivate Patient Account</a>
+	<a href="#" class="page-buttons button btn btn-success">Reactivate Patient Accoun</a>
+	<a href="#" class="page-buttons button btn btn-success">Delete Patient Account</a>
+    </div>
+</div>

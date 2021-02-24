@@ -1,0 +1,274 @@
+<!--modal sign up popup-->
+<div class="container modal fade" 
+     id="modal-sign-up-popup" 
+     role="dialog" >
+
+    <div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	    <div class="modal-header">
+
+		<!--close button-->
+		<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+		<button type="button" id="close-sign-up-btn" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+		<!--sign up header-->
+		<h4><span class="icon-plus"></span> Sign Up</h4>
+
+	    </div>
+
+	    <!--modal body-->
+	    <div class="modal-body">
+
+		<!--form-->
+		<form action="UsersServlet" method="post" 
+		      name="registrationForm"  novalidate >
+
+		    <div class="form-group">
+
+			<!--enter first name-->
+<!--                                    <div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="userFName" type="text" 
+				   class="form-control" name="firstName" 
+				   placeholder="Enter fist name" autofocus required>
+			</div>
+			<span ng-show="registrationForm.firstName.$dirty && registrationForm.firstName.$invalid" style="color: red;">
+			    <div ng-messages="registrationForm.firstName.$error" ng-messages-include="_js/angular/messages.html"></div>
+			</span>
+
+			enter last name
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="userLName" type="text" 
+				   class="form-control" name="lastName" 
+				   placeholder="Enter last name" required>
+			</div>
+			<span ng-show="registrationForm.lastName.$dirty && registrationForm.lastName.$invalid" style="color: red;">
+			    <div ng-messages="registrationForm.lastName.$error" ng-messages-include="_js/angular/messages.html"></div>
+			</span>-->
+
+			<!--username-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="username" type="text" 
+				   class="form-control" name="username" 
+				   placeholder="Enter username" required>
+			</div>
+			<span ng-show="registrationForm.username.$dirty && registrationForm.username.$invalid" style="color: red;">
+			    <div ng-messages="registrationForm.username.$error" ng-messages-include="_js/angular/messages.html"></div>
+			</span>
+
+
+			<!--password-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="password" 
+				   check-password="password"
+				   type="password" 
+				   class="form-control" 
+				   name="password" 
+				   placeholder="Enter password" 
+				   data-toggle="popover" 
+				   data-trigger="focus" 
+				   data-placement="right" 
+				   title="Requirement" 
+				   data-content="A min of 8 characters, at least one uppercase, at least one lowercase, at least 2 numbers, and at least one special character" 
+				   required>
+			</div>
+			<span ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid" style="color: red;">
+			    <div ng-messages="registrationForm.password.$error" ng-messages-include="_js/angular/messages.html"></div>
+			</span>
+
+			<!--confirm password-->
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="confirmPassword"
+				   compare-to="password" 
+				   type="password" 
+				   class="form-control" 
+				   name="confirmPassword" 
+				   placeholder="Confirm password" 
+				   data-toggle="popover" 
+				   data-trigger="focus" 
+				   data-placement="right" 
+				   title="Requirement" 
+				   data-content="Must match the password" 
+				   required>
+			</div>
+			<span ng-show="registrationForm.confirmPassword.$dirty && registrationForm.confirmPassword.$invalid" style="color: red;">
+			    <span ng-messages="registrationForm.confirmPassword.$error" ng-messages-include="_js/angular/messages.html"></span>
+			</span>
+
+			<!--enter email-->
+<!--                                    <div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-envelope"></span>
+			    </span>
+			    <input type="email" class="form-control" 
+				   name="email" placeholder="Enter email" 
+				   ng-model="email" 
+				   data-toggle="popover"
+				   data-trigger="focus"
+				   data-placement="left"
+				   title="Example"
+				   data-content="someone@example.com"
+				   required>
+			</div>
+			<span ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid" style="color: red;">
+			    <span ng-messages="registrationForm.email.$error" ng-messages-include="_js/angular/messages.html"></span>
+			</span>
+
+			enter address
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-home"></span>
+			    </span>
+			    <input ng-model="address" 
+				   type="text" 
+				   class="form-control" 
+				   name="address" 
+				   placeholder="Enter full Address" 
+				   data-toggle="popover" 
+				   data-trigger="focus" 
+				   data-placement="left" 
+				   title="Example" 
+				   data-content="140 Castlebrook Rise NE, AB T3J 1P1, CANADA" 
+				   required>
+			</div>
+			<span ng-show="registrationForm.address.$dirty && registrationForm.address.$invalid" style="color: red;">
+			    <span ng-messages="registrationForm.address.$error" ng-messages-include="_js/angular/messages.html"></span>
+			</span>
+
+			enter home phone
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-phone-alt"></span>
+			    </span>
+			    <input ng-model="homePhone" 
+				   type="tel" 
+				   class="form-control container-fluid" 
+				   name="homePhone" 
+				   placeholder="Home phone number" 
+				   pattern="\d{10}" 
+				   data-toggle="popover" 
+				   data-trigger="focus" 
+				   data-placement="left" 
+				   title="Format" 
+				   data-content="10 digits, No dashes or spaces: 7778889999" 
+				   required>
+			</div>
+			<span ng-show="registrationForm.homePhone.$dirty && registrationForm.homePhone.$invalid" style="color: red;">
+			    <span ng-messages="registrationForm.homePhone.$error" ng-messages-include="_js/angular/messages.html"></span>
+			</span>
+
+			enter cell phone
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-phone-alt"></span>
+			    </span>
+			    <input ng-model="cellPhone" 
+				   type="tel" 
+				   class="form-control container-fluid" 
+				   name="cellPhone" 
+				   placeholder="Home cell number" 
+				   pattern="\d{10}" 
+				   data-toggle="popover" 
+				   data-trigger="focus" 
+				   data-placement="left" 
+				   title="Format" 
+				   data-content="10 digits, No dashes or spaces: 7778889999" 
+				   required>
+			</div>
+			<span ng-show="registrationForm.cellPhone.$dirty && registrationForm.cellPhone.$invalid" style="color: red;">
+			    <span ng-messages="registrationForm.cellPhone.$error" ng-messages-include="_js/angular/messages.html"></span>
+			</span>
+
+			enter date of birth
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-gift"></span>
+			    </span>
+
+			    Note: z-index > 1003 impt here. date picker overlaps w/ form-ctrl. w/o z-index, date picker doesn't work
+			    <input ng-model="birthDate" type="text" id="datepicker" class="form-control container-fluid" name="dateOfBirth" placeholder="Enter date of birth" style="z-index: 2010;" required>
+			</div>
+
+			Gender
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>&nbsp; Gender
+			    </span>
+			    <div class="form-control container-fluid">
+				<label class="radio inline" style="display: inline;">
+				    <label><input type="radio" class="gender" name="gender-grp" value="male" required checked> Male</label>
+				</label>
+				&nbsp;&nbsp;
+				<label class="radio inline" style="display: inline;" >
+				    <label><input type="radio" class="gender" name="gender-grp" value="female"> Female</label>
+				</label>
+			    </div>
+			</div>
+
+			user type
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-user"></span>&nbsp; User Type: 
+				</span>
+				<select id="user-type" class="form-control container-fluid" name="userType">
+				    <optgroup label="External">
+					<option value="client" selected>Client</option>
+				    </optgroup>
+				    <optgroup label="Internal">
+					<option value="nutritionist">Nutritionist</option>
+					<option value="admin">Administrator</option>
+					<option value="staff">Staff</option>
+				    </optgroup>
+				</select>
+			    </div>
+
+			contract period
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-gift"></span>
+			    </span>
+			    <input ng-model="contractPeriod" 
+				   type="text" 
+				   class="form-control container-fluid" 
+				   name="contractPeriod" 
+				   placeholder="Enter contract period" 
+				   data-toggle="popover" 
+				   data-trigger="focus" 
+				   data-placement="left" 
+				   title="Example" 
+				   data-content="3 years" 
+				   required>
+			</div>
+			<span ng-show="registrationForm.contractPeriod.$dirty && registrationForm.contractPeriod.$invalid" style="color: red;">
+			    <span ng-messages="registrationForm.contractPeriod.$error" ng-messages-include="_js/angular/messages.html"></span>
+			</span>-->
+			<br>
+
+			<!--submit sign up button-->
+			<input ng-disabled="registrationForm.$invalid" id="sign-up-btn" 
+			       class="btn btn-danger btn-lg" 
+			       type="submit" name="submitSignUp" 
+			       value="Submit">
+		    </div>
+		</form>
+
+	    </div>
+	</div>
+    </div>
+</div>

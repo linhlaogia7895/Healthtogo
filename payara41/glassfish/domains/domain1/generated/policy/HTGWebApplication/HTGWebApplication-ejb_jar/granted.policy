@@ -1,0 +1,72 @@
+/* AUTOMATICALLY GENERATED ON Mon Feb 13 11:21:54 MST 2017*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.EJBMethodPermission "NutritionLibraryBean", "addCalorie,Local,java.lang.String,java.lang.String,double,double,double,double,double,double";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getDateOfBirth,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientBean", "addSecurityQuestion,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "SecurityBean", "getQuestion,Local,";
+  permission javax.security.jacc.EJBMethodPermission "AdminBean", "findStaffToUpdateByAdmin,Local,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "reactivateAccount,Local,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getDateOfHire,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientBean", "editSecurityQuestion,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "AdminBean", "findStaffToResetByAdmin,Local,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "getSecurityQuestion,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getAddress,Local,";
+  permission javax.security.jacc.EJBMethodPermission "NutritionLibraryBean", "removeCalorie,Local,java.lang.String,int";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "userAdd,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean";
+  permission javax.security.jacc.EJBMethodPermission "AdminBean", "editStaffAccountByAdminOrNutritionist,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,int,java.sql.Date,double,char,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "deactivateAccount,Local,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "AdminBean", "findStaffoDeactivateByAdmin,Local,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "NutritionLibraryBean", "getCaloriesTable,Local,";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "userResetPassword,Local,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getEmail,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getGender,Local,";
+  permission javax.security.jacc.EJBMethodPermission "SecurityBean", "getAnwser,Local,";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getLockStatus,Local,";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getCellPhone,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientBean", "createPatientAccountByPatient,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Date,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "NutritionistBean", "editStaffAccountByAdminOrNutritionist,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,int,java.sql.Date,double,char,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getHomephone,Local,";
+  permission javax.security.jacc.EJBMethodPermission "AdminBean", "resetPasswordByUserAndAdmin,Local,java.lang.String,int,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "AdminBean", "findStaffToDeleteByAdmin,Local,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "userForgetPassword,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "createPatientAccountByOthers,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,int,java.sql.Date,char,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "accountSetUserType,Local,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getGender,Local,";
+  permission javax.security.jacc.EJBMethodPermission "NutritionLibraryBean", "editCalorieTable,Local,java.lang.String,int,java.lang.String,double,double,double,double,double,double";
+  permission javax.security.jacc.EJBMethodPermission "StaffersBean", "editStaffAccountByStaff,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int,int,java.sql.Date,char";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getLastName,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getLastname,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientBean", "editPatientAccount,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Date,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "userExists,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getAccountStatus,Local,";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "userGetLockedStatus,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "StaffersBean", "createStaffACcount,Local,java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.sql.Date,java.sql.Date,double,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getFirstName,Local,";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "userValidate,Local,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getAddress,Local,";
+  permission javax.security.jacc.EJBMethodPermission "AdminBean", "findStaffToReactviateByAdmin,Local,java.lang.String,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getHomePhone,Local,";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getJobStatus,Local,";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getEmail,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getDate,Local,";
+  permission javax.security.jacc.EJBMethodPermission "UsersBean", "userGetType,Local,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "UpdateStaffByAdminBean", "getSalary,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getCellphone,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getContract,Local,";
+  permission javax.security.jacc.EJBMethodPermission "PatientInfoBean", "getFirstname,Local,";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.EJBRoleRefPermission "NutritionistBean", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "UpdateStaffByAdminBean", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "PatientBean", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "SecurityBean", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "AdminBean", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "UsersBean", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "PatientInfoBean", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "StaffersBean", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "NutritionLibraryBean", "**";
+};
+

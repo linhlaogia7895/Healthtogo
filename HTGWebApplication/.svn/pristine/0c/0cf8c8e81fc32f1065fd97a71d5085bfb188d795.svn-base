@@ -1,0 +1,31 @@
+/**
+ * Document   : staff-library-controller.js
+ * Version    : Jan 23, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Angular for managing the library table
+ */
+
+(function(){
+    var app=angular.module('nutritionistApp',['ngSanitize']);
+    
+    /*CALORIE TABLE*/
+    app.controller('patientTableController', function ($scope,$http){
+        //$scope.sortType = 'food'; //set the default sort type
+        //$scope.sortReverse = null; //set the default sort order
+        //$scope.searchFood = ''; //Set the default search filter
+	//$scope.sortOrder = "";
+	
+        /*grab list of food items and calories from MYSQL through servlet CalorieJSON*/
+	$http({
+		method : "POST",
+		url : "PatientJSON"
+	    }).then(function mySucces(response) {
+		$scope.patient = response.data;
+		}, function myError(response) {
+		    $scope.patient = response.statusText;
+		});
+	
+    });
+    
+    
+}());

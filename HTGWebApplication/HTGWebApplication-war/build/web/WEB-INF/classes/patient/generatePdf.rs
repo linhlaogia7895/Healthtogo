@@ -1,0 +1,2 @@
+patient.generatePdf
+patient.GenerateInvoice

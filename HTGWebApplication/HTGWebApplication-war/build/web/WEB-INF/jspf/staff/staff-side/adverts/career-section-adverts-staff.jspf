@@ -1,0 +1,294 @@
+<!--career section - style using W#.CSS - has angular component -->
+<div id="career-table" class="table-bodies news-section-body container w3-container container-fluid" ng-controller="careerSectionController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Careers</h1>
+
+    <!--alert section at top of table-->
+    <div class="alert alert-info">
+	<p>Sort Column: {{sortType}}</p>
+	<p>Sort Order: {{sortOrder}}</p>
+	<p>Sort Query: {{searchCareer}}</p>
+    </div>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search careers" ng-model="searchCareer">
+		</div>
+	    </div>
+
+	    <!--Add Career edit button-->
+	    <div class="w3-col m4 w3-right-align w3-container" style="padding: 7px;">
+		<button name="addData" class="btn btn-success" value="Add Data" ng-click="showPositionBlank=!showPositionBlank">
+		    <span style="font-size: 20px;">
+			{{addBtnTxtshowPositionBlankToggle}}
+		    </span>
+		</button>
+	    </div>
+	</div>
+    </form>
+
+
+    <!--Add Career blank form-->
+    <div ng-show="showPositionBlank">
+	<form action="AdvertsCareerStaffSideServlet" method="post" name="careerBlankForm">
+	    <div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+		<div class="panel-heading">Career Details</div>
+		<div class="panel-body">
+
+		    <!--career title-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-title"></span>
+			</span>
+			<input name="POSITION_TITLE" class="form-control" placeholder="Enter Title" ng-model="POSITION_TITLE">
+		    </div>
+
+		    <!--career category-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-filter"></span>
+			</span>
+			<input name="POSITION_CATEGORY" class="form-control" placeholder="Enter Category" ng-model="POSITION_CATEGORY">
+		    </div>
+
+		    <!--career category-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-time"></span>
+			</span>
+			<input name="EMPLOYMENT_TYPE" class="form-control" placeholder="Enter Employment type" ng-model="EMPLOYMENT_TYPE">
+		    </div>
+
+		    <!--enter date posted-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-calendar"></span>
+			</span>
+			<input type="date" ng-model="DATE_POSTED" class="datepicker2 form-control" name="DATE_POSTED" placeholder="Enter posting date" style="max-width: 220px;">
+		    </div>
+
+		    <!--enter date posted-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-calendar"></span>
+			</span>
+			<input type="date" ng-model="DATE_CLOSED" class="datepicker2 form-control" name="DATE_CLOSED" placeholder="Enter closing date" style="max-width: 220px;">
+		    </div>
+
+		    <!--Career article-->
+		    <div style="padding: 10px 0;">
+			<label><span class="icon-pencil"></span>Position Details:</label>
+			<textarea ng-model="REQUIREMENTS" class="form-control" name="REQUIREMENTS" rows="30" placeholder="Enter your content here"></textarea>
+		    </div>
+
+		    <!--career form buttons-->
+		    <input type="submit" name="careerNewFormSubmit" value="Submit Form" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+		    <input type="reset" name="careerNewFormReset" value="Reset Form" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">
+
+		</div>
+	    </div>
+	</form>
+    </div>
+
+    <!--the table-->
+    <table class="table table-bordered table-stripped">
+
+	<!--table header-->
+	<thead>
+	    <tr>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'positionID'; sortReverse=!sortReverse">
+			Position ID
+			<span ng-show="sortType === 'positionID' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'positionID' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'title'; sortReverse=!sortReverse">
+			Title
+			<span ng-show="sortType === 'title' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'title' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'category'; sortReverse=!sortReverse">
+			Category
+			<span ng-show="sortType === 'category' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'category' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'employmentType'; sortReverse=!sortReverse">
+			Employment Type
+			<span ng-show="sortType === 'employmentType' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'employmentType' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'datePosted'; sortReverse=!sortReverse">
+			Date Posted
+			<span ng-show="sortType === 'datePosted' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'datePosted' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'dateClosed'; sortReverse=!sortReverse">
+			Closing Date
+			<span ng-show="sortType === 'dateClosed' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'dateClosed' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		</td>
+
+	    </tr>
+	</thead>
+
+
+	<!--NG-Repeat loops through table in printing all rows-->
+	<tbody>
+	    <tr ng-repeat="c in careers | orderBy:sortType:sortReverse | filter:searchCareer">
+		<td>
+		    <!--Here: position id is displayed-->
+		    <div>{{c.CAREER_ID}}</div>
+		</td>
+
+		<td>
+		    <!--Here: position title is displayed-->
+		    <div ng-model="editCareerData[c.CAREER_ID]">{{c.POSITION_TITLE}}</div>
+		</td>
+
+		<td>
+		    <!--Here: position category is displayed-->
+		    <div ng-model="editCareerData[c.CAREER_ID]">{{c.POSITION_CATEGORY}}</div>
+		</td>
+
+		<td>
+		    <!--Here: position employment type is displayed-->
+		    <div ng-model="editCareerData[c.CAREER_ID]">{{c.EMPLOYMENT_TYPE}}</div>
+		</td>
+
+		<td>
+		    <!--Here: date posted is displayed-->
+		    <div ng-model="editCareerData[c.CAREER_ID]">{{c.DATE_POSTED}}</div>
+		</td>
+
+		<td>
+		    <!--Here: date posted is displayed-->
+		    <div ng-model="editCareerData[c.CAREER_ID]">{{c.DATE_CLOSED}}</div>
+		</td>
+
+		<td>
+		    <!--Here: button to display detail is displayed-->
+		    <button class="btn btn-warning" name="displayDetail" value="Show Detail" ng-click="getDetail(c)">
+			Modify
+		    </button>
+		    <a href="AdvertsCareerStaffSideServlet?delete=true&id={{c.CAREER_ID}}" class="btn btn-danger">Delete</a>
+		</td>
+	    </tr>
+	</tbody>
+
+    </table>
+
+    <!--career details popup for editing-->
+    <div class="modal fade" id="modal-career-details-popup" role="dialog">
+	<div class="modal-dialog">
+
+	    <!-- Modal content-->
+	   <div class="modal-content">
+	       <div class="modal-header">
+
+		   <!--close button-->
+		   <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+		   <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+		   <!--contact header-->
+		   <h4><span class="icon-list"></span> Career Details</h4>
+	       </div>
+
+	       <!--form USING ANGULAR JS--> 
+	       <form action="AdvertsCareerStaffSideServlet" method="post" name="contactForm">
+
+		   <!--modal body-->
+		   <div class="modal-body">
+
+				<!--career ID-->
+				<input type="hidden" name="CAREER_ID" value="{{detail_careerID}}">			    
+				
+				<!--career title-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-title"></span>
+				    </span>
+				    <input name="POSITION_TITLE" class="form-control" placeholder="Enter Title" ng-model="detail_careerTitle">
+				</div>
+
+				<!--career category-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-filter"></span>
+				    </span>
+				    <input name="POSITION_CATEGORY" class="form-control" placeholder="Enter Category" ng-model="detail_careerCategory">
+				</div>
+
+				<!--career category-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-time"></span>
+				    </span>
+				    <input name="EMPLOYMENT_TYPE" class="form-control" placeholder="Enter Employment type" ng-model="detail_careerType">
+				</div>
+
+				<!--enter date posted-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-calendar"></span>
+				    </span>
+				    <input type="date" ng-model="detail_careerDatePosted" class="datepicker2 form-control" name="DATE_POSTED" placeholder="Enter posting date" style="max-width: 220px; z-index: 2003;">
+				</div>
+
+				<!--enter date posted-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-calendar"></span>
+				    </span>
+				    <input type="date" ng-model="detail_careerDateClosed" class="datepicker2 form-control" name="DATE_CLOSED" placeholder="Enter closing date" style="max-width: 220px; z-index: 2003;">
+				</div>
+
+				<!--Career article-->
+				<div style="padding: 10px 0;">
+				    <label><span class="icon-pencil"></span>Position Details:</label>
+				    <textarea ng-model="detail_careerArticle" class="form-control" name="REQUIREMENTS" rows="30" placeholder="Enter your content here"></textarea>
+				</div>
+
+				<!--career form buttons-->
+				<input type="submit" name="careerStaffEditFormSubmit" value="Submit Form" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+				<!--<input type="reset" name="detail_careerFormReset" value="Reset Form" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">-->
+				<br>
+			    <!--</div>-->
+			<!--</div>-->
+		   </div>
+
+		   <!--footer-->
+		   <div class="modal-footer">
+		   </div>
+	       </form>
+	   </div>
+	</div>
+    </div>
+
+</div>

@@ -1,0 +1,107 @@
+<%-- 
+    Document   : manage-adverts.jsp
+    Created on : Feb 1, 2017, 3:26:58 PM
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: jsp for all adverts
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<!--header redirect-->
+<%@include file="WEB-INF/jspf/staff/staff-side/adverts/header-scriptlet-staff-adverts.jspf" %>
+<!--end of header redirect definitions-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Manage Adverts</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+	<!--CDNs-->
+	<c:import url="WEB-INF/jspf/staff/staff-side/adverts/cdn-staff-adverts.jspf"></c:import>
+	<!--end of CDN definitions-->
+	
+    </head>
+    
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <div class="page" ng-app="mainApp">
+            
+            <!--Logo-->
+            <header>
+                
+		
+            <!--logo-header-->
+            <c:import url="WEB-INF/jspf/common/logo-header-common.jspf"></c:import>
+	    <!--end of logo header definitions-->
+            
+	    
+	    <!--Navigation bar-->
+	    <%@include file="WEB-INF/jspf/common/nav-common.jspf" %>
+	    <!--end of navigation bar definitions-->
+            
+            <!--============================================================-->
+            <!--ENTER YOUR HTML HERE-->
+
+            <div class="main-body w3-container container-fluid">
+                
+                <!--side navbar - style from W3.CSS -->
+		<c:import url="WEB-INF/jspf/staff/staff-side/adverts/nav-side-adverts-staff.jspf"></c:import>
+		<!--end of side-nav definitions-->
+                
+                <!--margin left makes sure there's space for side navbar-->
+                <div style="margin-left:70px">
+                    
+		    
+		    <!--============================================================-->
+                    <!--news section - style using W#.CSS - has angular component -->
+		    <c:import url="WEB-INF/jspf/staff/staff-side/adverts/news-section-adverts-staff.jspf"></c:import>
+		    <!--end of news section definitions-->
+		    
+		    
+		    <!--============================================================-->
+		    <!--promos section - style using W#.CSS - has angular component -->
+		    <c:import url="WEB-INF/jspf/staff/staff-side/adverts/promos-section-adverts-staff.jspf"></c:import>
+		    <!--end of promos section-->
+		    
+		    
+		    <!--============================================================-->
+		    <!--career section - style using W#.CSS - has angular component -->
+		    <c:import url="WEB-INF/jspf/staff/staff-side/adverts/career-section-adverts-staff.jspf"></c:import>
+		    <!--end of career section definitions-->
+		    
+		    
+		    <!--============================================================-->
+		    <!--intern section - style using W#.CSS - has angular component -->
+		    <c:import url="WEB-INF/jspf/staff/staff-side/adverts/intern-section-adverts-staff.jspf"></c:import>
+		    <!--end of intern section definitions-->
+		    
+		    
+		    <!--============================================================-->
+		    <!--volunteer section - style using W#.CSS - has angular component -->
+		    <c:import url="WEB-INF/jspf/staff/staff-side/adverts/volunteer-section-adverts-staff.jspf"></c:import>
+		    <!--end of volunteer section definitions-->
+                    
+                </div>
+            </div>
+		
+                
+	    <!--footer definition-->
+	    <c:import url="WEB-INF/jspf/common/footer-common.jspf"></c:import>
+            <!--end of footer definition-->
+            
+            
+            <!-- +++++++++++++++++++++++popups+++++++++++++++++++++++ -->
+            
+            <!--contact modal popup-->
+	    <c:import url="WEB-INF/jspf/common/contact-popup-common.jspf"></c:import>
+	    <!--end of contact modal popup-->
+            
+            
+            <!--Messages coming from Servlet-->
+	    <%@include file="WEB-INF/jspf/common/servlet-messages.jspf" %>
+	    <!--end messages from servlet definitions-->
+                        
+        </div>
+    </body>
+</html>

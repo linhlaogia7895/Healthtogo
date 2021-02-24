@@ -1,0 +1,446 @@
+package beans.staff;
+
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+import java.sql.ResultSet;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+import javax.ejb.Singleton;
+
+/**
+ * Document   : StaffersBean.java
+ * Version    : Jan 20, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: EJB for Staff connections
+ */
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
+@Singleton
+public class StaffersBean{
+
+    /**
+     * Private method to manage connections to jdbc
+     * @return Connection the jdbc connection
+     */
+    @Lock(LockType.READ)
+    private Connection getConnection() {
+        Connection conn=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            InitialContext ic=new InitialContext();
+            DataSource ds=(DataSource)ic.lookup("jdbc/htgConnectionPool");
+            conn=ds.getConnection();
+        } catch (ClassNotFoundException | NamingException | SQLException ex) {
+            Logger.getLogger(StaffersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
+    }
+
+    
+    /**
+     * Method to create staff account
+     * @param activityUser the activity user
+     * @param newUsername the staff username
+     * @param newPassword the staff password
+     * @param newUserType the staff user's type
+     * @param newLocked the staff account's locked status
+     * @param newFirstName the staff first name 
+     * @param newLastName the staff last name
+     * @param newEmail the staff email address
+     * @param newAddress the staff physical address
+     * @param newHomePhone the staff home phone number
+     * @param newCellPhone the staff cell phone
+     * @param dateOfBirth the staff date of birth
+     * @param newSalary the staff salary
+     * @param newGender the staff gender
+     * @param jobStatus the staff job status
+     * @param accountStatus the staff account status
+     * @return true when the account has been created
+     */
+    @Lock(LockType.READ)
+    public final boolean createStaffACcount(
+            String activityUser, 
+            String newUsername, 
+            String newPassword, 
+            String newUserType, 
+            boolean newLocked, 
+            String newFirstName, 
+            String newLastName, 
+            String newEmail, 
+            String newAddress, 
+            String newHomePhone, 
+            String newCellPhone, 
+            Date dateOfBirth, 
+            Date dateOfHire,
+            double newSalary, 
+            String newGender, 
+            String jobStatus, 
+            String accountStatus) 
+    {
+        boolean created=false;
+        
+        try {
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call createStaffAccount(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, newUsername);
+                ps.setString(3, newPassword);
+                ps.setString(4, newUserType);
+                ps.setBoolean(5, newLocked);
+                ps.setString(6, newFirstName);
+                ps.setString(7, newLastName);
+                ps.setString(8, newEmail);
+                ps.setString(9, newAddress);
+                ps.setString(10, newHomePhone);
+                ps.setString(11, newCellPhone);
+                ps.setDate(12, dateOfBirth);  
+                ps.setDate(13, dateOfHire);
+                ps.setDouble(14, newSalary);
+                ps.setString(15, newGender); // Hi Linh. Pls check this. there's no ps.setChar() to set the value to SQL (newGender CHAR)
+                ps.setString(16, jobStatus);
+                ps.setString(17, accountStatus);
+                ps.executeQuery();
+                created = true;
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return created;
+    }
+
+    
+    /**
+     * Method to do a limited of the staff account by the staffer
+     * @param activityUser the activity user
+     * @param newUsername the staff username
+     * @param newFirstName the staff first name
+     * @param newLastName the staff last name
+     * @param newEmail the staff email
+     * @param newAddress the staff physical address
+     * @param newHomePhone the staff home phone
+     * @param newCellPhone the staff cell phone
+     * @param dateOfBirth the staff date of birth
+     * @param newGender the staff gender
+     * @return true when account has been edited
+     */
+    @Lock(LockType.READ)
+    public final boolean editStaffAccountByStaff(
+            String activityUser, 
+            String newUsername, 
+            String newFirstName, 
+            String newLastName, 
+            String newEmail, 
+            String newAddress, 
+            int newHomePhone, 
+            int newCellPhone, 
+            Date dateOfBirth, 
+            char newGender) 
+    {
+        boolean accountEdited=false;
+        try {
+            
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call editStaffAccountByStaff(?,?,?,?,?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, newUsername);
+                ps.setString(3, newFirstName);
+                ps.setString(4, newLastName);
+                ps.setString(5, newEmail);
+                ps.setString(6, newAddress);
+                ps.setInt(7, newHomePhone);
+                ps.setInt(8, newCellPhone);
+                ps.setDate(9, dateOfBirth);
+                ps.setString(10, String.valueOf(newGender));
+                int result=ps.executeUpdate();
+                accountEdited=result > 0;
+                
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return accountEdited;
+    }
+
+ 
+    public boolean createPatientAccountByStaff(
+            String activityUser, 
+            String newUsername, 
+            String newUserType, 
+            boolean newLocked, 
+            String newFirstName, 
+            String newLastName, 
+            String newEmail, 
+            String newAddress, 
+            String newHomePhone, 
+            String newCellPhone, 
+            Date newDateOfBirth, 
+            String newGender, 
+            String newContractPeriod, 
+            String accountStatus) 
+    {
+       boolean created=false;
+        
+        try {
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call createPatientAccountByOthers(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, activityUser);
+                ps.setString(2, newUsername);
+                ps.setString(3, newUserType);
+                ps.setBoolean(4, newLocked);
+                ps.setString(5, newFirstName);
+                ps.setString(6, newLastName);
+                ps.setString(7, newEmail);
+                ps.setString(8, newAddress);
+                ps.setString(9, newHomePhone);
+                ps.setString(10, newCellPhone);
+                ps.setDate(11, newDateOfBirth);  
+                ps.setString(12, newGender); 
+                ps.setString(13, newContractPeriod);
+                ps.setString(14, accountStatus);
+                ps.executeQuery();
+                created = true;
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return created;
+    }
+
+    /**
+     * Method to search patient to update by admin
+     * @param firstName the first name to search
+     * @param lastName the last name to search
+     * @param phoneNumber the phone number to search
+     * @return String the patient account to update
+     */
+    @Lock(LockType.READ)
+    public String searchPatientToUpdateByAdmin(String firstName, String lastName, String phoneNumber) 
+    {
+     String resulttable=" <table class=\"table table-striped\"><thead><tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Address</th><th>Home Phone</th><th>Cell Phone</th><th>Update Patient Account</th></tr> </thead>";
+
+        
+        try
+        {
+            PreparedStatement ps;
+            try(Connection conn = getConnection())
+            {
+               // String sql = ;
+                ps = conn.prepareStatement("{call searchPatientInfo(?,?,?)}");
+                ps.setString(1,firstName);
+                ps.setString(2, lastName);
+                ps.setString(3, phoneNumber);
+                ResultSet rs = ps.executeQuery();
+                
+              while(rs.next())
+               {
+                     resulttable+=(" <tbody><tr>");
+                     resulttable+=("<td>"+rs.getString(2) +"</td>");
+                     resulttable+=("<td>" +rs.getString(3)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(4)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(5)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(6)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(7)+ "</td>");
+                     resulttable+=("<td><a href='EditPatientInfoByStaff?updatePatientID="+rs.getInt(1) +"'>Update Patient</a></td>");
+                     resulttable+=("</tr></tbody>"); 
+              }
+                
+                
+                
+                resulttable+="</table>";
+                
+                 conn.close();
+            }
+            
+          ps.close();
+            
+        }
+        
+         catch (SQLException ex) {
+            Logger.getLogger(StaffersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+    return resulttable;
+    }
+
+    /**
+     * Method to search patient account to deactivate by admin
+     * @param firstName the first name to search
+     * @param lastName the last name to search
+     * @param phoneNumber the phone number to search
+     * @return String the patient account found
+     */
+    @Lock(LockType.READ)
+    public String searchPatientToDeactivateByAdmin(String firstName, String lastName, String phoneNumber) 
+    {
+       String resulttable=" <table class=\"table table-striped\"><thead><tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Address</th><th>Home Phone</th><th>Cell Phone</th><th>Deactivate Patient Account</th></tr> </thead>";  
+        try
+        {
+            PreparedStatement ps;
+            try(Connection conn = getConnection())
+            {
+                String sql = "{call searchPatientInfo(?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1,firstName);
+                ps.setString(2, lastName);
+                ps.setString(3, phoneNumber);
+                ResultSet rs = ps.executeQuery();
+                
+                while(rs.next())
+                {
+                     resulttable+=(" <tbody><tr>");
+                     resulttable+=("<td>"+rs.getString(2) +"</td>");
+                     resulttable+=("<td>" +rs.getString(3)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(4)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(5)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(6)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(7)+ "</td>");
+                     resulttable+=("<td><a href='ManagePatientByStaffServlet?deactivatePatientID="+rs.getInt(1) +"'>Deactivate Patient</a></td>");
+                     resulttable+=("</tr></tbody>"); 
+                }
+                
+                resulttable+="</table>";
+                
+                 conn.close();
+            }
+            
+            ps.close();
+            
+        }
+        
+         catch (SQLException ex) {
+            Logger.getLogger(StaffersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+    return resulttable;
+    }
+
+    /**
+     * Method to search patient account to reactivated
+     * @param firstName the first name to search
+     * @param lastName the last name to search
+     * @param phoneNumber the phone number to search
+     * @return String the patient account found
+     */
+    @Lock(LockType.READ)
+    public String searchPatientToReactviateByAdmin(String firstName, String lastName, String phoneNumber) 
+    {
+        String resulttable=" <table class=\"table table-striped\"><thead><tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Address</th><th>Home Phone</th><th>Cell Phone</th><th>Reactivate Patient Account</th></tr> </thead>";
+        
+        try
+        {
+            PreparedStatement ps;
+            try(Connection conn = getConnection())
+            {
+                String sql = "{call searchPatientInfo(?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1,firstName);
+                ps.setString(2, lastName);
+                ps.setString(3, phoneNumber);
+                ResultSet rs = ps.executeQuery();
+                
+                while(rs.next())
+                {
+                     resulttable+=(" <tbody><tr>");
+                     resulttable+=("<td>"+rs.getString(2) +"</td>");
+                     resulttable+=("<td>" +rs.getString(3)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(4)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(5)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(6)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(7)+ "</td>");
+                     resulttable+=("<td><a href='ManagePatientByStaffServlet?reactivatePatientID="+rs.getInt(1) +"'>Reactivate Patient</a></td>");
+                     resulttable+=("</tr></tbody>"); 
+                }
+                
+                resulttable+="</table>";
+                
+                 conn.close();
+            }
+            
+            ps.close();
+            
+        }
+        
+         catch (SQLException ex) {
+            Logger.getLogger(StaffersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+    return resulttable;
+       
+    }
+
+    /**
+     * Method to search patient account to delete
+     * @param firstName the first name to search
+     * @param lastName the last name to search
+     * @param phoneNumber the phone number to search
+     * @return String the patient account found
+     */
+    @Lock(LockType.READ)
+    public String searchPatientToDeleteByAdmin(String firstName, String lastName, String phoneNumber) 
+    {
+       String resulttable=" <table class=\"table table-striped\"><thead><tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Address</th><th>Home Phone</th><th>Cell Phone</th><th>Delete Patient Account</th></tr> </thead>";
+        
+        try
+        {
+            PreparedStatement ps;
+            try(Connection conn = getConnection())
+            {
+                String sql = "{call searchPatientInfo(?,?,?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1,firstName);
+                ps.setString(2, lastName);
+                ps.setString(3, phoneNumber);
+                ResultSet rs = ps.executeQuery();
+                
+                while(rs.next())
+                {
+                     resulttable+=(" <tbody><tr>");
+                     resulttable+=("<td>"+rs.getString(2) +"</td>");
+                     resulttable+=("<td>" +rs.getString(3)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(4)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(5)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(6)+ "</td>");
+                     resulttable+=("<td>" +rs.getString(7)+ "</td>");
+                     resulttable+=("<td><a href='ManagePatientByStaffServlet?deletePatientID="+rs.getInt(1) +"'>Delete Patient</a></td>");
+                     resulttable+=("</tr></tbody>"); 
+                }
+                
+                resulttable+="</table>";
+                
+                 conn.close();
+            }
+            
+            ps.close();
+            
+        }
+        
+         catch (SQLException ex) {
+            Logger.getLogger(StaffersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+    return resulttable;
+    }
+
+}

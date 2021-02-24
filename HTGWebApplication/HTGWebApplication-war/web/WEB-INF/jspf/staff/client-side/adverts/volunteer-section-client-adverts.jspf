@@ -1,0 +1,315 @@
+<!--volunteer section-->
+<div id="volunteer-table" class="table-bodies news-section-body container w3-container container-fluid" ng-controller="volunteerSectionController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Volunteer</h1>
+    
+    <div ng-hide="allvolunteerTable">
+	
+	<!--alert section at top of table-->
+	<div class="alert alert-info">
+	    <p>Sort Type: {{sortType}}</p>
+	    <p>Sort Reverse: {{sortOrder}}</p>
+	    <p>Sort Query: {{searchVolunteer}}</p>
+	</div>
+
+	<!--search box - style in css file-->
+	<form>
+	    <div class="w3-row">
+		<div class="form-group w3-col m8 w3-left-align">
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-search"></span>
+			</span>
+			<input type="search" name="search" class="form-control" placeholder="Search internships" ng-model="searchVolunteer">
+		    </div>
+		</div>
+	    </div>
+	</form>
+
+	<form action="DetailsCarrierServlet_CareerInternVolunteer" method="post">
+	    <!--the table-->
+	    <table class="table table-bordered table-stripped">
+
+		<!--table header-->
+		<thead>
+		    <tr>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'positionID'; sortReverse=!sortReverse">
+				Position ID
+				<span ng-show="sortType === 'positionID' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'positionID' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'title'; sortReverse=!sortReverse">
+				Title
+				<span ng-show="sortType === 'title' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'title' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'category'; sortReverse=!sortReverse">
+				Category
+				<span ng-show="sortType === 'category' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'category' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'employmentType'; sortReverse=!sortReverse">
+				Employment Type
+				<span ng-show="sortType === 'employmentType' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'employmentType' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'datePosted'; sortReverse=!sortReverse">
+				Date Posted
+				<span ng-show="sortType === 'datePosted' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'datePosted' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			    <a href="#" ng-click="sortType = 'dateClosed'; sortReverse=!sortReverse">
+				Closing Date
+				<span ng-show="sortType === 'dateClosed' && !sortReverse" class="fa fa-chevron-up"></span>
+				<span ng-show="sortType === 'dateClosed' && sortReverse" class="fa fa-chevron-down"></span>
+			    </a>
+			</td>
+
+			<td>
+			</td>
+
+		    </tr>
+		</thead>
+
+
+		<!--NG-Repeat loops through table in printing all rows-->
+		<tbody>
+		    <tr ng-repeat="v in volunteers | orderBy:sortType:sortReverse | filter:searchVolunteer">
+			<td>
+			    <!--Here: position id is displayed-->
+			    <div>{{v.id}}</div>
+			    <input type="hidden" name="volunteerID" value="{{v.id}}">
+			</td>
+
+			<td>
+			    <!--Here: position title is displayed-->
+			    <div ng-hide="editVolunteerData[v.id]">{{v.title}}</div>
+			    <!--<div ng-show="editVolunteerData[v.id]"><input type="text" class="black-backg" name="volunteerTitle" ng-model="v.title"></div>-->
+			    <input type="hidden" name="volunteerTitle" value="{{v.title}}">
+			</td>
+
+			<td>
+			    <!--Here: position category is displayed-->
+			    <div ng-hide="editVolunteerData[v.id]">{{v.category}}</div>
+			    <!--<div ng-show="editVolunteerData[v.id]"><input type="text" class="black-backg" name="volunteerCategory" ng-model="v.category"></div>-->
+			    <input type="hidden" name="volunteerCategory" value="{{v.category}}">
+			</td>
+
+			<td>
+			    <!--Here: position employment type is displayed-->
+			    <div ng-hide="editVolunteerData[v.id]">{{v.employmentType}}</div>
+			    <!--<div ng-show="editVolunteerData[v.id]"><input type="text" class="black-backg" name="volunteerEmploymentType" ng-model="v.employmentType"></div>-->
+			    <input type="hidden" name="volunteerEmploymentType" value="{{v.employmentType}}">
+			</td>
+
+			<td>
+			    <!--Here: date posted is displayed-->
+			    <div ng-hide="editVolunteerData[v.id]">{{v.datePosted}}</div>
+			    <!--<div ng-show="editVolunteerData[v.id]"><input type="text" class="black-backg" name="volunteerDatePosted" ng-model="v.datePosted"></div>-->
+			    <input type="hidden" name="volunteerDatePosted" value="{{v.datePosted}}">
+			</td>
+
+			<td>
+			    <!--Here: date posted is displayed-->
+			    <div ng-hide="editVolunteerData[v.id]">{{v.closingDate}}</div>
+			    <!--<div ng-show="editVolunteerData[v.id]"><input type="text" class="black-backg" name="volunteerDateClosed" ng-model="v.closingDate"></div>-->
+			    <input type="hidden" name="volunteerDateClosed" value="{{v.closingDate}}">
+
+			    <input type="hidden" name="volunteerRequirements" value="{{v.detail}}">
+			</td>
+
+			<td>
+			    <!--Here: button to display detail is displayed-->
+			    <input type="submit" name="volunteerGetDetailsSubmit" value="Show Detail" class="btn btn-warning">
+    <!--			<button class="btn btn-warning" name="displayDetail" value="Show Detail" ng-click="getDetail(v)">
+				Detail
+			    </button>-->
+			</td>
+		    </tr>
+		</tbody>
+
+	    </table>
+	</form>
+	
+    </div>
+
+    
+<!--    volunteer details page
+    <div ng-show="allvolunteerDetails" id="career-page" class="w3-container container" style="max-width: 100%;">
+	<div class="panel panel-primary" style="padding: 10px;">
+	    <div class="panel-heading">
+		<h3>Position Details</h3>
+	    </div>
+	    <div class="panel-body" style="background-color: #e6f2ff;">
+		
+		<form action="AdvertsVolunteerClientSideServlet" method="post">
+		    <table class="career-table-properties table table-striped">
+			
+			position id
+			<tr>
+			    <td><p>Position ID: </p></td>
+			    <td>
+				<div>{{detail_volunteerID}}</div>
+				<input type="hidden" name="detail_volunteerID" value="{{detail_volunteerID}}">
+			    </td>
+			</tr>
+			
+			title
+			<tr>
+			    <td><p>Title: </p></td>
+			    <td>
+				<div>{{detail_volunteerTitle}}</div>
+				<input type="hidden" name="detail_volunteerTitle" value="{{detail_volunteerTitle}}">
+			    </td>
+			</tr>
+			
+			category
+			<tr>
+			    <td><p>Category: </p></td>
+			    <td>
+				<div>{{detail_volunteerCategory}}</div>
+				<input type="hidden" name="detail_volunteerCategory" value="{{detail_volunteerCategory}}">
+			    </td>
+			</tr>
+			
+			volunteer type
+			<tr>
+			    <td><p>Career Type: </p></td>
+			    <td>
+				<div>{{detail_volunteerType}}</div>
+				<input type="hidden" name="detail_volunteerType" value="{{detail_volunteerType}}">
+			    </td>
+			</tr>
+			
+			posting date
+			<tr>
+			    <td><p>Posting Date: </p></td>
+			    <td>
+				<div>{{detail_volunteerDatePosted}}</div>
+				<input type="hidden" name="detail_volunteerDatePosted" value="{{detail_volunteerDatePosted}}">
+			    </td>
+			</tr>
+			
+			closing date
+			<tr>
+			    <td><p>Closing Date: </p></td>
+			    <td>
+				<div>{{detail_volunteerDateClosed}}</div>
+				<input type="hidden" name="detail_volunteerDateClosed" value="{{detail_volunteerDateClosed}}">
+			    </td>
+			</tr>
+		    </table>
+		    
+		    requirements
+		    <div>
+			<h5 class="" style="font-size: 1.2em;"><span class="icon-pencil"></span> Requirements:</h5>
+			<div  style="border: 2px solid gray; border-radius: 5px;">
+			    <div style="padding: 7px; background-color: white;">
+				<p class="detailValue">{{detail_volunteerRequirements}}</p>
+			    </div>
+			</div>
+			<input type="hidden" name="detail_volunteerRequirements" value="{{detail_volunteerRequirements}}">
+		    </div>
+		    
+		    <hr>
+		    <h2 class="w3-center" style="text-shadow: 10px 10px 5px #888888; font-style: italic">Application Form</h2>
+		    
+		    Enter first name
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="detail_volunteerFName" type="text" 
+				   class="form-control" name="detail_volunteerFName" 
+				   placeholder="Enter fist name">
+			</div>
+
+			 enter last name
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-user"></span>
+			    </span>
+			    <input ng-model="detail_volunteerLName" type="text" 
+				   class="form-control" name="detail_volunteerLName" 
+				   placeholder="Enter last name">
+			</div>
+
+			 enter email
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-envelope"></span>
+			    </span>
+			    <input type="email" class="form-control" 
+				   name="detail_volunteerEmail" placeholder="Enter email" 
+				   ng-model="email" 
+				   data-toggle="popover"
+				   data-trigger="focus"
+				   data-placement="left"
+				   title="Example"
+				   data-content="someone@example.com">
+			</div>
+
+			 enter home phone
+			<div class="input-group input-group-lg">
+			    <span class="input-group-addon">
+				<span class="icon-phone-alt"></span>
+			    </span>
+			    <input ng-model="detail_volunteerContactNum" 
+				   type="tel" 
+				   class="form-control container-fluid" 
+				   name="detail_volunteerContactNum" 
+				   placeholder="Contact number" 
+				   pattern="\d{10}" 
+				   data-toggle="popover" 
+				   data-trigger="focus" 
+				   data-placement="left" 
+				   title="Format" 
+				   data-content="10 digits, No dashes or spaces: 7778889999">
+			</div>
+			 <br>
+
+			volunteer cover letter
+			<div style="padding: 10px 0;">
+			    <label><span class="icon-pencil"></span> Cover letter:</label>
+			    <textarea ng-model="detail_volunteerCoverLetter" class="form-control" name="detail_volunteerCoverLetter" rows="15" placeholder="Type your cover letter here.."></textarea>
+			</div>
+
+			 <br>
+			 upload resume
+			    <div style="padding: 10px 0;">
+				<label><span class="icon-file"></span> Upload Resume:</label>
+				<p><span style="font-size: large; font-weight: bolder; color: red;"><strong>Important:</strong></span> Only text, PDF and document files are accepted. Moreover, you have to press <em><strong>UPLOAD</strong></em> before clicking submit. Otherwise, your resume will not get submitted.</p>
+				<input type="file" name="volunteerFileUpload" class="fileUpload" data-upload-url="VolunteerFileUploadServlet">
+			    </div>
+			 <br>
+
+			volunteer form buttons
+			<input type="submit" name="detail_volunteerApplyFormSubmit" ng-model="detail_volunteerApplyFormSubmit" value="Submit Application" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+			<input type="button" name="#" ng-click="cancelSubmit()" value="Cancel Submit" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">
+			<br>
+		    
+		</form>
+	    </div>
+	</div>
+    </div>-->
+    
+
+</div>

@@ -1,0 +1,209 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package main;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Document   : DetailsCarrierServlet_CareerInternVolunteer.java
+ * Version    : March 1, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for sending details of career, intern and volunteer to the details jsp page
+ */
+public class DetailsCarrierServlet_CareerInternVolunteer extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	
+	/*career details*/
+	String careerGetDetailsSubmit=request.getParameter("careerGetDetailsSubmit");
+	if(careerGetDetailsSubmit!=null){
+	    
+	    String careerID=request.getParameter("careerID");
+	    String careerTitle=request.getParameter("careerTitle");
+	    String careerCategory=request.getParameter("careerCategory");
+	    String careerEmploymentType=request.getParameter("careerEmploymentType");
+	    String careerDatePosted=request.getParameter("careerDatePosted");
+	    String careerDateClosed=request.getParameter("careerDateClosed");
+	    String careerRequirements=request.getParameter("careerRequirements");
+	    
+	    boolean hasDetails=careerID!=null && !careerID.isEmpty()
+			    && careerTitle!=null && !careerTitle.isEmpty()
+			    && careerCategory!=null && !careerCategory.isEmpty()
+			    && careerEmploymentType!=null && !careerEmploymentType.isEmpty()
+			    && careerDatePosted!=null && !careerDatePosted.isEmpty()
+			    && careerDateClosed!=null && !careerDateClosed.isEmpty()
+			    && careerRequirements!=null && !careerRequirements.isEmpty();
+	    if(hasDetails){
+		
+		System.out.println("has details:--------------> "+careerGetDetailsSubmit);
+		System.out.println("careerID:::::: "+careerID);
+		System.out.println("careerTitle:::::: "+careerTitle);
+		System.out.println("careerCategory:::::: "+careerCategory);
+		System.out.println("careerEmploymentType:::::: "+careerEmploymentType);
+		System.out.println("careerDatePosted:::::: "+careerDatePosted);
+		System.out.println("careerDateClosed:::::: "+careerDateClosed);
+		System.out.println("careerRequirements:::::: "+careerRequirements);
+		
+		request.setAttribute("careerID", careerID);
+		request.setAttribute("careerTitle", careerTitle);
+		request.setAttribute("careerCategory", careerCategory);
+		request.setAttribute("careerEmploymentType", careerEmploymentType);
+		request.setAttribute("careerDatePosted", careerDatePosted);
+		request.setAttribute("careerDateClosed", careerDateClosed);
+		request.setAttribute("careerRequirements", careerRequirements);
+		
+		request.setAttribute("tableSelector", "career");
+	    }else{
+		response.sendRedirect("ManageAdvertsServlet?page=adverts-all&tableSelector=career&message=Incomplete data");
+	    }
+	}
+	
+	/*intern details*/
+	String internGetDetailsSubmit=request.getParameter("internGetDetailsSubmit");
+	if(internGetDetailsSubmit!=null){
+	    
+	    String internID=request.getParameter("internID");
+	    String internTitle=request.getParameter("internTitle");
+	    String internCategory=request.getParameter("internCategory");
+	    String internEmploymentType=request.getParameter("internEmploymentType");
+	    String internDatePosted=request.getParameter("internDatePosted");
+	    String internDateClosed=request.getParameter("internDateClosed");
+	    String internRequirements=request.getParameter("internRequirements");
+	    
+	    boolean hasDetails=internID!=null && !internID.isEmpty()
+			    && internTitle!=null && !internTitle.isEmpty()
+			    && internCategory!=null && !internCategory.isEmpty()
+			    && internEmploymentType!=null && !internEmploymentType.isEmpty()
+			    && internDatePosted!=null && !internDatePosted.isEmpty()
+			    && internDateClosed!=null && !internDateClosed.isEmpty()
+			    && internRequirements!=null && !internRequirements.isEmpty();
+	    if(hasDetails){
+		
+		System.out.println("has details:--------------> "+careerGetDetailsSubmit);
+		System.out.println("internID:::::: "+internID);
+		System.out.println("internTitle:::::: "+internTitle);
+		System.out.println("internCategory:::::: "+internCategory);
+		System.out.println("internEmploymentType:::::: "+internEmploymentType);
+		System.out.println("internDatePosted:::::: "+internDatePosted);
+		System.out.println("internDateClosed:::::: "+internDateClosed);
+		System.out.println("internRequirements:::::: "+internRequirements);
+		
+		request.setAttribute("internID", internID);
+		request.setAttribute("internTitle", internTitle);
+		request.setAttribute("internCategory", internCategory);
+		request.setAttribute("internEmploymentType", internEmploymentType);
+		request.setAttribute("internDatePosted", internDatePosted);
+		request.setAttribute("internDateClosed", internDateClosed);
+		request.setAttribute("internRequirements", internRequirements);
+		
+		request.setAttribute("tableSelector", "intern");
+	    }else{
+		response.sendRedirect("ManageAdvertsServlet?page=adverts-all&tableSelector=intern&message=Incomplete data");
+	    }
+	}
+	    
+	/*intern details*/
+	String volunteerGetDetailsSubmit=request.getParameter("volunteerGetDetailsSubmit");
+	if(volunteerGetDetailsSubmit!=null){
+	    
+	    String volunteerID=request.getParameter("volunteerID");
+	    String volunteerTitle=request.getParameter("volunteerTitle");
+	    String volunteerCategory=request.getParameter("volunteerCategory");
+	    String volunteerEmploymentType=request.getParameter("volunteerEmploymentType");
+	    String volunteerDatePosted=request.getParameter("volunteerDatePosted");
+	    String volunteerDateClosed=request.getParameter("volunteerDateClosed");
+	    String volunteerRequirements=request.getParameter("volunteerRequirements");
+	    
+	    boolean hasDetails=volunteerID!=null && !volunteerID.isEmpty()
+			    && volunteerTitle!=null && !volunteerTitle.isEmpty()
+			    && volunteerCategory!=null && !volunteerCategory.isEmpty()
+			    && volunteerEmploymentType!=null && !volunteerEmploymentType.isEmpty()
+			    && volunteerDatePosted!=null && !volunteerDatePosted.isEmpty()
+			    && volunteerDateClosed!=null && !volunteerDateClosed.isEmpty()
+			    && volunteerRequirements!=null && !volunteerRequirements.isEmpty();
+	    if(hasDetails){
+		
+		System.out.println("has details:--------------> "+careerGetDetailsSubmit);
+		System.out.println("volunteerID:::::: "+volunteerID);
+		System.out.println("volunteerTitle:::::: "+volunteerTitle);
+		System.out.println("volunteerCategory:::::: "+volunteerCategory);
+		System.out.println("volunteerEmploymentType:::::: "+volunteerEmploymentType);
+		System.out.println("volunteerDatePosted:::::: "+volunteerDatePosted);
+		System.out.println("volunteerDateClosed:::::: "+volunteerDateClosed);
+		System.out.println("volunteerRequirements:::::: "+volunteerRequirements);
+		
+		request.setAttribute("volunteerID", volunteerID);
+		request.setAttribute("volunteerTitle", volunteerTitle);
+		request.setAttribute("volunteerCategory", volunteerCategory);
+		request.setAttribute("volunteerEmploymentType", volunteerEmploymentType);
+		request.setAttribute("volunteerDatePosted", volunteerDatePosted);
+		request.setAttribute("volunteerDateClosed", volunteerDateClosed);
+		request.setAttribute("volunteerRequirements", volunteerRequirements);
+		
+		request.setAttribute("tableSelector", "volunteer");
+	    }else{
+		response.sendRedirect("ManageAdvertsServlet?page=adverts-all&tableSelector=volunteer&message=Incomplete data");
+	    }
+	}
+	
+	getServletContext().getRequestDispatcher("/position-details-page-CareerInternVolunteer.jsp").forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+	return "Short description";
+    }// </editor-fold>
+
+}

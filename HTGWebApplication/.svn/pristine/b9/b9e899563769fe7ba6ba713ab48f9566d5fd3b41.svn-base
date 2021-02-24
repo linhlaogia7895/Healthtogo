@@ -1,0 +1,249 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package users;
+
+import beans.patient.PatientBean;
+import beans.patient.SecurityBean;
+import common.HtmlPageHelper;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.*;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Document   : PatientInfo.java
+ * Version    : Jan 3, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for CRUD patient account
+ */
+@WebServlet(name="PatientInfo", urlPatterns={"/PatientInfo"})
+public class PatientInfo extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        PatientBean pb =  new PatientBean();
+        HtmlPageHelper hph=new HtmlPageHelper();
+        String submitNewJournal = request.getParameter("submitNewJournal");
+        if(submitNewJournal != null)
+        {
+            String username = (String) request.getSession().getAttribute("userName");
+            String purpose = request.getParameter("purpose");
+            String current = request.getParameter("current");
+            String goal = request.getParameter("goal");
+            String start = request.getParameter("start");
+            String lowest = request.getParameter("lowest");
+            String halfway = request.getParameter("halfway");
+            String lost = request.getParameter("lost");
+            String calories = request.getParameter("calories");
+            String chest = request.getParameter("chest");
+            String waist = request.getParameter("waist");
+            String abdomen = request.getParameter("abdomen");
+            String hip = request.getParameter("hip");
+            if(pb.addNewJournal(username, username,purpose, current, goal, start, lowest, halfway, lost, calories, chest, waist, abdomen, hip))
+                {
+                    request.setAttribute("message", hph.sendMessage("New Journal Added"));
+                    getServletContext().getRequestDispatcher("/myJournal.jsp").forward(request, response);
+                }
+                else
+                {
+                    request.setAttribute("message", hph.sendMessage("Some error happened, please try again."));
+                    getServletContext().getRequestDispatcher("/myJournal.jsp").forward(request, response);
+                }
+        }
+        String submitRecord = request.getParameter("submitRecord");
+        if(submitRecord != null)
+        {
+            String username = (String) request.getSession().getAttribute("userName");
+            String current = request.getParameter("current");
+            String goal = request.getParameter("goal");
+            String start = request.getParameter("start");
+            String lowest = request.getParameter("lowest");
+            String halfway = request.getParameter("halfway");
+            String lost = request.getParameter("lost");
+            String calories = request.getParameter("calories");
+            String chest = request.getParameter("chest");
+            String waist = request.getParameter("waist");
+            String abdomen = request.getParameter("abdomen");
+            String hip = request.getParameter("hip");
+            if(pb.addNewRecord(username, username, current, goal, start, lowest, halfway, lost, calories, chest, waist, abdomen, hip))
+                {
+                    //request.setAttribute("message", hph.sendMessage("New Record Added"));
+                    response.sendRedirect("Record?message=New Record Added");
+                    //getServletContext().getRequestDispatcher("/myRecord.jsp").forward(request, response);
+                }
+                else
+                {
+                    request.setAttribute("message", hph.sendMessage("Some error happened, please try again."));
+                    getServletContext().getRequestDispatcher("/addNewRecord.jsp").forward(request, response);
+                }
+        }
+        String submitProfile = request.getParameter("submitProfile");
+        if(submitProfile != null)
+        {
+            String username = (String) request.getSession().getAttribute("userName");
+            String firstname = request.getParameter("firstName");
+            String lastname = request.getParameter("lastName");
+            String dateOfBirth = request.getParameter("dateOfBirth");
+            String address = request.getParameter("address");
+            String homePhone = request.getParameter("homePhone");
+            String cellPhone = request.getParameter("cellPhone");
+            String email = request.getParameter("email");
+            String gender = request.getParameter("gender");
+            String contract = request.getParameter("contract");
+            String questionOne = request.getParameter("questionOne");
+            String questionTwo = request.getParameter("questionTwo");
+            String anwserOne = request.getParameter("anwserOne");
+            String anwserTwo = request.getParameter("anwserTwo");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/DD/YYYY");
+            try {
+                Date date = sdf1.parse(dateOfBirth);
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime()); 
+            
+                if((pb.createPatientAccountByPatient(username, "patient", firstname, lastname, email, address, homePhone, cellPhone, sqlDate, gender, contract)) && (pb.addSecurityQuestion(username, username, questionOne, anwserOne, questionTwo, anwserTwo)))
+                {
+                    getServletContext().getRequestDispatcher("/patient.jsp").forward(request, response);
+                }
+                else
+                {
+                    request.setAttribute("message", hph.sendMessage("Some error happened, please try again."));
+                    getServletContext().getRequestDispatcher("/patientEditProfileWhenSignUp.jsp").forward(request, response);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(PatientInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        String editProfile = request.getParameter("editProfile");
+        if(editProfile != null)
+        {
+            String username = (String) request.getSession().getAttribute("userName");
+            String firstname = request.getParameter("firstName");
+            String lastname = request.getParameter("lastName");
+            String dateOfBirth = request.getParameter("dateOfBirth");
+            String address = request.getParameter("address");
+            String homePhone = request.getParameter("homePhone");
+            String cellPhone = request.getParameter("cellPhone");
+            String email = request.getParameter("email");
+            String gender = request.getParameter("gender");
+            String contract = request.getParameter("contract");
+            SimpleDateFormat sdf1 = new SimpleDateFormat("MM/DD/YYYY");
+            try {
+                Date date = sdf1.parse(dateOfBirth);
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime()); 
+            
+                if(pb.editPatientAccount(username, username, firstname, lastname, email, address, homePhone, cellPhone, sqlDate, gender, contract))
+                {
+                    request.setAttribute("message", hph.sendMessage("Success Updating Your Profile!"));
+                    getServletContext().getRequestDispatcher("/patient.jsp").forward(request, response);
+                }
+                else
+                {
+                    response.sendRedirect("PatientInformation?message=Fail To update your profile");
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(PatientInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        String submitAnwser = request.getParameter("submitAnwser");
+        if(submitAnwser != null)
+        {
+            String anwserOne = request.getParameter("anwserOne");
+            String anwserTwo = request.getParameter("anwserTwo");
+            String username = (String) request.getSession().getAttribute("userName");
+            try {
+                SecurityBean sb= new SecurityBean(username);
+                String anwserone = (String)sb.getAnwser().get(0);
+                String answertwo = (String)sb.getAnwser().get(1);
+                if(anwserOne.equals(anwserone) && anwserTwo.equals(answertwo))
+                {
+                    request.getRequestDispatcher("/changeSecurityQuestion.jsp").forward(request, response);
+                }
+                else
+                {
+                    response.sendRedirect("SecurityServlet?message=Incorrect Anwsers");
+                }
+            } 
+            catch (NamingException ex) {
+                Logger.getLogger(PatientInfo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        String changeAnwser = request.getParameter("changeAnwser");
+        if(changeAnwser != null)
+        {
+            String questionOne = request.getParameter("questionOne");
+            String questionTwo = request.getParameter("questionTwo");
+            String anwserOne = request.getParameter("anwserOne");
+            String anwserTwo = request.getParameter("anwserTwo");
+            String username = (String) request.getSession().getAttribute("userName");
+            if (pb.editSecurityQuestion(username, username, questionOne, anwserOne, questionTwo, anwserTwo))
+            {
+                response.sendRedirect("PatientInformation?message=Security Questions Updated");
+            }
+            else
+            {
+                request.setAttribute("message", hph.sendMessage("Some Errors Happen, Please Try Again Later."));
+                getServletContext().getRequestDispatcher("/changeSecurityQuestion.jsp").forward(request, response);
+            }
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

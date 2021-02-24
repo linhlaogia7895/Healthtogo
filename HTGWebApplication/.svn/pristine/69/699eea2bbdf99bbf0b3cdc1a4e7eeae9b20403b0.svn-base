@@ -1,0 +1,11 @@
+<header>
+    <!--Logo. IMPORTANT: MUST CHANGE the PATHs HERE WHEN FILE IS MOVED-->
+    <div id="slides" class="slideshow">
+	<div>
+	    <img id="logo" class="logos" src="_res/common/logo5-resize.png" alt="Health To Go Nutrition Care">
+	</div>
+	<div>
+	    <img id="logo2" class="logos" src="_res/common/logo6-resize.png" alt="Health To Go Nutrition Care">
+	</div>
+    </div>
+</header>

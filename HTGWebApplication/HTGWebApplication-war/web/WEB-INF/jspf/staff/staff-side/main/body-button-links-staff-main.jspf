@@ -1,0 +1,27 @@
+<!--Body button links-->
+<div class="w3-row container-fluid w3-container" style="max-width: 1090px; height: 500px; width: auto;">
+    <h1>Account & Website Management</h1>
+    <div class="btn-grp w3-row w3-center">
+	<a href="ManageNutritionLibraryServlet?page=oZGhggzzqLwMHkzG8ikpJw==&tableSelector=viLodokcSMmV5BdcHIw4bg==" class="page-buttons button btn btn-success">Manage Calorie Table</a>
+	<a href="ManageNutritionLibraryServlet?page=oZGhggzzqLwMHkzG8ikpJw==&tableSelector=hnyxjySbkW1zDWJngdDWTA==" class="page-buttons button btn btn-success">Manage Tips Table</a>
+	<a href="ManageNutritionLibraryServlet?page=oZGhggzzqLwMHkzG8ikpJw==&tableSelector=qMbnpvyO3nFOC6q4LF9DIA==" class="page-buttons button btn btn-success">Manage FAQ Table</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="ManageAdvertsServlet?page=W2pegITsW7BedqAFN2Lk9g==&tableSelector=dI6d/mDV5ahfNFDsnG1rDQ==" class="page-buttons button btn btn-success">Manage News</a>
+	<a href="ManageAdvertsServlet?page=W2pegITsW7BedqAFN2Lk9g==&tableSelector=qP2WhaE2OBUNBDtRZvG2yg==" class="page-buttons button btn btn-success">Manage Promotions</a>
+	<a href="ManageAdvertsServlet?page=W2pegITsW7BedqAFN2Lk9g==&tableSelector=kDSZTh2iO3Vr8amp5e90QQ==" class="page-buttons button btn btn-success">Manage Careers</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="ManageAdvertsServlet?page=W2pegITsW7BedqAFN2Lk9g==&tableSelector=fCsjPF2OXVYkqAmWHFdOpA==" class="page-buttons button btn btn-success">Manage Internship</a>
+	<a href="ManageAdvertsServlet?page=W2pegITsW7BedqAFN2Lk9g==&tableSelector=nwwfJ3Gse0zR8jzNMVrHqA==" class="page-buttons button btn btn-success">Manage Volunteers</a>
+	<a href="PageNotReady" class="page-buttons button btn btn-success">Manage Subscriptions</a>
+    </div>
+
+<!--    <div class="btn-grp w3-row w3-center">
+	<a href="#" class="page-buttons button btn btn-success">Reset Login</a>
+	<a href="#" class="page-buttons button btn btn-success">Manage Library</a>
+	<a href="#" class="page-buttons button btn btn-success">Manage Library</a>
+    </div>-->
+</div>

@@ -1,0 +1,74 @@
+<!--List of schedules-->
+<div class="container-fluid">
+    <div class="w3-container w3-row container-fluid">
+	<div class="w3-col m10 w3-bar w3-${color1}" style="border-radius: 10px; width: 80%;">
+	    <div class="w3-bar-item"><strong><i>Time Slot:</i></strong><span class="semi-thick-prosto"> 08:00 AM - 09:00 AM</span></div>
+	    <div class="w3-bar-item"><strong><i>Status:</i></strong> ${status1}</div>
+	</div>			
+	<button class="w3-col m11 btn btn-warning patient-appointment-booker" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled1} ng-click="btnTime0809()">Book</button>
+	<button class="w3-col m12 btn btn-danger patient-cancel-booked-appointment" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled1}>Cancel</button>
+    </div>
+    <br>
+
+    <div class="w3-container w3-row container-fluid">
+	<div class="w3-col m10 w3-bar w3-${color2}" style="border-radius: 10px; width: 80%;">
+	    <div class="w3-bar-item"><strong><i>Time Slot:</i></strong> 10:00 AM - 11:00 AM</div>
+	    <div class="w3-bar-item"><strong><i>Status:</i></strong>  ${status2}</div>
+	</div>			
+	<button class="w3-col m11 btn btn-warning patient-appointment-booker" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled2} ng-click="btnTime1011()">Book</button>
+	<button class="w3-col m12 btn btn-danger patient-cancel-booked-appointment" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled2}>Cancel</button>
+    </div>
+    <br>
+
+    <div class="w3-container w3-row container-fluid">
+	<div class="w3-col m10 w3-bar w3-${color3}" style="border-radius: 10px; width: 80%;">
+	    <div class="w3-third w3-bar-item"><strong><i>Time Slot:</i></strong> 01:00 PM - 02:00 PM</div>
+	    <div class="w3-third w3-bar-item"><strong><i>Status:</i></strong>  ${status3}</div>
+	</div>
+	<button class="w3-col m11 btn btn-warning patient-appointment-booker" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled3} ng-click="btnTime1314()">Book</button>
+	<button class="w3-col m12 btn btn-danger patient-cancel-booked-appointment" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled3}>Cancel</button>
+    </div>
+    <br>
+
+    <div class="w3-container w3-row container-fluid">
+	<div class="w3-col m10 w3-bar w3-${color4}" style="border-radius: 10px; width: 80%;">
+	    <div class="w3-bar-item"><strong><i>Time Slot:</i></strong> 03:00 PM - 04:00 PM</div>
+	    <div class="w3-bar-item"><strong><i>Status:</i></strong>  ${status4}</div>
+	</div>			
+	<button class="w3-col m11 btn btn-warning patient-appointment-booker" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled4} ng-click="btnTime1516()">Book</button>
+	<button class="w3-col m12 btn btn-danger patient-cancel-booked-appointment" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled4}>Cancel</button>
+    </div>
+    <br>
+
+    <div class="w3-container w3-row container-fluid">
+	<div class="w3-col m10 w3-bar w3-${color5}" style="border-radius: 10px; width: 80%;">
+	    <div class="w3-bar-item"><strong><i>Time Slot:</i></strong> 05:00 PM - 06:00 PM</div>
+	    <div class="w3-bar-item"><strong><i>Status:</i></strong>  ${status5}</div>
+	</div>
+	<button class="w3-col m11 btn btn-warning patient-appointment-booker" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled5} ng-click="btnTime1716()">Book</button>
+	<button class="w3-col m12 btn btn-danger patient-cancel-booked-appointment" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled5}>Cancel</button>			
+    </div>
+    <br>
+
+    <div class="w3-container w3-row container-fluid">
+	<div class="w3-col m10 w3-bar w3-${color6}" style="border-radius: 10px; width: 80%;">
+	    <div class="w3-bar-item"><strong><i>Time Slot:</i></strong> 07:00 PM - 08:00 PM</div>
+	    <div class="w3-bar-item"><strong><i>Status:</i></strong>  ${status6}</div>
+	</div>
+	<button class="w3-col m11 btn btn-warning patient-appointment-booker" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled6} ng-click="btnTime1920()">Book</button>
+	<button class="w3-col m12 btn btn-danger patient-cancel-booked-appointment" 
+		style="height: 40px; width: 10%; border-radius: 10px;" ${disabled6}>Cancel</button>
+    </div>
+    <br>
+</div>

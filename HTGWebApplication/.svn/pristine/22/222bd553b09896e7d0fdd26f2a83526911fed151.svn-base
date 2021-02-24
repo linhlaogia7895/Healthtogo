@@ -1,0 +1,222 @@
+package users;
+
+import beans.users.UsersBean;
+import common.HtmlPageHelper;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Document   : MainPageServlet.js
+ * Version    : Jan 3, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for main page
+ */
+public class UsersServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HtmlPageHelper hph=new HtmlPageHelper();
+        UsersBean ub=new UsersBean();
+        
+        /*logout*/
+        String logout=request.getParameter("logout");
+        if(logout!=null){
+            
+            request.setAttribute("message", hph.sendMessage("You are now logged out..."));
+            request.setAttribute("classRequireLogin", "class='require-login'");
+            hph.setNavBarElements("",request); //"" = no userType, so defaults to index.jsp
+            redirectToUserJSP("",request,response); //no user = ""
+            
+            /*Unimplemented: create a log entry for logout*/
+            
+            request.getSession().invalidate();
+        }
+        
+        /*verifies that a login request is submitted*/
+        String submitLogin=request.getParameter("submitLogin");
+        if(submitLogin!=null){
+            
+            /*verifies that all parameters for login request are supplied*/
+            String userName=request.getParameter("userName");
+            String password=request.getParameter("password");
+            boolean hasLogin=userName!=null && !userName.isEmpty() && password!=null && !password.isEmpty();
+            if(hasLogin){
+                
+                
+                /*checks if user is a valid user*/
+                if(checkUser(userName, password)){
+                    
+                    /*Note: retrieves the user type for the logged in user*/
+                    
+                    /*sets username as session attribute. When invalidated, user should be logged out*/
+                    request.getSession().setAttribute("userName", userName);
+                    
+                    /*sets usertype as session attribute. Useful when redirecting back to user's JSP after an operation*/
+                    request.getSession().setAttribute("userType", ub.userGetType(userName));
+                    
+                    /*if remember-me-login is checked off, sets rememberMe as session attribute. 
+                    Can be used for user's other transactions that need the rememberMe value*/
+                    String rememberMeLogin=(String)request.getParameter("remember-me-login");
+                    if(rememberMeLogin!=null)
+                        request.getSession().setAttribute("rememberMe", rememberMeLogin);
+                        
+                    /*redirects to the appropriate JSP page*/
+                    String userType=(String)request.getSession().getAttribute("userType");
+                    
+                    
+                    /*Unimplemented: create a log entry for login*/
+                    
+                    hph.setNavBarElements(userType,request);
+                    redirectToUserJSP(userType,request,response);
+                }else{
+                    
+                    /*when username and/or password are/is invalid*/
+                    request.setAttribute("message", hph.sendMessage("Invalid username or password"));
+                    request.setAttribute("classRequireLogin", "class='require-login'");
+                    hph.setNavBarElements("",request); //"" = no userType, so defaults settings
+                    redirectToUserJSP("",request,response); //"" = no userType, so defaults to index.jsp
+                }
+            }else{
+                /*when not both username and password were entered*/
+                request.setAttribute("message", hph.sendMessage("Both values are required"));
+                request.setAttribute("classRequireLogin", "class='require-login'");
+                hph.setNavBarElements("",request); //"" = no userType, so defaults settings
+                redirectToUserJSP("",request,response); //"" = no userType, so defaults to index.jsp
+            } 
+        }
+        String submitSignUp = request.getParameter("submitSignUp");
+        if(submitSignUp != null)
+        {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            boolean checkUsername = ub.userExists(username);
+            if(checkUsername)
+            {
+                request.setAttribute("message", hph.sendMessage("Username Existed"));
+                redirectToUserJSP("",request,response);
+            }
+            else
+            {
+                if(ub.userAdd(username, username, password, "patient", false))
+                {
+                    request.setAttribute("message", hph.sendMessage("Welcome " +username+", Please edit your profile."));
+                    request.getSession().setAttribute("userName", username);
+                    request.getSession().setAttribute("userType", ub.userGetType(username));
+                    String userType=(String)request.getSession().getAttribute("userType");
+                    hph.setNavBarElements(userType,request);
+                    getServletContext().getRequestDispatcher("/patientEditProfileWhenSignUp.jsp").forward(request, response);
+                }
+                else
+                {
+                    request.setAttribute("message", hph.sendMessage("Error Signing Up, Please Try Again Later"));
+                    redirectToUserJSP("",request,response);
+                }
+            }
+                
+            
+            
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+    
+    /**
+     * Method to validate user
+     * @param username the username entered
+     * @param password the password entered
+     * @return true if validated
+     */
+    private boolean checkUser(String username, String password){
+        UsersBean ub=new UsersBean();
+        return ub.userValidate(username, password);
+    }
+    
+    /**
+     * Method for redirect
+     * @param userType the user's userType
+     * @param request an HttpServletRequest object
+     * @param response an HttpServletResponse object
+     */
+    private void redirectToUserJSP(String userType, HttpServletRequest request,HttpServletResponse response){
+        String url="";
+        
+        /*sets the user URL*/
+        try {
+            switch(userType){
+                case "admin":
+                    url="/admin.jsp";
+                    break;
+                case "nutritionist":
+                    url="/nutritionist.jsp";
+                    break;
+                case "staff":
+                    url="/staff.jsp";
+                    break;
+                case "patient":
+                    url="/patient.jsp";
+                    break;
+                default:
+                    url="/index.jsp";
+            }
+            
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(UsersServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException ex) {
+            Logger.getLogger(UsersServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}

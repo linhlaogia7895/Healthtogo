@@ -1,0 +1,260 @@
+<!--form for registration-->
+<form class="form-horizontal" action="AdminPageServlet" method="POST" name="registrationForm">
+
+    <table class="table table-hover">
+	<thead>
+	    <tr>
+	       <th>
+		   <div class="form-group">
+		  <label class="control-label" for="txt">Login details:</label>
+		  </div>
+	       </th>
+	    </tr>
+	</thead>
+	<tbody>
+	    <tr>
+		<td>
+		    <label for="usr"> Username:</label>
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-user"></span>
+			</span>
+			<input ng-model="username" type="text" 
+			    class="form-control" name="username" 
+			    placeholder="Enter username" required>
+<!--                        <input ng-model="username" type="hidden" 
+			    class="form-control" name="keyEncrypt" value="fmtteJM9jVi7BtkXx4OX8Q==">-->
+		    </div>
+		    <span ng-show="registrationForm.username.$dirty && registrationForm.username.$invalid" style="color: red;">
+			<div ng-messages="registrationForm.username.$error" ng-messages-include="_js/angular/messages.html"></div>
+		    </span>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <!--password-->
+		    <label for="pwd">Password:</label>
+
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-user"></span>
+			</span>
+			<input ng-model="password" 
+			    check-password="password"
+			    type="password" 
+			    class="form-control" 
+			    name="password" 
+			    placeholder="Enter password" 
+			    data-toggle="popover" 
+			    data-trigger="focus" 
+			    data-placement="right" 
+			    title="Requirement" 
+			    data-content="A min of 8 characters, at least one uppercase, at least one lowercase, at least 2 numbers, and at least one special character" 
+			    required>
+		    </div>
+		    <span ng-show="registrationForm.password.$dirty && registrationForm.password.$invalid" style="color: red;">
+			<div ng-messages="registrationForm.password.$error" ng-messages-include="_js/angular/messages.html"></div>
+		    </span>
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+		    <!--confirm password-->
+		    <label for="pwd">Confirm Password:</label>
+
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-user"></span>
+			</span>
+			<input ng-model="confirmPassword"
+			    compare-to="password" 
+			    type="password" 
+			    class="form-control" 
+			    name="confirmPassword" 
+			    placeholder="Confirm password" 
+			    data-toggle="popover" 
+			    data-trigger="focus" 
+			    data-placement="right" 
+			    title="Requirement" 
+			    data-content="Must match the password" 
+			    required>
+		    </div>
+		    <span ng-show="registrationForm.confirmPassword.$dirty && registrationForm.confirmPassword.$invalid" style="color: red;">
+			<span ng-messages="registrationForm.confirmPassword.$error" ng-messages-include="_js/angular/messages.html"></span>
+		    </span>
+		</td>
+	    </tr>
+	</tbody>
+    </table>
+
+    <div class="container-fluid">
+	<table class="table table-hover">
+
+	    <thead>
+		<tr>
+		    <th>
+			<div class="form-group">
+			    <label class="control-label" for="txt">Personal details:</label>
+			</div>
+		     </th>
+		</tr>
+	     </thead>
+
+	    <tbody>
+		<tr>
+		    <td>
+			<label for="fname">First Name:</label>
+			<div class="input-group">
+			    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			    <input id="firstName" type="text" class="form-control" name="firstName" placeholder="Enter First Name">
+			</div>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<label for="lname">Last Name: </label>
+			<div class="input-group">
+			    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			    <input id="lastName" type="text" class="form-control" name="lastName" placeholder="Enter Last Name">
+			</div>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<label for="birth">Date of Birth:</label>
+			<div class="input-group">
+			    <span class="input-group-addon"><span class="glyphicon glyphicon-gift"></span></span>
+			    <input type="text" id="datepicker" class="form-control" name="dateOfBirth" placeholder="Enter date of birth">
+		       </div>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<label for="add">Address:</label>
+			<div class="input-group">
+			    <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+			    <input id="address" type="text" class="form-control" name="address" placeholder="Enter your Address">
+			</div>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<label for="phone">Home Phone:</label>
+			<div class="input-group">
+			    <span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt"></span></span>
+			    <input id="homephone" type="text" class="form-control" name="homePhone" placeholder="Enter home phone">
+			</div>
+		    </td>
+		    <td>
+			<label for="phone">Cell Phone:</label>
+			<div class="input-group">
+			    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+			    <input id="cellphone" type="text" class="form-control" name="cellPhone" placeholder="Enter cell phone">
+			</div>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<label for="email">Email:</label> 
+			<div class="input-group">
+			    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+			    <input type="email" class="form-control" 
+				name="email" placeholder="Enter email" 
+				ng-model="email" 
+				data-toggle="popover"
+				data-trigger="focus"
+				data-placement="left"
+				title="Example"
+				data-content="someone@example.com" required>
+			</div>
+			<span ng-show="registrationForm.email.$dirty && registrationForm.email.$invalid" style="color: red;">
+			    <span ng-messages="registrationForm.email.$error" ng-messages-include="_js/_common/angular/messages.html"></span>
+			</span>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<label for="gender">Gender:</label> 
+			<div class="input-group">
+			    <input type="radio" name="gender" value="M" checked> Male &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+			    <input type="radio" name="gender" value="F"> Female
+			</div>
+		    </td>
+		</tr>
+	    </tbody>
+	</table>
+
+	<table class="table table-hover">
+	    <thead>
+		<tr>
+		    <th>
+			<div class="form-group">
+			    <label class="control-label" for="txt">Employment details:</label>
+			</div>
+		    </th>
+		</tr>
+	    </thead>
+
+	    <tbody>
+		<tr>
+		    <td>
+			<label for="dhire">Date of Hire:</label>
+			<div class="input-group">
+			    <span class="input-group-addon"><span class="glyphicon glyphicon-gift"></span></span>
+			    <input type="text" id="datepickerHire" class="form-control" name="dateOfHire" placeholder="Enter date of hire">
+			</div>
+		    </td>
+		</tr>
+
+		<tr>
+		    <td>
+			<label for="job">Job Status:</label>
+			<div class="input-group">
+			    <input type="radio" name="jobStatus" value="fullTime" checked> Full Time &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+			    <input type="radio" name="jobStatus" value="partTime"> Part Time &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+			    <input type="radio" name="jobStatus" value="contract" checked> Contract &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+			    <input type="radio" name="jobStatus" value="seasonal"> Seasonal
+			</div>
+		    </td>
+		</tr>
+		<tr>
+		   <td>
+			<label for="acct">Account Status:</label>
+			<div class="input-group">
+			    <input type="radio" name="accountStatus" value="active" checked> Active &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+			    <input type="radio" name="accountStatus" value="inactive"> Inactive 
+			</div>
+		    </td>
+		</tr>
+		<tr>
+		    <td>
+			<label for="acct">Lock Status:</label>
+			<div class="input-group">
+			    <input type="radio" name="lockStatus" value="true" checked> Locked &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+			    <input type="radio" name="lockStatus" value="false"> Unlocked
+			</div>
+		    </td>
+		</tr>
+	    </tbody>
+	</table>
+    </div>
+
+
+    <table class="table table-hover">
+	<tbody>
+       <tr><td>
+       <div class="form-group"> 
+	<div class="col-sm-offset-2 col-sm-10">
+	    <button type="submit" name="submitCancel" class="w3-btn w3-gray" style="width:150px;"><b>Cancel</b></button>
+	</div>
+	</div>
+       </td><td>
+	<div class="form-group"> 
+	<div class="col-sm-offset-2 col-sm-10">
+	 <button type="submit" name="submitCreateStaff" class="w3-btn w3-green" style="width:150px;"><b>Add New Staff</b></button>
+	 </div>
+	</div>
+	</td></tr>
+	</tbody>
+   </table>
+</form>

@@ -1,0 +1,110 @@
+<!--appointment booker get details modal popup-->
+<div class="modal fade" id="modal-appointment-booker-popup" role="dialog">
+    <div class="modal-dialog">
+
+	<!-- Modal content-->
+       <div class="modal-content">
+	   <div class="modal-header">
+
+	       <!--close button-->
+	       <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+	       <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+	       <!--contact header-->
+	       <h4><span class="icon-calendar"></span> Booking Details</h4>
+	   </div>
+	   <!--form USING ANGULAR JS--> 
+	   <form action="MainPageServlet" method="post" name="contactForm">
+
+	       <!--modal body-->
+	       <div class="modal-body">
+		       <div class="form-group">
+
+			   <!--enter ID-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-user"></span>
+			       </span>
+			       <input ng-model="PATIENT_ID" type="text" class="form-control" name="PATIENT_ID" placeholder="Enter your ID number" autofocus required>
+			   </div>
+
+			   <!--start time-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-user"></span>
+			       </span>
+			       <input type="text" class="form-control" name="NUTRITIONIST_ID" value="00001A{{START_TIME}}" readonly>
+			   </div>
+
+			   <!--start time-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-time"></span>
+			       </span>
+			       <input type="text" class="form-control" name="START_TIME" value="9:00 AM{{START_TIME}}" readonly>
+			   </div>
+			   
+			   <!--end time-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-time"></span>
+			       </span>
+			       <input type="text" class="form-control" name="START_TIME" value="10:00 AM{{START_TIME}}" readonly>
+			   </div>
+
+			    <!--EXTENSION-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-time"></span>&nbsp; Extension: 
+				</span>
+				<select id="user-type" class="form-control container-fluid" name="EXTENSION">
+					<option value="none" selected>None</option>
+					<option value="30">30 minutes</option>
+					<option value="1">1 hour</option>
+				</select>
+			    </div>
+			    
+			    <!--type of consultation-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-open-file"></span>&nbsp; Type of consultation: 
+				</span>
+				<select id="user-type" class="form-control container-fluid" name="userType">
+					<option value="regular" selected>regular</option>
+					<option value="package1">Package 1: Meal Planning</option>
+					<option value="package1">Package 2: Sport Nutrition</option>
+					<option value="package1">Package 3: Eating Disorder</option>
+					<option value="package1">Package 4: Celiac Meal Planning</option>
+					<option value="package1">Package 5: Losing Weight</option>
+					<option value="package1">Package 6: Gaining Weight</option>
+				</select>
+			    </div>
+			    
+			    <!--enter message-->
+			   <div style="padding: 10px 0;">
+			       <label for="message"><span class="icon-pencil"></span>Message:</label>
+			       <textarea ng-model="contactTextArea" 
+					 class="form-control" 
+					 name="PURPOSE" 
+					 rows="5" 
+					 placeholder="Enter your message here"></textarea>
+			   </div>
+			   <br>
+			    
+
+			   <!--submit button-->
+			   <input ng-disabled="contactForm.$invalid" id="contact-btn" class="btn btn-danger pull-left" type="submit" name="submitMessage" value="Send Message">
+		       </div>
+	       </div>
+
+	       <!--footer-->
+	       <div class="modal-footer">
+		   <p>
+		       <i class="fa fa-spinner w3-spin" style="font-size:64px">Hi.. </i>
+		   </p>
+	       </div>
+	   </form>
+
+       </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package beans.staff;
+
+
+import beans.users.UsersBean;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Stateful;
+import javax.ejb.LocalBean;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+/**
+ *
+ * @author 690727
+ */
+@Stateful
+@LocalBean
+public class EditPatientByStaffBean {
+
+private String firstName;
+private String lastName;
+private String email;
+private String address;
+private String homePhone;
+private String cellPhone;
+private Date dateOfBirth;
+private String gender;
+private String contract;
+private SimpleDateFormat dateformat = new SimpleDateFormat("MM/DD/YYYY");
+
+public EditPatientByStaffBean()
+{
+    
+}
+
+public EditPatientByStaffBean(int patientID)throws NamingException
+{
+     try {
+           
+            PreparedStatement ps;
+            try (Connection conn = getConnection()) {
+                String sql="{call getPatientInfoById(?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, patientID);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next())
+                {
+                    this.firstName = rs.getString(2);
+                    this.lastName = rs.getString(3);
+                    this.email = rs.getString(4);
+                    this.address = rs.getString(5);
+                    this.homePhone = rs.getString(6);
+                    this.cellPhone = rs.getString(7);
+                    this.dateOfBirth = rs.getDate(8);
+                    this.gender = rs.getString(9);
+                    this.contract = rs.getString(10);
+                    
+                }
+                conn.close();
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EditPatientByStaffBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
+public String getFirstName()
+{
+    return firstName;
+}
+
+public String getLastName()
+{
+    return lastName;
+}
+
+public String getEmail()
+{
+    return email;
+}
+
+public String getAddress()
+{
+    return address;
+}
+
+public String getHomePhone()
+{
+    return homePhone;
+}
+
+public String getCellPhone()
+{
+    return cellPhone;
+}
+
+public String getDateOfBirth()
+{
+    return dateformat.format(dateOfBirth);
+}
+
+public String getGender()
+{
+    return gender;
+}
+
+public String getContract()
+{
+    return contract;
+}
+  /**
+     * Private method to manage connections to jdbc
+     * @return Connection the jdbc connection
+     */
+    private Connection getConnection() throws NamingException {
+        Connection conn=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            InitialContext ic=new InitialContext();
+            DataSource ds=(DataSource)ic.lookup("jdbc/htgConnectionPool");
+            conn=ds.getConnection();
+        } catch (ClassNotFoundException | NamingException | SQLException ex) {
+            Logger.getLogger(UsersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
+    }
+}
+

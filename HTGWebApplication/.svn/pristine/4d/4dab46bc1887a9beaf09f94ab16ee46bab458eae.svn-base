@@ -1,0 +1,192 @@
+<!--calorie table - style using W#.CSS - has angular component -->
+<div id="calorie-table" class="table-bodies calorie-table-body container w3-container" ng-controller="calorieTableController">
+
+    <!--title-->
+    <h1 class="table-title">Food Calorie Table</h1>
+
+    <!--alert section at top of table-->
+    <div class="alert alert-info">
+	<p>Sort Column: {{sortType}}</p>
+	<p>Sort Order: {{sortOrder}}</p>
+	<p>Sort Query: {{searchFood}}</p>
+    </div>
+
+
+    <!--search box - styles in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search calorie" ng-model="searchFood">
+		</div>
+	    </div>
+
+
+	    <!--Add calorie button-->
+	    <div class="w3-col m4 w3-right-align w3-container" style="padding: 7px;">
+		<button name="addData" class="btn btn-success" value="Add Data" ng-click="showBlank=!showBlank">{{addBtnTxtToggle}}</button>
+	    </div>
+
+	</div>
+    </form>
+
+
+    <!--the calorie table-->
+    <form action="CalorieTableServlet" method="GET">
+	<table class="calorie-table table table-bordered table-stripped">
+
+	    <!--calorie table header-->
+	    <thead>
+		<tr>
+
+		    <!--Food name column header-->
+		    <td>
+			<a href="#" ng-click="sortType = 'foodName'; sortReverse=!sortReverse">
+			    Food (100g)
+			    <span ng-show="sortType === 'foodName' && !sortReverse" class="fa fa-chevron-up"></span>
+			    <span ng-show="sortType === 'foodName' && sortReverse" class="fa fa-chevron-down"></span>
+			</a>
+		    </td>
+
+		    <!--Recommended calories column header-->
+		    <td>
+			<a href="#" ng-click="sortType = 'recommendedCalories'; sortReverse=!sortReverse">
+			    Recommended
+			    <span ng-show="sortType === 'recommendedCalories' && !sortReverse" class="fa fa-chevron-up"></span>
+			    <span ng-show="sortType === 'recommendedCalories' && sortReverse" class="fa fa-chevron-down"></span>
+			</a>
+		    </td>
+
+		    <!--Calories column header-->
+		    <td>
+			<a href="#" ng-click="sortType = 'calories'; sortReverse=!sortReverse">
+			    Calories
+			    <span ng-show="sortType === 'calories' && !sortReverse" class="fa fa-chevron-up"></span>
+			    <span ng-show="sortType === 'calories' && sortReverse" class="fa fa-chevron-down"></span>
+			</a>
+		    </td>
+
+		    <!--Protein column header-->
+		    <td>
+			<a href="#" ng-click="sortType = 'protein'; sortReverse=!sortReverse">
+			    Protein
+			    <span ng-show="sortType === 'protein' && !sortReverse" class="fa fa-chevron-up"></span>
+			    <span ng-show="sortType === 'protein' && sortReverse" class="fa fa-chevron-down"></span>
+			</a>
+		    </td>
+
+		    <!--Fat column header-->
+		    <td>
+			<a href="#" ng-click="sortType = 'fat'; sortReverse=!sortReverse">
+			    Fat
+			    <span ng-show="sortType === 'fat' && !sortReverse" class="fa fa-chevron-up"></span>
+			    <span ng-show="sortType === 'fat' && sortReverse" class="fa fa-chevron-down"></span>
+			</a>
+		    </td>
+
+		    <!--Carbs column header-->
+		    <td>
+			<a href="#" ng-click="sortType = 'carbs'; sortReverse = !sortReverse">
+			    Carbs
+			    <span ng-show="sortType === 'carbs' && !sortReverse" class="fa fa-chevron-up"></span>
+			    <span ng-show="sortType === 'carbs' && sortReverse" class="fa fa-chevron-down"></span>
+			</a>
+		    </td>
+
+		    <!--Fiber column header-->
+		    <td>
+			<a href="#" ng-click="sortType = 'fiber'; sortReverse = !sortReverse">
+			    Fiber
+			    <span ng-show="sortType === 'fiber' && !sortReverse" class="fa fa-chevron-up"></span>
+			    <span ng-show="sortType === 'fiber' && sortReverse" class="fa fa-chevron-down"></span>
+			</a>
+		    </td>
+		    <td></td>
+		</tr>
+	    </thead>
+
+
+	    <!--calorie table body - content in angularjs file-->
+	    <tbody>
+
+		<!--Blank input fields for adding calorie-->
+		<tr ng-show="showBlank" style="margin: 0; padding: 0;">
+		    <td><input type="text" class="black-backg" name="foodName"></td>
+		    <td><input type="text" class="black-backg" name="recommendedCalories"></td>
+		    <td><input type="text" class="black-backg" name="calories"></td>
+		    <td><input type="text" class="black-backg" name="protein"></td>
+		    <td><input type="text" class="black-backg" name="fat"></td>
+		    <td><input type="text" class="black-backg" name="carbs"></td>
+		    <td><input type="text" class="black-backg" name="fiber"></td>
+		    <td class="w3 w3-center"><input class="btn btn-success" type="submit" name="add" value="Save to Database"></td>
+		</tr>
+
+		<!--NG-Repeat loops through table in printing all rows-->
+		<tr ng-repeat="x in foods | orderBy:sortType:sortReverse | filter:searchFood" style="visibility: visible;">
+		    <td>
+
+			<!--Here: hidden id value, foodname text as table item, input text field filled with food name value-->
+			<input type="hidden" name="id" value='{{x.id}}'>
+
+			<div ng-hide="editData[x.id]">{{x.foodName}}</div>
+			<div ng-show="editData[x.id]"><input type="text" class='black-backg' name="foodName2" ng-model="x.foodName"></div>
+		    </td>
+
+		    <td>
+
+			<!--Here: recommended calorie text as table item, input text field filled with recommended calorie value-->
+			<div ng-hide="editData[x.id]">{{x.recommendedCalories}}</div>
+			<div ng-show="editData[x.id]"><input type="text" class="black-backg" name="recommendedCalories2" ng-model="x.recommendedCalories"></div>
+		    </td>
+
+		    <td>
+
+			<!--Here: calorie text as table item, input text field filled with calorie value-->
+			<div ng-hide="editData[x.id]">{{x.calories}}</div>
+			<div ng-show="editData[x.id]"><input type="text" class="black-backg" name="calories2" ng-model="x.calories"></div>
+		    </td>
+
+		    <td>
+
+			<!--Here: protein text as table item, input text field filled with protein value-->
+			<div ng-hide="editData[x.id]">{{x.protein}}</div>
+			<div ng-show="editData[x.id]"><input type="text" class="black-backg" name="protein2" ng-model="x.protein"></div>
+		    </td>
+
+		    <td>
+
+			<!--Here: fat text as table item, input text field filled with fat value-->
+			<div ng-hide="editData[x.id]">{{x.fat}}</div>
+			<div ng-show="editData[x.id]"><input type="text" class="black-backg" name="fat2" ng-model="x.fat"></div>
+		    </td>
+
+		    <td>
+
+			<!--Here: carbs text as table item, input text field filled with carbs value-->
+			<div ng-hide="editData[x.id]">{{x.carbs}}</div>
+			<div ng-show="editData[x.id]"><input type="text" class="black-backg" name="carbs2" ng-model="x.carbs"></div>
+		    </td>
+
+		    <td>
+
+			<!--Here: fiber text as table item, input text field filled with fiber value-->
+			<div ng-hide="editData[x.id]">{{x.fiber}}</div>
+			<div ng-show="editData[x.id]"><input type="text" class="black-backg" name="fiber2" ng-model="x.fiber"></div>
+		    </td>
+		    <td class="w3 w3-center">
+
+			<!--Here: input button for modify, update and remove calorie record-->
+			<input class="btn btn-warning" type="button" name="modify" value="Modify" ng-hide="editData[x.id]" ng-click="modify(x)" onclick="return false">
+			<a name='editCalorie' class="btn btn-warning" href='CalorieTableServlet?edit=?Ìß?¶ßÇ??Å??ôÑ&data={{x}}' ng-show="editData[x.id]"><p>Update</p></a>
+			<input class="btn btn-success" type="submit" name="cancel" value="Cancel" ng-show="editData[x.id]" ng-click="cancel(x)" onclick="return false">
+			<a name='removeCalorie' class="btn btn-danger" href='CalorieTableServlet?remove=true&data={{x.id}}' ng-hide="editData[x.id]"><p>Remove</p></a>
+		    </td>
+		</tr>
+	    </tbody>
+	</table>
+    </form>
+
+</div>

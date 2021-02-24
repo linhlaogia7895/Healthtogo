@@ -1,0 +1,176 @@
+<!--Navigation bar-->
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="150">
+    <div class="container-fluid" id="nav_local">
+
+	<!--Navigation bar for small screens-->
+	<div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>          
+	    </button>
+	    <a class="navbar-brand" href="#"></a>
+	</div>
+
+	<!--Regular navigation bar-->
+	<div class="collapse navbar-collapse" id="myNavbar">
+	    <ul class="nav navbar-nav">
+
+		<!--IMPORTANT: MUST CHANGE ALL PATHS HERE WHEN FILE IS MOVED-->
+		<li class="#"><a href="MainPageServlet?page=index#main-page"><span class="icon-home" style="font-size: 1.2em;" ></span>&nbsp;Home</a></li>
+		<li class="#"><a href="MainPageServlet?page=index#services-page"> Services</a></li>
+		<li class="#"><a href="MainPageServlet?page=index#about-page"> About Us</a></li>
+		<li class="#"><a style="cursor:pointer" id="contact-popup">Contact</a></li>
+		<li class="#"><a href="NutritionLibrary">Nutrition Library</a></li>
+
+		<!--No one logged in-->
+		<li class="${noneLoggedIn} dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+			Account
+
+			<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+
+			<!--check MainPageServlet.java and HtmlPageHelper.java for the contents of classRequireLogin-->
+			<li><a style="cursor:pointer" ${classRequireLogin}>(5) <span class="assigned">(Mamadou)</span> Reset Login</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(6) <span class="assigned">(Linh)</span> Create / Update account</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(8) <span class="assigned">(Marufa)</span> Payment plan</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(10) <span class="assigned">(Last)</span> Pay for service</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(12) <span class="assigned">(Marufa)</span> Send message to nutritionist</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(13) <span class="assigned">(Marufa/Rachel)</span> Patient journal</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(19) <span class="assigned">(Rodney)</span> Search FAQ, tips and nutrition library</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(22) <span class="assigned">(Marufa)</span> Subscribe to advert(s)</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(26) <span class="assigned">(Marufa)</span> Manage invoice</a></li>
+			<li><a style="cursor:pointer" ${classRequireLogin}>(27) <span class="assigned">(Marufa)</span> Book appointment</a></li>
+		    </ul>
+		</li>
+
+
+		<!--patient-->
+		<li class='${patientStatus} dropdown'>
+			<a class='dropdown-toggle' data-toggle='dropdown' href='#'>Account<span class='caret'></span></a>
+			<ul class='dropdown-menu'>
+			    <li><a href='#'>(5) <span class="assigned">(Mamadou)</span> Reset Login</a></li>
+			    <li><a href='PatientInformation'>Edit Account Infomation</a></li>
+				<li><a href='#'>(8) Payment plan</a></li>
+				<li><a href='#'>(10) <span class="assigned">(Last)</span> Pay for service</a></li>
+				<li><a href='#'>(12) Send message to nutritionist</a></li>
+				<li><a href='#'>(13) <span class="assigned">(Marufa/Rachel)</span> Patient journal</a></li>
+				<li><a href='#'>(19) <span class="assigned">(Rodney)</span> Search FAQ, tips and nutrition library</a></li>
+				<li><a href='#'>(22) Subscribe to advert(s)</a></li>
+				<li><a href='#'>(26) Manage invoice</a></li>
+				<li><a href='#'>(27) Book appointment</a></li>
+			</ul>
+		</li>
+
+		<!--nutritionist-->
+		<li class="${nutritionistStatus} dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+			    Nutritionist
+
+			<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+			<li><a href="#">(3) <span class="assigned">(Mamadou)</span> Manage staff</a></li>
+			<li><a href="#">(5) <span class="assigned">(Mamadou)</span> Reset login</a></li>
+			<li><a href="#">(7) <span class="assigned">(Mamadou)</span> Manage patient account</a></li>
+			<li><a href="#">(11) Answer messages from patient</a></li>
+			<li><a href="patientJournal.jsp">(13) <span class="assigned">(Marufa/Rachel)</span> Patient journal</a></li>
+			<li><a href="#">(14) Monitor patient progress</a></li>
+			<li><a href="#">(15) Manage patients' journals</a></li>
+			<li><a href="#">(16) <span class="assigned">(Last)</span> Generate patient progress report</a></li>
+			<li><a href="#">(17) <span class="assigned">(Last)</span> Generate business report</a></li>
+			<li><a href="#">(18) <span class="assigned">(Rodney)</span> Manage FAQ, tips and nutrition library</a></li>
+			<li><a href="#">(19) Search FAQ, tips and nutrition library</a></li>
+			<li><a href="#">(20) <span class="assigned">(Linh)</span> Manage appointments</a></li>
+		    </ul>
+		</li>
+
+		<!--administrator-->
+		<li class="${adminStatus} dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+			    Administrator
+
+			<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+			<li><a href="#">(3) Manage staff</a></li>
+			<li><a href="#">(4) Modify security</a></li>
+			<li><a href="#">(5) Reset login</a></li>
+			<li><a href="#">(7) Manage patient account</a></li>
+			<li><a href="#">(15) <span class="assigned">(Marufa/Rachel)</span> Manage patients' journals</a></li>
+			<li><a href="#">(16) <span class="assigned">(Last)</span> Generate patient progress report</a></li>
+			<li><a href="#">(19) <span class="assigned">(Rodney)</span> Search FAQ, tips and nutrition library</a></li>
+			<li><a href="#">(23) Manage activity logs</a></li>
+			<li><a href="#">(24) <span class="assigned">(Linh)</span> Manage logins</a></li>
+		    </ul>
+		</li>
+
+		<!--staff-->
+		<li class="${staffStatus} dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+			    Staff
+
+			<span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+			<li><a href="#">(5) (Mamadou) Reset Login</a></li>
+			<li><a href="#">(6) <span class="assigned">(Linh)</span> Create and Update patient account</a></li>
+			<li><a href="#">(7) <span class="assigned">(Mamadou)</span> Manage patient account</a></li>
+			<li><a href="#">(9) <span class="assigned">(Linh)</span> Manage invoice and payments</a></li>
+			<li><a href="#">(10) <span class="assigned">(Last)</span> Pay for service</a></li>
+			<li><a href="#">(15) <span class="assigned">(Marufa/Rachel)</span> Manage patients' journals</a></li>
+			<li><a href="#">(16) <span class="assigned">(Last)</span> Generate patient progress report</a></li>
+			<li><a href="#">(17) <span class="assigned">(Last)</span> Generate business report</a></li>
+			<li><a href="#">(18) Manage FAQ, tips and nutrition library</a></li>
+			<li><a href="#">(19) Search FAQ, tips and nutrition library</a></li>
+			<li><a href="#">(20) <span class="assigned">(Linh)</span> Manage appointments</a></li>
+			<li><a href="#">(21) Manage advertisements</a></li>
+			<li><a href="#">(25) Manage email notifications</a></li>
+		    </ul>   
+		</li>
+	    </ul>
+
+	    <!--Sign up, login, logout, LoggedIn icons using glyph icons of bootstrap 3-->
+	    <ul class="nav navbar-nav navbar-right">
+		<li class="${logoutIconStatus}">
+		    <a href='UsersServlet?logout=true'> &nbsp; <span class='icon-log-out'></span> Logout</a>
+		</li>
+
+		<!--logged in link for nutritionist-->
+		<li class="${nutritionistStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=nutritionist"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Nutritionist </i></span>
+			</a>
+		</li> 
+
+		<!--logged in link for admin-->
+		<li class="${adminStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=admin"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Admin </i></span>
+			</a>
+		</li> 
+
+		<!--logged in link for staff-->
+		<li class="${staffStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=staff"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Staff </i></span>
+			</a>
+		</li> 
+
+		<li class="${signUpIconStatus}">
+		    <a style='cursor:pointer' class='sign-up'><span class='icon-user'></span> Sign Up</a>
+		</li>
+		<li class="${logInIconStatus}">
+		    <a style='cursor:pointer' id='my-login'><span class='icon-log-in'></span> Login</a>
+		</li>
+	    </ul>
+
+	</div>
+    </div>
+</nav>

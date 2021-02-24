@@ -1,0 +1,29 @@
+<!--tips table - style using W#.CSS - has angular component -->
+<div id="tips-table" class="table-bodies tips-table-body container w3-container container-fluid" ng-controller="tipsTableController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Nutrition Tips</h1>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="form-group">
+	    <div class="input-group input-group-lg">
+		<span class="input-group-addon">
+		    <span class="icon-search"></span>
+		</span>
+		<input type="search" name="search" class="form-control" placeholder="Search tips" ng-model="searchTips">
+	    </div>
+	</div>
+    </form>
+
+    <!--populates page with angular content for tips-->
+    <div ng-repeat="x in tips | orderBy:'title' | filter:searchTips" class="w3-accordion w3-light-grey">
+	<button id="tips-btn" ng-click="manageTipsAccordion(x.id)" class="w3-btn-block w3-left-align"><span id="tips-btn-text">{{x.title}}</span></button>
+	<div id='{{x.id}}' class="w3-accordion-content w3-container">
+	    <h3 style="text-align: center;">{{x.title}}</h3>
+	    <h5>Source: <a href="{{x.href}}" target='_blank'>{{x.hrefText}}</a></h5>
+	    <div id="tips-content" ng-bind-html='x.content'></div> <!-- ng-bind-html requires the ng-sanitize CDN -->
+	</div>
+    </div>
+    <br>
+</div>

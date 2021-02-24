@@ -1,0 +1,73 @@
+<!--my journal details-->
+<div ng-repeat="x in journal">
+<!--                    <button id="journal-detail" class="btn btn-warning" ng-click="details(x)">More Details</button>-->
+    <div class="col-md-4" >
+	<div class="thumbnail hovereffect2">
+	    <div align="center">
+		<p>Journal Number: {{x.journalNumber}}</p>
+		<p>Date Record: {{x.dateRecord}}</p>
+		<p>Start Weight: {{x.startWeight}}</p>
+		<p>End Weight: {{x.endWeight}}</p>
+		<button id="journal-detail" class="btn btn-warning" ng-click="details(x)">More Details</button>
+	    </div>
+	</div>
+    </div>
+        <div class="modal fade" id="plan-detail-popup">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                   <!--close top button-->
+                   <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+                   <!--popup header-->
+                   <h4 class="modal-title">Journal Detail!</h4>
+               </div>
+
+                <!--modal body-->
+                <div class="modal-body" >
+                    <h3>Journal Date: {{x.dateRecord}}</h3>
+                    <h3>Motivation: {{x.motivation}}</h3>
+                    <h3>Start Weight: {{x.startWeight}}</h3>
+                    <h3>End Weight: {{x.endWeight}}</h3>
+                    <h3>Record Detail Number {{x.recordNumber}}:</h3>
+                    <table><tr><th>Date</th><th>Current Weight</th><th>Goal Weight</th><th>Start Weight</th>
+                    <th>Lowest Weight</th><th>Halfway Weight</th><th>Weight Lost</th><th>Calories Level</th><th>Chest Measure</th>
+                    <th>Waist Measure</th><th>Abdomen Measure</th><th>Hip Measure</th></tr>
+                        <tr ng-repeat="y in record">
+                            <td>{{y.dateOfMeasurement}}</td>
+                            <td>{{y.patientCurrentWeight}}</td>
+                            <td>{{y.patientGoalWeight}}</td>
+                            <td>{{y.patientStartWeight}}</td>
+                            <td>{{y.patientLowestWeight}}</td>
+                            <td>{{y.patientHalfWayWeight}}</td>
+                            <td>{{y.patientWweightLost}}</td>
+                            <td>{{y.patientCaloriesLevel}}</td>
+                            <td>{{y.patientChestMeasure}}</td>
+                            <td>{{y.patientWaistMeasure}}</td>
+                            <td>{{y.patientAbdomenMeasure}}</td>
+                            <td>{{y.patientHipMeasure}}</td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <h3>Diet Plan Detail:</h3>
+                    <table>
+                       <tr><th>Day</th><th>Breakfast</th><th>Lunch</th><th>Dinner</th><th>Morning Snack</th><th>Afternoon Snack</th></tr>
+                        <tr ng-repeat="z in diet">
+                            <td>{{z.day}}</td>
+                                <td>{{z.breakfast}}</td>
+                                <td>{{z.lunch}}</td>
+                                <td>{{z.dinner}}</td>
+                                <td>{{z.morningSnack}}</td>
+                                <td>{{z.afternoonSnack}}</td>
+                            </tr>                         
+                    </table>
+                    <br>
+                    <h1>{{x.activityCompleted}}: {{x.dateCompleted}}</h1>
+                    <div id="activityProgress">
+                        <a href="JournalServlet?checkComplete=true&data={{x.journalNumber}}" class="btn btn-warning">Check Complete</a>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

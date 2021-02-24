@@ -1,0 +1,177 @@
+<!--tips table - style using W#.CSS - has angular component -->
+<div id="tips-table" class="table-bodies tips-table-body container w3-container container-fluid" ng-controller="tipsTableController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Nutrition Tips</h1>
+
+    <!--Add tips form box - styles in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search tips" ng-model="searchTips">
+		</div>
+	    </div>
+
+
+	    <!--Add tips button-->
+	    <div class="w3-col m4 w3-right-align w3-container" style="padding: 7px;">
+		<button name="addData" class="btn btn-success" value="Add Tips Data" ng-click="tipsAddForm=!tipsAddForm">{{addBtnTipsFormToggle}}</button>
+	    </div>
+
+	</div>
+    </form>
+
+    <!--the form that pops open on click of the add tips button-->
+    <div ng-show="tipsAddForm">
+	<form action="TipsTableServlet" method="POST" name="mainTipsForm">
+	    <div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+		<div class="panel-heading">Tips Details</div>
+		<div class="panel-body">
+
+		    <!--tips title-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-title"></span>
+			</span>
+			<input name="tipsTitle" class="form-control" placeholder="Enter Title" ng-model="tipsTitle">
+		    </div>
+
+		    <!--enter link-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-link"></span>
+			</span>
+			<input ng-model="tipsSource" class="form-control" name="tipsSource" placeholder="Enter link/source">
+		    </div>
+
+		    <!--enter link label-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-tag"></span>
+			</span>
+			<input ng-model="tipsLinLabel" class="form-control" name="tipsLinLabel" placeholder="Enter Source label">
+		    </div>
+
+		    <!--enter date-->
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-calendar"></span>
+			</span>
+			<input type="date" ng-model="tipsDate" class="datepicker2 form-control" name="tipsDate" placeholder="Enter Date published" style="max-width: 220px;">
+		    </div>
+
+
+		    <!--Tips article-->
+		    <div style="padding: 10px 0;">
+			<label><span class="icon-pencil"></span>Article:</label>
+			<textarea ng-model="tipsArticle" class="form-control" name="tipsArticle" rows="30" placeholder="Enter your content here"></textarea>
+		    </div>
+
+		    <!--tips form buttons-->
+		    <input type="submit" name="tipsFormSubmit" value="Submit Form" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+		    <input type="reset" name="tipsFormReset" value="Reset Form" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">
+		</div>
+	    </div>
+	</form>
+    </div>
+
+    <!--populates page with angular content for tips-->
+	<div ng-repeat="x in tips | orderBy:'title' | filter:searchTips" class="w3-accordion w3-light-grey">
+	    <button id="tips-btn" ng-click="manageTipsAccordion(x.id)" class="w3-btn-block w3-left-align">
+		<span id="tips-btn-text">{{x.title}}</span>
+	    </button>
+
+	    <div id='{{x.id}}' class="w3-accordion-content w3-container">
+
+		<!--hides the div on button click-->
+		<div ng-hide="editTips[x.id]">
+		    <div class="tips-icons-set w3-row">
+
+			<!--the title-->
+			<h3 style="text-align: center;" class="w3-center w3-col m14 l11">{{x.title}}</h3>
+
+			<span style="float: right;" class="w3-center w3-col m2 l1">
+
+			    <!--the edit and remove buttons-->
+			    <a class="tips-icons w3-col m1 l1" href="#" ng-click="modify(x)"><span class="icon-edit"></span></a>&nbsp;&nbsp;
+			    <a class="tips-icons w3-col m1 l1" href="TipsTableServlet?editTips={{x.id}}" ng-click="remove(x)"><span class="icon-remove"></span></a>
+			</span>				    
+		    </div>
+		    <div class="w3-row">
+
+			<!--the link, link text and date published lines in row-->
+			<h5 class="w3-col m6 l6">Source: <a href="{{x.href}}" target='_blank'>{{x.hrefText}}</a></h5>
+			<p class="pull-right w3-col m6 l6 w3-right-align">Published:<br>{{x.datePublished}}</p>
+
+		    </div>
+
+		    <!--the content-->
+		    <div id="tips-content" ng-bind-html='x.content'></div> <!-- ng-bind-html requires the ng-sanitize CDN -->
+
+		</div>
+
+		<!--shows the div on button click-->
+		<div ng-show="editTips[x.id]">
+		    <div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+			<div class="panel-heading">Tips Details
+			<span style="float: right;">
+			    <a class="tips-icons w3-col m1 l1" href="#" ng-click="back(x)"><span class="icon-remove"></span></a>
+			</span>	
+			</div>
+			<div class="panel-body">
+
+			    <!--tips title-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-title"></span>
+				</span>
+				<input name="tipsTitle" class="form-control" placeholder="Enter Title" ng-model="x.title">
+			    </div>
+
+			    <!--enter link-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-link"></span>
+				</span>
+				<input ng-model="x.href" class="form-control" name="tipsSource" placeholder="Enter link/source">
+			    </div>
+
+			    <!--enter link label-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-tag"></span>
+				</span>
+				<input ng-model="x.hrefText" class="form-control" name="tipsLinLabel" placeholder="Enter Source label">
+			    </div>
+
+			    <!--enter date-->
+			    <br><p style="line-height: 5px;">Date published: {{x.datePublished}}</p>
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-calendar"></span>
+				</span>
+				<input type="date" class="datepicker2 form-control" name="tipsDate" placeholder="Change Date" style="max-width: 150px;">
+			    </div>
+
+
+			    <!--Tips article-->
+			    <div style="padding: 10px 0;">
+				<label><span class="icon-pencil"></span> Article:</label>
+				<textarea ng-model="x.content" class="form-control" name="tipsArticle" rows="30" placeholder="Enter your content here" required></textarea>
+			    </div>
+
+			    <!--tips form buttons-->
+			    <a class="btn btn-danger pull-right" href="TipsTableServlet?editTips={{x}}"><span style="font-size: 20px; font-weight: bolder;">Submit Form</span></a>
+			</div>
+		    </div>
+		</div>
+
+	    </div>
+	</div>
+
+    <br>
+</div>

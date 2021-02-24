@@ -1,0 +1,105 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package domains.users;
+
+import java.sql.Date;
+
+/**
+ *
+ * @author 696645
+ */
+public final class Record {
+    private int recordNumber;
+    private int patientId;
+    private Date dateOfMeasurement;
+    private double patientCurrentWeight;
+    private double patientGoalWeight;
+    private double patientStartWeight;
+    private double patientLowestWeight;
+    private double patientHalfWayWeight;
+    private double patientWeightLost;
+    private double patientCaloriesLevel;
+    private double patientChestMeasure;
+    private double patientWaistMeasure;
+    private double patientAbdomenMeasure;
+    private double patientHipMeasure;
+
+    public Record() {
+    }
+
+    public Record(int recordNumber, int patientId, Date dateOfMeasurement, double patientCurrentWeight, double patientGoalWeight, double patientStartWeight, double patientLowestWeight, double patientHalfWayWeight, double patientWweightLost, double patientCaloriesLevel, double patientChestMeasure, double patientWaistMeasure, double patientAbdomenMeasure, double patientHipMeasure) {
+        this.recordNumber = recordNumber;
+        this.patientId = patientId;
+        this.dateOfMeasurement = dateOfMeasurement;
+        this.patientCurrentWeight = patientCurrentWeight;
+        this.patientGoalWeight = patientGoalWeight;
+        this.patientStartWeight = patientStartWeight;
+        this.patientLowestWeight = patientLowestWeight;
+        this.patientHalfWayWeight = patientHalfWayWeight;
+        this.patientWeightLost = patientWweightLost;
+        this.patientCaloriesLevel = patientCaloriesLevel;
+        this.patientChestMeasure = patientChestMeasure;
+        this.patientWaistMeasure = patientWaistMeasure;
+        this.patientAbdomenMeasure = patientAbdomenMeasure;
+        this.patientHipMeasure = patientHipMeasure;
+    }
+
+    public int getRecordNumber() {
+        return recordNumber;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public Date getDateOfMeasurement() {
+        return dateOfMeasurement;
+    }
+
+    public double getPatientCurrentWeight() {
+        return patientCurrentWeight;
+    }
+
+    public double getPatientGoalWeight() {
+        return patientGoalWeight;
+    }
+
+    public double getPatientStartWeight() {
+        return patientStartWeight;
+    }
+
+    public double getPatientLowestWeight() {
+        return patientLowestWeight;
+    }
+
+    public double getPatientHalfWayWeight() {
+        return patientHalfWayWeight;
+    }
+
+    public double getPatientWweightLost() {
+        return patientWeightLost;
+    }
+
+    public double getPatientCaloriesLevel() {
+        return patientCaloriesLevel;
+    }
+
+    public double getPatientChestMeasure() {
+        return patientChestMeasure;
+    }
+
+    public double getPatientWaistMeasure() {
+        return patientWaistMeasure;
+    }
+
+    public double getPatientAbdomenMeasure() {
+        return patientAbdomenMeasure;
+    }
+
+    public double getPatientHipMeasure() {
+        return patientHipMeasure;
+    }
+}

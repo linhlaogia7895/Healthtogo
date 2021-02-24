@@ -1,0 +1,72 @@
+/**
+ * Document   : advertisements-controller.js
+ * Version    : Jan 28, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Angular js for advertisements.jsp
+ */
+
+(function(){
+    var app = angular.module("mainApp",['ngSanitize']);
+    
+    app.controller("newsSectionController",function($scope){
+	$scope.searchNews = "";
+    
+	$scope.news = [
+	    {title:"01 first",
+		id:"w3-show-first",
+		date:"January 20, 2017",
+		href:"http://www.nba.com",
+		hrefText:"Link to article",
+		content:"No content yet"},
+	    {title:"02 second",
+		id:"w3-show-second",
+		date:"January 5, 2017",
+		href:"http://www.nba.com",
+		hrefText:"Link to article",
+		content:"No content yet"},
+	    {title:"03 third",
+		id:"w3-show-third",
+		date:"November 1, 2016",
+		href:"http://www.nba.com",
+		hrefText:"Link to article",
+		content:"No content yet"},
+	    {title:"04 fourth",
+		id:"w3-show-fourth",
+		date:"October 10, 2016",
+		href:"http://www.nba.com",
+		hrefText:"Link to article",
+		content:"No content yet"}
+	];
+
+	$scope.manageNewsAccordion = function(id){
+	      var x = document.getElementById(id);
+		if (x.className.indexOf("w3-show") === -1) {
+		    x.className += " w3-show";
+		    x.previousElementSibling.className += " w3-red";
+		} else { 
+		    x.className = x.className.replace(" w3-show", "");
+		    x.previousElementSibling.className = 
+		    x.previousElementSibling.className.replace(" w3-red", "");
+		}  
+	    };
+	});
+
+    app.controller("promosSectionController",function($scope){
+	
+    });
+    
+    app.controller("careerSectionController",function($scope){
+	
+    });
+    
+    app.controller("internSectionController",function($scope){
+	
+    });
+    
+    app.controller("volunteerSectionController",function($scope){
+	
+    });
+    
+}());
+
+

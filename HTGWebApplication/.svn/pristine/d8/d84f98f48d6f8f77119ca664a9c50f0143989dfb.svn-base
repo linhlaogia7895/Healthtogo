@@ -1,0 +1,199 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package beans.admin;
+
+
+import beans.users.UsersBean;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.LocalBean;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
+//import javax.ejb.Stateful;
+//import javax.ejb.LocalBean;
+import javax.ejb.Singleton;
+import javax.ejb.Stateful;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+/**
+ *
+ * @author 690727
+ */
+//@Stateful
+//@LocalBean
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
+//@Stateless
+@Singleton
+public class UpdateStaffByAdminBean {
+
+    // Add business logic below. (Right-click in editor and choose
+    // "Insert Code > Add Business Method")
+    
+    private String firstname;
+    private String lastname;
+    private Date dateOfBirth;
+    private String address;
+    private String homePhone;
+    private String cellPhone;
+    private String email;
+    private String gender;
+    private Date dateOfHire;
+   // private double salary;
+    private String jobStatus;
+    private String accountStatus;
+   // private String lockStatus;
+    private SimpleDateFormat dformat = new SimpleDateFormat("MM/DD/YYYY");
+    
+    public UpdateStaffByAdminBean()
+    {
+        
+    }
+    
+    public UpdateStaffByAdminBean(int staffId) throws NamingException
+    {
+        try
+        {
+            PreparedStatement ps;
+            try(Connection conn = getConnection())
+            {
+                String sql = "{call getStaffInfoById(?)}";
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, staffId);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next())
+                {
+                    this.firstname = rs.getString(2);
+                    this.lastname = rs.getString(3);
+                    this.email = rs.getString(4);
+                    this.address = rs.getString(5);
+                    this.homePhone = rs.getString(6);
+                    this.cellPhone = rs.getString(7);
+                    this.dateOfBirth = rs.getDate(8);
+                    this.dateOfHire = rs.getDate(9);
+                    //this.salary = rs.getDouble(10);
+                    this.gender = rs.getString(10);
+                    this.jobStatus = rs.getString(11);
+                    this.accountStatus = rs.getString(13);
+                   // this.lockStatus = rs.getString(14); 
+                }
+                conn.close();
+                
+            }
+            ps.close();
+        }
+        catch (SQLException ex)
+        {
+             Logger.getLogger( UpdateStaffByAdminBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    @Lock(LockType.READ)
+    public String getFirstName()
+    {
+        return firstname;
+    }
+    
+    @Lock(LockType.READ)
+    public String getLastName()
+    {
+        return lastname;
+    }
+    
+    @Lock(LockType.READ)
+    public String getDateOfBirth()
+    {
+        return dformat.format(dateOfBirth);
+    }
+    
+    @Lock(LockType.READ)
+    public String getAddress()
+    {
+        return address;
+    }
+    
+    @Lock(LockType.READ)
+    public String getHomePhone()
+    {
+        return homePhone;
+    }
+    
+    @Lock(LockType.READ)
+    public String getCellPhone()
+    {
+        return cellPhone;
+    }
+    
+    @Lock(LockType.READ)
+    public String getEmail()
+    {
+        return email;
+    }
+    
+    @Lock(LockType.READ)
+    public String getGender()
+    {
+        return gender;
+    }
+    
+    @Lock(LockType.READ)
+    public String getDateOfHire()
+    {
+        return dformat.format(dateOfHire);
+    }
+    
+//    @Lock(LockType.READ)
+//    public double getSalary()
+//    {
+//        return salary;
+//    }
+    
+    @Lock(LockType.READ)
+    public String getJobStatus()
+    {
+        return jobStatus;
+    }
+    
+    @Lock(LockType.READ)
+    public String getAccountStatus()
+    {
+        return accountStatus;
+    }
+    
+//    @Lock(LockType.READ)
+//    public String getLockStatus()
+//    {
+//        return lockStatus;
+//    }
+    
+       /**
+     * Private method to manage connections to jdbc
+     * @return Connection the jdbc connection
+     */
+    @Lock(LockType.READ)
+    private Connection getConnection() throws NamingException {
+        Connection conn=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            InitialContext ic=new InitialContext();
+            DataSource ds=(DataSource)ic.lookup("jdbc/htgConnectionPool");
+            conn=ds.getConnection();
+        } catch (ClassNotFoundException | NamingException | SQLException ex) {
+            Logger.getLogger(UsersBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return conn;
+    }
+}

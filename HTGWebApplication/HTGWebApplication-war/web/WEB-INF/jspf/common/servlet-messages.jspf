@@ -1,0 +1,3 @@
+<!--messages from servlet-->
+<span id="tableSelector" style="visibility: hidden">${tableSelector}</span>
+${message}

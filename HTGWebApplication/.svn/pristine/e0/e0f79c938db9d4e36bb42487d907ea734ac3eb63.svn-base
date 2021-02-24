@@ -1,0 +1,103 @@
+<!--form for personal details-->
+<form class="form-horizontal" action="PatientInfo" method="POST" name="registrationForm">
+    <table class="table table-hover">
+	<thead>
+	    <tr><th><label class="control-label col-sm-2" for="txt">Personal details</label></th></tr>
+	</thead>
+	<tbody>
+	    <tr><td>
+		    <label for="fname">First Name:</label>
+		    <div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+			<input id="firstName" type="text" class="form-control" name="firstName" value="${firstname}">
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <label for="lname">Last Name: </label>
+		    <div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+			<input id="lastName" type="text" class="form-control" name="lastName" value="${lastname}">
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <label for="birth">Date of Birth:</label>
+		    <div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-gift"></span></span>
+			<input type="text" id="datepicker" class="form-control" name="dateOfBirth" value="${date}">
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <label for="add">Address:</label>
+		    <div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+			<input id="address" type="text" class="form-control" name="address" value="${address}">
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <label for="phone">Home Phone:</label>
+		    <div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt"></span></span>
+			<input id="homephone" type="text" class="form-control" name="homePhone" value="${homephone}">
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <label for="phone">Cell Phone:</label>
+		    <div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+			<input id="cellphone" type="text" class="form-control" name="cellPhone" value="${cellphone}">
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <label for="email">Email:</label> 
+		    <div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+			<input type="email" class="form-control" name="email" required value="${email}">
+		    </div>
+
+	    </td></tr>
+	    <tr><td>
+		    <label for="contract">Contract Period:</label>
+		    <div class="input-group">
+			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			<input type="text" class="form-control" name="contract" value="${contract}">
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <label for="gender">Gender:</label> 
+		    <div class="input-group">
+			<%
+			    String gender;
+			    if((request.getAttribute("gender"))== null)
+			       gender = "";
+			    else
+				gender = (String)request.getAttribute("gender");
+			    if(gender.equals("M"))
+			    {
+				out.print("<input type='radio' name='gender' value='M' checked> Male&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+				out.print("<input type='radio' name='gender' value='F' > Female");
+			    }
+			    else if(gender.equals("F"))
+			    {
+				out.print("<input type='radio' name='gender' value='M' > Male&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+				out.print("<input type='radio' name='gender' value='F' checked> Female");
+			    }
+			    else
+			    {
+				out.print("<input type='radio' name='gender' value='M' > Male&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+				out.print("<input type='radio' name='gender' value='F' > Female");
+			    }
+			    %>
+		    </div>
+	    </td></tr>
+	</tbody>
+    </table>
+
+    <div class="btn-group-vertical">
+	<a id="white" href="SecurityServlet" class="btn btn-warning btn-lg" role="button" >Edit Security Question</a><br/>
+	<a id="white" href="#" class="btn btn-warning btn-lg" role="button">Edit Bank information</a><br/>
+    </div>
+    <br/>
+    <div class="control-label col-sm-1"><a id="white" href="index.jsp" class="btn btn-success" role="button">Cancel</a> </div>
+    <div class="control-label col-sm-3"><input class="btn btn-success" type="submit" name="editProfile" value="Save"> </div>
+    <br/><br/>
+</form> 

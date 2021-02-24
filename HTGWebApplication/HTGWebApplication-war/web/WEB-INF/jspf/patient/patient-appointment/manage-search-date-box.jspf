@@ -1,0 +1,36 @@
+<!--search box - style in css file-->
+<form action="BookAppointmentServletByPatient" method="POST">
+    <div class="w3-row">
+	<div class="form-group pull-left">
+	    <input ng-model="DATE_TO_SEARCH" 
+		   type="text" 
+		   id="datepicker3" 
+		   class="form-control container-fluid w3-container w3-third m1" 
+		   name="DATE_TO_SEARCH" 
+		   placeholder="Enter Date" 
+		   style="width: 200px; border-bottom-right-radius: 0; border-top-right-radius: 0;">
+	    <input type="hidden" name="url" value="xrYn9w8h6Cc5SIaQg8b9AQ==">
+	</div>
+	<div class="form-group">
+	    <input type="submit" name="SEARCH_SELECTED_DATE_SUBMIT" 
+		   class="btn btn-success w3-container w3-col m2" 
+		   value="Search Date" 
+		   style="height: 35px; border-bottom-left-radius: 0; border-top-left-radius: 0;">
+	</div>
+	    <input type="hidden" ng-model="BOOKING_DATE='${BOOKING_DATE}'">
+	    <input type="hidden" ng-model="appointment0809='${appId0809}'">
+	    <input type="hidden" ng-model="appointment1011='${appId1011}'">
+	    <input type="hidden" ng-model="appointment1314='${appId1314}'">
+	    <input type="hidden" ng-model="appointment1516='${appId1516}'">
+	    <input type="hidden" ng-model="appointment1718='${appId1718}'">
+	    <input type="hidden" ng-model="appointment1920='${appId1920}'">
+
+	<div class="form-group" 
+	     style="cursor:auto; padding: 10px; margin: 20px; margin-bottom: 30px;">
+	    <h5><span class="btn btn-success w3-container pull-right" 
+		      style="cursor:auto; font-size: 1.2em; height: 60px; border-bottom-left-radius: 0; border-top-left-radius: 0; border-radius: 10px;">
+		    ${tdyDate}
+		</span></h5>
+	</div>
+    </div>
+</form>

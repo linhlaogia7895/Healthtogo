@@ -1,0 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package beans.admin;
+
+import java.sql.Date;
+import javax.ejb.Local;
+
+/**
+ * Document   : AdminBeanLocal.java
+ * Version    : Jan 20, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: interface for AdminBean.java
+ */
+@Local
+public interface AdminBeanLocal {
+    boolean editStaffAccountByAdminOrNutritionist(
+            String activityUser,
+            String newUsername,
+            String newFirstName,
+            String newLastName,
+            String newEmail,
+            String newAddress,
+            int newHomePhone,
+            int newCellPhone,
+            Date dateOfBirth,
+            double newSalary,
+            char newGender,
+            String jobStatus,
+            String accountStatus
+    );
+}

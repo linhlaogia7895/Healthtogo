@@ -1,0 +1,297 @@
+<!--Manage patient - search and list of booked appointments -->
+<!--<div id="manage-appointment-table" class="table-bodies news-section-body container w3-container container-fluid" ng-controller="managePatientAppointmentsController" style="max-width: 90%">-->
+<div id="manage-appointment-table" class="table-bodies news-section-body container w3-container container-fluid" ng-controller="managePatientAppointmentsController">
+
+    <!--title-->
+    <h1 class="table-title">Manage Appointments</h1>
+
+    <!--alert section at top of table-->
+    <div class="alert alert-info">
+	<p>Sort Column: {{sortType}}</p>
+	<p>Sort Order: {{sortOrder}}</p>
+	<p>Sort Query: {{searchAppointments}}</p>
+    </div>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search careers" ng-model="searchAppointments">
+		</div>
+	    </div>
+
+	    <!--Add Appointment button with toggle option-->
+	    <div class="w3-col m4 w3-right-align w3-container" style="padding: 7px;">
+		<button name="addData" class="btn btn-success" ng-click="showBlankAppointment=!showBlankAppointment">
+		    <span style="font-size: 20px;">
+			{{addBtnTxt_AddAppointment_or_CloseForm}}
+		    </span>
+		</button>
+	    </div>
+	</div>
+    </form>
+
+
+    <!--Add Appointment blank form - with toggle option-->
+    <div ng-show="showBlankAppointment">
+	
+	    <!--title-->
+	    <div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+		<div class="panel-heading">Add Appointment</div>
+		<div class="panel-body">
+		    <h1 class="table-title">Book Appointment</h1>    
+	    
+		     <div class="w3-container">
+		
+		    <!--search box - style in css file-->
+		    <br>
+
+		    <!--List of schedules-->
+	    </div>
+		</div>
+		    
+	    </div>
+	    <br>
+	
+	<!--<form action="AdvertsCareerStaffSideServlet" method="post" name="careerBlankForm">-->
+<!--	    <div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+		<div class="panel-heading">Add Appointment</div>
+		<div class="panel-body">
+
+		    enter ID
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-user"></span>
+			</span>
+			<input ng-model="PATIENT_ID" type="text" class="form-control" name="PATIENT_ID" placeholder="Enter your ID number" autofocus required>
+		    </div>
+
+		    start time
+		    <div class="input-group input-group-lg">
+			<span class="input-group-addon">
+			    <span class="icon-user"></span>
+			</span>
+			<input type="text" class="form-control" name="NUTRITIONIST_ID" value="00001A{{START_TIME}}">
+		    </div>
+
+		    EXTENSION
+		     <div class="input-group input-group-lg">
+			 <span class="input-group-addon">
+			     <span class="icon-time"></span>&nbsp; Time Slot: 
+			 </span>
+			 <select id="user-type" class="form-control container-fluid" name="EXTENSION">
+				 <option value="none" selected>None</option>
+				 <option value="8-9am">08:00AM - 09:00AM/option>
+				 <option value="10-11am">10:00AM - 09:00AM/option>
+				 <option value="8-9am">08:00AM - 09:00AM/option>
+				 <option value="8-9am">08:00AM - 09:00AM/option>
+				 <option value="8-9am">08:00AM - 09:00AM/option>
+				 <option value="8-9am">08:00AM - 09:00AM/option>
+			 </select>
+		     </div>
+
+		     EXTENSION
+		     <div class="input-group input-group-lg">
+			 <span class="input-group-addon">
+			     <span class="icon-time"></span>&nbsp; Extension: 
+			 </span>
+			 <select id="user-type" class="form-control container-fluid" name="EXTENSION">
+				 <option value="none" selected>None</option>
+				 <option value="30">30 minutes</option>
+				 <option value="1">1 hour</option>
+			 </select>
+		     </div>
+
+		     type of consultation
+		     <div class="input-group input-group-lg">
+			 <span class="input-group-addon">
+			     <span class="icon-open-file"></span>&nbsp; Type of consultation: 
+			 </span>
+			 <select id="user-type" class="form-control container-fluid" name="userType">
+				 <option value="regular" selected>regular</option>
+				 <option value="package1">Package 1: Meal Planning</option>
+				 <option value="package1">Package 2: Sport Nutrition</option>
+				 <option value="package1">Package 3: Eating Disorder</option>
+				 <option value="package1">Package 4: Celiac Meal Planning</option>
+				 <option value="package1">Package 5: Losing Weight</option>
+				 <option value="package1">Package 6: Gaining Weight</option>
+			 </select>
+		     </div>
+
+		     enter message
+		    <div style="padding: 10px 0;">
+			<label for="message"><span class="icon-pencil"></span>Message:</label>
+			<textarea ng-model="contactTextArea" 
+				  class="form-control" 
+				  name="PURPOSE" 
+				  rows="5" 
+				  placeholder="Enter your message here"></textarea>
+		    </div>
+		    <br>
+
+
+		    submit button
+		    <input ng-disabled="contactForm.$invalid" id="contact-btn" class="btn btn-danger pull-left" type="submit" name="submitMessage" value="Submit Booking">
+		    <input ng-disabled="contactForm.$invalid" id="contact-btn" class="btn btn-danger pull-left" type="submit" name="submitMessage" value="Submit Booking">
+		</div>
+	    </div>-->
+	<!--</form>-->
+    </div>
+
+    <!--the table-->
+    <table class="table table-bordered table-stripped">
+
+	<!--table header-->
+	<thead>
+	    <tr>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'AppointmentID'; sortReverse=!sortReverse">
+			Appointment ID
+			<span ng-show="sortType === 'AppointmentID' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'AppointmentID' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'patientID'; sortReverse=!sortReverse">
+			Patient ID
+			<span ng-show="sortType === 'patientID' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'patientID' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+
+		<td>
+		    <a href="#" ng-click="sortType = 'appointmentDate'; sortReverse=!sortReverse">
+			Appointment Date
+			<span ng-show="sortType === 'appointmentDate' && !sortReverse" class="fa fa-chevron-up"></span>
+			<span ng-show="sortType === 'appointmentDate' && sortReverse" class="fa fa-chevron-down"></span>
+		    </a>
+		</td>
+		<td></td>
+	    </tr>
+	</thead>
+
+
+	<!--NG-Repeat loops through table in printing all rows-->
+	<tbody>
+	    <tr ng-repeat="a in appointments | orderBy:sortType:sortReverse | filter:searchAppointments">
+		<td>
+		    <!--Appointment ID-->
+		    <div>{{a.APPOINTMENT_ID}}</div>
+		</td>
+
+		<td>
+		    <!--Here: position title is displayed-->
+		    <div ng-model="editAppointmentData[a.APPOINTMENT_ID]">{{a.PATIENT_ID}}</div>
+		</td>
+
+		<td>
+		    <!--Here: position category is displayed-->
+		    <div ng-model="editAppointmentData[a.APPOINTMENT_ID]">{{a.DATE_BOOKED}}</div>
+		</td>
+
+		<td>
+		    <!--Here: button to display detail is displayed-->
+		    <button class="btn btn-warning" name="displayDetail" value="Get Detail" ng-click="getDetail(a)">
+			Modify
+		    </button>
+		    <a href="ManageAppointmentsServletByStaff?delete=true&id={{a.APPOINTMENT_ID}}" class="btn btn-danger">Delete</a>
+		</td>
+	    </tr>
+	</tbody>
+
+    </table>
+
+    <!--appointment details popup for editing-->
+    <div class="modal fade" id="modal-appointment-details-popup" role="dialog">
+	<div class="modal-dialog">
+
+	    <!-- Modal content-->
+	   <div class="modal-content">
+	       <div class="modal-header">
+
+		   <!--close button-->
+		   <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+		   <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+		   <!--contact header-->
+		   <h4><span class="icon-list"></span> Appointment Details</h4>
+	       </div>
+
+	       <!--form USING ANGULAR JS--> 
+	       <form action="AdvertsCareerStaffSideServlet" method="post" name="contactForm">
+
+		   <!--modal body-->
+		   <div class="modal-body">
+
+				<!--career ID-->
+				<input type="hidden" name="CAREER_ID" value="{{detail_careerID}}">			    
+				
+				<!--career title-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-title"></span>
+				    </span>
+				    <input name="POSITION_TITLE" class="form-control" placeholder="Enter Title" ng-model="detail_careerTitle">
+				</div>
+
+				<!--career category-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-filter"></span>
+				    </span>
+				    <input name="POSITION_CATEGORY" class="form-control" placeholder="Enter Category" ng-model="detail_careerCategory">
+				</div>
+
+				<!--career category-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-time"></span>
+				    </span>
+				    <input name="EMPLOYMENT_TYPE" class="form-control" placeholder="Enter Employment type" ng-model="detail_careerType">
+				</div>
+
+				<!--enter date posted-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-calendar"></span>
+				    </span>
+				    <input type="date" ng-model="detail_careerDatePosted" class="datepicker2 form-control" name="DATE_POSTED" placeholder="Enter posting date" style="max-width: 220px; z-index: 2003;">
+				</div>
+
+				<!--enter date posted-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-calendar"></span>
+				    </span>
+				    <input type="date" ng-model="detail_careerDateClosed" class="datepicker2 form-control" name="DATE_CLOSED" placeholder="Enter closing date" style="max-width: 220px; z-index: 2003;">
+				</div>
+
+				<!--Career article-->
+				<div style="padding: 10px 0;">
+				    <label><span class="icon-pencil"></span>Position Details:</label>
+				    <textarea ng-model="detail_careerArticle" class="form-control" name="REQUIREMENTS" rows="30" placeholder="Enter your content here"></textarea>
+				</div>
+
+				<!--career form buttons-->
+				<input type="submit" name="careerStaffEditFormSubmit" value="Submit Form" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+				<!--<input type="reset" name="detail_careerFormReset" value="Reset Form" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">-->
+				<br>
+			    <!--</div>-->
+			<!--</div>-->
+		   </div>
+
+		   <!--footer-->
+		   <div class="modal-footer">
+		   </div>
+	       </form>
+	   </div>
+	</div>
+    </div>
+
+</div>

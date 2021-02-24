@@ -1,0 +1,111 @@
+<!--faq table - style using W#.CSS - has angular component -->
+<div id="faq-table" class="table-bodies faq-table-body container w3-container container-fluid" ng-controller="faqTableController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Frequently Asked Questions</h1>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search tips" ng-model="searchFaq">
+		</div>
+	    </div>
+
+	    <!--add faq button-->
+	    <div class="w3-col m4 w3-right-align w3-container" style="padding: 7px;">
+		<button name="addData" class="btn btn-success" value="Add FAQ Data" ng-click="faqAddForm=!faqAddForm">{{addBtnfaqFormToggle}}</button>
+	    </div>
+	</div>
+
+    </form>
+
+    <!--faq add form-->
+    <div ng-show="faqAddForm">
+	<div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+	    <div class="panel-heading">FAQ Details</div>
+	    <div class="panel-body">
+		<form action="FaqTableServlet" method="POST" name="mainFaqForm">
+		    <!--FAQ question-->
+		    <div style="padding: 10px 0;">
+			<label><span class="icon-pencil"></span> Question:</label>
+			<textarea ng-model="y.question" class="form-control" name="faqQuestion" rows="5" placeholder="Enter your question here"></textarea>
+		    </div>
+
+		    <!--FAQ answer-->
+		    <div style="padding: 10px 0;">
+			<label><span class="icon-pencil"></span> Answer</label>
+			<textarea ng-model="y.answer" class="form-control" name="faqAnswer" rows="5" placeholder="Enter your answer here"></textarea>
+		    </div>
+
+		    <!--tips form buttons-->
+		    <input type="submit" name="tipsFormSubmit" value="Submit Form" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+		    <input type="reset" name="tipsFormReset" value="Reset Form" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">
+		</form>
+	    </div>
+	</div>
+    </div>
+
+    <!--populates page with angular content for tips-->
+    <div ng-repeat="y in faqs | filter:searchFaq" class="w3-accordion w3-light-grey">
+
+	<button id="faq-btn" ng-click="manageFaqAccordion(y.id)" class="w3-btn-block w3-left-align">
+		<span id="faq-btn-text">{{y.question}}</span>
+	</button>
+
+	<!--hides the div on button click-->
+	<div ng-hide="editFaq[y.id]">
+
+	    <div id='{{y.id}}' class="w3-accordion-content w3-container">
+
+		<span style="float: right;" class="w3-center w3-col m2 l1">
+
+		    <!--the edit and remove buttons-->
+		    <a class="tips-icons w3-col m1 l1" href="#" ng-click="modify(y)"><span class="icon-edit"></span></a>&nbsp;&nbsp;
+		    <a class="tips-icons w3-col m1 l1" href="TipsTableServlet?editTips={{y.id}}" ng-click="remove(y)"><span class="icon-remove"></span></a>
+		</span>	
+
+		<h5>{{y.question}}</h5><br>
+		<p>{{y.answer}}</p>
+	    </div>
+	</div>
+
+	<!--shows the div on button click-->
+	<div ng-show="editFaq[y.id]">
+
+	    <div class="panel panel-success" style="box-shadow: 10px 10px 5px #888888;">
+		<div class="panel-heading">FAQ Details
+		    <span style="float: right;">
+			<!--the edit and remove buttons-->
+			<a class="tips-icons w3-col m1 l1" href="#" ng-click="back(y)"><span class="icon-remove"></span></a>
+		    </span>
+		</div>
+
+		<div class="panel-body">
+		    <!--FAQ question-->
+		    <div style="padding: 10px 0;">
+			<label><span class="icon-pencil"></span> Question:</label>
+			<textarea ng-model="y.question" class="form-control" name="faqQuestion" rows="5" placeholder="Enter your question here"></textarea>
+		    </div>
+
+		    <!--FAQ answer-->
+		    <div style="padding: 10px 0;">
+			<label><span class="icon-pencil"></span> Answer:</label>
+			<textarea ng-model="y.answer" class="form-control" name="faqAnswer" rows="5" placeholder="Enter your answer here"></textarea>
+		    </div>
+
+		    <!--faq form buttons-->
+		    <a class="btn btn-danger pull-right" href="FaqTableServlet?editFaq={{x}}"><span style="font-size: 20px; font-weight: bolder;">Submit Form</span></a>
+		</div>
+	    </div>
+
+	</div>
+
+    </div>
+    <br>
+
+</div>

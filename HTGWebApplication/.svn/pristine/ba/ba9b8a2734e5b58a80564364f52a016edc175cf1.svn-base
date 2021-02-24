@@ -1,0 +1,310 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package admin;
+
+import beans.admin.AdminBean;
+import common.HtmlPageHelper;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author 690727
+ */
+@WebServlet(name="ManageStaffServlet", urlPatterns={"/ManageStaffServlet"})
+public class ManageStaffServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+     
+        String submitUpdate = request.getParameter("submitUpdate");
+        String submitResetLogins = request.getParameter("submitResetLogins");
+        String submitDeactivate = request.getParameter("submitDeactivate");
+        String submitReactivate = request.getParameter("submitReactivate");
+        String submitDelete = request.getParameter("submitDelete");
+        
+       // String deactivateStaffId = request.getParameter("deactivateStaffID");
+       // System.out.println(deactivateStaffId);
+        
+        AdminBean adminbean = new AdminBean();
+        HtmlPageHelper hph=new HtmlPageHelper();
+       
+        String result = "";
+        
+        if(submitUpdate != null)
+        {
+            String updateFirstName = request.getParameter("updateFirstName");
+            String updateLastName = request.getParameter("updateLastName");
+            String updatePhoneNumber = request.getParameter("updatePhoneNumber");  
+            if(updateFirstName == null )
+            {
+                updateFirstName = "";
+            }
+            if(updateLastName == null)
+            {
+                updateLastName = "";
+            }
+            if(updatePhoneNumber == null)
+            {
+                updatePhoneNumber = "";        
+            }
+            
+             
+               result = adminbean.findStaffToUpdateByAdmin(updateFirstName, updateLastName, updatePhoneNumber);
+              
+               request.setAttribute("message", result);
+               request.getRequestDispatcher("/admin.jsp").forward(request, response);
+              
+              
+        }
+        if(submitResetLogins != null)
+        {
+            String resetfirstName = request.getParameter("resetfirstName");
+            String resetlastName = request.getParameter("resetlastName");
+            String resetPhoneNumber = request.getParameter("resetPhoneNumber");
+            
+            if(resetfirstName == null)
+            {
+                resetfirstName = "";
+            }
+            if(resetlastName == null)
+            {
+                resetlastName = "";
+            }
+            if(resetPhoneNumber == null)
+            {
+                resetPhoneNumber = "";
+            }
+            
+             result = adminbean.findStaffToResetByAdmin(resetfirstName, resetlastName, resetPhoneNumber);
+             request.setAttribute("message", result);
+             request.getRequestDispatcher("/admin.jsp").forward(request, response);
+        }
+        if(submitDeactivate != null)
+        {
+            String deactivatefirstName = request.getParameter("deactivatefirstName");
+            String deactivatelastName = request.getParameter("deactivatelastName");
+            String deactivatePhoneNumber = request.getParameter("deactivatePhoneNumber");
+            
+            if(deactivatefirstName == null)
+            {
+                deactivatefirstName = "";
+            }
+            if(deactivatelastName == null)
+            {
+                deactivatelastName = "";
+            }
+            if(deactivatePhoneNumber == null)
+            {
+                deactivatePhoneNumber = "";
+            }
+            
+            result = adminbean.findStaffToDeactivateByAdmin(deactivatefirstName, deactivatelastName, deactivatePhoneNumber);
+             request.setAttribute("message", result);
+             request.getRequestDispatcher("/admin.jsp").forward(request, response);
+        }
+        if(submitReactivate !=null)
+        {
+            String reactivatefirstName = request.getParameter("reactivatefirstName");
+            String reactivatelastName = request.getParameter("reactivatelastName");
+            String reactivatePhoneNumber = request.getParameter("reactivatePhoneNumber");
+            
+            if(reactivatefirstName == null)
+            {
+                reactivatefirstName = "";
+                
+            }
+            if(reactivatelastName == null)
+            {
+                reactivatelastName = "";
+            }
+            if(reactivatePhoneNumber == null)
+            {
+                reactivatePhoneNumber = "";
+            }
+            result = adminbean.findStaffToReactviateByAdmin(reactivatefirstName, reactivatelastName, reactivatePhoneNumber);
+            request.setAttribute("message", result);
+            request.getRequestDispatcher("/admin.jsp").forward(request, response);
+        }
+        if(submitDelete !=null)
+        {
+            String deletefirstName = request.getParameter("deletefirstName");
+            String deletelastName = request.getParameter("deletelastName");
+            String deletePhoneNumber = request.getParameter("deletePhoneNumber");
+            
+            if(deletefirstName == null)
+            {
+                deletefirstName = "";
+            }
+            if(deletelastName == null)
+            {
+                deletelastName = "";
+            }
+            if(deletePhoneNumber == null)
+            {
+                deletePhoneNumber = "";
+            }
+            result = adminbean.findStaffToDeleteByAdmin(deletefirstName, deletelastName, deletePhoneNumber);
+            request.setAttribute("message", result);
+            request.getRequestDispatcher("/admin.jsp").forward(request, response);
+        }
+       
+        String submitCancelUpdate = request.getParameter("submitCancelUpdate");
+        if(submitCancelUpdate != null)
+        {
+            request.setAttribute("message", hph.sendMessage("Account creation canceled!"));
+            getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
+        }
+        String submitLockLogins = request.getParameter("submitLockLogins");
+        if(submitLockLogins != null)
+        {
+            String lockFirstName = request.getParameter("lockFirstName");
+            String lockLastName = request.getParameter("lockLastName");
+            String lockPhoneNumber = request.getParameter("lockPhoneNumber");
+            
+            if(lockFirstName == null)
+            {
+                lockFirstName = "";
+            }
+            if(lockLastName == null)
+            {
+                lockLastName = "";
+            }
+            if(lockPhoneNumber == null)
+            {
+                lockPhoneNumber = "";
+            }
+            
+            result = adminbean.findStaffToLockByAdmin(lockFirstName, lockLastName, lockPhoneNumber);
+            request.setAttribute("message", result);
+            request.getRequestDispatcher("/admin.jsp").forward(request, response);
+        }
+        String submitUnlockLogins = request.getParameter("submitUnlockLogins");
+        if(submitUnlockLogins != null)
+        {
+            String unlockFirstName = request.getParameter("unlockFirstName");
+            String unlockLastName = request.getParameter("unlockLastName");
+            String unlockPhoneNumber = request.getParameter("unlockPhoneNumber");
+            
+            if(unlockFirstName == null)
+            {
+                unlockFirstName = "";
+            }
+            if(unlockLastName == null)
+            {
+                unlockLastName = "";
+            }
+            if(unlockPhoneNumber == null)
+            {
+                unlockPhoneNumber = "";
+            }
+            result = adminbean.findStaffToUnlockByAdmin(unlockFirstName, unlockLastName, unlockPhoneNumber); 
+            request.setAttribute("message", result);
+            request.getRequestDispatcher("/admin.jsp").forward(request, response);
+            
+        }
+                
+        String submitUpdateStaff = request.getParameter("submitUpdateStaff");
+        if(submitUpdateStaff != null)
+        {
+            String username = (String) request.getSession().getAttribute("userName");
+            String staffId = request.getParameter("staffId");
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
+            String dateOfBirth = request.getParameter("dateOfBirth");
+            String address = request.getParameter("address");
+            String homePhone = request.getParameter("homePhone");
+            String cellPhone = request.getParameter("cellPhone");
+            String email = request.getParameter("email");
+            String gender = request.getParameter("gender");
+            String salary = request.getParameter("salary");
+            String jobStatus = request.getParameter("jobStatus");
+            String accountStatus = request.getParameter("accountStatus");
+            SimpleDateFormat sdformat = new SimpleDateFormat("MM/DD/YYYY");
+            
+            try
+            {
+                Date mydate = sdformat.parse(dateOfBirth);
+                java.sql.Date sqlBirthDate = new java.sql.Date(mydate.getTime());
+                
+                double staffSalary = Double.parseDouble(salary);
+                
+                 if(adminbean.editStaffAccountByAdminOrNutritionist(username, staffId, firstName, lastName, email, address, homePhone, cellPhone, sqlBirthDate, staffSalary, gender, jobStatus, accountStatus))
+                 {
+                        request.setAttribute("message", hph.sendMessage("Staff account updated"));
+                        getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response); 
+                 }
+                 else
+                    {
+                        request.setAttribute("message", hph.sendMessage("Unable to update staff account"));
+                        getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
+                    }
+            }
+            catch(Exception ex)
+            {
+                Logger.getLogger(ManageStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

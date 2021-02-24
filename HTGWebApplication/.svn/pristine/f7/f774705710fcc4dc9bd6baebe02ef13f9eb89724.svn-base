@@ -1,0 +1,79 @@
+/*
+    Document   : home_page_style.css
+    Version    : Jan 1, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: index.jsp css
+*/
+
+/*for text content under about page*/
+@import url('https://fonts.googleapis.com/css?family=Playball');
+
+/*main page*/
+.main-page { display:block; position: relative; max-height: 780px; max-width: 1190px; margin: 0 auto; padding: 0 0;
+            margin-bottom: 30px;
+}
+.main-page img { box-shadow: 10px 10px 5px #888888; }
+#advert { position: absolute; top: 5%; left: 5%; max-width: 300px; max-height: 67px; }
+#advert h3 { box-shadow: 10px 10px 5px #888888; background-color: brown; border-radius: 25px; padding: 10px; color: white;
+            font-size: 100%;
+}
+#advert h3:hover { background-color: red;  }
+.advert-btn { font-size: 100%; border-radius: 25px; font-weight: bold; box-shadow: 10px 10px 5px #888888; height: 100%; width: 100%; }
+
+
+/*services page*/
+.services-page { display:block; position: relative; margin: 0 auto; padding: 0 0; max-width: 1185px; 
+                margin-bottom: 30px;
+}
+
+.services-page h1 { margin: 30px 0 10px 0; box-shadow: 10px 10px 5px #888888; border-radius: 5px; max-width: 1170px;
+                   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f8ffe8+0,e3f5ab+33,b7df2d+100;Green+3D+%234 */
+                    background: #f8ffe8; /* Old browsers */
+                    background: -moz-linear-gradient(top,  #f8ffe8 0%, #e3f5ab 33%, #b7df2d 100%); /* FF3.6-15 */
+                    background: -webkit-linear-gradient(top,  #f8ffe8 0%,#e3f5ab 33%,#b7df2d 100%); /* Chrome10-25,Safari5.1-6 */
+                    background: linear-gradient(to bottom,  #f8ffe8 0%,#e3f5ab 33%,#b7df2d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8ffe8', endColorstr='#b7df2d',GradientType=0 ); /* IE6-9 */
+}
+.services-page button { width: 100%; }
+.thumbnail { box-shadow: 10px 10px 5px #888888; }
+.thumbnail:hover img { border-radius: 30px; }
+.caption p:hover a:hover { text-decoration: none; color: red; font-size: 1.1em; }
+.caption p:nth-child(odd) { line-height: 0; padding: 15px 0 0 0; }
+.caption p:last-child { color: green; font-size: 1.3em; }
+.hides p:hover { color: white; }
+
+
+/*about-me page*/
+.about-page { max-width: 1170px; position: relative; display: block;
+             margin: 0 auto; padding: 15px 0 15px 0; 
+}
+.about-page img { box-shadow: 10px 10px 5px #888888; max-width: 400px; }
+.body-text { margin-top: 5px; margin-left: 10px; font-family: 'Playball', cursive; 
+             background: url(../..//_res/main/images/about-me-background.gif) no-repeat center bottom; background-size: contain;
+}
+.body-text { font-size: 1.11em; }
+
+
+/*sideboxes*/
+.side-boxes { height: 250px; width: 100%; margin-left: 18px;  margin-bottom: 10px;
+             font-weight: bold; text-shadow: 10px 10px 5px #888888; line-height: 70px; padding: 0; border-radius: 5px;
+             border: none;
+}
+.side-boxes > h4 { font-weight: bold; text-shadow: 10px 10px 5px #888888; line-height: 70px; margin: 0 0 10px 0;padding: 0; border-radius: 5px; }
+
+#quick-links-head {  }
+#quick-links-body { border-radius: 10px; text-align: left;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d5cea6+0,c9c190+40,b7ad70+100;Brown+3D */
+background: #d5cea6; /* Old browsers */
+background: -moz-linear-gradient(top,  #d5cea6 0%, #c9c190 40%, #b7ad70 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #d5cea6 0%,#c9c190 40%,#b7ad70 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #d5cea6 0%,#c9c190 40%,#b7ad70 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#b7ad70',GradientType=0 ); /* IE6-9 */
+ }
+#quick-links-body > div { padding-top: 10px; margin-top: 10px; }
+#quick-links-body div>ul { line-height: 10px; margin-left: 0; padding-left: 30px; padding-top: 10px; }
+#quick-links-body ul>li { padding-bottom: 7px; }
+#quick-links-body ul li a { color: brown; }
+
+
+

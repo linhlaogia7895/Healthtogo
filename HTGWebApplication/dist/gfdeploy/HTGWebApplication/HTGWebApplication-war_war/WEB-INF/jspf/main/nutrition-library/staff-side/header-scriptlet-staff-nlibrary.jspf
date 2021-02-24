@@ -1,0 +1,14 @@
+<!--header Scriptlet nutrition library staff-side-->
+<%@page import="common.VerifySecurityHelper" %> 
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+
+VerifySecurityHelper v=VerifySecurityHelper.getInstance();
+try{
+    if(!v.isLoggedIn(request, response)) response.sendRedirect("MainPageServlet");
+}catch(Exception ex){
+    System.out.println("error: "+ex.getMessage()); 
+}
+%>

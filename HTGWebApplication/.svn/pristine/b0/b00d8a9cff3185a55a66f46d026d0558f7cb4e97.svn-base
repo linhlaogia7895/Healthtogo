@@ -1,0 +1,140 @@
+<!--appointment booker get details modal popup-->
+<div class="modal fade" id="modal-appointment-booker-popup" role="dialog">
+    <div class="modal-dialog">
+
+	<!-- Modal content-->
+       <div class="modal-content">
+	   <div class="modal-header">
+
+	       <!--close button-->
+	       <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+	       <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+	       <!--contact header-->
+	       <h4><span class="icon-calendar"></span> Booking Details</h4>
+	   </div>
+	   <!--form USING ANGULAR JS--> 
+	   <form action="BookAppointmentServletByPatient" method="post" name="contactForm">
+
+	       <!--modal body-->
+	       <div class="modal-body">
+		       <div class="form-group">
+
+			   <!--username-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-user"></span>
+			       </span>
+			       <input ng-model="USERNAME" 
+				      type="text" 
+				      class="form-control" 
+				      name="USERNAME" 
+				      placeholder="Enter your username" 
+				      autofocus required>
+			   </div>
+
+			   <!--nutritionist ID-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-user"></span>
+			       </span>
+			       <input type="text" 
+				      class="form-control" 
+				      name="NUTRITIONIST_ID" 
+				      value="00005" 
+				      readonly>
+			   </div>
+
+			   <!--start time-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-time"></span>&nbsp; Start Time:
+			       </span>
+			       <input type="text" 
+					class="form-control" 
+					name="START_TIME" 
+					value="{{START_TIME}}" 
+					readonly>
+			   </div>
+			   
+			   <!--end time-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-time"></span>&nbsp; End Time:
+			       </span>
+			       <input type="text" 
+				      class="form-control" 
+				      name="END_TIME" 
+				      value="{{END_TIME}}" 
+				      readonly>
+			   </div>
+
+			    <!--EXTENSION-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-time"></span>&nbsp; Time Extension: 
+				</span>
+				<select id="user-type" 
+					class="form-control container-fluid" 
+					name="EXTENSION"
+					ng-model="EXTENSION">
+					
+					<option value="none" selected>None</option>
+					<option value="30minutes">30 minutes</option>
+					<option value="">1 hour</option>
+				</select>
+			    </div>
+			    
+			    <!--type of consultation-->
+			    <div class="input-group input-group-lg">
+				<span class="input-group-addon">
+				    <span class="icon-open-file"></span>&nbsp; Type of consultation: 
+				</span>
+				<select id="user-type" class="form-control container-fluid" name="PACKAGE_TYPE">
+					<option value="regular" selected>regular</option>
+					<option value="package1">Package 1: Meal Planning</option>
+					<option value="package1">Package 2: Sport Nutrition</option>
+					<option value="package1">Package 3: Eating Disorder</option>
+					<option value="package1">Package 4: Celiac Meal Planning</option>
+					<option value="package1">Package 5: Losing Weight</option>
+					<option value="package1">Package 6: Gaining Weight</option>
+				</select>
+			    </div>
+			    
+			    <!--enter message-->
+			   <div style="padding: 10px 0;">
+			       <label for="message"><span class="icon-pencil"></span>Message:</label>
+			       <textarea ng-model="contactTextArea" 
+					 class="form-control" 
+					 name="PURPOSE" 
+					 rows="5" 
+					 placeholder="Enter your message here"></textarea>
+			   </div>
+			   <br>
+			    
+			    <!--hidden inputs-->
+			    <input type="hidden" name="url" value="xrYn9w8h6Cc5SIaQg8b9AQ==">
+			    <input type="hidden" name="KEY" value="7fQOavphhWZBEvv90+CcWQ==">
+			    <input type="hidden" name="BOOKING_DATE" value="${BOOKING_DATE}">
+			    
+			    <!--submit button-->
+			    <input ng-disabled="contactForm.$invalid" 
+				  id="contact-btn" 
+				  class="btn btn-danger pull-left" 
+				  type="submit" 
+				  name="submitBooking" 
+				  value="Submit Booking">
+		       </div>
+	       </div>
+
+	       <!--footer-->
+	       <div class="modal-footer">
+		   <p>
+		       <i class="fa fa-spinner w3-spin" style="font-size:64px">Hi.. </i>
+		   </p>
+	       </div>
+	   </form>
+
+       </div>
+    </div>
+</div>

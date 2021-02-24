@@ -1,0 +1,105 @@
+<%-- 
+    Document   : admin.jsp
+    Version    : Jan 5, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: admin page for administrator
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="WEB-INF/jspf/common/header-not-logged-in-redirect-rightaway.jspf" %>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTG Admin Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <!--This meta statement tells individual devices not to scale the web page but rather to use the scale of 1. 
+        Meaning, if we are on a device that's 700px across, it will render the page as if there were on 700px, 
+        allowing the rest of the HTML to move around. The device will not attempt to show the entire page and scale it 
+        down-->
+        <meta name="Viewport" content="width=device-width, initial-scale=1"> 
+        
+	<!--CDNs-->
+	<c:import url="WEB-INF/jspf/admin/adminJSP/cdn-adminJSP.jspf"></c:import>
+	<!--end of CDN definitions-->
+	
+        
+    </head>
+    
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <div class="page" ng-app="">
+            
+	    <!--logo-header-->
+	    <c:import url="WEB-INF/jspf/common/logo-header-common.jspf"></c:import>
+	    <!--end of logo header definitions-->
+            
+	    
+	    <!--Navigation bar-->
+	    <%@include file="WEB-INF/jspf/common/nav-common.jspf" %>
+	    <!--end of navigation bar definitions-->
+
+            <!--Page to manage staff account
+            includes account update , creation, deactivation, reactivation
+            deletion-->
+              
+	    <!--body button links-->
+	    <%--<c:import url="WEB-INF/jspf/admin/adminJSP/admin-body-button-and-links.jspf"></c:import>--%>
+	    <%@include file="WEB-INF/jspf/admin/adminJSP/dropdown-menu.jspf" %>
+	    <!--end of button links definitions-->
+	    
+	    <!--footer definition-->
+	    <c:import url="WEB-INF/jspf/common/footer-common.jspf"></c:import>
+            <!--end of footer definition-->
+            
+            <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+            
+            <!-- Search text box to update an account -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-update-account.jspf"></c:import>
+	    <!--end search textbox definitions-->
+            
+	    <!-- Search text box to deactivate staff account -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-deactivate-account.jspf"></c:import>
+	    <!--end search textbox definitions-->
+            
+             <!-- Search text box to reactivate a staff account-->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-reactivate-account.jspf"></c:import>
+	    <!--end search textbox definitions-->
+                
+	    <!-- Search text box to delete a staff account -->
+            <c:import url="WEB-INF/jspf/admin/adminJSP/search-delete-account.jspf"></c:import>
+	    <!--end search textbox definitions-->
+	    
+	    <!-- Search text boxes for reset logins -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-reset-login.jspf"></c:import>
+	    <!--end search textbox definitions-->
+	    
+	    <!-- Search text boxes for locking staff account -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-lock-account.jspf"></c:import>
+	    <!--end search textbox definitions-->
+                
+	    <!-- Search text boxes for unlock staff account -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-unlock-account.jspf"></c:import>
+	    <!--end search textbox definitions-->
+                     
+	    <!-- Search text box for Patient update -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-update-account.jspf"></c:import>
+	    <!--end search textbox definitions-->
+               
+	    <!-- Search text box for Patient Deactivate -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-patient-deactivate.jspf"></c:import>
+	    <!--end search textbox definitions-->
+	    
+	    <!-- Search text box for Patient Reactivate -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-patient-reactivate.jspf"></c:import>
+	    <!--end search textbox definitions-->
+	    
+	    <!-- Search text box for Patient Delete -->
+	    <c:import url="WEB-INF/jspf/admin/adminJSP/search-patient-delete.jspf"></c:import>
+	    <!--end search textbox definitions-->
+                         
+        </div>
+    </body>
+</html>

@@ -1,0 +1,363 @@
+/**
+ * Document   : main_page.js
+ * Version    : Jan 3, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Javascript for main page
+ */
+
+var previousLogoWidth;
+var newPageWidth;
+var newNavWidth;
+var canSee;
+
+window.onload = initProcess;
+
+/**
+ * Function to initiate the entire JS for main page
+ */
+function initProcess(){
+    
+    previousLogoWidth = $('#logo').width();
+    registerListenersMain();
+    popupMessageModal();
+}
+
+/**
+ * Handles the logout modal popup message on home page
+ */
+function popupMessageModal(){
+    var msg = $('#message-text').text();
+    if(msg!=""){
+        $('#modal-messages-popup').modal().fadeout(8000,function (){
+            $(this).empty().remove();
+        });
+        
+    }
+}
+
+
+/**
+ * Function to initiate the listeners for main page
+ */
+function registerListenersMain(){
+    
+    $('.hides').hide();
+    
+    $(window).on({
+        resize: 
+            function(){
+                navbarToggleUpdateElementsMain();
+        }
+    });
+    
+    
+    adjustSideBoxes();
+    
+    /*handles the swapping in and out effect for the service pics on label click*/
+    $('#pack1Label').click(
+        function (){
+            replacerDiv($('#pack1GIF'),$('#pack1Form'));
+    });
+    
+    $('#pack2Label').click(
+        function (){
+            replacerDiv($('#pack2GIF'),$('#pack2Form'));
+    });
+    
+    $('#pack3Label').click(
+        function (){
+            replacerDiv($('#pack3GIF'),$('#pack3Form'));
+    });
+    
+    $('#pack4Label').click(
+        function (){
+            replacerDiv($('#pack4GIF'),$('#pack4Form'));
+    });
+    
+    $('#pack5Label').click(
+        function (){
+            replacerDiv($('#pack5GIF'),$('#pack5Form'));
+    });
+    
+    $('#pack6Label').click(
+        function (){
+            replacerDiv($('#pack6GIF'),$('#pack6Form'));
+    });
+    
+    
+    /*handles the fading in and out effect for the service pic labels on hover*/
+    $('#pack1Label').hover(
+        function(){
+            hoverText(1);
+    });  
+
+    $('#pack2Label').hover(
+        function(){
+            hoverText(2);
+    }); 
+
+    $('#pack3Label').hover(
+        function(){
+            hoverText(3);
+    }); 
+
+    $('#pack4Label').hover(
+        function(){
+            hoverText(4);
+    }); 
+
+    $('#pack5Label').hover(
+        function(){
+            hoverText(5);
+    }); 
+
+    $('#pack6Label').hover(
+        function(){
+            hoverText(6);
+    }); 
+}
+
+function adjustSideBoxes(){
+//    var boxHeight = ($('#main-img').height()-10) / 2;
+    var boxHeight = $('#main-img').height()+10;
+    $('.side-boxes').css('height',boxHeight);
+    $('#quick-links-body').css('height',boxHeight-90);
+}
+
+function adjustsideboxbody(){
+    var boxHeight = $('#main-img').height()+10;
+    $('.side-boxes').css('height',boxHeight);
+}
+
+/**
+ * Function to swap out the images on services page
+ * @param {type} div1 The div to check if visible
+ * @param {type} div2 The div to replace div1 if visible
+ * @returns {undefined}
+ */
+function replacerDiv(div1,div2){
+    var canSee = $(div1).is(':visible');
+    if(canSee){
+        $(div1).slideUp(1000);
+        $(div2).slideDown(1000);                
+    }else{
+        $(div2).slideUp(1000);
+        $(div1).slideDown(1000);                
+    }
+}
+
+/**
+ * Function to display tooltips for the package labels on services page
+ * @param {type} i The number corresponding to the package
+ */
+function hoverText(i){
+    var infoE='.extraInfos'+i;
+    var canSeeInfo = $(infoE).is(':visible');
+    var gifVisible = $('#pack'+i+'GIF').is(':visible');
+
+    if(gifVisible){
+        if(canSeeInfo){
+            $(infoE).hide().delay(800);   
+        }else{
+            $(infoE).show(300).text('Click above for information');    
+            
+        }
+    }else{
+        if(canSeeInfo){
+            $(infoE).hide().delay(800);   
+        }else{
+            $(infoE).show(300).text('Click above to restore');    
+        }
+    }
+}
+
+/**
+ * Function that responds to window RESIZE event listener
+ */
+function navbarToggleUpdateElementsMain(){
+    
+    adjustMainImg();    
+    adjustMainPageAndAdvert();
+}
+
+/**
+ * makes sure the main page img will have padding on each side by making its
+ * width less by 10 points from page width
+ */
+function adjustMainImg(){
+    
+    newNavWidth = $('.navbar').width();
+    $('.main-img').width(newNavWidth - 10);
+}
+
+
+/**
+ * Function to adjust elements on the main page on screen resize
+ */
+function adjustMainPageAndAdvert(){
+    
+    /*uses the width of main img on resize to 
+     * adjust the other elements*/
+    if($('.main-img').width() < 300){
+        
+        /*djusts the advert on main img*/
+        $('#advert').css('top','2%');
+        $('#advert').css('left','2%');
+        
+        /*adjusts the advert text*/
+        $('#advert h3').css('font-size','40%');
+        $('#advert h3').css('height','40%');
+        $('#advert h3').css('width','40%');
+        
+        /*adjusts the advert button*/
+        $('.advert-btn').css('font-size','40%');
+        $('.advert-btn').css('height','30%');
+        $('.advert-btn').css('width','30%');
+        
+        /*adjust the height & width of about-page img*/
+        $('#about-page img').css('max-width','200px');
+    }
+    else if($('.main-img').width() < 400){
+        
+        /*djusts the advert on main img*/
+        $('#advert').css('top','2%');
+        $('#advert').css('left','2%');
+        
+        /*adjusts the advert text*/
+        $('#advert h3').css('font-size','50%');
+        $('#advert h3').css('height','50%');
+        $('#advert h3').css('width','50%');
+        
+        /*adjusts the advert button*/
+        $('.advert-btn').css('font-size','50%');
+        $('.advert-btn').css('height','50%');
+        $('.advert-btn').css('width','50%');
+        $('.advert-btn').css('height','40%');
+        $('.advert-btn').css('width','40%');
+        
+        /*adjusts the body text on the About page*/
+        $('.body-text').css('font-size','10px');
+        
+        /*adjusts the service pics caption fonts*/
+        $('.caption p').css('font-size','13px');
+        
+        /*adjust the height & width of about-page img*/
+        $('#about-page img').css('max-width','300px');
+    }
+    else if($('.main-img').width() < 500){
+        
+        /*djusts the advert on main img*/
+        $('#advert').css('top','3%');
+        $('#advert').css('left','3%');
+        
+        /*adjusts the advert text*/
+        $('#advert h3').css('font-size','60%');
+        $('#advert h3').css('height','60%');
+        $('#advert h3').css('width','60%');
+        
+        /*adjusts the advert button*/
+        $('.advert-btn').css('font-size','60%');
+        $('.advert-btn').css('height','50%');
+        $('.advert-btn').css('width','50%');
+        
+        /*adjusts the header font on services page*/
+        $('.services-page h1').css('font-size','23px');
+        
+        /*adjusts the body text on the About page*/
+        $('.body-text').css('font-size','14px');
+        
+        /*adjusts the service pics caption fonts*/
+        $('.caption p').css('font-size','16px');
+        
+        /*adjust the height & width of about-page img*/
+        $('#about-page img').css('max-width','400px');
+    }
+    else if($('.main-img').width() < 600){
+        
+        /*djusts the advert on main img*/
+        $('#advert').css('top','3%');
+        $('#advert').css('left','3%');
+        
+        /*adjusts the advert text*/
+        $('#advert h3').css('font-size','70%');
+        
+        /*adjusts the advert button*/
+        $('.advert-btn').css('font-size','70%');
+        $('.advert-btn').css('height','60%');
+        $('.advert-btn').css('width','60%');
+        
+        /*adjusts the header font on services page*/
+        $('.services-page h1').css('font-size','27px');
+        
+        /*adjusts the body text on the About page*/
+        $('.body-text').css('font-size','14px');
+    }
+    else if($('.main-img').width() < 700){
+        
+        /*djusts the advert on main img*/
+        $('#advert').css('top','4%');
+        $('#advert').css('left','4%');
+        
+        /*adjusts the advert text*/
+        $('#advert h3').css('font-size','80%');
+        $('#advert h3').css('height','80%');
+        $('#advert h3').css('width','80%');
+        
+        /*adjusts the advert button*/
+        $('.advert-btn').css('font-size','80%');
+        $('.advert-btn').css('height','80%');
+        $('.advert-btn').css('width','80%');
+    
+        /*adjusts the header font on services page*/
+        $('.services-page h1').css('font-size','30px');
+        
+        /*adjusts the body text on the About page*/
+        $('.body-text').css('font-size','17.795px');
+    }
+    else if($('.main-img').width() < 800){
+        
+        /*djusts the advert on main img*/
+        $('#advert').css('top','4%');
+        $('#advert').css('left','4%');
+        
+        /*adjusts the advert text*/
+        $('#advert h3').css('font-size','90%');
+        
+        /*adjusts the advert button*/
+        $('.advert-btn').css('font-size','90%');
+        
+         /*adjusts the header font on services page*/
+        $('.services-page h1').css('font-size','37px');
+        
+        /*adjusts the body text on the About page*/
+        $('.body-text').css('font-size','17.795px');
+        
+        /*removes the bootstrap jumbotron effect as the page shrinks*/
+        $("div[id^='removeJumbotron']").removeClass('jumbotron');
+    }
+    else{
+        
+        /*djusts the advert on main img*/
+        $('#advert').css('top','5%');
+        $('#advert').css('left','5%');
+        
+        /*adjusts the advert text*/
+        $('#advert h3').css('font-size','100%');
+        $('#advert h3').css('height','100%');
+        $('#advert h3').css('width','100%');
+        
+        /*adjusts the advert button*/
+        $('.advert-btn').css('font-size','100%');
+        $('.advert-btn').css('height','100%');
+        $('.advert-btn').css('width','100%');
+        
+        /*adjusts the header font on services page*/
+        $('.services-page h1').css('font-size','62.5px');
+        
+        /*adjusts the body text on the About page*/
+        $('.body-text').css('font-size','17.795px');
+        
+        /*removes the bootstrap jumbotron effect as the page shrinks*/
+        $("div[id^='removeJumbotron']").addClass('jumbotron');
+    }
+}

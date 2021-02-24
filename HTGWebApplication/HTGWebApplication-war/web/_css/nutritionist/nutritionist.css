@@ -1,0 +1,98 @@
+/*
+    Document   : nutritionist.css
+    Version    : Jan 1, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: Stylesheet for nutritionist page
+*/
+
+h1 { text-align: center; text-shadow: 10px 10px 5px #888888; }
+
+/*Page buttons*/
+.page-buttons {    position: relative;
+    text-decoration: none;
+    border: none;
+    font-size: 20px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer; 
+    margin: 5px 5px;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a4b357+0,75890c+100;Olive+3D+%233 */
+background: #a4b357; /* Old browsers */
+background: -moz-linear-gradient(top,  #a4b357 0%, #75890c 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #a4b357 0%,#75890c 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #a4b357 0%,#75890c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a4b357', endColorstr='#75890c',GradientType=0 ); /* IE6-9 */
+
+}
+
+.page-buttons:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+.page-buttons:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+div[class="btn-grp w3-row w3-center"]>a { text-decoration: none; color: white; }
+
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 150px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: relative;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+    
+}

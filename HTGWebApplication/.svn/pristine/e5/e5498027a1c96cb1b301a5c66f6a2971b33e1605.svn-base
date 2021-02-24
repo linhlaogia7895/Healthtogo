@@ -1,0 +1,767 @@
+<%-- 
+    Document   : index.jsp
+    Version    : Dec 25, 2016
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: default home page
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Health To Go Nutrition Care</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <!--This meta statement tells individual devices not to scale the web page but rather to use the scale of 1. 
+        Meaning, if we are on a device that's 700px across, it will render the page as if there were on 700px, 
+        allowing the rest of the HTML to move around. The device will not attempt to show the entire page and scale it 
+        down-->
+        <meta name="Viewport" content="width=device-width, initial-scale=1"> 
+        
+        <!--CDN for JQuery date picker-->
+        <!--IMPORTANT: MUST CHANGE PATH HERE FOR CUPERTINO WHEN FILE IS MOVED. Cupertino is needed by datepicker-->
+        <link href="_css/common/cupertino/jquery-ui.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        
+        <!--CDN for JQuery date picker. Needs to be at this spot-->
+        <script src="_js/_common/temp/jquery-1.11.3.min.js"></script>
+        
+        <!--CDN for general JQuery and Bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <!--CDN for JQuery date picker. Needs to be at this spot-->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <!--CDN for Angular JS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        
+        <!--Custom-made JS and CSS. Important: MUST CHANGE ALL PATHS HERE WHEN FILE IS MOVED-->
+        <script src="_js/main/main-page-script.js" type="text/javascript"></script>
+        <script src="_js/_common/common.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="_css/common/common.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="_css/main/main-page-style.css">
+        
+    </head>
+    
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <div class="page" ng-app="">
+            
+            <!--Logo-->
+            <header>
+                
+                <!--Logo. IMPORTANT: MUST CHANGE the PATHs HERE WHEN FILE IS MOVED-->
+                <div id="slides" class="slideshow">
+                    <div>
+                        <!--<img id="logo" class="logos" src="_res/common/logo5.png" alt="Health To Go Nutrition Care">-->
+                        <img id="logo" class="logos" src="_res/common/logo5.png" alt="Health To Go Nutrition Care">
+                    </div>
+                    <div>
+                        <img id="logo2" class="logos" src="_res/common/logo6.png" alt="Health To Go Nutrition Care">
+                    </div>
+                </div>
+            </header>
+            
+            <!--Navigation bar-->
+            <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="150">
+                <div class="container-fluid" id="nav_local">
+                    
+                    <!--Navigation bar for small screens-->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>          
+                        </button>
+                        <a class="navbar-brand" href="#"></a>
+                    </div>
+                    
+                    <!--Regular navigation bar-->
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            
+                            <!--IMPORTANT: MUST CHANGE ALL PATHS HERE WHEN FILE IS MOVED-->
+                            <li class="active"><a href="#main-page"><span class="icon-home" style="font-size: 1.2em;" ></span>&nbsp;Home</a></li>
+                            <li class="#"><a href="#services-page"> Services</a></li>
+                            <li class="#"><a href="#about-page"> About Us</a></li>
+                            <li class="#"><a style="cursor:pointer" id="contact-popup">Contact</a></li>
+                            <li class="#"><a href="_jsp/main/nutrition-library.jsp">Nutrition Library</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    
+                                    Account
+                                    
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    
+                                    <!--check MainPageServlet.java and HtmlPageHelper.java for the contents of classRequireLogin-->
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(5) Reset Login</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(6) Create / Update account</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(8) Payment plan</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(10) Pay for service</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(12) Send message to nutritionist</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(13) Patient journal</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(19) Search FAQ, tips and nutrition library</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(22) Subscribe to advert(s)</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(26) Manage invoice</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(27) Book appointment</a></li>
+                                </ul>
+                            </li>
+                            
+                                <!--check MainPageServlet.java and HtmlPageHelper.java for the contents of classRequireLogin-->
+                                ${userTypeMenu}
+                                
+                                
+<!--                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    
+                                        Nutritionist
+        
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">(3) Manage staff</a></li>
+                                    <li><a href="#">(5) Reset login</a></li>
+                                    <li><a href="#">(7) Manage patient account</a></li>
+                                    <li><a href="#">(11) Answer messages from patient</a></li>
+                                    <li><a href="#">(13) Patient journal</a></li>
+                                    <li><a href="#">(14) Monitor patient progress</a></li>
+                                    <li><a href="#">(15) Manage patients' journals</a></li>
+                                    <li><a href="#">(16) Generate patient progress report</a></li>
+                                    <li><a href="#">(17) Generate business report</a></li>
+                                    <li><a href="#">(18) Manage FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(19) Search FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(20) Manage appointments</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                        Administrator
+
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">(3) Manage staff</a></li>
+                                    <li><a href="#">(4) Modify security</a></li>
+                                    <li><a href="#">(5) Reset login</a></li>
+                                    <li><a href="#">(7) Manage patient account</a></li>
+                                    <li><a href="#">(15) Manage patients' journals</a></li>
+                                    <li><a href="#">(16) Generate patient progress report</a></li>
+                                    <li><a href="#">(19) Search FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(23) Manage activity logs</a></li>
+                                    <li><a href="#">(24) Manage logins</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                        Staff
+                                    
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">(5) Reset Login</a></li>
+                                    <li><a href="#">(6) Create and Update patient account</a></li>
+                                    <li><a href="#">(7) Manage patient account</a></li>
+                                    <li><a href="#">(9) Manage invoice and payments</a></li>
+                                    <li><a href="#">(10) Pay for service</a></li>
+                                    <li><a href="#">(15) Manage patients' journals</a></li>
+                                    <li><a href="#">(16) Generate patient progress report</a></li>
+                                    <li><a href="#">(17) Generate business report</a></li>
+                                    <li><a href="#">(18) Manage FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(19) Search FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(20) Manage appointments</a></li>
+                                    <li><a href="#">(21) Manage advertisements</a></li>
+                                    <li><a href="#">(25) Manage email notifications</a></li>
+                                </ul>
+                            </li>-->
+                        </ul>
+                        
+                        <!--Sign up and login using glyph icons of bootstrap 3-->
+                        <ul class="nav navbar-nav navbar-right">
+                            ${navBarElements}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            
+            <!--ENTER YOUR HTML HERE-->
+
+            <!--first page - home -->
+            <section id="main-page" class="main-page">
+                
+                    <!--main image on home page-->
+                    <img id="main-img" class="img-thumbnail main-img" src="_res/main/images/section1.jpg">
+                    
+                    <!--the lone advert sitting on the home image-->
+                    <div id="advert" class="container-fluid advert">
+                        <form action="MainPageServlet" method="get">
+                            <h3>Did you know that <strong>fitness</strong> is 20% exercise and 80% nutrition? Let us help you achieve this goal.</h3>
+                            <br>
+                            <input class="btn btn-warning advert-btn" type="submit" name="submitBookSessionNow" value="Book a session now">
+                        </form>
+                    </div>
+            </section>
+            
+            <!--Second page - Services-->
+            <section id="services-page" class="container-fluid services-page">
+                <div id="removeJumbotron" class="jumbotron">
+                    <h1 id="header" align="center" class="col-lg-12">Services</h1>
+                </div>
+                
+                <!--first row of services-->
+                <div id="set1">
+                    <div class="row">
+                        
+                        <!--Package 1: Meal Planning-->
+                        <div class="col-md-4">
+                            <div class="thumbnail hovereffect2">
+                                <div id="pack1GIF">
+                                    <img src="_res/main/images/package1.gif" alt="Package 1: Meal Planning" style="width:100%">
+                                </div>
+                                <div class="caption" align="center">
+                                    <p><a id="pack1Label" class="package" style="cursor:pointer">Package 1: Meal Planning</a></p>
+                                    <p class="hides extraInfos1"></p>
+                                </div>
+                                <div id="pack1Form" class="hides" align="center">
+                                    <form>
+                                        <p>A complete meal plan for $25 a week, including breakfast, lunch and dinner.</p>
+                                        <input class="btn btn-warning serv_btn" type="submit" name="submitPackage1" value="Book session now">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Package 2: Sport Nutrition-->
+                        <div class="col-md-4">
+                            <div class="thumbnail hovereffect2">
+                                <div id="pack2GIF">
+                                    <img src="_res/main/images/package2.gif" alt="Package 2: Sport Nutrition" style="width:100%">
+                                </div>
+                                <div class="caption" align="center">
+                                  <p><a id="pack2Label" class="package" style="cursor:pointer">Package 2: Sport Nutrition</a></p>
+                                  <p class="hides extraInfos2"></p>
+                                </div>
+                                <div id="pack2Form" class="hides" align="center">
+                                    <form>
+                                        <p>A complete meal plan for $25 a week, including breakfast, lunch and dinner.</p>
+                                        <input class="btn btn-warning serv_btn" type="submit" name="submitPackage2" value="Book session now">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Package 3: Eating Disorder-->
+                        <div class="col-md-4">
+                          <div class="thumbnail hovereffect2">
+                                <div id="pack3GIF">
+                                    <img src="_res/main/images/package3.gif" alt="Package 3: Eating Disorder" style="width:100%">
+                                </div>
+                                <div class="caption" align="center">
+                                    <p><a id="pack3Label" class="package" style="cursor:pointer">Package 3: Eating Disorder</a></p>
+                                    <p class="hides extraInfos3"></p>
+                                </div>
+                                <div id="pack3Form" class="hides" align="center">
+                                    <form>
+                                        <p>A complete meal plan for $25 a week, including breakfast, lunch and dinner.</p>
+                                        <input class="btn btn-warning serv_btn" type="submit" name="submitPackage3" value="Book session now">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--second row of services-->
+                <div id="set2">
+                    <div class="row">
+                        
+                        <!--Package 4: Celiac Meal Planning-->
+                        <div class="col-md-4">
+                            <div class="thumbnail hovereffect2">
+                                <div id="pack4GIF">
+                                    <img src="_res/main/images/package4.gif" alt="Package 4: Celiac Meal Planning" style="width:100%">
+                                </div>
+                                <div class="caption" align="center">
+                                    <p><a id="pack4Label" class="package" style="cursor:pointer">Package 4: Celiac Meal Planning</a></p>
+                                    <p class="hides extraInfos4"></p>
+                                </div>
+                                <div id="pack4Form" class="hides" align="center">
+                                    <form>
+                                        <p>A complete meal plan for $25 a week, including breakfast, lunch and dinner.</p>
+                                        <input class="btn btn-warning serv_btn" type="submit" name="submitPackage4" value="Book session now">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Package 5: Weight loss meal planning-->
+                        <div class="col-md-4">
+                            <div class="thumbnail hovereffect2">
+                                <div id="pack5GIF">
+                                    <img src="_res/main/images/package5.gif" alt="Package 5: Weight loss meal planning" style="width:100%">
+                                </div>
+                                <div class="caption" align="center">
+                                    <p><a id="pack5Label" class="package" style="cursor:pointer">Package 5: Weight loss meal planning</a></p>
+                                    <p class="hides extraInfos5"></p>
+                                </div>
+                                <div id="pack5Form" class="hides" align="center">
+                                    <form>
+                                        <p>A complete meal plan for $25 a week, including breakfast, lunch and dinner.</p>
+                                        <input class="btn btn-warning serv_btn" type="submit" name="submitPackage5" value="Book session now">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Package 6: Weight gain meal planning-->
+                        <div class="col-md-4">
+                            <div class="thumbnail hovereffect2">
+                                <div id="pack6GIF">
+                                    <img src="_res/main/images/package6.gif" alt="Package 6: Weight gain meal planning" style="width:100%">
+                                </div>
+                                <div class="caption" align="center">
+                                    <p><a id="pack6Label" class="package" style="cursor:pointer">Package 6: Weight gain meal planning</a></p>
+                                    <p class="hides extraInfos6"></p>
+                                </div>
+                                 <div id="pack6Form" class="hides" align="center">
+                                    <form>
+                                        <p>A complete meal plan for $25 a week, including breakfast, lunch and dinner.</p>
+                                        <input class="btn btn-warning serv_btn" type="submit" name="submitPackage6" value="Book session now">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <hr>
+            <!--Third page - About ME--> 
+            <section id="about-page" class="container-fluid about-page">
+                    <aside class="col-lg-4">
+                        <img class="img-circle" src="_res/main/images/About-me.gif" alt="Ms. Amina Ashraf" title="Ms. Amina Ashraf">
+                    </aside>
+                    <aside class="col-lg-8">
+                        <div class="body-text jumbotron">
+                            <h1>About Us</h1>
+                            <h2>Health To Go is a privately owned consulting company founded by Registered Nutritionist Amina Ashraf in 2016. We offer nutrition 
+    consulting services including one-on-one nutrition counselling, professional speaking, educational resources as well as food industry
+    and restaurant consulting. Our services and resources aim to help people achieve long lasting and dramatic results to boost their energy,
+     maximize their health and manage a healthy weight.</h2>                                
+                        </div>
+                    </aside>                    
+            </section> 
+            
+            <!--footer section-->
+            <footer class="navbar navbar-inverse container-fluid">
+                 <div align='center'>
+                     <p>Copyright &copy; Health To Go, Inc. <strong>|</strong> Tel: 403.998.9902 <strong>|</strong> <a href="mailto:amina.ashraf@yahoo.com">amina.ashraf@yahoo.com</a> <strong>|</strong> Designed by: M.R.M.T.R. </p>
+                </div>
+            </footer> 
+            
+            
+            
+            <!-- ----------------------popups-------------------- -->
+            
+            <!--login modal popup-->
+            <div class="modal fade container-fluid" id="modal-login-popup" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                            <!--close button-->
+                            <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                            <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+                            
+                            <!--login symbol-->
+                            <h4><span class="icon-lock"></span> Login</h4>
+                        </div>
+                        
+                        <div class="modal-body">
+                            
+                            <!--form-->
+                            <form role="form" action="UsersServlet" method="post">
+                                <div class="form-group">
+                                    
+                                    <!--enter username-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-user"></span>
+                                        </span>
+                                        <input class="form-control" type="text" name="userName" placeholder="Enter username" autofocus required>
+                                    </div>
+                                    
+                                    <!--enter password-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-lock"></span>
+                                        </span>
+                                        <input class="form-control" type="password" name="password" placeholder="Enter password" required>
+                                    </div> 
+                                </div>
+                                
+                                <!--remember me checkbox-->
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="remember-me-login" checked>Remember me</label>
+                                </div>
+                                
+                                <!--login submit button-->
+                                    <input type="submit" class="btn btn-success btn-block" name="submitLogin" value="Login">
+                            </form>
+                            
+                        </div>
+                        
+                        <!--login footer section-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="icon-remove"></span> Cancel</button>
+                            <p>Not a member? <a style="cursor:pointer" class="sign-up">Sign Up</a></p>
+                            <p>Forgot <span data-dismiss="modal"><a style="cursor:pointer" id="forgot-password">Password?</a></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+            <!--contact modal popup-->
+             <div class="modal fade" id="modal-contact-popup" role="dialog">
+                 <div class="modal-dialog">
+                     
+                     <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                            <!--close button-->
+                            <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                            <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+                            
+                            <!--contact header-->
+                            <h4><span class="icon-envelope"></span> Contact</h4>
+                        </div>
+                        <!--form USING ANGULAR JS--> 
+                        <form action="MainPageServlet" method="post" name="myForm">
+                            
+                            <!--modal body-->
+                            <div class="modal-body">
+                                    <div class="form-group">
+
+                                        <!--enter name-->
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="icon-user"></span>
+                                            </span>
+                                            <input type="text" class="form-control" name="contactName" placeholder="Enter your name" autofocus required>
+                                        </div>
+
+                                        <!--enter email-->
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="icon-envelope"></span>
+                                            </span>
+                                            <input type="email" class="form-control" name="contactEmail" placeholder="Enter email" required
+                                                   ng-model="email">
+                                        </div>
+                                        <span ng-show="myForm.contactEmail.$dirty && myForm.contactEmail.$invalid" style="color: red;">
+                                            <span ng-show="myForm.contactEmail.$error.email">Invalid email address</span>
+                                        </span>
+
+                                        <!--enter subject-->
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="icon-question"></span>
+                                            </span>
+                                            <input type="text" class="form-control" name="contactSubject" placeholder="Enter subject">
+                                        </div>
+
+                                        <!--enter message-->
+                                        <div style="padding: 10px 0;">
+                                            <label for="message"><span class="icon-pencil"></span>Message:</label>
+                                            <textarea class="form-control" name="message" rows="10" placeholder="Enter your message" required></textarea>
+                                        </div>
+                                        <br>
+                                        
+                                        <!--submit button-->
+                                        <input id="contact-btn" class="btn btn-danger pull-left" type="submit" name="submitMessage" value="Send Message">
+                                    </div>
+                            </div>
+                                
+                            <!--footer-->
+                            <div class="modal-footer">
+                                <h5 id="address-link"><a target="_blank" href="https://www.google.ca/maps/dir//140+Castlebrook+Rise+NE,+AB+T3J+1P1,+CANADA/@51.1050826,-113.9695245,16z/data=!3m1!4b1"><span class="icon-home"> 140 Castlebrook Rise NE, AB T3J 1P1, CANADA</span></a></h5>
+                            </div>
+                        </form>
+                    </div>
+                 </div>
+             </div>
+            
+            <!--modal sign up popup-->
+            <div class="modal fade" id="modal-sign-up-popup" role="dialog">
+                <div class="modal-dialog">
+                    
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                            <!--close button-->
+                            <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                            <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+                            
+                            <!--sign up header-->
+                            <h4><span class="icon-plus"></span> Sign Up</h4>
+                            
+                        </div>
+                        
+                        <!--modal body-->
+                        <div class="modal-body">
+                            
+                            <!--form-->
+                            <form action="#" method="post" name="myForm2">
+                                <div class="form-group">
+                                    
+                                    <!--enter first name-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-user"></span>
+                                        </span>
+                                        <input type="text" class="form-control" name="firstName" placeholder="Enter fist name" autofocus required>
+                                    </div>
+                                    
+                                    <!--enter last name-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-user"></span>
+                                        </span>
+                                        <input type="text" class="form-control" name="lastName" placeholder="Enter last name" required>
+                                    </div>
+                                    
+                                    <!--username-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-user"></span>
+                                        </span>
+                                        <input type="text" class="form-control" name="username" placeholder="Enter username" required>
+                                    </div>
+                                    
+                                    <!--password-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-user"></span>
+                                        </span>
+                                        <input type="text" class="form-control" name="password" placeholder="Enter password" required title="A min of 8 characters, at least one uppercase, at least one lowercase, at least 2 numbers, and at least one special character">
+                                    </div>
+                                    
+                                    <!--enter email-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-envelope"></span>
+                                        </span>
+                                        <input type="email" class="form-control" name="email" placeholder="Enter email" ng-model="email" required>
+                                    </div>
+                                    <span ng-show="myForm2.email.$dirty && myForm2.email.$invalid" style="color: red;">
+                                        <span ng-show="myForm2.email.$error.email">Invalid email address</span>
+                                    </span>
+                                    
+                                    <!--enter address-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-home"></span>
+                                        </span>
+                                        <input type="text" class="form-control" name="address" placeholder="Enter Address" required>
+                                    </div>
+                                    
+                                    <!--enter home phone-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-phone-alt"></span>
+                                        </span>
+                                        <input type="tel" class="form-control container-fluid" name="homePhone" placeholder="Home phone number" pattern="\d{10}" title="10 digits, No dashes or spaces: 7778889999" required>
+                                    </div>
+                                    
+                                    <!--enter cell phone-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-ear-phone"></span>
+                                        </span>
+                                        <input type="tel" class="form-control container-fluid" name="cellPhone" placeholder="Cell phone number" pattern="\d{10}" title="10 digits, No dashes or spaces: 7778889999" >
+                                    </div>
+                                    
+                                    <!--enter date of birth-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-gift"></span>
+                                        </span>
+                                        
+                                        <!--Note: z-index > 1003 impt here. date picker overlaps w/ form-ctrl. w/o z-index, date picker doesn't work-->
+                                        <input type="text" id="datepicker" class="form-control container-fluid" name="dateOfBirth" placeholder="Enter date of birth" style="z-index: 2010;" required>
+                                    </div>
+                                    
+                                    <!--Gender-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-user"></span>&nbsp; Gender
+                                        </span>
+                                        <div class="form-control container-fluid">
+                                            <label class="radio inline" style="display: inline;">
+                                                <label><input type="radio" class="gender" name="gender-grp" value="male" required> Male</label>
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <label class="radio inline" style="display: inline;" >
+                                                <label><input type="radio" class="gender" name="gender-grp" value="female"> Female</label>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!--user type-->
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="icon-user"></span>&nbsp; User Type: 
+                                            </span>
+                                            <select id="user-type" class="form-control container-fluid" name="userType" required>
+                                                <optgroup label="External">
+                                                    <option value="client">Client</option>
+                                                </optgroup>
+                                                <optgroup label="Internal">
+                                                    <option value="nutritionist">Nutritionist</option>
+                                                    <option value="admin">Administrator</option>
+                                                    <option value="staff">Staff</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                    <!--</div>-->
+                                    
+                                    <!--contract period-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-gift"></span>
+                                        </span>
+                                        <input type="text" class="form-control container-fluid" name="contractPeriod" placeholder="Enter contract period" required>
+                                    </div>
+                                    <br>
+                                    
+                                    <!--submit sign up button-->
+                                    <input id="sign-up-btn" class="btn btn-danger btn-lg" type="submit" name="submitSignUp" value="Submit">
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--modal popup for require login-->
+            <div class="modal fade" id="modal-require-login-popup" role="dialog">
+                 <div class="modal-dialog modal-sm">
+                     
+                     <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                            <!--close top button-->
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                            <!--popup header-->
+                            <h4 class="modal-title"><span class="icon-warning"></span> Error!</h4>
+                        </div>
+                        
+                        <!--modal body-->
+                        <div class="modal-body">
+                            
+                            <!--message-->
+                            <h5>Sorry. You are required to login to be able to use this feature...</h5>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+            
+            <!--forgot password-->
+            <div class="modal fade" id="modal-forgot-password-popup" role="dialog">
+                 <div class="modal-dialog">
+                     
+                     <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                            <!--close top button-->
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                            <!--popup header-->
+                            <h4 class="modal-title"><span class="icon-warning"></span> Reset Password</h4>
+                        </div>
+                        
+                        <!--Form-->
+                        <form action="UsersServlet" method="post" name="resetForm">
+                            <div class="form-group">
+                                <!--modal body-->
+                                <div class="modal-body">
+                                    
+                                    
+                                    <!--verify username-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-user"></span>
+                                        </span>
+                                        <input class="form-control" type="text" name="resetUserName" placeholder="Enter registered username" autofocus required>
+                                    </div>
+
+                                    <!--verify email-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <span class="icon-envelope"></span>
+                                        </span>
+                                        <input type="email" class="form-control" name="resetUserEmail" placeholder="Enter registered email" required
+                                               ng-model="email">
+                                    </div>
+                                    <span ng-show="resetForm.resetUserEmail.$dirty && resetForm.resetUserEmail.$invalid" style="color: red;">
+                                        <span ng-show="resetForm.resetUserEmail.$error.email">Invalid email address</span>
+                                    </span>
+                                </div>
+                                          
+                            </div>
+                            <!--submit reset button-->
+                            <div class="modal-footer">
+                                <input id="send-reset-btn" class="btn btn-danger btn-lg pull-left" data-dismiss="modal" type="submit" name="submitReset" value="Verify and Send Reset">
+                                
+                                <!--message-->
+                                <div>
+                                    <p style="text-align: right;"><span class="icon-envelope"></span> We will send the reset link to <br>your registered email address</p>
+                                </div>
+                            </div>   
+                        </form>
+                    </div>
+                 </div>
+             </div>
+            
+            <!--messages popup-->
+            <div class="modal fade" id="modal-messages-popup" role="dialog">
+                 <div class="modal-dialog modal-sm">
+                     
+                     <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                            <!--close top button-->
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            
+                            <!--popup header-->
+                            <h4 class="modal-title"><span class="icon-log-out"></span> Logout</h4>
+                        </div>
+                        
+                        <!--modal body-->
+                        <div class="modal-body">
+                            
+                            <!--message-->
+                            <h5><span id="message-text"><%= request.getParameter("messages")!=null?request.getParameter("messages"):"" %></span></h5>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+            
+        </div>
+    </body>
+</html>

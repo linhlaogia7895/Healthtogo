@@ -1,0 +1,105 @@
+/**
+ * Document   : library-tables.js
+ * Version    : Jan 23, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Angular for managing the library table
+ */
+
+(function(){
+    var app=angular.module('mainApp',[]);
+    
+    app.controller('calorieTableController', function ($scope){
+        $scope.sortType = 'food'; //set the default sort type
+        $scope.sortReverse = false; //set the default sort order
+        $scope.searchFood = ''; //Set the default search filter
+        
+        /*list of food items and calories*/
+        $scope.foods = [
+            {food:'Pecans',calories:'691',fat:'72g',protein:'9g',carbs:'14g',fiber:'10g'},
+            {food:'Walnuts',calories:'654',fat:'65g',protein:'15g',carbs:'14g',fiber:'7g'},
+            {food:'Hazelnuts',calories:'628',fat:'61g',protein:'15g',carbs:'17g',fiber:'10g'},
+            {food:'Sunflower Seeds',calories:'584',fat:'51g',protein:'21g',carbs:'20g',fiber:'9g'},
+            {food:'Almonds',calories:'575',fat:'49g',protein:'21g',carbs:'22g',fiber:'12g'},
+            {food:'Sesame Seeds',calories:'573',fat:'50g',protein:'18g',carbs:'23g',fiber:'12g'},
+            {food:'Soybeans',calories:'446',fat:'20g',protein:'36g',carbs:'30g',fiber:'9g'},
+            {food:'Quinoa',calories:'368',fat:'6g',protein:'14g',carbs:'64g',fiber:'7g'},
+            {food:'Beans,Pinto',calories:'347',fat:'1g',protein:'21g',carbs:'63g',fiber:'15g'},
+            {food:'Black Beans',calories:'341',fat:'1g',protein:'22g',carbs:'62g',fiber:'15g'},
+            {food:'Beans, Kidney',calories:'337',fat:'1g',protein:'23g',carbs:'61g',fiber:'15g'},
+            {food:'Beans, Navy',calories:'337',fat:'1g',protein:'22g',carbs:'61g',fiber:'24g'},
+            {food:'Cranberry Beans',calories:'335',fat:'1g',protein:'23g',carbs:'63g',fiber:'25g'},
+            {food:'Mushrooms, Shiitake',calories:'296',fat:'1g',protein:'10g',carbs:'75g',fiber:'11g'},
+            {food:'Avocado',calories:'160',fat:'15g',protein:'2g',carbs:'9g',fiber:'7g'},
+            {food:'Garlic',calories:'149',fat:'0g',protein:'6g',carbs:'33g',fiber:'2g'},
+            {food:'Yams',calories:'118',fat:'0g',protein:'2g',carbs:'28g',fiber:'4g'},
+            {food:'Bananas',calories:'89',fat:'0g',protein:'1g',carbs:'23g',fiber:'3g'},
+            {food:'Corn',calories:'86',fat:'1g',protein:'3g',carbs:'19g',fiber:'3g'},
+            {food:'Sweet Potato',calories:'86',fat:'0g',protein:'2g',carbs:'20g',fiber:'3g'},
+            {food:'Pomegranates',calories:'83',fat:'1g',protein:'2g',carbs:'19g',fiber:'4g'},
+            {food:'Peas',calories:'81',fat:'0g',protein:'5g',carbs:'14g',fiber:'5g'},
+            {food:'Potatoes, Russet',calories:'79',fat:'0g',protein:'5g',carbs:'14g',fiber:'5g'},
+            {food:'Parsnips',calories:'75',fat:'0g',protein:'1g',carbs:'18g',fiber:'5g'},
+            {food:'Figs',calories:'74',fat:'0g',protein:'1g',carbs:'19g',fiber:'3g'},
+            {food:'Shallots',calories:'72',fat:'0g',protein:'3g',carbs:'17g',fiber:'0g'},
+            {food:'Kumquats',calories:'71',fat:'1g',protein:'2g',carbs:'16g',fiber:'6g'},
+            {food:'Potatoes, Red',calories:'70',fat:'0',protein:'2g',carbs:'16g',fiber:'2g'},
+            {food:'Guava',calories:'68',fat:'1g',protein:'3g',carbs:'14g',fiber:'5g'},
+            {food:'Grapes',calories:'67',fat:'0g',protein:'1g',carbs:'17g',fiber:'1g'},
+            {food:'Cherries',calories:'63',fat:'0g',protein:'1g',carbs:'16g',fiber:'2g'},
+            {food:'Leeks',calories:'61',fat:'0g',protein:'1g',carbs:'14g',fiber:'2g'},
+            {food:'Pears',calories:'58',fat:'0g',protein:'0g',carbs:'15g',fiber:'3g'},
+            {food:'Blueberries',calories:'57',fat:'0g',protein:'1g',carbs:'14g',fiber:'2g'},
+            {food:'Tangerines',calories:'53',fat:'0g',protein:'1g',carbs:'13g',fiber:'2g'},
+            {food:'Apples',calories:'52',fat:'0g',protein:'0g',carbs:'14g',fiber:'2g'},
+            {food:'Raspberries',calories:'52',fat:'1g',protein:'1g',carbs:'12g',fiber:'6g'},
+            {food:'Kale',calories:'50',fat:'1g',protein:'3g',carbs:'10g',fiber:'2g'},
+            {food:'Pineapple',calories:'50',fat:'0g',protein:'1g',carbs:'13g',fiber:'1g'},
+            {food:'Apricots',calories:'48',fat:'0g',protein:'1g',carbs:'11g',fiber:'2g'},
+            {food:'Oranges',calories:'47',fat:'0g',protein:'1g',carbs:'12g',fiber:'2g'},
+            {food:'Cranberries',calories:'46',fat:'0g',protein:'0g',carbs:'12g',fiber:'5g'},
+            {food:'Beets',calories:'43',fat:'0g',protein:'2g',carbs:'10g',fiber:'3g'},
+            {food:'Blackberries',calories:'43',fat:'0g',protein:'1g',carbs:'10g',fiber:'5g'},
+            {food:'Celeriac',calories:'42',fat:'0g',protein:'1g',carbs:'9g',fiber:'2g'},
+            {food:'Grapefruit',calories:'42',fat:'0g',protein:'1g',carbs:'11g',fiber:'2g'},
+            {food:'Sugar Snap Peas',calories:'42',fat:'0g',protein:'3g',carbs:'8g',fiber:'3g'},
+            {food:'Carrots',calories:'42',fat:'0g',protein:'1g',carbs:'10g',fiber:'3g'},
+            {food:'Acorn Squash',calories:'40',fat:'0g',protein:'1g',carbs:'10g',fiber:'1g'},
+            {food:'Onion',calories:'40',fat:'0g',protein:'1g',carbs:'9g',fiber:'2g'},
+            {food:'Papaya',calories:'39',fat:'0g',protein:'1g',carbs:'10g',fiber:'2g'},
+            {food:'Peaches',calories:'39',fat:'0g',protein:'1g',carbs:'10g',fiber:'1g'},
+            {food:'Mushrooms, Maitake',calories:'37',fat:'0g',protein:'2g',carbs:'7g',fiber:'3g'},
+            {food:'HoneyDew',calories:'36',fat:'0g',protein:'1g',carbs:'9g',fiber:'1g'},
+            {food:'Rutabagas',calories:'36',fat:'0g',protein:'1g',carbs:'8g',fiber:'3g'},
+            {food:'Broccoli',calories:'34',fat:'0g',protein:'3g',carbs:'7g',fiber:'3g'},
+            {food:'Cantaloupe',calories:'34',fat:'0g',protein:'1g',carbs:'9g',fiber:'1g'},
+            {food:'Serrano Pepper',calories:'32',fat:'0g',protein:'2g',carbs:'8g',fiber:'4g'},
+            {food:'Strawberries',calories:'32',fat:'0g',protein:'1g',carbs:'8g',fiber:'2g'},
+            {food:'Green Beans',calories:'31',fat:'0g',protein:'2g',carbs:'7g',fiber:'3g'},
+            {food:'Okra',calories:'31',fat:'0g',protein:'2g',carbs:'7g',fiber:'3g'},
+            {food:'Spaghetti Squash',calories:'31',fat:'1g',protein:'1g',carbs:'7g',fiber:'0g'},
+            {food:'Sweet Red Peppers',calories:'31',fat:'0g',protein:'1g',carbs:'6g',fiber:'2g'},
+            {food:'Collards',calories:'30',fat:'0g',protein:'2g',carbs:'6g',fiber:'4g'},
+            {food:'Limes',calories:'30',fat:'0g',protein:'1g',carbs:'11g',fiber:'3g'},
+            {food:'Watermelon',calories:'30',fat:'0g',protein:'1g',carbs:'8g',fiber:'0g'},
+            {food:'Lemons',calories:'29',fat:'0g',protein:'1g',carbs:'9g',fiber:'3g'},
+            {food:'Turnips',calories:'28',fat:'0g',protein:'1g',carbs:'6g',fiber:'2g'},
+            {food:'Banana Peppers',calories:'27',fat:'0g',protein:'2g',carbs:'5g',fiber:'3g'},
+            {food:'Sweet Yellow Peppers',calories:'27',fat:'0g',protein:'1g',carbs:'6g',fiber:'1g'},
+            {food:'Mustard Greens',calories:'26',fat:'0g',protein:'3g',carbs:'5g',fiber:'3g'},
+            {food:'Cabbage',calories:'25',fat:'0g',protein:'1g',carbs:'6g',fiber:'3g'},
+            {food:'Cauliflower',calories:'25',fat:'0g',protein:'2g',carbs:'5g',fiber:'3g'},
+            {food:'Eggplant',calories:'24',fat:'0g',protein:'1g',carbs:'6g',fiber:'0g'},
+            {food:'Spinach',calories:'23',fat:'0g',protein:'3g',carbs:'4g',fiber:'2g'},
+            {food:'Rhubarb',calories:'21',fat:'0g',protein:'1g',carbs:'5g',fiber:'2g'},
+            {food:'Asparagus',calories:'20',fat:'0g',protein:'2g',carbs:'4g',fiber:'2g'},
+            {food:'Sweet Green Pepper',calories:'20',fat:'0g',protein:'1g',carbs:'5g',fiber:'2g'},
+            {food:'Swiss Chard',calories:'19',fat:'0g',protein:'2g',carbs:'4g',fiber:'2g'},
+            {food:'Tomatoes',calories:'18',fat:'0g',protein:'1g',carbs:'4g',fiber:'1g'},
+            {food:'Celery',calories:'16',fat:'0g',protein:'1g',carbs:'3g',fiber:'2g'},
+            {food:'Radish',calories:'16',fat:'0g',protein:'1g',carbs:'3g',fiber:'2g'},
+            {food:'Summer Squash',calories:'16',fat:'0g',protein:'1g',carbs:'3g',fiber:'1g'},
+            {food:'Cucumbers',calories:'15',fat:'0g',protein:'1g',carbs:'4g',fiber:'0g'},
+            {food:'Lettuce',calories:'15',fat:'0g',protein:'1g',carbs:'3g',fiber:'1g'}
+        ];
+    });
+}());

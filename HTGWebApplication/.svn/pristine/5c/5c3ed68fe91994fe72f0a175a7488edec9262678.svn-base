@@ -1,0 +1,56 @@
+<!--<div style="position: absolute; top: 400px; left: 250px; height: 70px; width: 500px;">-->
+<div style="position: absolute; top:auto; left:250px;; height:auto; width:auto;">
+ <br/>
+
+   <%= (request.getAttribute("message")!=null)?request.getAttribute("message"):"" %> 
+
+ </div>
+
+   <div class="middle-body" style="height:auto; width: 100%; top: auto;">
+   <div class="dropdown">
+     <button class="dropbtn">Manage Staff</button>
+     <div class="dropdown-content">
+       <a href="createNewStaffAccount.jsp">Create Staff Account</a>
+       <a href="#update" id="updateStaff">Update Staff Account</a>
+       <a href="#deactivate" id="deactivateStaff">Deactivate Staff Account</a>
+       <a href="#reactivate" id="reactivateStaff">Reactivate Staff Account</a>
+       <a href="#lockLogin" id="lockStaff">Lock Staff Account</a>
+       <a href="#unlockLogin" id="unlockStaff">Unlock Staff Account</a>
+       <a href="#delete" id="deleteStaff">Delete Staff Account</a>
+     </div>
+   </div><br/>
+   <div class="dropdown">
+     <button class="dropbtn">Manage Logins</button>
+     <div class="dropdown-content">
+     <a href="#resetLogin" id="resetPassword">Reset Password</a>
+     </div>
+   </div><br/>
+   <div class="dropdown">
+     <button class="dropbtn">Manage Security </button>
+     <div class="dropdown-content">
+       <a href="#">Modify System Security</a>
+       <a href="#">Modify Account Security</a>
+     </div>
+   </div><br/>
+   <div class="dropdown">
+     <button class="dropbtn">Manage Activity Log</button>
+     <div class="dropdown-content">
+       <a href="#">Edit Log</a>
+       <a href="#">Import Log</a>
+       <a href="#">Export Log</a>
+       <a href="#">Print Log</a>
+       <a href="#">Delete Log</a>
+     </div>
+   </div><br/>
+   <div class="dropdown">
+     <button class="dropbtn">Manage Patient Accounts</button>
+     <div class="dropdown-content">
+       <a href="checkPatientExist.jsp">Create Patient Account</a>
+       <a href="#patientUpdate" id="updatePatientAccount">Update Patient Account</a>
+       <a href="#patientDeactivate" id="deactivatePatientAccount">Deactivate Patient Account</a>
+       <a href="#patientReactivate" id="reactivatePatientAccount">Reactivate Patient Account</a>
+       <a href="#patientDelete" id="deletePatientAccount">Delete Patient Account</a>
+       <a href="#patientInvoice" id="generatePatientInvoice">Generate Patient Invoice</a>
+     </div>
+   </div>
+</div>

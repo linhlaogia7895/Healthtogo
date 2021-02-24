@@ -1,0 +1,82 @@
+<!--Navigation bar-->
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="150">
+    <div class="container-fluid" id="nav_local">
+
+	<!--Navigation bar for small screens-->
+	<div class="navbar-header">
+	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>          
+	    </button>
+	    <a class="navbar-brand" href="#"></a>
+	</div>
+
+	<!--Regular navigation bar-->
+	<div class="collapse navbar-collapse" id="myNavbar">
+	    <ul class="nav navbar-nav">
+
+		<!--IMPORTANT: MUST CHANGE ALL PATHS HERE WHEN FILE IS MOVED-->
+		<li class="#"><a href="MainPageServlet?page=patient#main-page"><span class="icon-home" style="font-size: 1.2em;" ></span>&nbsp;Home</a></li>
+		<li class="#"><a href="MainPageServlet?page=patient#services-page"> Services</a></li>
+		<li class="#"><a href="MainPageServlet?page=patient#about-page"> About Us</a></li>
+		<li class="#"><a style="cursor:pointer" id="contact-popup">Contact</a></li>
+		<li class="#"><a href="NutritionLibrary">Nutrition Library</a></li>
+
+		<!--patient-->
+		<li class='${patientStatus} dropdown'>
+			<a class='dropdown-toggle' data-toggle='dropdown' href='#'>Account<span class='caret'></span></a>
+			<ul class='dropdown-menu'>
+			    <li><a href='PageNotReady'>Reset Login</a></li>
+			    <li><a href='PatientInformation'>Edit Account Information</a></li>
+				<li><a href='paymentPlan.jsp'>Payment plan</a></li>
+				<li><a href='RedirectServlet?url=uCEnu7FrA9+Rm2vqCKEkOMBSm1HXKmi5RvX6O5jrd5Q='>Manage Invoice</a></li>
+                                <li><a href='Record'>My Record</a></li>
+
+                                <li><a href='RedirectServlet?url=icBa3l73XB44QmLOpbIbJw=='>My Journal</a></li>
+				<li><a href='messageToNutritionist.jsp'>Send message to nutritionist</a></li>
+				<li><a href='PageNotReady'>Patient journal</a></li>
+				<li><a href='PageNotReady'>Search FAQ, tips and nutrition library</a></li>
+				<li><a href='manageInvoice.jsp'>Subscribe to advert(s)</a></li>
+				<li><a href="BookAppointmentServletByPatient?url=xrYn9w8h6Cc5SIaQg8b9AQ==">Book appointment</a></li>
+
+			</ul>
+		</li>
+	    </ul>
+
+	    <!--Sign up, login, logout, LoggedIn icons using glyph icons of bootstrap 3-->
+	    <ul class="nav navbar-nav navbar-right">
+		<li class="${logoutIconStatus}">
+		    <a href='UsersServlet?logout=true'> &nbsp; <span class='icon-log-out'></span> Logout</a>
+		</li>
+
+		<!--logged in link for nutritionist-->
+		<li class="${nutritionistStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=nutritionist"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Nutritionist </i></span>
+			</a>
+		</li>
+                <li class="${patientStatus}" style="display: inline-block;">
+		    <a><span class='icon-user logged-in user-attrib'> logged in: <i> Patient </i></span></a>
+		</li>
+                
+
+		<!--logged in link for admin-->
+		<li class="${adminStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=admin"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Admin </i></span>
+			</a>
+		</li> 
+
+		<!--logged in link for staff-->
+		<li class="${staffStatus}" style="display: inline-block;">
+			<a href="MainPageServlet?page=staff"><span class='icon-user logged-in user-attrib'> logged in: </span> 
+				<span id="userSpan"><i> Staff </i></span>
+			</a>
+		</li> 
+
+	    </ul>
+
+	</div>
+    </div>
+</nav>

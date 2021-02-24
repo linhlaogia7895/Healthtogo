@@ -1,0 +1,143 @@
+<!--promos section-->
+<div id="promos-table" class="table-bodies promos-section-body container w3-container container-fluid" ng-controller="promosSectionController" style="max-width: 90%">
+
+    <!--title-->
+    <h1 class="table-title">Promotions</h1>
+
+    <!--search box - style in css file-->
+    <form>
+	<div class="w3-row">
+	    <div class="form-group w3-col m8 w3-left-align">
+		<div class="input-group input-group-lg">
+		    <span class="input-group-addon">
+			<span class="icon-search"></span>
+		    </span>
+		    <input type="search" name="search" class="form-control" placeholder="Search promos" ng-model="searchPromos">
+		</div>
+	    </div>
+	</div>
+    </form>
+
+    <!--populates page with angular content for tips-->
+    <div ng-repeat="p in promos | orderBy:'-date':true | filter:searchPromos" class="w3-accordion w3-light-grey">
+	<button id="promos-btn" ng-click="managePromosAccordion(p.id)" class="w3-btn-block w3-left-align adverts-btn">
+	    <span class="adverts-btn-text">{{p.title}} 
+		<span ng-model="dates" class="pull-right">End Date: {{p.dateExpired}}</span>
+	    </span>
+	</button>
+	<div id='{{p.id}}' class="w3-accordion-content w3-container">
+	    <h3 style="text-align: center;">{{p.title}}</h3>
+	    <div class="w3-row">
+		<div class="w3-col m8 w3-left-align">
+		    <h5>Posting date: {{p.datePosted}}</h5>
+		    <h5>Closing date: {{p.dateExpired}}</h5>	
+		</div>
+		<div class="w3-col m4 w3-right-align">
+		    <button class="btn btn-success pull-right" style="font-size: 1.2em; font-weight: bolder;" ng-click="toggleApplyForm()"><strong>{{ApplyPromoBtn}}</strong></button>
+		</div>
+	    </div>
+	    
+	    <div class="" ng-show="applyForm">
+			
+		    <div class="w3 w3-container panel panel-success" style="width: 100%;">
+
+			<div class="panel-heading">Promo Application Form</div>
+
+			<div class="panel-body">
+
+			    <form action="PromoApplicationsServlet" method="post">
+
+				<input type="hidden" name="promoID" value="{{p.id}}">
+				<input type="hidden" name="promoTitle" value="{{p.title}}">
+				<input type="hidden" name="promoPostingDate" value="{{p.datePosted}}">
+				<input type="hidden" name="promoClosingDate" value="{{p.dateExpired}}">
+				<input type="hidden" name="key" value="G9e8gG/jSQJjJ7zcWZYN2FVaokprrbLtAlrOIpMN4Nc=">
+
+				<!--Enter first name-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-user"></span>
+				    </span>
+				    <input ng-model="promoFName" type="text" 
+					   class="form-control" name="promoFName" 
+					   placeholder="Enter fist name">
+				</div>
+
+
+				 <!--enter last name-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-user"></span>
+				    </span>
+				    <input ng-model="promoLName" type="text" 
+					   class="form-control" name="promoLName" 
+					   placeholder="Enter last name">
+				</div>
+
+
+				 <!--enter email-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-envelope"></span>
+				    </span>
+				    <input type="email" class="form-control" 
+					   name="promoEmail" placeholder="Enter email" 
+					   ng-model="email" 
+					   data-toggle="popover"
+					   data-trigger="focus"
+					   data-placement="left"
+					   title="Example"
+					   data-content="someone@example.com">
+				</div>
+
+
+				 <!--contact phone-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-phone-alt"></span>
+				    </span>
+				    <input ng-model="promoContactNum" 
+					   type="tel" 
+					   class="form-control container-fluid" 
+					   name="promoContactNum" 
+					   placeholder="Contact number" 
+					   pattern="\d{10}" 
+					   data-toggle="popover" 
+					   data-trigger="focus" 
+					   data-placement="left" 
+					   title="Format" 
+					   data-content="10 digits, No dashes or spaces: 7778889999">
+				</div>
+
+				<!--enter date of birth-->
+				<div class="input-group input-group-lg">
+				    <span class="input-group-addon">
+					<span class="icon-calendar"></span>
+				    </span>
+
+				    <!--Note: z-index > 1003 impt here. date picker overlaps w/ form-ctrl. w/o z-index, date picker doesn't work-->
+				    <input ng-model="promoBirthDate" type="text" class="datepicker2 form-control container-fluid" name="promoBirthDate" placeholder="Enter date of birth" style="max-width: 220px;">
+				</div>
+				
+				<!--cover letter-->
+				<div style="padding: 10px 0;">
+				    <label><span class="icon-pencil"></span> Cover letter:</label>
+				    <textarea ng-model="promoCoverLetter" class="form-control" name="promoCoverLetter" rows="15" placeholder="Type your cover letter here and provide reasons for why you should win the promo over the other applicants.."></textarea>
+				</div>
+
+				<!--volunteer form buttons-->
+				<input type="submit" name="promoApplyFormSubmit" ng-model="promoApplyFormSubmit" value="Submit Application" class="btn-danger pull-right" style="font-size: 20px; font-weight: bolder;">
+				<input type="reset" name="#" value="Reset Form" class="btn-success pull-right" style="font-size: 20px; font-weight: bolder;">
+			    </form>
+
+			</div>
+		    </div>
+		</div>
+	    
+	    <div class="adverts-content" ng-bind-html='p.content'>
+	    </div> <!-- ng-bind-html requires the ng-sanitize CDN -->
+	    
+	</div>
+    </div>
+    <br>
+</div>

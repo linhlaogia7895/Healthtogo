@@ -1,0 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package common;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Document   : CreateSecurityHelper.java
+ * Version    : Feb 15, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for installing security
+ */
+public final class CreateSecurityHelper{
+
+    private static final String KEYA="b78fa4-yendoR35=7a73-hniL=4339-uodamaM=a5ba-lehcaR=33dfe0c54876-afuraM-995c32d9-a34f-42df-88ec-602868210a31-81a9ad30-f1f6-4d5a-92e9-8a797555e50b";
+    private static final String KEYB="b05e555797a8-9e29-a5d4-6f1f-03da9a18-13a012868206-ce88-fd24-f43a-9d23c599-Marufa-67845c0efd33=Rachel-ab5a=Mamadou-9334=Linh-37a7=53Rodney-4af87b";
+    
+    private static CreateSecurityHelper obj=null;
+    public static CreateSecurityHelper getInstance(){
+	if(obj==null){
+	    obj=new CreateSecurityHelper();
+	    return obj;
+	}else{
+	    return obj;
+	}
+    }
+    
+    /**
+     * Method for encrypting
+     */
+    public static final String encrypt(String string){
+	String encrypted="";
+	
+	char[] a=KEYA.toCharArray();
+	char[] b=KEYB.toCharArray();
+	char[] str=string.toCharArray();
+	
+	for(int i=0;i<str.length;i++){
+	    int n=str[i]+a[i]+b[i];
+	    encrypted+=(char)n;
+	}
+	return encrypted;
+    }
+    
+    /**
+     * Method for encrypting
+     */
+    public static final String decrypt(String string){
+	String decrypted="";
+	
+	char[] a=KEYA.toCharArray();
+	char[] b=KEYB.toCharArray();
+	char[] str=string.toCharArray();
+	
+	for(int i=0;i<str.length;i++){
+	    int n=str[i]-a[i]-b[i];
+	    decrypted+=(char)n;
+	}
+	return decrypted;
+    }
+}

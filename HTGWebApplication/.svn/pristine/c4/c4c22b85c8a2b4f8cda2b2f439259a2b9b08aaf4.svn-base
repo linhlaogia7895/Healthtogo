@@ -1,0 +1,56 @@
+package domains.users;
+
+/**
+ * Document   : SecurityQuestion.java
+ * Version    : Jan 21, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: domain class for jdbc security_question table
+ */
+public class SecurityQuestion {
+    String question;
+    String answer;
+
+    /**
+     * no-arg constructor
+     */
+    public SecurityQuestion() {
+    }
+
+    /**
+     * Main class constructor
+     * @param question the security question
+     * @param answer the security answer
+     */
+    public SecurityQuestion(String question, String answer) {
+            this.question = question;
+            this.answer = answer;
+    }
+
+    /**
+     * @return the question
+     */
+    public final String getQuestion() {
+            return question;
+    }
+
+    /**
+     * @param question the question to set
+     */
+    public final void setQuestion(String question) {
+            this.question = question;
+    }
+
+    /**
+     * @return the answer
+     */
+    public final String getAnswer() {
+            return answer;
+    }
+
+    /**
+     * @param answer the answer to set
+     */
+    public final void setAnswer(String answer) {
+            this.answer = answer;
+    }
+}

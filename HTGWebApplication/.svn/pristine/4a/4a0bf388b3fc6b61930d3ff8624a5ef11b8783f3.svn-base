@@ -1,0 +1,150 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package common;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringEscapeUtils;
+
+/**
+ * Document   : CreateSecurityHelper.java
+ * Version    : Feb 15, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for installing security
+ */
+public final class CreateSecurityHelper{
+
+    private static final String KEYA="b78fa4-yendoR35=7a73-hniL=4339-uodamaM=a5ba-lehcaR=33dfe0c54876-afuraM-995c32d9-a34f-42df-88ec-602868210a31-81a9ad30-f1f6-4d5a-92e9-8a797555e50b";
+    private static final String KEYB="b05e555797a8-9e29-a5d4-6f1f-03da9a18-13a012868206-ce88-fd24-f43a-9d23c599-Marufa-67845c0efd33=Rachel-ab5a=Mamadou-9334=Linh-37a7=53Rodney-4af87b";
+    
+    private static CreateSecurityHelper obj=null;
+    public static CreateSecurityHelper getInstance(){
+	if(obj==null){
+	    obj=new CreateSecurityHelper();
+	    return obj;
+	}else{
+	    return obj;
+	}
+    }
+    
+    /**
+     * Method for encrypting
+     * @param string The data to be encrypted
+     * @return String the encrypted data
+     */
+    public final String encrypt(String string){
+//	try {
+	    String encrypted="";
+	    
+	    char[] a=KEYA.toCharArray();
+	    char[] b=KEYB.toCharArray();
+	    char[] str=string.toCharArray();
+	    
+	    for(int i=0;i<str.length;i++){
+		int n=str[i]+a[i]+b[i];
+		encrypted+=(char)n;
+	    }
+	    
+//	    byte[] st2=encrypted.getBytes("UTF-8");
+//	    
+//	    return Arrays.toString(st2);
+
+	    return encrypted;
+	    
+//	} catch (UnsupportedEncodingException ex) {
+//	    Logger.getLogger(CreateSecurityHelper.class.getName()).log(Level.SEVERE, null, ex);
+//	}
+//	return null;
+    }
+    
+    /**
+     * Method for encrypting
+     * @param string The data to be decrypted
+     * @return String the decrypted data
+     */
+    public final String decrypt(String string){
+//	try {
+	    String decrypted="";
+	    
+	    char[] a=KEYA.toCharArray();
+	    char[] b=KEYB.toCharArray();
+	    char[] str=string.toCharArray();
+	    
+	    for(int i=0;i<str.length;i++){
+		int n=str[i]-a[i]-b[i];
+		decrypted+=(char)n;
+	    }
+	    
+	    return decrypted;
+	    
+//	    byte[] st2=decrypted.getBytes("UTF-8");
+//	    return Arrays.toString(st2);
+//	    
+//	} catch (UnsupportedEncodingException ex) {
+//	    Logger.getLogger(CreateSecurityHelper.class.getName()).log(Level.SEVERE, null, ex);
+//	}
+//	return null;
+    }
+    
+    /**
+   * Converts the string to the unicode format '\u0020'.
+   * 
+   * This format is the Java source code format.
+   *
+   * <pre>
+   *   CharUtils.unicodeEscaped(' ') = "\u0020"
+   *   CharUtils.unicodeEscaped('A') = "\u0041"
+   * </pre>
+   * 
+   * @param ch  the character to convert
+   * @return the escaped unicode string
+   */
+  public final String unicodeEscaped(char ch) {
+      if (ch < 0x10) {
+          return "\\u000" + Integer.toHexString(ch);
+      } else if (ch < 0x100) {
+          return "\\u00" + Integer.toHexString(ch);
+      } else if (ch < 0x1000) {
+          return "\\u0" + Integer.toHexString(ch);
+      }
+      return "\\u" + Integer.toHexString(ch);
+  }
+  
+  /**
+   * Converts the string to the unicode format '\u0020'.
+   * 
+   * This format is the Java source code format.
+   * 
+   * If <code>null</code> is passed in, <code>null</code> will be returned.
+   *
+   * <pre>
+   *   CharUtils.unicodeEscaped(null) = null
+   *   CharUtils.unicodeEscaped(' ')  = "\u0020"
+   *   CharUtils.unicodeEscaped('A')  = "\u0041"
+   * </pre>
+   * 
+   * @param ch  the character to convert, may be null
+   * @return the escaped unicode string, null if null input
+   */
+  public final String unicodeEscaped(Character ch) {
+      if (ch == null) {
+          return null;
+      }
+      return unicodeEscaped(ch.charValue());
+  }
+  
+  public final String convertUnicodeToString(String unicode){
+      return StringEscapeUtils.unescapeJava(unicode);
+  }
+}

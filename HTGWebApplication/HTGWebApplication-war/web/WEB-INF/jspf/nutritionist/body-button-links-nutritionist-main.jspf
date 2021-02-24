@@ -1,0 +1,27 @@
+<!--Body button links-->
+<div class="w3-row container-fluid w3-container" style="max-width: 1090px; height: 500px; width: auto;">
+    <h1>Nutrition Page Management</h1>
+    <div class="btn-grp w3-row w3-center">
+	<a href="createNewStaffAccount.jsp" class="page-buttons button btn btn-success">Create Staff Account</a>
+	<a href="#" class="page-buttons button btn btn-success">Update Staff Account</a>
+	<a href="#" class="page-buttons button btn btn-success">Deactivate Staff Account</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="#" class="page-buttons button btn btn-success">Deactivate Staff Account</a>
+	<a href="#" class="page-buttons button btn btn-success">Create Patient Account</a>
+	<a href="#" class="page-buttons button btn btn-success">Deactivate Patient Account</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="#" class="page-buttons button btn btn-success">Reactivate Patient Account</a>
+	<a href="nutritionistManageJournal.jsp" class="page-buttons button btn btn-success">View Patient Journal</a>
+	<a href="#" class="page-buttons button btn btn-success">Appointments</a>
+    </div>
+
+    <div class="btn-grp w3-row w3-center">
+	<a href="#" class="page-buttons button btn btn-success">Book Appointments</a>
+	<a href="#" class="page-buttons button btn btn-success">View Appointments</a>
+	<a href="#" class="page-buttons button btn btn-success">Delete Appointments</a>
+    </div>
+</div>

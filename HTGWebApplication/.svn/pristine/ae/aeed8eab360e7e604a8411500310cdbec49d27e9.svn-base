@@ -1,0 +1,79 @@
+<!--contact modal popup-->
+<div class="modal fade" id="modal-contact-popup" role="dialog">
+    <div class="modal-dialog">
+
+	<!-- Modal content-->
+       <div class="modal-content">
+	   <div class="modal-header">
+
+	       <!--close button-->
+	       <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+	       <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+
+	       <!--contact header-->
+	       <h4><span class="icon-envelope"></span> Contact</h4>
+	   </div>
+	   <!--form USING ANGULAR JS--> 
+	   <form action="MainPageServlet" method="post" name="contactForm">
+
+	       <!--modal body-->
+	       <div class="modal-body">
+		       <div class="form-group">
+
+			   <!--enter name-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-user"></span>
+			       </span>
+			       <input ng-model="contactName" type="text" class="form-control" name="contactName" placeholder="Enter your name" autofocus required>
+			   </div>
+
+			   <!--enter email-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-envelope"></span>
+			       </span>
+			       <input type="email" class="form-control" name="contactEmail" placeholder="Enter email" required
+				      ng-model="email">
+			   </div>
+			   <span ng-show="contactForm.contactEmail.$dirty && contactForm.contactEmail.$invalid" 
+				 style="color: red;">
+			       <span ng-messages="contactForm.contactEmail.$error.email" ng-messages-include="_js/angular/messages.html"></span>
+			   </span>
+
+			   <!--enter subject-->
+			   <div class="input-group input-group-lg">
+			       <span class="input-group-addon">
+				   <span class="icon-question"></span>
+			       </span>
+			       <input type="text" class="form-control" name="contactSubject" placeholder="Enter subject">
+			   </div>
+
+			   <!--enter message-->
+			   <div style="padding: 10px 0;">
+			       <label for="message"><span class="icon-pencil"></span>Message:</label>
+			       <textarea ng-model="contactTextArea" class="form-control" name="message" rows="10" placeholder="Enter your message" required></textarea>
+			   </div>
+			   <br>
+
+			   <!--submit button-->
+			   <input ng-disabled="contactForm.$invalid" id="contact-btn" class="btn btn-danger pull-left" type="submit" name="submitMessage" value="Send Message">
+		       </div>
+	       </div>
+
+	       <!--footer-->
+	       <div class="modal-footer">
+		   <h5 id="address-link">
+		       <a target="_blank" 
+			  href="https://www.google.ca/maps/dir//140+Castlebrook+Rise+NE,+AB+T3J+1P1,+CANADA/@51.1050826,-113.9695245,16z/data=!3m1!4b1">
+			       <span class="icon-map-marker"> 
+				   140 Castlebrook Rise NE, AB T3J 1P1, CANADA
+			       </span>
+		       </a>
+		   </h5>
+	       </div>
+	   </form>
+
+       </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+package beans.patient;
+
+import java.sql.Date;
+import javax.ejb.Local;
+
+/**
+ * Document   : PatientBeanLocal.java
+ * Version    : Jan 20, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: interface for PatientBean.java
+ */
+@Local
+public interface PatientBeanLocal {
+    boolean createPatientAccountByPatient(
+            String newUsername,
+            String usertype,
+            String newFirstName,
+            String newLastName,
+            String newEmail,
+            String newAddress,
+            String newHomePhone,
+            String newCellPhone,
+            Date dateOfBirth,
+            String newGender,
+            String contractPeriod
+    );
+    
+    boolean addSecurityQuestion(
+            String activityUser,
+            String theUsername,
+            String questionNumberOne,
+            String anwserNumberOne,
+            String questionNumberTwo,
+            String anwserNumberTwo
+    );
+    
+    boolean editPatientAccount(
+            String activityUser,
+            String newUsername,
+            String newFirstName,
+            String newLastName,
+            String newEmail,
+            String newAddress,
+            int newHomePhone,
+            int newCellPhone,
+            Date dateOfBirth,
+            char newGender,
+            String contractPeriod
+    );
+    
+    boolean editeditSecurityQuestion(
+            String activityUser,
+            String theUsername,
+            String questionNumberOne,
+            String anwserNumberOne,
+            String questionNumberTwo,
+            String anwserNumberTwo
+    );
+    
+    
+}

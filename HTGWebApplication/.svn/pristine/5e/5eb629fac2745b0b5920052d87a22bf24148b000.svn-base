@@ -1,0 +1,15 @@
+<!--Third page - About ME--> 
+<section id="about-page" class="container-fluid about-page">
+    <aside class="col-lg-4">
+	<img class="img-circle" src="_res/main/images/About-me.gif" alt="Ms. Amina Ashraf" title="Ms. Amina Ashraf">
+    </aside>
+    <aside class="col-lg-8">
+	<div class="body-text jumbotron">
+	    <h1>About Us</h1>
+	    <h2 style="margin-left: 25px;">Health To Go is a privately owned consulting company founded by Registered Nutritionist Amina Ashraf in 2016. We offer nutrition 
+consulting services including one-on-one nutrition counselling, professional speaking, educational resources as well as food industry
+and restaurant consulting. Our services and resources aim to help people achieve long lasting and dramatic results to boost their energy,
+maximize their health and manage a healthy weight.</h2>                                
+	</div>
+    </aside>                    
+</section> 

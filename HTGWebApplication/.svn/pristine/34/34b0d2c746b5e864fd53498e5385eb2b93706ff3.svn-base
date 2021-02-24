@@ -1,0 +1,467 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package patient;
+
+import beans.patient.PatientAppointmentsBean;
+import common.CreateSecurityHelper;
+import common.HtmlPageHelper;
+import domains.main.AppointmentsDomain;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Document   : BookAppointmentServletByPatient.java
+ * Version    : April 4, 2017
+ * Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+ * Description: Servlet for receiving inputs for book appointments by patient
+ */
+public class BookAppointmentServletByPatient extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	
+	HttpSession session=request.getSession(true);
+	String message="";
+	
+	/*check for submitted url path*/
+	String url=request.getParameter("url");
+	
+	/*checks the encrypted url with decryptor*/
+	CreateSecurityHelper csh=CreateSecurityHelper.getInstance();
+	if(csh.decrypt(url).equals("app-patient"))
+	    url="/appointment-patient.jsp";
+	else if(csh.decrypt(url).equals("app-manage"))
+	    url="appointment-manage-by-staff.jsp";
+	
+	/*Search selected date*/
+	String SEARCH_SELECTED_DATE_SUBMIT=request.getParameter("SEARCH_SELECTED_DATE_SUBMIT");
+	if(isNotNullNorEmpty(SEARCH_SELECTED_DATE_SUBMIT)){
+	    String DATE_TO_SEARCH=request.getParameter("DATE_TO_SEARCH");
+	     
+	    /*checks if selected date has value*/
+	    if(isNullOrEmpty(DATE_TO_SEARCH)){
+		setToday(request);
+		message="The date field cannot be empty";
+	    }
+	    
+	    /*get the current date*/
+	    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    LocalDate localDate = LocalDate.now();
+	    String tdyDate=dtf.format(localDate);
+	    
+	    /*checks if selected date has value*/
+	    if(isNotNullNorEmpty(DATE_TO_SEARCH)){
+
+		/*checks if selected date has passed*/
+		if(tdyDate.compareTo(DATE_TO_SEARCH)<0){
+		    PatientAppointmentsBean pab=new PatientAppointmentsBean();
+		    ArrayList<AppointmentsDomain> appointmentsList=pab.getAllAppointments();
+
+		    /*loop through dbase*/
+		    boolean hasEquals=false;
+		    for(AppointmentsDomain a:appointmentsList){
+			hasEquals=String.valueOf(a.getSTART_DATE()).equalsIgnoreCase(DATE_TO_SEARCH);
+			
+			/*if match found*/
+			if(hasEquals){
+			    applyStyles(request, String.valueOf(a.getSTART_TIME()).trim());
+			    request.setAttribute("tdyDate", "Selected Date <br>"+a.getSTART_DATE());
+			    
+			    /*send the date to the hidden field to the front end for later use in booking*/
+			    request.setAttribute("BOOKING_DATE", a.getSTART_DATE());
+			    
+			    /*remember appointment ID*/
+			    session.setAttribute("appId", a.getAPPOINTMENT_ID());
+			}
+		    }
+		    /*if no match found*/
+		    if(!hasEquals){
+			setToday(request);
+			message="No matching date found.";
+		    }
+		}else{/*if current date has passed*/
+		    setToday(request);
+		    message="The date you selected has passed";
+		}
+	    }/*if field is empty*/
+	}
+	
+	
+	/*Initial Load*/
+	if(isNullOrEmpty(SEARCH_SELECTED_DATE_SUBMIT)){
+	    setToday(request);
+	}
+	
+	/*Book appointment*/
+	String KEY=request.getParameter("KEY");
+	String submitBooking=request.getParameter("submitBooking");
+	if(isNotNullNorEmpty(submitBooking)){
+	    /*check if key converts properly*/
+	    if(csh.decrypt(KEY).equals("booking")){
+		String activityUser=(String)session.getAttribute("userName");
+		String USERNAME=request.getParameter("USERNAME");
+		String NUTRITIONIST_ID=request.getParameter("NUTRITIONIST_ID");
+		String BOOKING_DATE=request.getParameter("BOOKING_DATE");
+		String START_TIME=request.getParameter("START_TIME");
+		String END_TIME=request.getParameter("END_TIME");
+		String EXTENSION=request.getParameter("EXTENSION");
+		String PACKAGE_TYPE=request.getParameter("PACKAGE_TYPE");
+		String PURPOSE=request.getParameter("PURPOSE");
+
+		/*checks if values are not null nor empty*/
+		boolean hasBooking=isNotNullNorEmpty(USERNAME)
+			&& isNotNullNorEmpty(NUTRITIONIST_ID)
+			&& isNotNullNorEmpty(BOOKING_DATE)
+			&& isNotNullNorEmpty(START_TIME)
+			&& isNotNullNorEmpty(END_TIME)
+			&& isNotNullNorEmpty(EXTENSION)
+			&& isNotNullNorEmpty(PACKAGE_TYPE)
+			&& isNotNullNorEmpty(PURPOSE)
+			&& activityUser.equalsIgnoreCase(USERNAME); /*checks if the USERNAME entered is the same as the session userName*/
+		if(hasBooking){
+		    try {
+			/*get patient ID*/
+			PatientAppointmentsBean pab=new PatientAppointmentsBean();
+			int patientID=pab.getPatientId(USERNAME);
+			
+			/*convert string to SQL date*/
+			DateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date startDate=df.parse(BOOKING_DATE);
+			Date sqlDate=new Date(startDate.getTime());
+			
+			/*convert string START_TIME to time*/
+			DateFormat dfTime=new SimpleDateFormat("HH:mm:ss");
+			java.sql.Time sqlStartTime = new java.sql.Time(dfTime.parse(START_TIME).getTime());
+			
+			/*convert string END_TIME to time*/
+			java.sql.Time sqlEndTime = new java.sql.Time(dfTime.parse(END_TIME).getTime());
+			
+			/*add appointment*/
+			pab.addAppointment(activityUser,
+				patientID,
+				Integer.parseInt(NUTRITIONIST_ID),
+				sqlDate,
+				sqlStartTime,
+				sqlDate,
+				sqlEndTime,
+				PACKAGE_TYPE,
+				PURPOSE);
+			
+		    } catch (ParseException ex) {
+			Logger.getLogger(BookAppointmentServletByPatient.class.getName()).log(Level.SEVERE, null, ex);
+		    }
+		}else{
+		    setToday(request);
+		    message="Failed validation";
+		}
+	    }else{
+		setToday(request);
+		message="Failed validation";
+	    }
+	}
+	
+	/*Cancel appointment*/
+	String submitCancel=request.getParameter("submitCancel");
+	String KEY_CANCEL=request.getParameter("KEY");
+	if(isNotNullNorEmpty(submitCancel)){
+	    if(csh.decrypt(KEY_CANCEL).equals("cancel Booking")){
+		
+		String BOOKING_DATE=request.getParameter("BOOKING_DATE");
+		String START_TIME=request.getParameter("START_TIME");
+		String END_TIME=request.getParameter("END_TIME");
+		String USERNAME=request.getParameter("USERNAME");
+		String activityUser=(String)session.getAttribute("userName");
+		
+		boolean hasCancel=isNotNullNorEmpty(BOOKING_DATE)
+			&& isNotNullNorEmpty(START_TIME)
+			&& isNotNullNorEmpty(END_TIME)
+			&& isNotNullNorEmpty(USERNAME)
+			&& isNotNullNorEmpty(activityUser)
+			&& USERNAME.equalsIgnoreCase(activityUser); /*checks if the USERNAME entered is the same as the session userName*/
+		
+		if(hasCancel){
+		    PatientAppointmentsBean pab=new PatientAppointmentsBean();
+		    pab.removeAppointmentById(activityUser, Integer.parseInt((String)session.getAttribute("appId")));
+		}else{
+		    setToday(request);
+		    message="Failed validation";
+		}
+	    }else{
+		setToday(request);
+		message="Failed validation";
+	    }
+	}
+	
+	
+//	----------------
+
+	/*get default nutrition ID*/
+	request.setAttribute("NUTRITIONIST_ID", "00005");
+	    
+	    
+	if(isNotNullNorEmpty(message)) 
+	    request.setAttribute("message", new HtmlPageHelper().sendMessage(message));
+	
+	getServletContext().getRequestDispatcher(url).forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+	return "Short description";
+    }// </editor-fold>
+
+    
+    /**
+     * Method to check if object is null or empty
+     * @param o the Object
+     * @return true if object is neither null or empty
+     */
+    private final boolean isNotNullNorEmpty(Object o){
+	return o!=null && !String.valueOf(o).isEmpty();
+    }
+    
+    /**
+     * Method to check if object is null or empty
+     * @param o the Object
+     * @return true if object is neither null or empty
+     */
+    private final boolean isNullOrEmpty(Object o){
+	return o==null || String.valueOf(o).isEmpty();
+    }
+    
+    /**
+     * Method to change page styles depending on the date/time availability 
+     * @param request the HttpServletRequest
+     * @param time the time to match
+     */
+    public final synchronized void applyStyles(HttpServletRequest request, String time){
+	switch(time){
+	    case "08:00:00":
+		request.setAttribute("color1", "grey");
+		request.setAttribute("status1", "CLOSED");
+		request.setAttribute("disabled1", "disabled");
+
+		request.setAttribute("color2", "teal");
+		request.setAttribute("color3", "teal");
+		request.setAttribute("color4", "teal");
+		request.setAttribute("color5", "teal");
+		request.setAttribute("color6", "teal");
+
+		request.setAttribute("status2", "OPEN");
+		request.setAttribute("status3", "OPEN");
+		request.setAttribute("status4", "OPEN");
+		request.setAttribute("status5", "OPEN");
+		request.setAttribute("status6", "OPEN");
+
+		break;
+	    case "10:00:00":
+		request.setAttribute("color2", "grey");
+		request.setAttribute("status2", "CLOSED");
+		request.setAttribute("disabled2", "disabled");
+
+		request.setAttribute("color1", "teal");
+		request.setAttribute("color3", "teal");
+		request.setAttribute("color4", "teal");
+		request.setAttribute("color5", "teal");
+		request.setAttribute("color6", "teal");
+
+		request.setAttribute("status1", "OPEN");
+		request.setAttribute("status3", "OPEN");
+		request.setAttribute("status4", "OPEN");
+		request.setAttribute("status5", "OPEN");
+		request.setAttribute("status6", "OPEN");
+
+		break;
+	    case "13:00:00":
+		request.setAttribute("color3", "grey");
+		request.setAttribute("status3", "CLOSED");
+		request.setAttribute("disabled3", "disabled");
+
+		request.setAttribute("color1", "teal");
+		request.setAttribute("color2", "teal");
+		request.setAttribute("color4", "teal");
+		request.setAttribute("color5", "teal");
+		request.setAttribute("color6", "teal");
+
+		request.setAttribute("status1", "OPEN");
+		request.setAttribute("status2", "OPEN");
+		request.setAttribute("status4", "OPEN");
+		request.setAttribute("status5", "OPEN");
+		request.setAttribute("status6", "OPEN");
+
+		break;
+	    case "15:00:00":
+		request.setAttribute("color4", "grey");
+		request.setAttribute("status4", "CLOSED");
+		request.setAttribute("disabled4", "disabled");
+
+		request.setAttribute("color1", "teal");
+		request.setAttribute("color2", "teal");
+		request.setAttribute("color3", "teal");
+		request.setAttribute("color5", "teal");
+		request.setAttribute("color6", "teal");
+
+		request.setAttribute("status1", "OPEN");
+		request.setAttribute("status2", "OPEN");
+		request.setAttribute("status3", "OPEN");
+		request.setAttribute("status5", "OPEN");
+		request.setAttribute("status6", "OPEN");
+		break;
+	    case "17:00:00":
+		request.setAttribute("color5", "grey");
+		request.setAttribute("status5", "CLOSED");
+		request.setAttribute("disabled5", "disabled");
+
+		request.setAttribute("color1", "teal");
+		request.setAttribute("color2", "teal");
+		request.setAttribute("color3", "teal");
+		request.setAttribute("color4", "teal");
+		request.setAttribute("color6", "teal");
+
+		request.setAttribute("status1", "OPEN");
+		request.setAttribute("status2", "OPEN");
+		request.setAttribute("status3", "OPEN");
+		request.setAttribute("status4", "OPEN");
+		request.setAttribute("status6", "OPEN");
+		break;
+	    case "19:00:00":
+		request.setAttribute("color6", "grey");
+		request.setAttribute("status6", "CLOSED");
+		request.setAttribute("disabled6", "disabled");
+
+		request.setAttribute("color1", "teal");
+		request.setAttribute("color2", "teal");
+		request.setAttribute("color3", "teal");
+		request.setAttribute("color4", "teal");
+		request.setAttribute("color5", "teal");
+
+		request.setAttribute("status1", "OPEN");
+		request.setAttribute("status2", "OPEN");
+		request.setAttribute("status3", "OPEN");
+		request.setAttribute("status4", "OPEN");
+		request.setAttribute("status5", "OPEN");
+
+		break;
+	}
+    }
+    
+    /**
+     * Method to set the default page styles
+     * @param request the HttpServletRequest
+     */
+    public final synchronized void defaultStyles(HttpServletRequest request){
+	request.setAttribute("color1", "teal");
+	request.setAttribute("color2", "teal");
+	request.setAttribute("color3", "teal");
+	request.setAttribute("color4", "teal");
+	request.setAttribute("color5", "teal");
+	request.setAttribute("color6", "teal");
+
+	request.setAttribute("status1", "OPEN");
+	request.setAttribute("status2", "OPEN");
+	request.setAttribute("status3", "OPEN");
+	request.setAttribute("status4", "OPEN");
+	request.setAttribute("status5", "OPEN");
+	request.setAttribute("status6", "OPEN");
+    }
+    
+    /**
+     * Method to set today's page
+     * @param request the HttpServletRequest
+     */
+    public final synchronized void setToday(HttpServletRequest request){
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	LocalDate localDate = LocalDate.now();
+	String tdyDate=dtf.format(localDate);
+	
+	HttpSession session=request.getSession(true);
+	
+	/*sets the header date*/
+	request.setAttribute("tdyDate", "Today's Schedule <br>"+tdyDate);
+	
+	/*sets the booking date*/
+	request.setAttribute("BOOKING_DATE", tdyDate);
+	
+	PatientAppointmentsBean ab=new PatientAppointmentsBean();
+	ArrayList<AppointmentsDomain> appointmentsList=ab.getAllAppointments();
+
+	boolean hasEquals=false;
+	for(AppointmentsDomain a:appointmentsList){
+	    hasEquals=String.valueOf(a.getSTART_DATE()).equalsIgnoreCase(tdyDate.trim());
+	    if(hasEquals){
+		
+		/*apply styles for the schedule found*/
+		applyStyles(request, String.valueOf(a.getSTART_TIME()).trim());
+		
+		/*remember appointment ID*/
+		session.setAttribute("appId", a.getAPPOINTMENT_ID());
+	    }
+	}
+	if(!hasEquals){
+	    defaultStyles(request);
+	}
+    }
+}

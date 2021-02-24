@@ -1,0 +1,30 @@
+
+<!--home page-->
+<section id="main-page" class="main-page">
+    <div>
+	<img id="main-img" class="w3-hover-opacity img-thumbnail main-img" alt="Nutritionist with fruits" src="_res/main/images/lady1.jpg">        
+    </div>
+    <!--the lone advert sitting on the home image-->
+    <div id="advert" class="container-fluid advert">
+	<form action="MainPageServlet" method="POST">
+	    <h3>Did you know that <strong>fitness</strong> is 20% exercise and 80% nutrition? Let us help you achieve this goal.</h3>
+	    <br>
+	    <input class="btn btn-warning advert-btn" type="submit" name="submitBookSessionNow" value="Book a session now">
+	</form>
+    </div>
+
+<!--home page-->
+<section id="main-page" class="main-page">
+    <div>
+	<img id="main-img" class="w3-hover-opacity img-thumbnail main-img" alt="Nutritionist with fruits" src="_res/main/images/section1.jpg">        
+    </div>
+    <!--the lone advert sitting on the home image-->
+    <div id="advert" class="container-fluid advert">
+	<form action="MainPageServlet" method="POST">
+	    <h3>Did you know that <strong>fitness</strong> is 20% exercise and 80% nutrition? Let us help you achieve this goal.</h3>
+	    <br>
+	    <input class="btn btn-warning advert-btn" type="submit" name="submitBookSessionNow" value="Book a session now">
+	</form>
+    </div>
+
+</section>

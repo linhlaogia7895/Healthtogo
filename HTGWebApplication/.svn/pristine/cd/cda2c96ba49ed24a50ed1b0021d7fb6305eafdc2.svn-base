@@ -1,0 +1,123 @@
+<%-- 
+    Document   : manage-nutrition-library.jsp
+    Version    : Jan 15, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: html page for staff to manage the nutrition library
+--%>
+
+<%--@page import="org.owasp.encoder.Encode"--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!--redirect scriptlet-->
+<%@include file="WEB-INF/jspf/nutritionist/header-scriptlet-nutritionistJSP.jspf" %>
+<!--end of redirect scriptlet definitions-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Manage Journal</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+	<!--CDNs-->
+	<c:import url="WEB-INF/jspf/nutritionist/CDN-nutritionistJSP.jspf"></c:import>
+	<!--end of CDN definitions-->
+        
+    </head>
+    
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <div class="page" ng-app="newInvoice">
+            <!--logo-header-->
+            <c:import url="WEB-INF/jspf/common/logo-header-common.jspf"></c:import>
+	    
+            <!--Navigation bar-->
+	    <%@include file="WEB-INF/jspf/main/nav-main.jspf" %>
+
+            <!--============================================================-->
+            <!--ENTER YOUR HTML HERE-->           
+           
+           
+                
+           
+                 <div class="container">
+                     <form class="form-horizontal" action="AddNewInvoice" method="POST" ng-controller="createInvoice">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr><th><label class="control-label col-sm-2" for="txt">Add New Invoice</label></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>
+                                    <label for="purpose">Patient ID</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                                        <input id="purpose" type="text" class="form-control" name="patientId" value="<%= request.getParameter("patientID") %>" >
+                                    </div>
+                            </td></tr>
+                            <tr><td>
+                                    <label for="current">Sub Total</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                                        <input id="current" type="text" class="form-control" name="subTotal" placeholder="Enter Sub Total" ng-model="subTotal">
+                                    </div>
+                            </td></tr>
+                            <tr><td>
+                                    <label for="goal">Tax Rate</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                                        <input id="goal" type="text" class="form-control" name="taxRate" placeholder="Enter Tax Rate" ng-model="taxRate">
+                                    </div>
+                            </td></tr>
+                            <tr><td>
+                                    <label for="start">Tax Amount</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                                        <input id="start" type="text" class="form-control" name="taxAmount" value="{{subTotal*(taxRate/100)}}" >
+                                    </div>
+                            </td></tr>
+                            <tr><td>
+                                    <label for="lowest">Total Amount</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                                        <input id="lowest" type="text" class="form-control" name="totalAmount" value="{{subTotal*(1+taxRate/100)}}" >
+                                    </div>
+                            </td></tr>
+                            <tr><td>
+                                    <label for="half">Bill Address</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                                        <input id="half" type="text" class="form-control" name="address" placeholder="Enter Bill Address">
+                                    </div>
+                            </td></tr>
+                            <tr><td>
+                                    <label for="lost">Description</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                                        <input id="lost" type="text" class="form-control" name="description" placeholder="Enter Description">
+                                    </div>
+                            </td></tr>
+                            
+
+                        </tbody>
+                    </table>
+                    <input class="btn btn-success" type="submit" name="submitNewInvoice" value="Create">
+                    <a href="staff.jsp" class="btn btn-warning" role="button">Cancel</a>
+                </form> 
+                <br/>
+            </div>   
+        </div>
+            <!--============================================================-->
+	    <!--footer definition-->
+	    <c:import url="WEB-INF/jspf/common/footer-common.jspf"></c:import>
+            <!--end of footer definition--> 
+            
+            <!-- +++++++++++++++++++++++++++popups+++++++++++++++++++++++++++ -->
+            
+            <!--contact modal popup-->
+	    <c:import url="WEB-INF/jspf/common/contact-popup-common.jspf"></c:import>
+	    <!--end of contact modal popup-->
+            
+            <!--============================================================-->
+            <!--Messages coming from Servlet-->
+	    <%@include file="WEB-INF/jspf/common/servlet-messages.jspf" %>
+	    <!--end messages from servlet definitions-->
+        </div>
+    </body>
+</html>

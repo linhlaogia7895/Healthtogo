@@ -1,0 +1,7 @@
+<%
+
+String username = (String)request.getParameter("username");
+if(username!=null)
+session.setAttribute("username", username);
+
+%>

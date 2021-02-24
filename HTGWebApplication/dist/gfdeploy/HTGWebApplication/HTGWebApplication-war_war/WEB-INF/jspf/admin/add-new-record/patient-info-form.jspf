@@ -1,0 +1,88 @@
+<form class="form-horizontal" action="PatientInfo" method="POST">
+    <table class="table table-hover">
+        <thead>
+            <tr><th><label class="control-label col-sm-2" for="txt">New Record</label></th></tr>
+        </thead>
+        <tbody>
+            <tr><td>
+                    <label for="current">Current Weight</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="current" type="text" class="form-control" name="current" placeholder="Enter Current Weight">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="goal">Goal Weight</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="goal" type="text" class="form-control" name="goal" placeholder="Enter Goal Weight">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="start">Start Weight</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="start" type="text" class="form-control" name="start" placeholder="Enter Start Weight">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="lowest">Lowest Weight</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="lowest" type="text" class="form-control" name="lowest" placeholder="Enter Lowest Weight">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="half">Half Way Weight</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="half" type="text" class="form-control" name="halfway" placeholder="Enter Half Way Weight">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="lost">Weight Lost</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="lost" type="text" class="form-control" name="lost" placeholder="Enter Weight Lost">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="calories">Calories Level</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="calories" type="text" class="form-control" name="calories" placeholder="Enter Calories Level">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="chest">Chest Measure</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="chest" type="text" class="form-control" name="chest" placeholder="Enter Chest Measure">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="waist">Waist Measure</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="waist" type="text" class="form-control" name="waist" placeholder="Enter Waist Measuret">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="andomen">Abdomen Measure</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="andomen" type="text" class="form-control" name="abdomen" placeholder="Enter Abdomen Measure">
+                    </div>
+            </td></tr>
+            <tr><td>
+                    <label for="hip">Hip Measure</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                        <input id="hip" type="text" class="form-control" name="hip" placeholder="Enter Hip Measure">
+                    </div>
+
+        </tbody>
+    </table>
+    <input class="btn btn-success" type="submit" name="submitRecord" value="Add">
+    <a href="Record" class="btn btn-warning" role="button">Cancel</a>
+</form>

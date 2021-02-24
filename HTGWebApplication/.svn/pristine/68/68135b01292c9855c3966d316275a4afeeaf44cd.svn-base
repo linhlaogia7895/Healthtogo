@@ -1,0 +1,35 @@
+<!--form for confirming security questions-->
+<form class="form-horizontal" action="PatientInfo" method="POST">
+    <table class="table table-hover">
+	<thead>
+	    <tr><th><label class="control-label col-sm-2" for="txt">Confirm Security Questions</label></th></tr>
+	</thead>
+	<tbody>
+	    <tr><td>
+		    <div class="input-group">
+			<span class="input-group-addon">Question 1: &nbsp;</span>
+			<input id="questionOne" type="text" class="form-control" name="questionOne" value="${questionOne}" disabled>
+		    </div>
+		    <div class="input-group">
+			<span class="input-group-addon">Answer 1: &nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<input id="anwserOne" type="text" class="form-control" name="anwserOne">
+		    </div>
+	    </td></tr>
+	    <tr><td>
+		    <div class="input-group">
+			<span class="input-group-addon">Question 2: &nbsp;</span>
+			<input id="questionTwo" type="text" class="form-control" name="questionTwo" value="${questionTwo}" disabled>
+		    </div>
+		    <div class="input-group">
+			<span class="input-group-addon">Anwser 2: &nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<input id="anwserTwo" type="text" class="form-control" name="anwserTwo">
+		    </div>
+	    </td></tr>
+	</tbody>
+    </table>
+			<span id="messageText">${messageError}</span>
+    <br/>
+    <div class="control-label col-sm-1"><a id="white" href="PatientInformation" class="btn btn-success" role="button">Cancel</a> </div>
+    <div class="control-label col-sm-3"><input class="btn btn-success" type="submit" name="submitAnwser" value="Submit"> </div>
+    <br/><br/>
+</form> 

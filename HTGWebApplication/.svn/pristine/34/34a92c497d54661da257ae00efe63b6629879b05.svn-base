@@ -1,0 +1,650 @@
+<%-- 
+    Document   : paymentPlan.jsp
+    Version    : Jan 5, 2017
+    Author     : Marufa Chowdhury, Rachel Bautista, Mamadou Diallo, Tuan L. Truong, Rodney Vencio
+    Description: html page for patient
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTG Patient Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <!--This meta statement tells individual devices not to scale the web page but rather to use the scale of 1. 
+        Meaning, if we are on a device that's 700px across, it will render the page as if there were on 700px, 
+        allowing the rest of the HTML to move around. The device will not attempt to show the entire page and scale it 
+        down-->
+        <meta name="Viewport" content="width=device-width, initial-scale=1"> 
+        
+        <!--CDN for JQuery date picker-->
+        <!--IMPORTANT: MUST CHANGE PATH HERE FOR CUPERTINO WHEN FILE IS MOVED. Cupertino is needed by datepicker-->
+        <link href="_css/common/cupertino/jquery-ui.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        
+        <!--CDN for JQuery date picker. Needs to be at this spot-->
+        <script src="_js/_common/temp/jquery-1.11.3.min.js"></script>
+        
+        <!--CDN for general JQuery and Bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <!--CDN for JQuery date picker. Needs to be at this spot-->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <!--CDN for Angular JS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        
+        <!--Custom-made JS and CSS. Important: MUST CHANGE ALL PATHS HERE WHEN FILE IS MOVED-->
+        <script src="_js/patient/patient.js" type="text/javascript"></script>
+        <script src="_js/_common/common.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="_css/common/common.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="_css/patient/patient.css">
+        
+    </head>
+<link href="https://fonts.googleapis.com/css?family=Aladin|Fredericka+the+Great|Great+Vibes|Kaushan+Script|Nixie+One|Oleo+Script|Playball|Shrikhand|Tangerine" rel="stylesheet"> 
+    <body data-spy="scroll" data-target=".navbar" data-offset="50">
+        <div class="page" ng-app="">
+            
+            <!--Logo-->
+            <header>
+                
+                <!--Logo. IMPORTANT: MUST CHANGE the PATHs HERE WHEN FILE IS MOVED-->
+                <div id="slides" class="slideshow">
+                    <div>
+                        <img id="logo" class="logos" src="_res/common/logo5.png" alt="Health To Go Nutrition Care">
+                    </div>
+                    <div>
+                        <img id="logo2" class="logos" src="_res/common/logo6.png" alt="Health To Go Nutrition Care">
+                    </div>
+                </div>  
+            </header>
+            
+            
+            <!--Navigation bar-->
+            <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="150">
+                <div class="container-fluid" id="nav_local">
+                    
+                    <!--Navigation bar for small screens-->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>          
+                        </button>
+                        <a class="navbar-brand" href="#"></a>
+                    </div>
+                    
+                    <!--Regular navigation bar-->
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            
+                            <!--IMPORTANT: MUST CHANGE ALL PATHS HERE WHEN FILE IS MOVED-->
+                            <li class="#"><a href="MainPageServlet?page=/index.jsp#main-page"><span class="icon-home" style="font-size: 1.2em;" ></span>&nbsp;Home</a></li>
+                            <li class="#"><a href="MainPageServlet?page=/index.jsp#services-page"> Services</a></li>
+                            <li class="#"><a href="MainPageServlet?page=/index.jsp#about-page"> About Us</a></li>
+                            <li class="#"><a style="cursor:pointer" id="contact-popup">Contact</a></li>
+                            <li class="#"><a href="NutritionLibrary">Nutrition Library</a></li>
+                            
+                            <!--No one logged in-->
+                            <li class="${noneLoggedIn} dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    
+                                    Account
+                                    
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    
+                                    <!--check MainPageServlet.java and HtmlPageHelper.java for the contents of classRequireLogin-->
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(5) <span class="assigned">(Mamadou)</span> Reset Login</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(6) <span class="assigned">(Linh)</span> Create / Update account</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(8) <span class="assigned">(Marufa)</span> Payment plan</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(10) <span class="assigned">(Last)</span> Pay for service</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(12) <span class="assigned">(Marufa)</span> Send message to nutritionist</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(13) <span class="assigned">(Marufa/Rachel)</span> Patient journal</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(19) <span class="assigned">(Rodney)</span> Search FAQ, tips and nutrition library</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(22) <span class="assigned">(Marufa)</span> Subscribe to advert(s)</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(26) <span class="assigned">(Marufa)</span> Manage invoice</a></li>
+                                    <li><a style="cursor:pointer" ${classRequireLogin}>(27) <span class="assigned">(Marufa)</span> Book appointment</a></li>
+                                </ul>
+                            </li>
+                            
+                            
+                            <!--patient-->
+                            <li class='${patientStatus} dropdown'>
+                                    <a class='dropdown-toggle' data-toggle='dropdown' href='#'>Account<span class='caret'></span></a>
+                                    <ul class='dropdown-menu'>
+                                        <li><a href='#'>(5) <span class="assigned">(Mamadou)</span> Reset Login</a></li>
+                                        <li><a href='PatientInformation'>Edit Account Infomation</a></li>
+                                            <li><a href='paymentPlan.jsp'>(8) Payment plan</a></li>
+                                            <li><a href='#'>(10) <span class="assigned">(Last)</span> Pay for service</a></li>
+                                            <li><a href='messageToNutritionist.jsp'>(12) Send message to nutritionist</a></li>
+                                            <li><a href='#'>(13) <span class="assigned">(Marufa/Rachel)</span> Patient journal</a></li>
+                                            <li><a href='#'>(19) <span class="assigned">(Rodney)</span> Search FAQ, tips and nutrition library</a></li>
+                                            <li><a href='#'>(22) Subscribe to advert(s)</a></li>
+                                            <li><a href='#'>(26) Manage invoice</a></li>
+                                            <li><a href='#'>(27) Book appointment</a></li>
+                                    </ul>
+                            </li>
+                            
+                            <!--nutritionist-->
+                            <li class="${nutritionistStatus} dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    
+                                        Nutritionist
+        
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">(3) <span class="assigned">(Mamadou)</span> Manage staff</a></li>
+                                    <li><a href="#">(5) <span class="assigned">(Mamadou)</span> Reset login</a></li>
+                                    <li><a href="#">(7) <span class="assigned">(Mamadou)</span> Manage patient account</a></li>
+                                    <li><a href="#">(11) Answer messages from patient</a></li>
+                                    <li><a href="#">(13) <span class="assigned">(Marufa/Rachel)</span> Patient journal</a></li>
+                                    <li><a href="#">(14) Monitor patient progress</a></li>
+                                    <li><a href="#">(15) Manage patients' journals</a></li>
+                                    <li><a href="#">(16) <span class="assigned">(Last)</span> Generate patient progress report</a></li>
+                                    <li><a href="#">(17) <span class="assigned">(Last)</span> Generate business report</a></li>
+                                    <li><a href="#">(18) <span class="assigned">(Rodney)</span> Manage FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(19) Search FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(20) <span class="assigned">(Linh)</span> Manage appointments</a></li>
+                                </ul>
+                            </li>
+                            
+                            <!--administrator-->
+                            <li class="${adminStatus} dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                        Administrator
+
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">(3) Manage staff</a></li>
+                                    <li><a href="#">(4) Modify security</a></li>
+                                    <li><a href="#">(5) Reset login</a></li>
+                                    <li><a href="#">(7) Manage patient account</a></li>
+                                    <li><a href="#">(15) <span class="assigned">(Marufa/Rachel)</span> Manage patients' journals</a></li>
+                                    <li><a href="#">(16) <span class="assigned">(Last)</span> Generate patient progress report</a></li>
+                                    <li><a href="#">(19) <span class="assigned">(Rodney)</span> Search FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(23) Manage activity logs</a></li>
+                                    <li><a href="#">(24) <span class="assigned">(Linh)</span> Manage logins</a></li>
+                                </ul>
+                            </li>
+                            
+                            <!--staff-->
+                            <li class="${staffStatus} dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+
+                                        Staff
+                                    
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">(5) (Mamadou) Reset Login</a></li>
+                                    <li><a href="#">(6) <span class="assigned">(Linh)</span> Create and Update patient account</a></li>
+                                    <li><a href="#">(7) <span class="assigned">(Mamadou)</span> Manage patient account</a></li>
+                                    <li><a href="#">(9) <span class="assigned">(Linh)</span> Manage invoice and payments</a></li>
+                                    <li><a href="#">(10) <span class="assigned">(Last)</span> Pay for service</a></li>
+                                    <li><a href="#">(15) <span class="assigned">(Marufa/Rachel)</span> Manage patients' journals</a></li>
+                                    <li><a href="#">(16) <span class="assigned">(Last)</span> Generate patient progress report</a></li>
+                                    <li><a href="#">(17) <span class="assigned">(Last)</span> Generate business report</a></li>
+                                    <li><a href="#">(18) Manage FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(19) Search FAQ, tips and nutrition library</a></li>
+                                    <li><a href="#">(20) <span class="assigned">(Linh)</span> Manage appointments</a></li>
+                                    <li><a href="#">(21) Manage advertisements</a></li>
+                                    <li><a href="#">(25) Manage email notifications</a></li>
+                                </ul>   
+                            </li>
+                        </ul>
+                        
+                        <!--Sign up, login, logout, LoggedIn icons using glyph icons of bootstrap 3-->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="${logoutIconStatus}">
+                                <a href='UsersServlet?logout=true'> &nbsp; <span class='icon-log-out'></span> Logout</a>
+                            </li>
+                            <li class="${loggedInIconStatus}">
+                                <a><span class='icon-user logged-in user-attrib'> logged in: 
+                                        <i> 
+                                            <%= session.getAttribute("userType")!=null?session.getAttribute("userType"):"" %>
+                                        </i>
+                                </span></a>
+                            </li> 
+                            <li class="${signUpIconStatus}">
+                                <a style='cursor:pointer' class='sign-up'><span class='icon-user'></span> Sign Up</a>
+                            </li>
+                            <li class="${logInIconStatus}">
+                                <a style='cursor:pointer' id='my-login'><span class='icon-log-in'></span> Login</a>
+                            </li>
+                        </ul>
+                                
+                    </div>
+                </div>
+            </nav>
+
+            
+            
+            
+            <!--ENTER YOUR HTML HERE-->
+ 
+
+<section class="section 1">
+                          <div class="section 1 overlay"></div>
+                          <div class="column default"><div class="header size">
+                                    <div class="header size">
+                                        <div class="header size">
+                                            <div class="header size">
+                                                <div class="header size" style="font-size:48px;">
+                                                </div><h4 class="box-title">Consultation</h4><div class="box-text">
+<p>There is no better time then now! Book your consultation today and get back into shape in no time. We will get together for a one on one talk to discuss your goals and
+    ask questions. It is our outmost priority to make sure that you start with the right frame of mind and help you attain your goal.</p>
+
+<p class="consultation">First Consultation:</p>
+<p>First consultation will be $30/hr. The first hour of consultation will be waived with the purchase of one of our package options.</p>
+
+
+</div></div></div></div></div>
+                                    
+     
+                                    <section class="section 2">
+                          <div class="section 2 overlay"></div>
+                          <div class="column default"><div class="header size">
+                                    <div class="header size">
+                                        <div class="header size">
+                                            <div class="header size">
+                                                <div class="header size" style="font-size:48px;">
+                                                </div><h4 class="box-title">Nutrition Plans/Custom Plan Packages</h4><div class="box-text">
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 >
+          <a data-toggle="collapse" href="#collapse1"class="panel-title">List Of Plan Options</a>
+        </h4>
+      
+      <div id="collapse1" class="panel-collapse collapse">
+        <ul class="list-group">
+          <li class="list-group-item"><p class="package">Package 1: Meal Planning $25</p><p>A complete meal plan for a week, including breakfast, lunch and dinner. If you are struggling to plan your meals and find the perfect balance, this is the perfect package to get you started.</p>
+</li>
+          <li class="list-group-item"><p class="package">Package 2: Sport Nutrition $25</p>
+<p>A complete meal plan for a week, including breakfast, lunch and dinner. This special package is a new addition to help any fitness or sport enthusiast.</p>
+</li>
+          <li class="list-group-item"><p class="package">Package 3: Eating Disorder $25</p>
+<p>A complete meal plan for a week, including breakfast, lunch and dinner. Eating disorder has become more and more common, with our specialists help, we have created the perfect meal plan and diet for our clients needs.</p>
+</li>
+          <li class="list-group-item"><p class="package">Package 4: Celiac Meal Planning $25</p>
+<p>A complete meal plan for a week, including breakfast, lunch and dinner. Our team is committed to accommodate everyone, our celiac/gluten free meal plans have been specially crafted for those that believe their food options are slim</p>
+</li>
+          <li class="list-group-item"><p class="package">Package 5: Weight Loss Meal Planning $25</p>
+<p>A complete meal plan for a week, including breakfast, lunch and dinner. One of our most popular package. This package is the perfect for anyone that 
+    loves food and wants to lose weight while eating. Don't give up on food you love, our specialist will work around the food items you love to create the best meal plan for you.</p>
+</li>
+          <li class="list-group-item"><p class="package">Package 6: Weight Gain Meal Planning $25</p>
+<p>A complete meal plan for a week, including breakfast, lunch and dinner. This is the perfect package for anyone looking to gain healthy weight. With weekly meetings and meal proportion planning</p>
+</li>
+        </ul>
+        <div class="panel-footer"></div>
+      </div>
+          <p>Achieve your goals through a customized nutritional plan or package made by you with professional help. 
+    If you wish to make any changes in the packages, just contact our office and we would be able to help you. Prices listed are on a weekly basis.</p>
+
+
+</div></div></div></div></div>
+                                                  
+                
+                <section class="section 2">
+                          <div class="section 2 overlay"></div>
+                          <div class="column default"><div class="header size">
+                                    <div class="header size">
+                                        <div class="header size">
+                                            <div class="header size">
+                                                <div class="header size" style="font-size:48px;">
+                                                </div><h4 class="box-title">Membership Options</h4><div class="box-text">
+<p>Sign up today and take advantage of our great deals</p>
+
+<p class="membership">1-month membership:</p>
+<p>Any customized plan package or nutrition plan : $30 + plan</p>
+
+<p class="membership">6-months membership:</p>
+<p>Any customized plan package or nutrition plan : $80 +plan</p>
+
+<p class="membership">1-year membership:</p>
+<p>Any customized plan package or nutrition plan : $150 +plan</p>
+
+<p>**All memberships include free consultations. Help with smart shopping, monthly grocery shopping with Amina's help/advice**</p>
+<p>Refer a friend and receive 15% Off your membership.</p>
+</div></div></div></div></div>
+                                                    		
+                              <div>
+                                  
+                                  <section class="section 4">
+                          <div class="section 4 overlay"></div>
+                          <div class="column default"><div class="header size">
+                                    <div class="header size">
+                                        <div class="header size">
+                                            <div class="header size">
+                                                <div class="header size" style="font-size:48px;">
+                                                </div><h4 class="box-title">Pick Your Package And Plan</h4><div class="box-text">
+                                  
+                                   <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    <!-- Identify your business so that you can collect the payments. -->
+    <input type="hidden" name="business" value="kin@kinskards.com">
+
+    <!-- Specify an Add to Cart button. -->
+    <input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="add" value="1">
+
+    <!-- Specify details about the item that buyers will purchase. -->
+    <input type="hidden" name="item_name" value="Package">
+    <input type="hidden" name="currency_code" value="CAD">
+
+    <!-- Provide a drop-down menu option field. -->
+    <input type="hidden" name="on0" value="Color">
+    <label for="os0">Package Option</label>
+        <select name="os0" id="os0">
+            <option value="Select a package">
+                -- Select a package --</option>
+            <option value="1">Meal Planning</option>
+            <option value="2">Sport Nutrition</option>
+            <option value="3">Eating Disorder</option>
+             <option value="4">Celiac Meal Planning</option>
+            <option value="5">Weight Loss Meal Planning</option>
+            <option value="6">Weight Gain Meal Planning</option>
+        </select>
+    <br>
+    <br>
+    <!-- Provide a drop-down menu option field with prices. -->
+    <input type="hidden" name="on1" value="Size">
+    <label for="os1">Membership</label>
+    <select name="os1" id="os1">
+        <option
+            value="Select a size">-- Select a membership --</option>
+        <option value="1">1 year - $150 CAD</option>
+        <option value="2">6 months - $80 CAD</option>
+        <option value="3">1 month - $30 CAD</option>
+    </select>
+    <br>
+    <!-- Specify the price that PayPal uses for each option. -->
+    <input type="hidden" name="option_index" value="1">
+    <input type="hidden" name="option_select0" value="2x4">
+    <input type="hidden" name="option_amount0" value="3.95">
+    <input type="hidden" name="option_select1" value="3x5">
+    <input type="hidden" name="option_amount1" value="4.95">
+    <input type="hidden" name="option_select2" value="4x6">
+    <input type="hidden" name="option_amount2" value="5.95">
+    <br>
+    <!-- Display the payment button. -->
+    <input type="image" name="submit"
+        src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_addtocart_120x26.png"
+        alt="Add to Cart">
+    <img alt="" width="1" height="1"
+        src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+</form>
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">           
+                                                    
+                                                    
+                                                    
+                                                    <table cellpadding="8" cellspacing="8" border="3">
+    <tr>
+        <td valign="top" align='center'>
+            <table cellpadding="6" cellspacing="8" border="3" align='center'>
+                <thead>
+                    <tr>
+                        <td colspan="2" >
+                            Package Options:
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Package 1
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('Package 1','  Meal Planning',  25)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Package 2
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('Package 2','  Sport Nutrition',  25)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Package 3
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('Package 3','  Eating Disorder',  25)"/>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            Package 4
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('Package 4','  Celiac Meal Planning',  25)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Package 5
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('Package 5','  Weight Loss Planning',  25)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Package 6
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('Package 6','  Weight Gain Planning',  25)"/>
+                        </td>
+                    </tr>
+                     <td colspan="2">
+                            Membership Options:
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            1 Month
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('1 month','',  30)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            6 Months
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('6 months','',  80)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            1 Year
+                        </td>
+                        <td>
+                            <input type="button" value="Add to cart" onclick="AddtoCart('1 year','',  150)"/>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </td>
+        <td valign="top">
+            <table cellpadding="8" cellspacing="8" border="3" id="orderedProductsTbl">
+                <thead>
+                    <tr>
+                        <td>
+                            Name
+                        </td>
+                        <td>
+                            Description
+                        </td>
+                        <td>
+                            Price
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="orderedProductsTblBody">
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" align="right" id="cart_total">
+
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </td>
+    </tr>
+   
+
+</table>
+                                                    
+                                                    
+                                                    
+                                                    
+                              </div>
+            
+           
+          
+                
+              
+            
+            
+            
+            
+            
+            <!--footer section-->
+            <footer class="navbar navbar-inverse container-fluid">
+                 <div align='center'>
+                     <p>Copyright &copy; Health To Go, Inc. 
+                         <strong>|</strong> 
+                            Tel: 403.998.9902 
+                         <strong>|</strong> 
+                         <a target="_blank" href="https://www.google.ca/maps/dir//140+Castlebrook+Rise+NE,+AB+T3J+1P1,+CANADA/@51.1050826,-113.9695245,16z/data=!3m1!4b1" style="text-decoration: none; color: black; ">
+                                <span class="icon-home office-address"
+                                      data-toggle="tooltip"
+                                      data-placement="top"
+                                      title="Click me!"
+                                      data-content="Direction to get to office">
+                                </span>
+                            </a> 
+                        <strong>|</strong> 
+                            <a href="mailto:amina.ashraf@yahoo.com">
+                                amina.ashraf@yahoo.com
+                            </a> 
+                        <strong>|</strong> 
+                            <a href="designer.jsp">
+                                Designed by: M.R.M.T.R.
+                            </a>
+                     </p>
+                </div>
+            </footer> 
+            
+            
+            
+            
+            <!-- +++++++++++++++++++++++++++popups+++++++++++++++++++++++++++ -->
+            
+            <!--contact modal popup-->
+             <div class="modal fade" id="modal-contact-popup" role="dialog">
+                 <div class="modal-dialog">
+                     
+                     <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            
+                            <!--close button-->
+                            <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                            <button type="button" class="close" data-dismiss="modal"><span class="icon-remove"></span></button>
+                            
+                            <!--contact header-->
+                            <h4><span class="icon-envelope"></span> Contact</h4>
+                        </div>
+                        <!--form USING ANGULAR JS--> 
+                        <form action="MainPageServlet" method="post" name="myForm">
+                            
+                            <!--modal body-->
+                            <div class="modal-body">
+                                    <div class="form-group">
+
+                                        <!--enter name-->
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="icon-user"></span>
+                                            </span>
+                                            <input ng-model="contactName" type="text" class="form-control" name="contactName" placeholder="Enter your name" autofocus required>
+                                        </div>
+
+                                        <!--enter email-->
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="icon-envelope"></span>
+                                            </span>
+                                            <input type="email" class="form-control" name="contactEmail" placeholder="Enter email" required
+                                                   ng-model="email">
+                                        </div>
+                                        <span ng-show="myForm.contactEmail.$dirty && myForm.contactEmail.$invalid" style="color: red;">
+                                            <span ng-show="myForm.contactEmail.$error.email">Invalid email address</span>
+                                        </span>
+
+                                        <!--enter subject-->
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon">
+                                                <span class="icon-question"></span>
+                                            </span>
+                                            <input type="text" class="form-control" name="contactSubject" placeholder="Enter subject">
+                                        </div>
+
+                                        <!--enter message-->
+                                        <div style="padding: 10px 0;">
+                                            <label for="message"><span class="icon-pencil"></span>Message:</label>
+                                            <textarea ng-model="contactTextArea" class="form-control" name="message" rows="10" placeholder="Enter your message" required></textarea>
+                                        </div>
+                                        <br>
+                                        
+                                        <!--submit button-->
+                                        <input id="contact-btn" class="btn btn-danger pull-left" type="submit" name="submitMessage" value="Send Message">
+                                    </div>
+                            </div>
+                                
+                            <!--footer-->
+                            <div class="modal-footer">
+                                <h5 id="address-link">
+                                    <a target="_blank" 
+                                       href="https://www.google.ca/maps/dir//140+Castlebrook+Rise+NE,+AB+T3J+1P1,+CANADA/@51.1050826,-113.9695245,16z/data=!3m1!4b1">
+                                            <span class="icon-home"> 
+                                                140 Castlebrook Rise NE, AB T3J 1P1, CANADA
+                                            </span>
+                                    </a>
+                                </h5>
+                            </div>
+                        </form>
+                    </div>
+                 </div>
+             </div>
+            
+            
+            <!--Messages coming from Servlet-->
+            ${message}
+            
+        </div>
+    </body>
+</html>
